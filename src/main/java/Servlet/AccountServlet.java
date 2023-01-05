@@ -154,7 +154,7 @@ public class AccountServlet extends HttpServlet {
 
             /**si controlla che l email sia proprio quella dell model.dao.account(controllo con ajax)**/
 
-            case"/checkEmail":
+            case"/checkEmail":     /**nella update dai dati*/
                 String email1=request.getParameter("email");
 
                 account= (Account) request.getSession(false).getAttribute("account");
@@ -349,7 +349,7 @@ public class AccountServlet extends HttpServlet {
                 String cognome=request.getParameter("cognome");
                 boolean validato7=ValidateForm.validateCognome(cognome);
                 if(validato7==true)
-                    request.setAttribute("cognome",cognome);
+                    request.setAttribute("cognome",cognome);  /*mi serviva per non perdere i campi gia immessi dopo aver premuto il tasto registrazione*/
 
                 String telefono=request.getParameter("telefono");
                 boolean validato8=ValidateForm.validateTelefono(telefono);
