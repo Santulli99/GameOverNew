@@ -1,5 +1,7 @@
-package Servlet;
+package gestioneUtenti;
 
+import gestioneUtenti.service.GestioneUtenteService;
+import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.dao.address.SqlAddressDao;
 import model.entity.Account;
 import model.entity.Address;
@@ -22,7 +24,7 @@ public class AddressServlet extends HttpServlet {
     Address address;
     boolean modifica;
     Account account;
-
+    private final GestioneUtenteService gestioneUtenteService = new GestioneUtenteServiceImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -80,9 +82,7 @@ public class AddressServlet extends HttpServlet {
                 boolean e=ValidateForm.validateCap(String.valueOf(cap));
 
                 if( a && b && c && d && e ) {
-
                     Account account = (Account) request.getSession(false).getAttribute("account");
-
                     address = new Address();
                     address.setAccount(account);
                     address.setCity(citta);
@@ -91,13 +91,9 @@ public class AddressServlet extends HttpServlet {
                     address.setStreet(via);
                     address.setStreetNumber(civico);
 
-                    sqlAddressDao = new SqlAddressDao();
 
-                    try {
-                        sqlAddressDao.updateAddress(address);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+
+                    gestioneUtenteService.ModificaDatiIndirizzo(address);
 
                     modifica = true;
                     request.setAttribute("modificaAddress", modifica);

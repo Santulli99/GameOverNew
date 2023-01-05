@@ -1,5 +1,7 @@
-package Servlet;
+package gestioneUtenti;
 
+import gestioneUtenti.service.GestioneUtenteService;
+import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.dao.dataClient.SqlDataClientDao;
 import model.entity.Account;
 import model.entity.DataClient;
@@ -22,6 +24,7 @@ public class DataClientServlet extends HttpServlet {
     private boolean modifica;
     private Account account;
 
+    private final GestioneUtenteService gestioneUtenteService = new GestioneUtenteServiceImp();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -167,13 +170,12 @@ public class DataClientServlet extends HttpServlet {
                     dataClient.setDate(account.getDataClient().getDate());
                     dataClient.setCf(account.getDataClient().getCf());
 
-                    sqlDataClientDao = new SqlDataClientDao();
-
-                    try {
+                    gestioneUtenteService.ModificaDatiAnagrafici(dataClient,account);
+                    /*try {
                         sqlDataClientDao.updateDataClient(dataClient, account);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
-                    }
+                    }*/
                     modifica=true;
                     request.setAttribute("modificaDati",modifica);
 
