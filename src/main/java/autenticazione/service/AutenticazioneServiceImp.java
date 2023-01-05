@@ -4,11 +4,12 @@ import model.dao.account.SqlAccountDao;
 import model.entity.Account;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class AutenticazioneServiceImp implements AutenticazioneService {
     private SqlAccountDao sqlAccountDao=null;
-    /*dsasdds*/
+
 
     public AutenticazioneServiceImp (){sqlAccountDao=new SqlAccountDao();}
 
@@ -21,27 +22,24 @@ public class AutenticazioneServiceImp implements AutenticazioneService {
 
         Account account=new Account();
         try {
-            account = sqlAccountDao.searchAccountIdWithDataClientandAndressLogin(password, email);
+            account = sqlAccountDao.searchAccountIdWithDataClientandAndressLogin(password,email);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-        if (account == null) {
-            boolean login=false;
-
-        }
-        return  null;
-
+        return  account;
     }
 
     @Override
-    public Account verificaAdmin(String username, String password) {
-        return null;
+    public boolean verificaAdmin(Account account) {
+
+        return account.isAdmin();
     }
 
     @Override
-    public boolean logout(HttpSession sessione) {
-        return false;
+    public void logout(HttpSession sessione) {
+
+         sessione.invalidate();
+
     }
 }
