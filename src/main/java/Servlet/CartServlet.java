@@ -27,7 +27,7 @@ public class CartServlet extends HttpServlet {
 
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
 
-        HttpSession session;
+
 
         switch (path) {
 
