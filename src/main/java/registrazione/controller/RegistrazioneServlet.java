@@ -20,12 +20,10 @@ import java.sql.SQLException;
 @WebServlet(name = "RegistrazioneServlet", value = "/RegistrazioneServlet/*")
 public class RegistrazioneServlet  extends HttpServlet {
 
-    private HttpServletRequest request;
-    private HttpSession session;
     private RequestDispatcher dispatcher;
-    private SqlAccountDao accountDao;
+    private SqlAccountDao accountDao=new SqlAccountDao();
 
-    private RegistrazioneServiceImp registrazioneServiceImp;
+    private RegistrazioneServiceImp registrazioneServiceImp= new RegistrazioneServiceImp();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
