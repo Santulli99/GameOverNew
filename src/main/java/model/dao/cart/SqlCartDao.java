@@ -3,7 +3,7 @@ package model.dao.cart;
 import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 import model.entity.Account;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.entity.cart.Cart;
 import model.entity.cart.CartItem;
 
@@ -55,13 +55,13 @@ public class SqlCartDao implements CartDao {
                 ps1.setInt(1, account.getId());
 
                 ResultSet rs = ps1.executeQuery();
-                Product product;
+                Prodotto prodotto;
                 ProductExtractor productExtractor = new ProductExtractor();
 
                 ArrayList<CartItem> products = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
-                    CartItem cartItem=new CartItem(product);
+                    prodotto = productExtractor.extract(rs);
+                    CartItem cartItem=new CartItem(prodotto);
                     products.add(cartItem);
                 }
                 Cart cart=new Cart();

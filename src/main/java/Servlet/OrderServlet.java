@@ -5,7 +5,7 @@ import model.dao.order.SqlOrderDao;
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
 import model.entity.Order;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.entity.cart.Cart;
 
 import javax.servlet.RequestDispatcher;
@@ -164,14 +164,14 @@ public class OrderServlet extends HttpServlet {
                 double totale=0;
                 for(int i=0;i<order.getProducts().size();i++) {
                     SqlProductDao sqlProductDao=new SqlProductDao();
-                    Product product=null;
+                    Prodotto prodotto =null;
                     try {
-                        product=sqlProductDao.searchProductWithPlatformsAndCategory(order.getProducts().get(i).getId());
+                        prodotto =sqlProductDao.searchProductWithPlatformsAndCategory(order.getProducts().get(i).getId());
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    order.getProducts().get(i).setPlatform(product.getPlatform());
-                    order.getProducts().get(i).setCategory(product.getCategory());
+                    order.getProducts().get(i).setPlatform(prodotto.getPlatform());
+                    order.getProducts().get(i).setCategory(prodotto.getCategory());
                     totale += order.getProducts().get(i).getPrice();
                 }
 
@@ -193,14 +193,14 @@ public class OrderServlet extends HttpServlet {
                 double total=0;
                 for(int i=0;i<order.getProducts().size();i++) {
                     SqlProductDao sqlProductDao=new SqlProductDao();
-                    Product product=null;
+                    Prodotto prodotto =null;
                     try {
-                        product=sqlProductDao.searchProductWithPlatformsAndCategory(order.getProducts().get(i).getId());
+                        prodotto =sqlProductDao.searchProductWithPlatformsAndCategory(order.getProducts().get(i).getId());
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    order.getProducts().get(i).setPlatform(product.getPlatform());
-                    order.getProducts().get(i).setCategory(product.getCategory());
+                    order.getProducts().get(i).setPlatform(prodotto.getPlatform());
+                    order.getProducts().get(i).setCategory(prodotto.getCategory());
                     total += order.getProducts().get(i).getPrice();
                 }
                 request.setAttribute("orderAdmin",order);

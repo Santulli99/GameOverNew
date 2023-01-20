@@ -16,7 +16,7 @@ public class Account {
     int id;
     private Address address;
 
-    private Wishlist wishlist;
+    private ListaDesideri listaDesideri;
 
 
 
@@ -115,12 +115,12 @@ public class Account {
         this.reviews = reviews;
     }
 
-    public Wishlist getWishlist() {
-        return wishlist;
+    public ListaDesideri getWishlist() {
+        return listaDesideri;
     }
 
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
+    public void setWishlist(ListaDesideri listaDesideri) {
+        this.listaDesideri = listaDesideri;
     }
 
     @Override

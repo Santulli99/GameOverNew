@@ -33,14 +33,14 @@
     <c:forEach items="${categories}" var="category">
 
         <tr>
-        <c:forEach items="${category.products}" var="product">
+        <c:forEach items="${category.prodottos}" var="prodotto">
           <tr><td>     ${category.id}         </td>
               <td>     ${category.categoryName} </td>
               <td> ${category.description} </td>
-            <td>${product.productName} </td>
-            <td>${product.description}</td>
-            <td>${product.price}</td>
-            <td>${product.date}</td> </tr>
+            <td>${prodotto.productName} </td>
+            <td>${prodotto.description}</td>
+            <td>${prodotto.price}</td>
+            <td>${prodotto.date}</td> </tr>
         </c:forEach>
         </tr>
 

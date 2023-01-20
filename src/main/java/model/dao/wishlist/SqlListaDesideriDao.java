@@ -4,22 +4,22 @@ import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 import model.entity.Account;
 
-import model.entity.Product;
-import model.entity.Wishlist;
+import model.entity.Prodotto;
+import model.entity.ListaDesideri;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class SqlWishlistDao implements WishlistDao {
+public class SqlListaDesideriDao implements ListaDesideriDao {
     @Override
-    public boolean deleteWishlist(int id_product, int id_cliente) throws Exception {
+    public boolean eliminaProdottoListaDesideri(Account account, Prodotto prodotto) throws Exception {
 
         try (Connection connection = SqlDao.getConnection()) {
             String query = "DELETE FROM wishlist WHERE (id_prodotto=? AND id_cliente=?);";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setInt(1, id_product);
-                ps.setInt(2, id_cliente);
+                ps.setInt(1, prodotto.getId());
+                ps.setInt(2, account.getId());
 
                 int rows = ps.executeUpdate();
                 return rows == 1;
@@ -29,13 +29,13 @@ public class SqlWishlistDao implements WishlistDao {
     }
 
     @Override
-    public boolean createWishlist(Account account, Product product) throws Exception {
+    public boolean inserisciProdottoListaDesideri(Account account, Prodotto prodotto) throws Exception {
         try (Connection connection = SqlDao.getConnection()) {
             String query = "INSERT INTO wishlist (id_cliente,id_prodotto) VALUES(?,?);";
 
             try (PreparedStatement ps1 = connection.prepareStatement(query)) {
                 ps1.setInt(1, account.getId());
-                ps1.setInt(2, product.getId());
+                ps1.setInt(2, prodotto.getId());
 
                 int rows = ps1.executeUpdate();
 
@@ -45,7 +45,7 @@ public class SqlWishlistDao implements WishlistDao {
     }
 
     @Override
-    public Wishlist searchWishlistWithAccount(Account account) throws Exception {
+    public ListaDesideri cercaListaDesideriPerUtente(Account account) throws Exception {
         try (Connection connection = SqlDao.getConnection()) {
             String query = "select * from  product,wishlist where id_cliente=?  and product.id_prodotto=wishlist.id_prodotto;";
 
@@ -53,19 +53,22 @@ public class SqlWishlistDao implements WishlistDao {
                 ps1.setInt(1, account.getId());
 
                 ResultSet rs = ps1.executeQuery();
-                Product product;
+                Prodotto prodotto;
                 ProductExtractor productExtractor = new ProductExtractor();
 
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodotti = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
-                    products.add(product);
+                    prodotto = productExtractor.extract(rs);
+                    prodotti.add(prodotto);
                 }
-                Wishlist wishlist = new Wishlist();
-                wishlist.setProduct(products);
-                return wishlist;
+                ListaDesideri listaDesideri = new ListaDesideri();
+                listaDesideri.setProducts(prodotti);
+                return listaDesideri;
 
             }
         }
     }
+
+
+
 }

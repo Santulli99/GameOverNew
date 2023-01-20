@@ -1,7 +1,7 @@
 package model.dao.category;
 
 import model.entity.Category;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 
@@ -121,7 +121,7 @@ public class SqlCategoryDao implements CategoryDao<SQLException>{
 
                 Category category = null;
                 CategoryExtractor categoryExtractor = new CategoryExtractor();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
 
                 if (rs.next()) {
@@ -129,14 +129,14 @@ public class SqlCategoryDao implements CategoryDao<SQLException>{
                     //relazione 1:N
                     //mi salvo la categoria e il primo prodotto
                     category = categoryExtractor.extract(rs);
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
 
                     //corretto l'array non era allocato percio lui fa new ArrayList
-                    category.getProducts().add(product);//aggiungo primo prodotto
+                    category.getProducts().add(prodotto);//aggiungo primo prodotto
 
                     while (rs.next()) {
-                        product = productExtractor.extract(rs);
-                        category.getProducts().add(product);
+                        prodotto = productExtractor.extract(rs);
+                        category.getProducts().add(prodotto);
                     }
                 }
                 return category;
@@ -158,7 +158,7 @@ public class SqlCategoryDao implements CategoryDao<SQLException>{
 
                 Category category = null;
                 CategoryExtractor categoryExtractor = new CategoryExtractor();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 HashMap<Integer, Category> hashMap = new LinkedHashMap();
 
@@ -175,8 +175,8 @@ public class SqlCategoryDao implements CategoryDao<SQLException>{
                         hashMap.put(id_categoria, category);
                     }
 
-                    product = productExtractor.extract(rs);
-                    hashMap.get(id_categoria).getProducts().add(product);
+                    prodotto = productExtractor.extract(rs);
+                    hashMap.get(id_categoria).getProducts().add(prodotto);
                 }
 
                 //categories = (ArrayList<Category>) hashMap.values();

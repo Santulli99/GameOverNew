@@ -93,23 +93,23 @@
             <div id="number1">
                 <div>
                     <label for="nome" >Nome del prodotto</label>
-                    <input value="${product.productName}" type="text" minlength="5" maxlength="50" id="nome" name="nome"  required >
+                    <input value="${prodotto.productName}" type="text" minlength="5" maxlength="50" id="nome" name="nome"  required >
                 </div>
                 <div>
                     <label for="prezzo" >Prezzo di base</label>
-                    <input value="${product.price}" type="text"   id="prezzo" name="prezzo" required >
+                    <input value="${prodotto.price}" type="text"   id="prezzo" name="prezzo" required >
                 </div>
             </div>
 
             <div id="number2">
 
                 <label for="content" >Contenuto (max 5000 caratteri)</label>
-                <textarea   id="content" rows="20" maxlength="5000" cols="70" name="description"  required >${product.description}</textarea>
+                <textarea   id="content" rows="20" maxlength="5000" cols="70" name="description"  required >${prodotto.description}</textarea>
 
             </div>
 
             <div id="number5">
-                <div><input type="hidden"  name="id"  value="${product.id}">
+                <div><input type="hidden"  name="id"  value="${prodotto.id}">
                 <button class="button" type="submit" >modifica prodotto</button>
                 </div>
             </div>
@@ -117,7 +117,7 @@
 
 
         <div id="number6">
-            <a href="/GameOver_war_exploded/ProductServlet/deleteProduct?id=${model.dao.product.id}"> <button class="button" >elimina prodotto</button></a>
+            <a href="/GameOver_war_exploded/ProductServlet/deleteProduct?id=${model.dao.prodotto.id}"> <button class="button" >elimina prodotto</button></a>
 
         </div>
 

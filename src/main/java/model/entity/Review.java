@@ -4,15 +4,15 @@ public class Review {
     private String descrizione;
     private double valutazione;
     private  Account account;
-    private Product product;
+    private Prodotto prodotto;
 
     public Review(){super(); }
 
-    public Review(String descrizione, double valutazione, Account account, Product product) {
+    public Review(String descrizione, double valutazione, Account account, Prodotto prodotto) {
         this.descrizione = descrizione;
         this.valutazione = valutazione;
         this.account = account;
-        this.product = product;
+        this.prodotto = prodotto;
     }
 
     public String getDescrizione() {
@@ -39,12 +39,12 @@ public class Review {
         this.account = account;
     }
 
-    public Product getProduct() {
-        return product;
+    public Prodotto getProduct() {
+        return prodotto;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Prodotto prodotto) {
+        this.prodotto = prodotto;
     }
 
 }

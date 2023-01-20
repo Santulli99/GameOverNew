@@ -172,7 +172,7 @@
 
             <!--lista prodotti nel carrello -->
 
-            <c:forEach items="${orderAdmin.products}" var="prodotto">
+            <c:forEach items="${orderAdmin.prodottos}" var="prodotto">
 
             <div class="headerOrd">
 

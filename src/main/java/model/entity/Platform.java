@@ -6,7 +6,7 @@ public class Platform {
 
     private String platformName;
     private int id;
-    private ArrayList<Product> products=new ArrayList<>();
+    private ArrayList<Prodotto> prodottos =new ArrayList<>();
 
 
 
@@ -30,12 +30,12 @@ public class Platform {
         this.id = id;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public ArrayList<Prodotto> getProducts() {
+        return prodottos;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProducts(ArrayList<Prodotto> prodottos) {
+        this.prodottos = prodottos;
     }
 
 

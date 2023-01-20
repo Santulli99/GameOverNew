@@ -3,7 +3,7 @@ package model.dao.product;
 import model.entity.Category;
 import model.dao.category.CategoryExtractor;
 import model.entity.Order;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.dao.order.OrderExtractor;
 import model.entity.Platform;
 import model.dao.platform.PlatformExtractor;
@@ -22,7 +22,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     }
     @Override
 
-    public  ArrayList<Product> searchProductsvetrina(int idpiattaforma ) throws SQLException{
+    public  ArrayList<Prodotto> searchProductsvetrina(int idpiattaforma ) throws SQLException{
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,platform AS pla WHERE pro.id_piattaforma=pla.id and pla.id=? LIMIT 15;";
@@ -30,44 +30,44 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1,idpiattaforma);
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Platform platform = null;
                 PlatformExtractor platformExtractor = new PlatformExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     platform = platformExtractor.extract(rs);
-                    product.setPlatform(platform);
-                    products.add(product);
+                    prodotto.setPlatform(platform);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
 
     }
 
-    public ArrayList<Product> searchProductsByName(String nome) throws SQLException {
+    public ArrayList<Prodotto> searchProductsByName(String nome) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro WHERE (pro.nome=?);";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, nome);
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
-                    products.add(product);
+                    prodotto = extractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
     @Override
-    public ArrayList<Product> searchProductsByPrice(double price_MAX) throws SQLException {
+    public ArrayList<Prodotto> searchProductsByPrice(double price_MAX) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro WHERE (pro.prezzo=?);";
@@ -76,20 +76,20 @@ public class SqlProductDao implements  ProductDao<SQLException>{
 
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
-                    products.add(product);
+                    prodotto = extractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
 
-    public  ArrayList<Product> searchProductsByCategoryAndPlatform1() throws SQLException{
+    public  ArrayList<Prodotto> searchProductsByCategoryAndPlatform1() throws SQLException{
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,category AS cat, platform AS pla " +
@@ -97,22 +97,22 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             try (PreparedStatement ps = connection.prepareStatement(query)) {
 
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
                 PlatformExtractor platformExtractor=new PlatformExtractor();
                 CategoryExtractor categoryExtractor=new CategoryExtractor();
                 Category category;
                 Platform platform;
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
+                    prodotto = extractor.extract(rs);
                     category=categoryExtractor.extract(rs);
                     platform=platformExtractor.extract(rs);
-                    products.add(product);
-                    product.setCategory(category);
-                    product.setPlatform(platform);
+                    prodottos.add(prodotto);
+                    prodotto.setCategory(category);
+                    prodotto.setPlatform(platform);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
@@ -122,7 +122,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
 
 
 
-  public  ArrayList<Product> searchProductsByCategoryAndPlatform(String category,int idPlatform) throws SQLException{
+  public  ArrayList<Prodotto> searchProductsByCategoryAndPlatform(String category, int idPlatform) throws SQLException{
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,category AS cat, platform AS pla " +
@@ -134,21 +134,21 @@ public class SqlProductDao implements  ProductDao<SQLException>{
 
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
-                    products.add(product);
+                    prodotto = extractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
 
     @Override
-    public ArrayList<Product> searchProductsByCategory(String category) throws SQLException {
+    public ArrayList<Prodotto> searchProductsByCategory(String category) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,category AS cat " +
@@ -159,20 +159,20 @@ public class SqlProductDao implements  ProductDao<SQLException>{
 
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
-                    products.add(product);
+                    prodotto = extractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
     @Override
-    public ArrayList<Product> searchProductsByDate(LocalDate date) throws SQLException {
+    public ArrayList<Prodotto> searchProductsByDate(LocalDate date) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro WHERE (pro.data_uscita=?);";
@@ -181,20 +181,20 @@ public class SqlProductDao implements  ProductDao<SQLException>{
 
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor extractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = extractor.extract(rs);
-                    products.add(product);
+                    prodotto = extractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
     @Override
-    public Product searchProduct(int id) throws SQLException {
+    public Prodotto searchProduct(int id) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro WHERE id_prodotto=?;";
@@ -202,58 +202,58 @@ public class SqlProductDao implements  ProductDao<SQLException>{
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 if (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                 }
-                return product;
+                return prodotto;
             }
         }
 
     }
 
     @Override
-    public ArrayList<Product> searchAllProducts() throws SQLException {
+    public ArrayList<Prodotto> searchAllProducts() throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro ;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
-                    products.add(product);
+                    prodotto = productExtractor.extract(rs);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
     @Override
-    public boolean createProduct(Product product) throws SQLException {
+    public boolean createProduct(Prodotto prodotto) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query1 = "INSERT INTO product(id_categoria, nome, descrizione, path_img, prezzo, data_uscita,id_piattaforma) " +
                     "VALUES (?,?,?,?,?,?,?);";
 
             try (PreparedStatement ps1 = connection.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS)) {
-                ps1.setInt(1, product.getCategory().getId());
-                ps1.setString(2, product.getProductName());
-                ps1.setString(3, product.getDescription());
-                ps1.setString(4, product.getCover());
-                ps1.setDouble(5, product.getPrice());
-                ps1.setDate(6, Date.valueOf(product.getDate()));
-                ps1.setInt(7, product.getPlatform().getId());
+                ps1.setInt(1, prodotto.getCategory().getId());
+                ps1.setString(2, prodotto.getProductName());
+                ps1.setString(3, prodotto.getDescription());
+                ps1.setString(4, prodotto.getCover());
+                ps1.setDouble(5, prodotto.getPrice());
+                ps1.setDate(6, Date.valueOf(prodotto.getDate()));
+                ps1.setInt(7, prodotto.getPlatform().getId());
                 int rows = ps1.executeUpdate();
 
                 ResultSet rs = ps1.getGeneratedKeys();
                 rs.next();
                 int id = rs.getInt(1);
-                product.setId(id);
+                prodotto.setId(id);
 
                 return rows == 1;
             }
@@ -261,16 +261,16 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     }
 
     @Override
-    public boolean updateProduct(Product product) throws SQLException {
+    public boolean updateProduct(Prodotto prodotto) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "UPDATE product SET descrizione=?,prezzo=?,nome=? WHERE id_prodotto=?;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, product.getDescription());
-                ps.setDouble(2, product.getPrice());
-                ps.setString(3, product.getProductName());
-                ps.setInt(4, product.getId());
+                ps.setString(1, prodotto.getDescription());
+                ps.setDouble(2, prodotto.getPrice());
+                ps.setString(3, prodotto.getProductName());
+                ps.setInt(4, prodotto.getId());
 
                 int rows = ps.executeUpdate();
                 return rows == 1;
@@ -296,7 +296,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     }
 
     @Override
-    public Product searchProductWithCategory(int id_pro) throws SQLException {
+    public Prodotto searchProductWithCategory(int id_pro) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,category AS cat WHERE pro.id_categoria=cat.id_categoria " +
@@ -305,23 +305,23 @@ public class SqlProductDao implements  ProductDao<SQLException>{
                 ps.setInt(1, id_pro);
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Category category = null;
                 CategoryExtractor categoryExtractor = new CategoryExtractor();
                 if (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     category = categoryExtractor.extract(rs);
-                    product.setCategory(category);
+                    prodotto.setCategory(category);
                 }
 
-                return product;
+                return prodotto;
             }
         }
     }
 
     @Override
-    public Product searchProductWithPlatforms(int id_pro) throws SQLException {
+    public Prodotto searchProductWithPlatforms(int id_pro) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
 
@@ -330,21 +330,21 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1, id_pro);
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Platform platform = null;
                 PlatformExtractor platformExtractor = new PlatformExtractor();
                 if (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     platform = platformExtractor.extract(rs);
-                    product.setPlatform(platform);
+                    prodotto.setPlatform(platform);
                 }
-                return product;
+                return prodotto;
             }
         }
     }
 
-    public Product searchProductWithPlatformsAndCategory(int id_pro) throws SQLException {
+    public Prodotto searchProductWithPlatformsAndCategory(int id_pro) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
 
@@ -354,7 +354,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1, id_pro);
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Platform platform = null;
                 PlatformExtractor platformExtractor = new PlatformExtractor();
@@ -362,19 +362,19 @@ public class SqlProductDao implements  ProductDao<SQLException>{
                 CategoryExtractor categoryExtractor= new CategoryExtractor();
 
                 if (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     platform = platformExtractor.extract(rs);
                     category=categoryExtractor.extract(rs);
-                    product.setPlatform(platform);
-                    product.setCategory(category);
+                    prodotto.setPlatform(platform);
+                    prodotto.setCategory(category);
                 }
-                return product;
+                return prodotto;
             }
         }
     }
 
     @Override
-    public Product searchProductWithOrders(int id_pro) throws SQLException {
+    public Prodotto searchProductWithOrders(int id_pro) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,orders AS ord,order_product AS op " +
@@ -384,48 +384,48 @@ public class SqlProductDao implements  ProductDao<SQLException>{
                 ps.setInt(1, id_pro);
                 ResultSet rs = ps.executeQuery();
 
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Order order = null;
                 OrderExtractor orderExtractor = new OrderExtractor();
                 if (rs.next()) {
-                    product = productExtractor.extract(rs);
-                    product.getOrders().add(orderExtractor.extract(rs));
+                    prodotto = productExtractor.extract(rs);
+                    prodotto.getOrders().add(orderExtractor.extract(rs));
                     while (rs.next()) {
-                        product.getOrders().add(orderExtractor.extract(rs));
+                        prodotto.getOrders().add(orderExtractor.extract(rs));
                     }
                 }
-                return product;
+                return prodotto;
             }
         }
     }
 
     @Override
-    public ArrayList<Product> searchProductWithCategory() throws SQLException {
+    public ArrayList<Prodotto> searchProductWithCategory() throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,category AS cat WHERE pro.id_categoria=cat.id_categoria ;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Category category = null;
                 CategoryExtractor categoryExtractor = new CategoryExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     category = categoryExtractor.extract(rs);
-                    product.setCategory(category);
-                    products.add(product);
+                    prodotto.setCategory(category);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
     }
 
     @Override
-    public ArrayList<Product> searchProductWithPlatform(int idpiattaforma) throws SQLException {
+    public ArrayList<Prodotto> searchProductWithPlatform(int idpiattaforma) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM product AS pro,platform AS pla WHERE pro.id_piattaforma=pla.id and pla.id=?;";
@@ -433,25 +433,25 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1,idpiattaforma);
                 ResultSet rs = ps.executeQuery();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 Platform platform = null;
                 PlatformExtractor platformExtractor = new PlatformExtractor();
-                ArrayList<Product> products = new ArrayList<>();
+                ArrayList<Prodotto> prodottos = new ArrayList<>();
                 while (rs.next()) {
-                    product = productExtractor.extract(rs);
+                    prodotto = productExtractor.extract(rs);
                     platform = platformExtractor.extract(rs);
-                    product.setPlatform(platform);
-                    products.add(product);
+                    prodotto.setPlatform(platform);
+                    prodottos.add(prodotto);
                 }
-                return products;
+                return prodottos;
             }
         }
 
     }
 
     @Override//hashmap
-    public ArrayList<Product> searchProductWithOrders() throws SQLException {
+    public ArrayList<Prodotto> searchProductWithOrders() throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
             String query = "SELECT *  FROM orders AS ord,product AS pro,order_product AS op " +
@@ -461,15 +461,15 @@ public class SqlProductDao implements  ProductDao<SQLException>{
                 ResultSet rs = ps.executeQuery();
                 Order order = null;
                 OrderExtractor orderExtractor = new OrderExtractor();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
-                HashMap<Integer, Product> hashMap = new LinkedHashMap();
+                HashMap<Integer, Prodotto> hashMap = new LinkedHashMap();
                 while (rs.next()) {
                     int id_prodotto = rs.getInt("id_prodotto");
                     //relazione N:
                     if (!hashMap.containsKey(id_prodotto)) {
-                        product = productExtractor.extract(rs);
-                        hashMap.put(id_prodotto, product);
+                        prodotto = productExtractor.extract(rs);
+                        hashMap.put(id_prodotto, prodotto);
                     }
                     order = orderExtractor.extract(rs);
                     hashMap.get(id_prodotto).getOrders().add(order);

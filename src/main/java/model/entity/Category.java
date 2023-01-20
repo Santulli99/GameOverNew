@@ -6,19 +6,19 @@ public class Category {
 
     private String categoryName,description;
     private int id;
-    private ArrayList<Product> products=new ArrayList<>();
+    private ArrayList<Prodotto> prodottos =new ArrayList<>();
 
     public Category() {
         super();
     }
 
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public ArrayList<Prodotto> getProducts() {
+        return prodottos;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProducts(ArrayList<Prodotto> prodottos) {
+        this.prodottos = prodottos;
     }
 
 

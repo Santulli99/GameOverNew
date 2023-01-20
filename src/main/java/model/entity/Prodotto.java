@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Product {
+public class Prodotto {
 
     private String productName,description,cover,dataString;
     private double price;
@@ -15,10 +15,10 @@ public class Product {
     private Category category;
     private Platform platform;
     private ArrayList<Review> reviews;
-    private Wishlist wishlist;
+    private ListaDesideri listaDesideri;
 
 
-    public Product() {
+    public Prodotto() {
         super();
     }
 
@@ -111,19 +111,19 @@ public class Product {
         this.reviews = reviews;
     }
 
-    public Wishlist getWishlist() {
-        return wishlist;
+    public ListaDesideri getWishlist() {
+        return listaDesideri;
     }
 
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
+    public void setWishlist(ListaDesideri listaDesideri) {
+        this.listaDesideri = listaDesideri;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return getId() == product.getId();
+        Prodotto prodotto = (Prodotto) o;
+        return getId() == prodotto.getId();
     }
 }

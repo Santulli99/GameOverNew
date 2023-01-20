@@ -1,6 +1,6 @@
 function  myFunction(){
 
-    location.replace("http://localhost:8080/GameOver_war_exploded/AccountServlet/homepage");
+    location.replace("http://localhost:8080/GameOverNew_war_exploded/HomePageController/homePage");
 
 }
 

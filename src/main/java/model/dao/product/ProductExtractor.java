@@ -1,21 +1,21 @@
 package model.dao.product;
 
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.dao.storage.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductExtractor implements ResultSetExtractor<Product> {
+public class ProductExtractor implements ResultSetExtractor<Prodotto> {
     @Override
-    public Product extract(ResultSet resultSet) throws SQLException {
-        Product product=new Product();
-        product.setId(resultSet.getInt("pro.id_prodotto"));
-        product.setPrice(resultSet.getDouble("pro.prezzo"));
-        product.setProductName(resultSet.getString("pro.nome"));
-        product.setDescription(resultSet.getString("pro.descrizione"));
-        product.setCover(resultSet.getString("pro.path_img"));
-        product.setDate(resultSet.getDate("pro.data_uscita").toLocalDate());
-        return product;
+    public Prodotto extract(ResultSet resultSet) throws SQLException {
+        Prodotto prodotto =new Prodotto();
+        prodotto.setId(resultSet.getInt("pro.id_prodotto"));
+        prodotto.setPrice(resultSet.getDouble("pro.prezzo"));
+        prodotto.setProductName(resultSet.getString("pro.nome"));
+        prodotto.setDescription(resultSet.getString("pro.descrizione"));
+        prodotto.setCover(resultSet.getString("pro.path_img"));
+        prodotto.setDate(resultSet.getDate("pro.data_uscita").toLocalDate());
+        return prodotto;
     }
 }

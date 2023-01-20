@@ -118,13 +118,13 @@
                     <div></div>
 
                 </li>
-                <c:forEach items="${products}" var="product">
+                <c:forEach items="${prodottos}" var="prodotto">
                     <li>
-                        <div><p>${product.productName}</p></div>
-                        <div><p> ${product.platform.platformName} </p></div>
-                        <div><p> ${product.category.categoryName} </p></div>
-                        <div><a href="/GameOver_war_exploded/ProductServlet/updateProduct?id=${model.dao.product.id}"><button>Modifica</button></a>
-                        <a href="/GameOver_war_exploded/ProductServlet/deleteProduct?id=${model.dao.product.id}"><button>Elimina</button></a></div>
+                        <div><p>${prodotto.productName}</p></div>
+                        <div><p> ${prodotto.platform.platformName} </p></div>
+                        <div><p> ${prodotto.category.categoryName} </p></div>
+                        <div><a href="/GameOver_war_exploded/ProductServlet/updateProduct?id=${model.dao.prodotto.id}"><button>Modifica</button></a>
+                        <a href="/GameOver_war_exploded/ProductServlet/deleteProduct?id=${model.dao.prodotto.id}"><button>Elimina</button></a></div>
                     </li>
                 </c:forEach>
             </ul>

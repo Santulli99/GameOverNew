@@ -4,7 +4,7 @@ import model.entity.Account;
 import model.dao.account.AccountExtractor;
 import model.entity.cart.CartItem;
 import model.entity.Order;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.dao.product.ProductExtractor;
 
 import model.dao.storage.SqlDao;
@@ -88,7 +88,7 @@ public class  SqlOrderDao implements OrderDao<SQLException>{
 
                 Order order = null;
                 OrderExtractor orderExtractor = new OrderExtractor();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 HashMap<Integer, Order> hashMap = new LinkedHashMap();
                 while (rs.next()) {
@@ -100,8 +100,8 @@ public class  SqlOrderDao implements OrderDao<SQLException>{
                         order = orderExtractor.extract(rs);
                         hashMap.put(id_ordine, order);
                     }
-                    product = productExtractor.extract(rs);
-                    hashMap.get(id_ordine).getProducts().add(product);
+                    prodotto = productExtractor.extract(rs);
+                    hashMap.get(id_ordine).getProducts().add(prodotto);
                 }
 
 

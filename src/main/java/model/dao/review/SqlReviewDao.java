@@ -4,7 +4,7 @@ import model.dao.account.AccountExtractor;
 import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 import model.entity.Account;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.entity.Review;
 
 import java.sql.*;
@@ -74,13 +74,13 @@ public class SqlReviewDao implements ReviewDao<SQLException> {
                 ResultSet rs = ps.executeQuery();
                 Review review = null;
                 ReviewExtractor reviewExtractor = new ReviewExtractor();
-                Product product = null;
+                Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
                 ArrayList<Review> reviews = new ArrayList<>();
                 while (rs.next()) {
                     review=reviewExtractor.extract(rs);
-                    product = productExtractor.extract(rs);
-                    review.setProduct(product);
+                    prodotto = productExtractor.extract(rs);
+                    review.setProduct(prodotto);
                     reviews.add(review);
                 }
                 return reviews;

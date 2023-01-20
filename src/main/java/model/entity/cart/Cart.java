@@ -1,7 +1,6 @@
 package model.entity.cart;
 
-import model.entity.Product;
-import model.entity.cart.CartItem;
+import model.entity.Prodotto;
 
 import java.util.ArrayList;
 
@@ -22,11 +21,11 @@ public class Cart {
         this.cartItems = cartItems;
     }
 
-    public void addProduct(Product p){
+    public void addProduct(Prodotto p){
         cartItems.add(new CartItem(p));
     }
 
-    public void removeProduct(Product p){
+    public void removeProduct(Prodotto p){
 
         for (int i=0; i<cartItems.size(); i++){
 
@@ -37,7 +36,7 @@ public class Cart {
         }
     }
 
-    public boolean isPresent(Product p){
+    public boolean isPresent(Prodotto p){
 
         for(int i=0; i<cartItems.size(); i++){
 

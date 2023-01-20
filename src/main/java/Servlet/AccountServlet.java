@@ -46,10 +46,10 @@ public class AccountServlet extends HttpServlet {
         /** carico i prodotti nella vetrina nella memoria globlale **/
 
         try {
-            ArrayList<Product> products;
+            ArrayList<Prodotto> prodottos;
             SqlProductDao sqlProductDao= new SqlProductDao();
-            products=sqlProductDao.searchProductsvetrina(2);
-            getServletContext().setAttribute("vetrina",products);
+            prodottos =sqlProductDao.searchProductsvetrina(2);
+            getServletContext().setAttribute("vetrina", prodottos);
 
 
         } catch (SQLException throwables) {
@@ -674,8 +674,8 @@ public class AccountServlet extends HttpServlet {
                     if (account.isAdmin()) {
                         try {
                             /* numero prodotti*/
-                            ArrayList<Product> products=sqlProductDao.searchAllProducts();
-                            request.getSession(false).setAttribute("n_products",products.size());
+                            ArrayList<Prodotto> prodottos =sqlProductDao.searchAllProducts();
+                            request.getSession(false).setAttribute("n_products", prodottos.size());
 
                             /*numero utenti*/
                             ArrayList<Account> accounts= sqlAccountDao2.searchAllAccount();

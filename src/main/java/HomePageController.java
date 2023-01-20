@@ -4,11 +4,11 @@ import model.dao.account.SqlAccountDao;
 import model.dao.cart.SqlCartDao;
 import model.dao.order.SqlOrderDao;
 import model.dao.product.SqlProductDao;
-import model.dao.wishlist.SqlWishlistDao;
+import model.dao.wishlist.SqlListaDesideriDao;
 import model.entity.Account;
 import model.entity.Order;
-import model.entity.Product;
-import model.entity.Wishlist;
+import model.entity.Prodotto;
+import model.entity.ListaDesideri;
 import model.entity.cart.Cart;
 
 import javax.servlet.RequestDispatcher;
@@ -23,8 +23,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-@WebServlet(name = "HomePageServlet", value = "/HomePageServlet/*")
-public class HomePageServlet extends HttpServlet {
+@WebServlet(name = "HomePageController", value = "/HomePageController/*")
+public class HomePageController extends HttpServlet {
     private RequestDispatcher dispatcher;
     private SqlAccountDao accountDao=new SqlAccountDao();
     private SqlProductDao productDao=new SqlProductDao();
@@ -32,7 +32,7 @@ public class HomePageServlet extends HttpServlet {
     private SqlOrderDao orderDao=new SqlOrderDao();
 
     private SqlCartDao cartDao=new SqlCartDao();
-    private SqlWishlistDao wishlistDao=new SqlWishlistDao();
+    private SqlListaDesideriDao wishlistDao=new SqlListaDesideriDao();
     private Account account=new Account();
     private AutenticazioneService autenticazioneService=new AutenticazioneServiceImp();
 
@@ -42,10 +42,10 @@ public class HomePageServlet extends HttpServlet {
         /** carico i prodotti nella vetrina nella memoria globlale **/
 
         try {
-            ArrayList<Product> products;
+            ArrayList<Prodotto> prodottos;
             SqlProductDao sqlProductDao= new SqlProductDao();
-            products=sqlProductDao.searchProductsvetrina(2);
-            getServletContext().setAttribute("vetrina",products);
+            prodottos =sqlProductDao.searchProductsvetrina(2);
+            getServletContext().setAttribute("vetrina", prodottos);
 
 
         } catch (SQLException throwables) {
@@ -66,8 +66,8 @@ public class HomePageServlet extends HttpServlet {
             case "/homePageAdmin":
                 try {
                     /* numero prodotti*/
-                    ArrayList<Product> products=productDao.searchAllProducts();
-                    request.getSession(false).setAttribute("n_products",products.size());
+                    ArrayList<Prodotto> prodottos =productDao.searchAllProducts();
+                    request.getSession(false).setAttribute("n_products", prodottos.size());
 
                     /*numero utenti*/
                     ArrayList<Account> accounts= accountDao.searchAllAccount();
@@ -101,12 +101,12 @@ public class HomePageServlet extends HttpServlet {
                 break;
             case "/homePageUtent":
                 Account account= (Account) session.getAttribute("account");
-                Wishlist wishlist=new Wishlist();
+                ListaDesideri listaDesideri =new ListaDesideri();
                 try {
-                    wishlist=wishlistDao.searchWishlistWithAccount(account);   /*aggiustare mettere come service*/
-                    if(wishlist!=null){
+                    listaDesideri =wishlistDao.cercaListaDesideriPerUtente(account);   /*aggiustare mettere come service*/
+                    if(listaDesideri !=null){
                         //deve caricare la lista dei desideri se cè
-                        session.setAttribute("wishlist",wishlist);
+                        session.setAttribute("wishlist", listaDesideri);
                     }
 
                     //realizzare carrello

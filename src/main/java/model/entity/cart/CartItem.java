@@ -1,20 +1,20 @@
 package model.entity.cart;
 
-import model.entity.Product;
+import model.entity.Prodotto;
 
 public class CartItem {
 
-    private Product item;
+    private Prodotto item;
 
-    public CartItem(Product product) {
-        this.item = product;
+    public CartItem(Prodotto prodotto) {
+        this.item = prodotto;
     }
 
-    public Product getItem() {
+    public Prodotto getItem() {
         return item;
     }
 
-    public void setItem(Product item) {
+    public void setItem(Prodotto item) {
         this.item = item;
     }
 

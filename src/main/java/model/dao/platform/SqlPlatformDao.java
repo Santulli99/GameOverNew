@@ -1,7 +1,7 @@
 package model.dao.platform;
 
 import model.entity.Platform;
-import model.entity.Product;
+import model.entity.Prodotto;
 import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 
@@ -124,7 +124,7 @@ public class SqlPlatformDao implements PlatformDao<SQLException> {
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ResultSet rs = ps.executeQuery();
                 Platform platform = null;
-                Product product = null;
+                Prodotto prodotto = null;
                 PlatformExtractor platformExtractor = new PlatformExtractor();
                 ProductExtractor productExtractor = new ProductExtractor();
                 HashMap<Integer, Platform> platformHashMap = new LinkedHashMap<>();
@@ -134,8 +134,8 @@ public class SqlPlatformDao implements PlatformDao<SQLException> {
                         platform = platformExtractor.extract(rs);
                         platformHashMap.put(platformId, platform);
                     }
-                    product = productExtractor.extract(rs);
-                    platformHashMap.get(platformId).getProducts().add(product);
+                    prodotto = productExtractor.extract(rs);
+                    platformHashMap.get(platformId).getProducts().add(prodotto);
                 }
                 return new ArrayList<>(platformHashMap.values());
             }

@@ -3,7 +3,7 @@
     <header class="topbar">
 
         <div class="logo">
-            <img onclick="myFunction()"  src="/GameOver_war_exploded/images/logo_nuovo.png">
+            <img onclick="myFunction()"  src="/GameOverNew_war_exploded/images/logo_nuovo.png">
         </div>
 
 
@@ -20,10 +20,10 @@
 
                 <ul id="menu1" class="menu-utente">
                     <li>
-                        <a href=/GameOver_war_exploded/AccountServlet/login >login</a>
+                        <a href=/GameOverNew_war_exploded/AutenticazioneController/login >login</a>
                     </li>
                     <li>
-                        <a href="/GameOver_war_exploded/AccountServlet/registrazione">registrazione</a>
+                        <a href="/GameOverNew_war_exploded/RegistrazioneServlet/registrazione">registrazione</a>
                     </li>
                 </ul>
 

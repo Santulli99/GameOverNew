@@ -1,7 +1,6 @@
 package model.dao.review;
 
 import model.dao.storage.ResultSetExtractor;
-import model.entity.Product;
 import model.entity.Review;
 
 import java.sql.ResultSet;
