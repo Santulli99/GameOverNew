@@ -103,14 +103,14 @@ public class HomePageServlet extends HttpServlet {
                 Account account= (Account) session.getAttribute("account");
                 Wishlist wishlist=new Wishlist();
                 try {
-                    wishlist=wishlistDao.searchWishlistWithAccount(account);
+                    wishlist=wishlistDao.searchWishlistWithAccount(account);   /*aggiustare mettere come service*/
                     if(wishlist!=null){
                         //deve caricare la lista dei desideri se cè
                         session.setAttribute("wishlist",wishlist);
                     }
 
                     //realizzare carrello
-                    Cart cart=new Cart();
+                    Cart cart=new Cart();             /*mettere come service*/
                     cart=cartDao.searchCartWithAccount(account);
                     if(cart !=null) {
                         request.getSession(false).setAttribute("carrello", cart);
