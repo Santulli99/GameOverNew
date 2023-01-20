@@ -62,10 +62,7 @@
 
 
 
-<!-- header -->
-
-
-<jsp:include page="/WEB-INF/views/partials/headerUtent.jsp"></jsp:include>
+c
 
 
 <!-- barra di navigazione  -->
