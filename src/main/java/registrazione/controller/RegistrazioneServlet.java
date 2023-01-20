@@ -37,19 +37,7 @@ public class RegistrazioneServlet  extends HttpServlet {
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
                 dispatcher.forward(request,response);
                 break;
-            case "/checkEmailSign":
-                String email=request.getParameter("email");
-                try {
-                    Account account=accountDao.searchAccountEmail(email);
-                    if(account!=null){
-                        response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda a un model.dao.account già esistente.");
-                    }
-                }
-                catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+
         }
 
     }
