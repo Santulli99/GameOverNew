@@ -91,7 +91,7 @@ public class ListaDesideriController extends HttpServlet {
                 request.setAttribute("lista",listaDesideri);
 
                 /*da 83 a 89 devo cancellare dopo aver aggiustato la jsp*/
-                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listades.jsp");
+                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
                 dispatcher.forward(request,response);
                 break;
             case "/login":
