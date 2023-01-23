@@ -1,8 +1,10 @@
 package listaDesideri.controller;
 
 import listaDesideri.service.ListaDesideriServiceImp;
+import model.dao.account.SqlAccountDao;
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
+import model.entity.ListaDesideri;
 import model.entity.Prodotto;
 
 import javax.servlet.RequestDispatcher;
@@ -75,14 +77,21 @@ public class ListaDesideriController extends HttpServlet {
             case "/":
                 break;
             case "/visualizzaListaDesideri":
-                /*Account account=new Account();
-                account=(Account) request.getSession(false).getAttribute("account");
-                ArrayList<Prodotto> prodotti= new ArrayList<>();
+                Account account=new Account();
+                /*account=(Account) request.getSession(false).getAttribute("account");*/
 
-                prodotti=listaDesideriServiceImp.getListaDesideri(account);
-                request.setAttribute("prodotti",prodotti);
-*/
-                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
+                SqlAccountDao accountDao=new SqlAccountDao();
+                try {
+                    account=accountDao.searchAccountId(3);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                ListaDesideri listaDesideri=new ListaDesideri();
+                listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
+                request.setAttribute("lista",listaDesideri);
+
+                /*da 83 a 89 devo cancellare dopo aver aggiustato la jsp*/
+                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listades.jsp");
                 dispatcher.forward(request,response);
                 break;
             case "/login":

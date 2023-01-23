@@ -12,6 +12,6 @@ public interface ListaDesideriService {
 
     boolean eliminaProdottoListaDesideri(Prodotto prodotto, Account account);
 
-    ArrayList<Prodotto> getListaDesideri(Account account);
+    ListaDesideri getListaDesideri(Account account);
 
 }

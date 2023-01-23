@@ -46,8 +46,9 @@ public class SqlListaDesideriDao implements ListaDesideriDao {
 
     @Override
     public ListaDesideri cercaListaDesideriPerUtente(Account account) throws Exception {
+
         try (Connection connection = SqlDao.getConnection()) {
-            String query = "select * from  product,wishlist where id_cliente=?  and product.id_prodotto=wishlist.id_prodotto;";
+            String query = "select pro.id_prodotto,id_categoria,nome,descrizione,path_img,prezzo,data_uscita,id_piattaforma,valutazione_media from  wishlist,product AS pro where id_cliente=?  and pro.id_prodotto=wishlist.id_prodotto;";
 
             try (PreparedStatement ps1 = connection.prepareStatement(query)) {
                 ps1.setInt(1, account.getId());
@@ -57,8 +58,10 @@ public class SqlListaDesideriDao implements ListaDesideriDao {
                 ProductExtractor productExtractor = new ProductExtractor();
 
                 ArrayList<Prodotto> prodotti = new ArrayList<>();
+
                 while (rs.next()) {
                     prodotto = productExtractor.extract(rs);
+
                     prodotti.add(prodotto);
                 }
                 ListaDesideri listaDesideri = new ListaDesideri();

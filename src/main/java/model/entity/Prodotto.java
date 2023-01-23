@@ -17,6 +17,23 @@ public class Prodotto {
     private ArrayList<Review> reviews;
     private ListaDesideri listaDesideri;
 
+    private double valutazioneMedia;
+
+    public ListaDesideri getListaDesideri() {
+        return listaDesideri;
+    }
+
+    public void setListaDesideri(ListaDesideri listaDesideri) {
+        this.listaDesideri = listaDesideri;
+    }
+
+    public double getValutazioneMedia() {
+        return valutazioneMedia;
+    }
+
+    public void setValutazioneMedia(double valutazioneMedia) {
+        this.valutazioneMedia = valutazioneMedia;
+    }
 
     public Prodotto() {
         super();

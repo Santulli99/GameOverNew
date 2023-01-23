@@ -131,5 +131,7 @@
 <!-- footer -->
 
 <jsp:include page="/WEB-INF/views/partials/footer.jsp"></jsp:include>
+
+
 </body>
 </html>

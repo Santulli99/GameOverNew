@@ -47,14 +47,13 @@ public class ListaDesideriServiceImp implements ListaDesideriService {
     }
 
     @Override
-    public ArrayList<Prodotto> getListaDesideri(Account account) {
+    public ListaDesideri getListaDesideri(Account account) {
         ArrayList<Prodotto> prodotti=new ArrayList<>();
         try {
             listaDesideri=listaDesideriDao.cercaListaDesideriPerUtente(account);
-            prodotti=listaDesideri.getProducts();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return prodotti;
+        return listaDesideri;
     }
 }

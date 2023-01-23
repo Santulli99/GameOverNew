@@ -4,13 +4,17 @@ import java.util.ArrayList;
 
 public class ListaDesideri {
     private Account account;
-    private ArrayList<Prodotto> prodotto;
+    private ArrayList<Prodotto> prodotti;
+
+    public ArrayList<Prodotto> getProdotti() {
+        return prodotti;
+    }
 
     public ListaDesideri() { super(); }
 
     public ListaDesideri(Account account, ArrayList<Prodotto> prodotto) {
         this.account = account;
-        this.prodotto = prodotto;
+        this.prodotti = prodotto;
     }
 
     public Account getAccount() {
@@ -21,15 +25,12 @@ public class ListaDesideri {
         this.account = account;
     }
 
-    public ArrayList<Prodotto> getProducts() {
-        return prodotto;
-    }
 
     public void setProducts(ArrayList<Prodotto> prodotto) {
-        this.prodotto = prodotto;
+        this.prodotti = prodotto;
     }
 
     public boolean containsListaDesideri(Prodotto pr){
-        return prodotto.contains(pr);
+        return prodotti.contains(pr);
     }
 }

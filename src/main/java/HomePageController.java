@@ -124,6 +124,7 @@ public class HomePageController extends HttpServlet {
                 }
                 break;
             case "/homePage":
+                System.out.println("sonoooo quiiiii");
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
                 dispatcher.forward(request, response);
                 break;
