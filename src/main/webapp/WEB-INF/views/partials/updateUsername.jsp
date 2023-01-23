@@ -39,7 +39,7 @@
 </script>
 
 <div class="conteinerLogin">
-    <form class="form" name="modulo" onsubmit="return (validateUsername()&&confermaUsername())" action="/GameOver_war_exploded/AccountServlet/updateUsername"   method="post">
+    <form class="form" name="modulo" onsubmit="return (validateUsername()&&confermaUsername())" action="${context}/AccountServlet/updateUsername"   method="post">
 
 
         <label class="label" for="username">Nuova Username </label>

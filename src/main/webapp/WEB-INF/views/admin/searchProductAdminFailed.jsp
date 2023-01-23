@@ -35,13 +35,13 @@
 
             <div class="vetrinaAjax" >
 
-                <img src="/GameOver_war_exploded/icons/icons8-ricerca-50.png">
+                <img src="${context}/icons/icons8-ricerca-50.png">
 
                 <p> Siamo spiacenti, nessun risultato trovato! <br>
                     Sembra che non ci siano giochi corrispondenti alla tua richiesta
                 </p>
 
-                <a href="/GameOver_war_exploded/AccountServlet/showAdmin"><button class="button">Torna all'HomePage</button></a>
+                <a href="${context}/AccountServlet/showAdmin"><button class="button">Torna all'HomePage</button></a>
 
 
             </div>

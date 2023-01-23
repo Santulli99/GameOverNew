@@ -126,7 +126,7 @@
                             <div><p> ${account.email} </p></div>
                             <div><p> ${account.username}</p></div>
                             <div id="button">
-                                <a href="/GameOver_war_exploded/AccountServlet/showAccount?id=${model.dao.account.id}"><button >VISUALIZZA</button></a>
+                                <a href="${context}/AccountServlet/showAccount?id=${model.dao.account.id}"><button >VISUALIZZA</button></a>
                             </div>
 
 

@@ -34,7 +34,7 @@
 
 
 <div class="conteinerRegistrazione">
-    <form class="form1" name="modulo" onsubmit="return (validateNome() && validateTel())"   action="/GameOver_war_exploded/DataClientServlet/updateDati"   method="post">
+    <form class="form1" name="modulo" onsubmit="return (validateNome() && validateTel())"   action="${context}/DataClientServlet/updateDati"   method="post">
 
         <div id="num1">
             <div class="label1">

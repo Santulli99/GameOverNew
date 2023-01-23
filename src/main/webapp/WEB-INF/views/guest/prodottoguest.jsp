@@ -181,7 +181,7 @@
 
             <div class="prodottoimg">
 
-                <img src="/GameOver_war_exploded/cover/${prodotto.cover}">
+                <img src="${context}/cover/${prodotto.cover}">
 
 
                 <div class="latodetroCopertina">
@@ -189,7 +189,7 @@
                     <p id="p1">DIGITALE</p>
                     <p id="p2">${prodotto.price}&euro;</p>
 
-                    <a href="/GameOver_war_exploded/CartServlet/addCartGhost?id=${prodotto.id}"><button class="button">aggiungi al carrello</button></a>
+                    <a href="${context}/CartServlet/addCartGhost?id=${prodotto.id}"><button class="button">aggiungi al carrello</button></a>
 
                     <p id="p3">
                         Codice articolo:

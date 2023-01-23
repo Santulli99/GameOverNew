@@ -196,7 +196,7 @@
 
             <div  class="prodottoimg">
 
-                <img src="/GameOver_war_exploded/cover/${prodotto.cover}">
+                <img src="${context}/cover/${prodotto.cover}">
 
 
 
@@ -228,7 +228,7 @@
 
 
 
-                    <a id="aa3"  href="/GameOver_war_exploded/CartServlet/addCart?id=${prodotto.id}"><button id="aa4" class="button">aggiungi al carrello</button></a>
+                    <a id="aa3"  href="${context}/CartServlet/addCart?id=${prodotto.id}"><button id="aa4" class="button">aggiungi al carrello</button></a>
 
                     <script defer>
                         var veri=${verifica};

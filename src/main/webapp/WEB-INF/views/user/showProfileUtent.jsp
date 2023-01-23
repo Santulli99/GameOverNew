@@ -198,7 +198,7 @@
 <div class="generalProfilo">
             <h3>I miei dati</h3>
 
-  <div class="modifica">  <img src="/GameOver_war_exploded/icons/icons8-utente-60.png"> <a href="/GameOver_war_exploded/DataClientServlet/showDataClient"><button>modifica</button></a>
+  <div class="modifica">  <img src="${context}/icons/icons8-utente-60.png"> <a href="${context}/DataClientServlet/showDataClient"><button>modifica</button></a>
   </div>
             <div class="sottodivPro">
 
@@ -232,9 +232,9 @@
 
    <div class="modifica">
 
-       <img src="/GameOver_war_exploded/icons/icons8-lucchetto.gif">
+       <img src="${context}/icons/icons8-lucchetto.gif">
 
-       <a href="/GameOver_war_exploded/AccountServlet/showUpdatePassword"><button>modifica</button></a>
+       <a href="${context}/AccountServlet/showUpdatePassword"><button>modifica</button></a>
    </div>
             <div class="sottodivPro1">
 
@@ -245,9 +245,9 @@
 
    <div class="modifica">
 
-       <img src="/GameOver_war_exploded/icons/icons8-nuovo-messaggio-50.png">
+       <img src="${context}/icons/icons8-nuovo-messaggio-50.png">
 
-       <a href="/GameOver_war_exploded/AccountServlet/showUpdateEmail"><button>modifica</button></a>
+       <a href="${context}/AccountServlet/showUpdateEmail"><button>modifica</button></a>
    </div>
 
             <div  class="sottodivPro1">
@@ -260,9 +260,9 @@
 
 
   <div class="modifica">
-      <img src="/GameOver_war_exploded/icons/icons8-nome-utente-100.png">
+      <img src="${context}/icons/icons8-nome-utente-100.png">
 
-      <a href="/GameOver_war_exploded/AccountServlet/showUpdateUsername"><button>modifica</button></a>
+      <a href="${context}/AccountServlet/showUpdateUsername"><button>modifica</button></a>
   </div>
             <div class="sottodivPro1">
 
@@ -274,9 +274,9 @@
 
     <div class="modifica">
 
-        <img src="/GameOver_war_exploded/icons/icons8-home-page-50.png">
+        <img src="${context}/icons/icons8-home-page-50.png">
 
-        <a href="/GameOver_war_exploded/AddressServlet/showUpdateAddress"><button>modifica</button></a>
+        <a href="${context}/AddressServlet/showUpdateAddress"><button>modifica</button></a>
     </div>
 
             <div class="sottodivPro">

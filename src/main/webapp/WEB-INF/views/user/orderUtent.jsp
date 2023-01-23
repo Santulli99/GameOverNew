@@ -181,7 +181,7 @@
             <div class="headerOrd">
 
                 <div id="a2">
-                    <img src="/GameOver_war_exploded/cover/${prodotto.cover}">
+                    <img src="${context}/cover/${prodotto.cover}">
                     <p><b>Nome gioco:</b> ${prodotto.productName} <br>
                         <b>Piattaforma:</b> ${prodotto.platform.platformName} <br>
                         <b>Data uscita:</b> ${prodotto.dataString}<br>
@@ -210,7 +210,7 @@
                 </div>
 
                 <div id="a7">
-                    <a href="/GameOver_war_exploded/OrderServlet/showOrdersUtent"><button class="button">continua a navigare</button></a>
+                    <a href="${context}/OrderServlet/showOrdersUtent"><button class="button">continua a navigare</button></a>
                 </div>
 
             </div>

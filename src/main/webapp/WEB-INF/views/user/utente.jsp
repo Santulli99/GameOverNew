@@ -79,7 +79,7 @@
 
     <div class="slider-container">
       <div class="image-container">
-        <img id="a1" src="/GameOver_war_exploded/images/MicrosoftTeams-image.png" class="slider-image" />
+        <img id="a1" src="${context}/images/MicrosoftTeams-image.png" class="slider-image" />
 
       </div>
       <div class="button-container">

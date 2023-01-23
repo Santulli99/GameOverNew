@@ -42,7 +42,7 @@
 </script>
 
 <div class="conteinerLogin">
-    <form class="form"  name="modulo"  onsubmit="return (validatePassword()&& confermaPassword())" action="/GameOver_war_exploded/AccountServlet/updatePassword"  method="post">
+    <form class="form"  name="modulo"  onsubmit="return (validatePassword()&& confermaPassword())" action="${context}/AccountServlet/updatePassword"  method="post">
 
 
         <label class="label" for="password">Nuova password </label>

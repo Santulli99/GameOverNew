@@ -28,7 +28,7 @@
 <body>
 
 
-<div> <img src="/GameOver_war_exploded/images/404.jpg" ></div>
+<div> <img src="${pageContext.request.contextPath}/images/404.jpg" ></div>
 
 
 </body>

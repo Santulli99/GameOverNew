@@ -27,7 +27,7 @@
 
 <div class="conteinerRegistrazione">
 
-    <form id="form3"  name="modulo" onsubmit="return validateForm()" action="/GameOverNew_war_exploded/registrazione/controller/RegistrazioneServlet/registrazione" method="post">
+    <form id="form3"  name="modulo" onsubmit="return validateForm()" action="${context}/RegistrazioneServlet/registrazione" method="post">
 
         <h5> <b>Compila i campi seguenti per registrarti <br>
             NB: I campi contrassegnati da * sono obbligatori</b></h5>

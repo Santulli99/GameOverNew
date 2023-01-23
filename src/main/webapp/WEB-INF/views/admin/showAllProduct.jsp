@@ -123,8 +123,8 @@
                         <div><p>${prodotto.productName}</p></div>
                         <div><p> ${prodotto.platform.platformName} </p></div>
                         <div><p> ${prodotto.category.categoryName} </p></div>
-                        <div><a href="/GameOver_war_exploded/ProductServlet/updateProduct?id=${model.dao.prodotto.id}"><button>Modifica</button></a>
-                        <a href="/GameOver_war_exploded/ProductServlet/deleteProduct?id=${model.dao.prodotto.id}"><button>Elimina</button></a></div>
+                        <div><a href="${context}/ProductServlet/updateProduct?id=${model.dao.prodotto.id}"><button>Modifica</button></a>
+                        <a href="${context}/ProductServlet/deleteProduct?id=${model.dao.prodotto.id}"><button>Elimina</button></a></div>
                     </li>
                 </c:forEach>
             </ul>

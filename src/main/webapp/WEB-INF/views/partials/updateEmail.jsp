@@ -47,7 +47,7 @@
 
 
 <div class="conteinerLogin">
-    <form class="form" name="modulo"  onsubmit=" return (validateEmail() && confermaEmail())"   action="/GameOver_war_exploded/AccountServlet/updateEmail"   method="post">
+    <form class="form" name="modulo"  onsubmit=" return (validateEmail() && confermaEmail())"   action="${context}/AccountServlet/updateEmail"   method="post">
 
 
         <label class="label" for="email">Nuova email </label>

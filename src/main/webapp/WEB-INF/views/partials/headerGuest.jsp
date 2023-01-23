@@ -3,11 +3,11 @@
     <header class="topbar">
 
         <div class="logo">
-            <img onclick="myFunction()"  src="/GameOverNew_war_exploded/images/logo_nuovo.png">
+            <img onclick="myFunction()"  src="${pageContext.request.contextPath}/images/logo_nuovo.png">
         </div>
 
 
-        <form class="ig-ricerca" action="/GameOver_war_exploded/ProductServlet/searchProductGuest" method="get" >
+        <form class="ig-ricerca" action="${pageContext.request.contextPath}/ProductServlet/searchProductGuest" method="get" >
             <input  id="ricerca1" name="stringa" onkeyup="ricercaAjaxGuest()" class="ricerca" type="text" placeholder="ricerca" >
             <button class="ig-ricerca-submit" type="submit" value="" title="Ricerca avanzata"></button>
         </form>
@@ -16,21 +16,21 @@
 
             <div class="utente" id="menu2">
 
-                <img src="/GameOver_war_exploded/icons/icons8-utente-48.png">
+                <img src="${pageContext.request.contextPath}/icons/icons8-utente-48.png">
 
                 <ul id="menu1" class="menu-utente">
                     <li>
-                        <a href=/GameOverNew_war_exploded/AutenticazioneController/login >login</a>
+                        <a href="${pageContext.request.contextPath}/AutenticazioneController/login">login</a>
                     </li>
                     <li>
-                        <a href="/GameOverNew_war_exploded/RegistrazioneServlet/registrazione">registrazione</a>
+                        <a href="${pageContext.request.contextPath}/RegistrazioneServlet/registrazione">registrazione</a>
                     </li>
                 </ul>
 
             </div>
 
             <div class="carrello">
-                 <img id="img1"   src="/GameOver_war_exploded/icons/icons8-carrello-della-spesa-48.png">
+                 <img id="img1"   src="${pageContext.request.contextPath}/icons/icons8-carrello-della-spesa-48.png">
 
                 <script>
                     document.getElementById("img1").onclick = function()  {JSalertWarning("Effettuare login o registrazione per visualizzare il carrello")};
