@@ -148,10 +148,10 @@
         <div id="titologioco"><h1><p>${prodotto.productName}</p></h1></div>
         <div id="valutazione">
           <div style="width: 50%">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
             <span class="fa fa-star "></span>
             <script >
               var i=${prodotto.valutazioneMedia};
