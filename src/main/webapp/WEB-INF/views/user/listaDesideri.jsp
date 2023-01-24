@@ -153,6 +153,10 @@
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star "></span>
+            <script >
+              var i=${prodotto.valutazioneMedia};
+              valutazioneChecked(i);
+            </script>
           </div> <div><p>totali valutazioni </p></div></div>
         <div id="prezzo">
 
