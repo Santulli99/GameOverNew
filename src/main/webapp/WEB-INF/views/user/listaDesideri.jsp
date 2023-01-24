@@ -164,7 +164,7 @@
       </div>
       <div id="bottoni">
 
-        <a href="/${pageContext.request.contextPath}/AccountServlet/utente"><button class="button">aggiungi al carrello</button></a>
+        <a href="${context}/CartServlet/addCartGhost?id=${prodotto.id}"><button class="button">aggiungi al carrello</button></a>
           <a href="/${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri"><button class="button">rimuovi</button></a>
 
       </div>
