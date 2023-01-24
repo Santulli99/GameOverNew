@@ -148,14 +148,13 @@
         <div id="titologioco"><h1><p>${prodotto.productName}</p></h1></div>
         <div id="valutazione">
           <div style="width: 50%">
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star "></span>
+            <span id="1" class="fa fa-star "></span>
+            <span id="2" class="fa fa-star "></span>
+            <span id="3" class="fa fa-star "></span>
+            <span id="4" class="fa fa-star "></span>
+            <span id="5" class="fa fa-star "></span>
             <script >
-              var i=${prodotto.valutazioneMedia};
-              valutazioneChecked(i);
+              valutazioneChecked(${prodotto.valutazioneMedia})
             </script>
           </div> <div><p>totali valutazioni </p></div></div>
         <div id="prezzo">
