@@ -387,6 +387,13 @@ function  banner(){
 
 }
 
+function valutazioneChecked(valutazione){
+    var i;
+    for(i=1; i<=valutazione; i++){
+        document.getElementById(""+i).className="fa fa-star checked";
+    }
+
+}
 
 
 

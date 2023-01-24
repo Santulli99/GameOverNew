@@ -55,6 +55,7 @@
 
 <script>
   i=0;
+
   bannerDinamic();
 
 </script>
