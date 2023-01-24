@@ -142,28 +142,21 @@
       <c:forEach items="${lista.prodotti}" var="prodotto">
     <div id="prodottoDesiderato">
 
-      <div id="cover"> <img style="border-radius: 10px;" src="${pageContext.request.contextPath}/cover/${prodotto.cover}"></div>
+      <div id="cover"> <img style="border-radius: 10px;" src="/GameOverNew_war_exploded/cover/${prodotto.cover}"></div>
       <div id="descrizione">
 
         <div id="titologioco"><h1><p>${prodotto.productName}</p></h1></div>
         <div id="valutazione">
           <div style="width: 50%">
-
-
-            <span id="1" class="fa fa-star"></span>
-            <span id="2"class="fa fa-star"></span>
-            <span id="3"class="fa fa-star"></span>
-            <span id="4"class="fa fa-star"></span>
-            <span id="5"class="fa fa-star"></span>
-
-            <script >
-              var i=${prodotto.valutazioneMedia};
-              valutazioneChecked(i);
-            </script>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star "></span>
           </div> <div><p>totali valutazioni </p></div></div>
         <div id="prezzo">
 
-          <div class="divprezzo"> <p>prezzo:${prodotto.price}&euro;</p> </div>
+          <div class="divprezzo"> <p>${prodotto.price}&euro;</p> </div>
           <div class="divprezzo"> <p>${prodotto.platform.platformName}</p> </div>
           <div class="divprezzo"> <p>${prodotto.category.categoryName}</p> </div>
 
@@ -173,8 +166,8 @@
       </div>
       <div id="bottoni">
 
-        <a href="${context}/AccountServlet/utente"><button class="button">aggiungi al carrello</button></a>
-          <a href="${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri"><button class="button">rimuovi</button></a>
+        <a href="/${pageContext.request.contextPath}/AccountServlet/utente"><button class="button">aggiungi al carrello</button></a>
+          <a href="/${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri"><button class="button">rimuovi</button></a>
 
       </div>
     </div>
