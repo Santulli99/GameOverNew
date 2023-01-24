@@ -22,7 +22,7 @@ public class ListaDesideriController extends HttpServlet {
     private RequestDispatcher dispatcher;
     private SqlProductDao sqlProdottoDao=new SqlProductDao();
     private ListaDesideriServiceImp listaDesideriServiceImp=new ListaDesideriServiceImp();
-
+    ListaDesideri listaDesideri=new ListaDesideri();
    private Prodotto prodotto=new Prodotto();
    private Account account=new Account();
    private boolean successo;
@@ -50,23 +50,7 @@ public class ListaDesideriController extends HttpServlet {
                 }
                 break;
 
-            case "/rimuoviListaDesideri":
-                account=(Account) request.getSession(false).getAttribute("account");
-                try {
-                    prodotto =sqlProdottoDao.searchProduct(Integer.parseInt(request.getParameter("id"))); /*implementare con servizio*/
-                    if(listaDesideriServiceImp.eliminaProdottoListaDesideri(prodotto,account)) {
-                        successo = true;
-                    }
-                    else {
-                        successo = false;
-                    }
-                    request.setAttribute("successo", successo);
-                    dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
-                    dispatcher.forward(request,response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
+
         }
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,11 +70,39 @@ public class ListaDesideriController extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                ListaDesideri listaDesideri=new ListaDesideri();
+
                 listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
                 request.setAttribute("lista",listaDesideri);
 
                 /*da 83 a 89 devo cancellare dopo aver aggiustato la jsp*/
+                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
+                dispatcher.forward(request,response);
+                break;
+
+            case "/rimuoviListaDesideri":
+                //account=(Account) request.getSession(false).getAttribute("account");
+
+
+                try {
+                    SqlAccountDao accountDao1=new SqlAccountDao();
+                    account=accountDao1.searchAccountId(3);
+                    System.out.println(Integer.parseInt(request.getParameter("id")));
+                    prodotto =sqlProdottoDao.searchProduct(Integer.parseInt(request.getParameter("id"))); /*implementare con servizio*/
+                    if(listaDesideriServiceImp.eliminaProdottoListaDesideri(prodotto,account)) {
+                        System.out.println("sono dentro");
+                        successo = true;
+                    }
+                    else {
+                        successo = false;
+                    }
+                    request.setAttribute("successo", successo);
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
+                request.setAttribute("lista",listaDesideri);
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
                 dispatcher.forward(request,response);
                 break;
