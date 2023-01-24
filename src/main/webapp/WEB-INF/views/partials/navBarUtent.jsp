@@ -3,7 +3,7 @@
 
         <ul class="primoul">
 
-            <li id="li1"> <img src="/GameOverNew_war_exploded/icons/icons8-monitor-52.png"><a>pc</a>
+            <li id="li1"> <img src="${pageContext.request.contextPath}/icons/icons8-monitor-52.png"><a>pc</a>
                 <!--menu tendina con categorie -->
                 <ul id="sotto_ul1" class="sotto_ul">
                     <li>
@@ -38,7 +38,7 @@
 
 
             </li>
-            <li id="li2"> <img src="/GameOverNew_war_exploded/icons/icons8-xbox-52.png" ><a>xbox</a>
+            <li id="li2"> <img src="${pageContext.request.contextPath}/icons/icons8-xbox-52.png" ><a>xbox</a>
                 <!--menu tendina con categorie -->
                 <ul id="sotto_ul2" class="sotto_ul">
                     <li>

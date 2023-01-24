@@ -14,7 +14,7 @@
     <jsp:param name="script" value="jqueryfunction.js"/>
   </jsp:include>
 
-  <script src="/GameOver_war_exploded/js/validate.js"></script>
+  <script src="${pageContext.request.contextPath}/js/validate.js"></script>
 </head>
 
 
