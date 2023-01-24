@@ -74,11 +74,11 @@
 
     .button{
 
-      background-color: gold;
-      color: #1a1a1a;
+      background-color: #ee3124;
+      color: #EEEEEE;
       margin:25px 100px 0px 100px;
       border-radius:5px;
-      border:2px solid gold;
+      border:2px solid #ee3124;
       padding:5px;
       width: 198px;
       height: 36px;
@@ -88,8 +88,8 @@
     }
 
     .button:hover{
-      background-color: orange;
-      color: #1a1a1a;
+      background-color: #ad0e06;
+      color: #EEEEEE;
     }
 
    a{
@@ -111,8 +111,9 @@
   if(er1==true) {
     JSalertWarning("Aggiungere almeno un prodotto per procedere all'acquisto");
   }
-
 </script>
+
+
 
 <!-- header -->
 
@@ -149,7 +150,7 @@
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+            <span class="fa fa-star "></span>
           </div> <div><p>totali valutazioni </p></div></div>
         <div id="prezzo">
 
