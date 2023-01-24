@@ -147,16 +147,16 @@
 
         <div id="titologioco"><h1><p>${prodotto.productName}</p></h1></div>
         <div id="valutazione">
-          <div style="width: 50%">
+          <div style="width: 50%" id="${prodotto.id}">
             <span id="1" class="fa fa-star "></span>
             <span id="2" class="fa fa-star "></span>
             <span id="3" class="fa fa-star "></span>
             <span id="4" class="fa fa-star "></span>
             <span id="5" class="fa fa-star "></span>
-            <script >
-              valutazioneChecked(${prodotto.valutazioneMedia})
+            <script>
+              valutazioneChecked(${prodotto.valutazioneMedia},${prodotto.id});
             </script>
-          </div> <div><p>totali valutazioni </p></div></div>
+          </div><div><p>totali valutazioni </p></div></div>
         <div id="prezzo">
 
           <div class="divprezzo"> <p>${prodotto.price}&euro;</p> </div>
@@ -167,15 +167,23 @@
 
 
       </div>
+
+
+
+
+
       <div id="bottoni">
 
         <a href="/${pageContext.request.contextPath}/AccountServlet/utente"><button class="button">aggiungi al carrello</button></a>
           <a href="/${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri"><button class="button">rimuovi</button></a>
 
       </div>
+
     </div>
 
       </c:forEach>
+
+
 
 
   </section>

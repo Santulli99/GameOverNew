@@ -387,12 +387,13 @@ function  banner(){
 
 }
 
-function valutazioneChecked(valutazione){
+function valutazioneChecked(valutazione,id){
     var i;
-    for(i=1; i<=valutazione; i++){
-        document.getElementById(""+i).className="fa fa-star checked";
-    }
-
+    const collection =document.getElementById("" + id).getElementsByTagName("span");
+    console.log(collection);
+        for (i=0; i < valutazione; i++) {
+            collection[i].className=  "fa fa-star checked";
+        }
 }
 
 
