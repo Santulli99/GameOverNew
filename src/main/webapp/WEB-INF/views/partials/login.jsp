@@ -31,7 +31,7 @@
 <body>
 
 <div class="conteinerLogin">
-<form class="form" name="modulo"  action="${pageContext.request.contextPath}/AutenticazioneController/login"  method="post">
+<form class="form" name="modulo"  action="/GameOverNew_war_exploded/AutenticazioneController/login"  method="post">
 
         <label class="label" for="email">email</label>
         <input   type="email" name="email" id="email"  placeholder="email" required>

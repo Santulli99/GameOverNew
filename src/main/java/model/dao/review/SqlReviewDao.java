@@ -68,7 +68,7 @@ public class SqlReviewDao implements ReviewDao<SQLException> {
     public ArrayList<Review> searchAllReviewWithProduct(int id_product) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query = "SELECT *  FROM review,product AS pro WHERE review.id_prodotto=pro.id_prodotto and pro.id_prodotto=?;";
+            String query = "SELECT *  FROM review,product AS pro ,account AS acc WHERE review.id_prodotto=pro.id_prodotto and review.id_cliente=acc.id_cliente and pro.id_prodotto=?;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1,id_product);
@@ -77,11 +77,15 @@ public class SqlReviewDao implements ReviewDao<SQLException> {
                 ReviewExtractor reviewExtractor = new ReviewExtractor();
                 Prodotto prodotto = null;
                 ProductExtractor productExtractor = new ProductExtractor();
+                Account account=null;
+                AccountExtractor accountExtractor=new AccountExtractor();
                 ArrayList<Review> reviews = new ArrayList<>();
                 while (rs.next()) {
                     review=reviewExtractor.extract(rs);
                     prodotto = productExtractor.extract(rs);
+                    account=accountExtractor.extract(rs);
                     review.setProduct(prodotto);
+                    review.setAccount(account);
                     reviews.add(review);
                 }
                 return reviews;

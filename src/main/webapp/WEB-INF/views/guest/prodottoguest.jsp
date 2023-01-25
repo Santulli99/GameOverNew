@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'  %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
@@ -18,9 +18,13 @@
         <jsp:param name="script" value="jqueryfunction.js"/>
 
     </jsp:include>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <style>
+     .checked {
+         color: orange;
+     }
 
         /*prodotto*/
 
@@ -181,7 +185,7 @@
 
             <div class="prodottoimg">
 
-                <img src="${context}/cover/${prodotto.cover}">
+                <img src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
 
 
                 <div class="latodetroCopertina">
@@ -210,6 +214,28 @@
             <div class="descrizione">
                 <h3>DESCRIZIONE</h3>
                 <p>${prodotto.description}</p>
+            </div>
+
+            <!-- div per le recensioni  -->
+            <div  class="descrizione">
+                <h3>Recensioni</h3>
+                <c:forEach items="${recensioni1}" var="recensione">
+                    <div style="border:solid 2px black">
+                        <p>${recensione.descrizione}</p>
+                        <p>
+                            <div style="width: 50%" id="${recensione.account.id}">
+                                <span id="1" class="fa fa-star "></span>
+                                <span id="2" class="fa fa-star "></span>
+                                <span id="3" class="fa fa-star "></span>
+                                <span id="4" class="fa fa-star "></span>
+                                <span id="5" class="fa fa-star "></span>
+                                 <script>
+                                    valutazioneChecked(${recensione.valutazione},${recensione.account.id});
+                                 </script>
+                            </div>
+                        </p>
+                    </div>
+                </c:forEach>
             </div>
 
         </div>

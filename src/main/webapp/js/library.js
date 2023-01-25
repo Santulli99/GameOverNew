@@ -44,46 +44,46 @@ function  myFunction5(){
 
 function  bottone1(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image.png";
 
 }
 
 function  bottone2(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image1.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image1.png";
 
 }
 
 function  bottone3(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image3.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image3.png";
 
 }
 
 function  bottone4(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image4.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image4.png";
 
 }
 function  bottone5(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image5.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image5.png";
 
 }
 
 function  bottone6(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image6.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image6.png";
 
 }
 function  bottone7(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image7.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image7.png";
 
 }
 function  bottone8(){
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/MicrosoftTeams-image8.png";
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/MicrosoftTeams-image8.png";
 
 }
 
@@ -117,7 +117,7 @@ function  ricercaAjax(){
 
         }
     };
-        xhr.open("GET","/GameOver_war_exploded/ProductServlet/searchProductWithAjax?stringa="+pattern,true);
+        xhr.open("GET","/GameOverNew_war_exploded/ProductServlet/searchProductWithAjax?stringa="+pattern,true);
         xhr.send();
 }
 function  myFunctionXhr(xhr){
@@ -130,13 +130,13 @@ function  myFunctionXhr(xhr){
             "\n" +
             "    <div class=\"vetrinaAjax\" >\n" +
             "\n" +
-            "        <img src=\"/GameOver_war_exploded/icons/icons8-ricerca-50.png\">\n" +
+            "        <img src=\"/GameOverNew_war_exploded/icons/icons8-ricerca-50.png\">\n" +
             "\n" +
             "        <p> Siamo spiacenti, nessun risultato trovato! <br>\n" +
             "            Sembra che non ci siano giochi corrispondenti alla tua richiesta\n" +
             "        </p>\n" +
             "\n" +
-            "        <a href=\"/GameOver_war_exploded/AccountServlet/utente\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
+            "        <a href=\"/GameOverNew_war_exploded/AccountServlet/utente\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
             "\n" +
             "\n" +
             "    </div>\n" +
@@ -148,7 +148,7 @@ function  myFunctionXhr(xhr){
             string += "   <div class=\"divVetrina\" >\n" +
                 "    <p>" + data[i].productName + "</p>\n" +
                 "\n" +
-                "       <a href=\"http://localhost:8080/GameOver_war_exploded/ProductServlet/showProductUtente?id=" + data[i].id + "\"> <img  src=\"/GameOver_war_exploded/cover/" + data[i].cover + "\">\n" +
+                "       <a href=\"http://localhost:8080/GameOver_war_exploded/ProductServlet/showProductUtente?id=" + data[i].id + "\"> <img  src=\"/GameOverNew_war_exploded/cover/" + data[i].cover + "\">\n" +
                 "       </a>\n" +
                 "\n" +
                 "        <p class=\"divPrezzo\">" + data[i].price + "&euro;</p>\n" +
@@ -178,7 +178,7 @@ function  ricercaAjaxGuest(){
 
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/ProductServlet/searchProductWithAjax?stringa="+pattern,true);
+    xhr.open("GET","/GameOverNew_war_exploded/ProductServlet/searchProductWithAjax?stringa="+pattern,true);
     xhr.send();
 }
 function  myFunctionXhrGuest(xhr){
@@ -191,13 +191,13 @@ function  myFunctionXhrGuest(xhr){
             "\n" +
             "    <div class=\"vetrinaAjax\" >\n" +
             "\n" +
-            "        <img src=\"/GameOver_war_exploded/icons/icons8-ricerca-50.png\">\n" +
+            "        <img src=\"/GameOverNew_war_exploded/icons/icons8-ricerca-50.png\">\n" +
             "\n" +
             "        <p> Siamo spiacenti, nessun risultato trovato! <br>\n" +
             "            Sembra che non ci siano giochi corrispondenti alla tua richiesta\n" +
             "        </p>\n" +
             "\n" +
-            "        <a href=\"/GameOver_war_exploded/AccountServlet/homepagea\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
+            "        <a href=\"/GameOverNew_war_exploded/AccountServlet/homepagea\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
             "\n" +
             "\n" +
             "    </div>\n" +
@@ -209,7 +209,7 @@ function  myFunctionXhrGuest(xhr){
             string += "   <div class=\"divVetrina\" >\n" +
                 "    <p>" + data[i].productName + "</p>\n" +
                 "\n" +
-                "       <a href=\"http://localhost:8080/GameOver_war_exploded/ProductServlet/showProduct?id=" + data[i].id + "\"> <img  src=\"/GameOver_war_exploded/cover/" + data[i].cover + "\">\n" +
+                "       <a href=\"http://localhost:8080/GameOverNew_war_exploded/ProductServlet/showProduct?id=" + data[i].id + "\"> <img  src=\"/GameOverNew_war_exploded/cover/" + data[i].cover + "\">\n" +
                 "       </a>\n" +
                 "\n" +
                 "        <p class=\"divPrezzo\">" + data[i].price + "&euro;</p>\n" +
@@ -378,7 +378,7 @@ function  banner(){
 
     const a=["MicrosoftTeams-image.png","MicrosoftTeams-image1.png","MicrosoftTeams-image3.png","MicrosoftTeams-image4.png","MicrosoftTeams-image5.png","MicrosoftTeams-image6.png","MicrosoftTeams-image7.png","MicrosoftTeams-image8.png"];
 
-    document.getElementById("a1").src="/GameOver_war_exploded/images/"+a[i];
+    document.getElementById("a1").src="/GameOverNew_war_exploded/images/"+a[i];
 
     i++;
     if(i==a.length){

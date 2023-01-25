@@ -50,17 +50,15 @@ public class AutenticazioneController extends HttpServlet {
                 if (autenticazioneService.verificaAdmin(account)) {
                     dispatcher=request.getRequestDispatcher("/HomePageController/homePageAdmin");
                     dispatcher.forward(request,response);
-                  //response.sendRedirect("/homePageServlet/homePageAdmin");//aggiungere alla home page servlet
+                   //response.sendRedirect("/HomePageController/homePageAdmin");//aggiungere alla home page servlet
                 }else {
                     //va alla pagina del cliente
                     dispatcher=request.getRequestDispatcher("/HomePageController/homePageUtent");
                     dispatcher.forward(request,response);
-                    //response.sendRedirect("/homePageServlet/homePageUtent");//aggiungere alla home page servlet
+                    //response.sendRedirect("/HomePageController/homePageUtent");//aggiungere alla home page servlet
                 }
-            case "/logout":
-                autenticazioneService.logout(session);
-                dispatcher=request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
-                dispatcher.forward(request,response);
+                break;
+
         }
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,6 +70,11 @@ public class AutenticazioneController extends HttpServlet {
                 break;
             case "/login":
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/client/login1.jsp");
+                dispatcher.forward(request,response);
+                break;
+            case "/logout":
+                autenticazioneService.logout(session);
+                dispatcher=request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
                 dispatcher.forward(request,response);
                 break;
         }

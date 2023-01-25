@@ -8,6 +8,8 @@ import model.dao.product.SqlProductDao;
 import model.entity.Category;
 import model.entity.Platform;
 import model.entity.Prodotto;
+import model.entity.Review;
+import recensione.service.RecensioneServiceImp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -188,7 +190,11 @@ public class ProductServlet extends HttpServlet {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
+                ArrayList<Review> reviews=new ArrayList<>();
+                RecensioneServiceImp recensioneServiceImp=new RecensioneServiceImp();
+                reviews=recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                System.out.println(reviews.size());
+                request.setAttribute("recensioni1", reviews);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher=request.getRequestDispatcher("/WEB-INF/views/guest/prodottoguest.jsp");
                 dispatcher.forward(request,response);
@@ -203,7 +209,10 @@ public class ProductServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
 
-
+                RecensioneServiceImp recensioneServiceImp1=new RecensioneServiceImp();
+                ArrayList<Review> reviews1=new ArrayList<>();
+                reviews1=recensioneServiceImp1.cercaRecensioniPerProdotto(prodotto);
+                request.setAttribute("recensioni", reviews1);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                 dispatcher.forward(request,response);

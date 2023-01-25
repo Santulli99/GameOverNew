@@ -5,7 +5,7 @@
     <header class="topbar">
 
         <div class="logo">
-           <a href="${pageContext.request.contextPath}/AccountServlet/utente"> <img src="${pageContext.request.contextPath}/images/logo_nuovo.png"></a>
+           <a href="${pageContext.request.contextPath}/HomePageController/homePageUtent"> <img src="${pageContext.request.contextPath}/images/logo_nuovo.png"></a>
         </div>
 
 
@@ -24,13 +24,16 @@
                 <ul id="menu1" class="menu-utente">
                     <li>
 
-                        <a href="${pageContext.request.contextPath}/AccountServlet/logout">Disconnetti</a>
+                        <a href="${pageContext.request.contextPath}/AutenticazioneController/logout">Disconnetti</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/AccountServlet/showAccountUtent">Il mio profilo</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/OrderServlet/showOrdersUtent">I miei ordini</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/ListaDesideriController/visualizzaListaDesideri">Lista Desideri</a>
                     </li>
                 </ul>
 

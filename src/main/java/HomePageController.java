@@ -57,6 +57,26 @@ public class HomePageController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
+        HttpSession session = request.getSession(false);
+
+        switch (path){
+            case "/":
+                break;
+            case "/homePageUtent":
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
+                dispatcher.forward(request, response);
+                break;
+            case "/homePage":
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
+                dispatcher.forward(request, response);
+                break;
+
+        }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
         System.out.println("IL PATH è:"+path);
         HttpSession session = request.getSession(false);
 
@@ -101,38 +121,26 @@ public class HomePageController extends HttpServlet {
                 break;
             case "/homePageUtent":
                 Account account= (Account) session.getAttribute("account");
-                ListaDesideri listaDesideri =new ListaDesideri();
-                try {
-                    listaDesideri =wishlistDao.cercaListaDesideriPerUtente(account);   /*aggiustare mettere come service*/
-                    if(listaDesideri !=null){
-                        //deve caricare la lista dei desideri se cè
-                        session.setAttribute("wishlist", listaDesideri);
-                    }
-
                     //realizzare carrello
-                    Cart cart=new Cart();             /*mettere come service*/
-                    cart=cartDao.searchCartWithAccount(account);
-                    if(cart !=null) {
-                        request.getSession(false).setAttribute("carrello", cart);
-                        request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
-                        request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
-                    }
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
-                    dispatcher.forward(request, response);
+                Cart cart=new Cart();
+                try {
+                    cart=cartDao.searchCartWithAccount(account); /*mettere come service*/
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                if(cart !=null) {
+                    request.getSession(false).setAttribute("carrello", cart);
+                    request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
+                    request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
+                }
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
+                    dispatcher.forward(request, response);
                 break;
-            case "/homePage":
-                System.out.println("sonoooo quiiiii");
-                dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
-                dispatcher.forward(request, response);
-                break;
+                }
 
         }
-    }
-
-
 }
+
+
 
 
