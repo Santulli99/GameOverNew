@@ -25,31 +25,13 @@ public class ListaDesideriController extends HttpServlet {
     ListaDesideri listaDesideri=new ListaDesideri();
    private Prodotto prodotto=new Prodotto();
    private Account account=new Account();
-   private boolean successo;
+   private boolean successo=false;
     public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
 
         switch (path){
             case "/":
                 break;
-            case "/aggiungiListaDesideri":
-                account=(Account) request.getSession(false).getAttribute("account");
-                try {
-                    prodotto =sqlProdottoDao.searchProduct(Integer.parseInt(request.getParameter("id"))); /*implementare con servizio*/
-                    if(listaDesideriServiceImp.aggiungiProdottoListaDesideri(prodotto,account)) {
-                         successo = true;
-                    }
-                    else {
-                         successo = false;
-                    }
-                    request.setAttribute("successo", successo);
-                    dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
-                    dispatcher.forward(request,response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-
 
         }
     }
@@ -60,52 +42,48 @@ public class ListaDesideriController extends HttpServlet {
         switch (path){
             case "/":
                 break;
-            case "/visualizzaListaDesideri":
-                Account account=new Account();
-                /*account=(Account) request.getSession(false).getAttribute("account");*/
-
-                SqlAccountDao accountDao=new SqlAccountDao();
+            case "/aggiungiListaDesideri":
+                account=(Account) request.getSession(false).getAttribute("account");
                 try {
-                    account=accountDao.searchAccountId(3);
+                    prodotto =sqlProdottoDao.searchProduct(Integer.parseInt(request.getParameter("id"))); /*implementare con servizio*/
+                    if(listaDesideriServiceImp.aggiungiProdottoListaDesideri(prodotto,account)) {
+                        successo = true;
+                    }
+                    request.setAttribute("successo", successo);
+                    dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
+                    dispatcher.forward(request,response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+                break;
 
+            case "/visualizzaListaDesideri":
+
+                account=(Account) request.getSession(false).getAttribute("account");
                 listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
                 request.setAttribute("lista",listaDesideri);
-
-                /*da 83 a 89 devo cancellare dopo aver aggiustato la jsp*/
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
                 dispatcher.forward(request,response);
                 break;
 
             case "/rimuoviListaDesideri":
-                //account=(Account) request.getSession(false).getAttribute("account");
-
-
+                account=(Account) request.getSession(false).getAttribute("account");
                 try {
-                    SqlAccountDao accountDao1=new SqlAccountDao();
-                    account=accountDao1.searchAccountId(3);
                     System.out.println(Integer.parseInt(request.getParameter("id")));
                     prodotto =sqlProdottoDao.searchProduct(Integer.parseInt(request.getParameter("id"))); /*implementare con servizio*/
                     if(listaDesideriServiceImp.eliminaProdottoListaDesideri(prodotto,account)) {
-                        System.out.println("sono dentro");
                         successo = true;
                     }
-                    else {
-                        successo = false;
-                    }
-                    request.setAttribute("successo", successo);
-
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
+                request.setAttribute("successo", successo);
                 listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
                 request.setAttribute("lista",listaDesideri);
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");
                 dispatcher.forward(request,response);
                 break;
+
             case "/login":
                 break;
         }
