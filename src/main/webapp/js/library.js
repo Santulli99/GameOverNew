@@ -390,7 +390,6 @@ function  banner(){
 function valutazioneChecked(valutazione,id){
     var i;
     const collection =document.getElementById("" + id).getElementsByTagName("span");
-    console.log(collection);
         for (i=0; i < valutazione; i++) {
             collection[i].className=  "fa fa-star checked";
         }

@@ -50,12 +50,13 @@ public class SqlReviewDao implements ReviewDao<SQLException> {
     }
 
     @Override
-    public boolean deleteReview(int id_account) throws SQLException {
+    public boolean deleteReview(int id_account,int id_prodotto) throws SQLException {
         try(Connection connection=SqlDao.getConnection()) {
-            String query = "DELETE FROM review WHERE (id_cliente=?);";
+            String query = "DELETE FROM review WHERE id_cliente=? and id_prodotto=?;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1,id_account);
+                ps.setInt(2,id_prodotto);
 
                 int rows = ps.executeUpdate();
                 return rows == 1;
