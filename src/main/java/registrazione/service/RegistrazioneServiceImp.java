@@ -14,16 +14,17 @@ import java.time.LocalDate;
 
 public class RegistrazioneServiceImp implements RegistrazioneService {
 
-    private SqlAccountDao accountDao;
+    private SqlAccountDao accountDao=new SqlAccountDao();
     private Account account;
-    private SqlDataClientDao sqlDataClientDao;
+    private SqlDataClientDao sqlDataClientDao=new SqlDataClientDao();
     private DataClient dataClient;
-    private SqlAddressDao sqlAddressDao;
+    private SqlAddressDao sqlAddressDao=new SqlAddressDao();
     private Address address;
 
 
     @Override
     public Account registrazioneAccount(HttpServletRequest request) {
+        account=new Account();
 
         String email1=request.getParameter("email");
         String emailConferma=request.getParameter("email1");
@@ -49,19 +50,22 @@ public class RegistrazioneServiceImp implements RegistrazioneService {
             request.setAttribute("username",usernam);
 
          if(validato1 && validato1_1 && validato2 && validato3 && validato4 && validato5){
-             account=new Account();
              account.setEmail(email1);
              account.setPassword(password1);
              account.setUsername(usernam);
              account.setAdmin(false);
+             System.out.println(account.getEmail()+account.getPassword()+account.getUsername());
              try {
-                 accountDao.createAccount(account);
+                 if(accountDao.createAccount(account)){
+                     return account;
+                 }
+
              } catch (SQLException throwables) {
                  throwables.printStackTrace();
              }
          }
 
-         return account;
+         return null;
 
     }
 

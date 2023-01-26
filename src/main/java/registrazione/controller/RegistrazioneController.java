@@ -50,6 +50,7 @@ public class RegistrazioneController extends HttpServlet {
             case "/registrazione":
                 boolean registrazione;
                 Account account=registrazioneServiceImp.registrazioneAccount(request);
+                System.out.println(account);
                 DataClient dataClient=registrazioneServiceImp.registrazioneDataClient(request,account);
                 Address address=registrazioneServiceImp.registrazioneAddressClient(request,account);
                 if(dataClient!=null && address!=null){
