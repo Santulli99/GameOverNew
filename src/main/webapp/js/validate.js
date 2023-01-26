@@ -643,7 +643,7 @@ function  checkEmailSignAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/AccountServlet/checkEmailSign?email="+email,true);
+    xhr.open("GET","/GameOverNew_war_exploded/AccountServlet/checkEmailSign?email="+email,true);
     xhr.send();
 
 }

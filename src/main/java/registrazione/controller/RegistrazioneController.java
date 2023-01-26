@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "RegistrazioneController", value = "/RegistrazioneController/*")
 public class RegistrazioneController extends HttpServlet {
-
+    private Account account;
     private RequestDispatcher dispatcher;
     private SqlAccountDao accountDao=new SqlAccountDao();
 
@@ -33,6 +34,30 @@ public class RegistrazioneController extends HttpServlet {
             case "/registrazione":
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
                 dispatcher.forward(request,response);
+                break;
+
+            /**la servlet vede se è gia presente un email con lo stesso indirizzo**/
+
+            case "/checkEmailSign":
+
+                String email=request.getParameter("email");
+
+                try {
+                    account= accountDao.searchAccountEmail(email);
+
+                    if(account!=null){
+
+
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda ad un account già esistente.");
+
+
+                    }
+
+                }
+                catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
 
         }
