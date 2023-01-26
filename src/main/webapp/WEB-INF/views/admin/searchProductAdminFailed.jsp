@@ -35,13 +35,13 @@
 
             <div class="vetrinaAjax" >
 
-                <img src="${context}/icons/icons8-ricerca-50.png">
+                <img src="${pageContext.request.contextPath}/icons/icons8-ricerca-50.png">
 
                 <p> Siamo spiacenti, nessun risultato trovato! <br>
                     Sembra che non ci siano giochi corrispondenti alla tua richiesta
                 </p>
 
-                <a href="${context}/AccountServlet/showAdmin"><button class="button">Torna all'HomePage</button></a>
+                <a href="${pageContext.request.contextPath}/AccountServlet/showAdmin"><button class="button">Torna all'HomePage</button></a>
 
 
             </div>

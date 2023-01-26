@@ -175,7 +175,7 @@
       <div id="bottoni">
 
         <a href="${pageContext.request.contextPath}/AccountServlet/utente"><button class="button">aggiungi al carrello</button></a>
-          <a href="/GameOverNew_war_exploded/ListaDesideriController/rimuoviListaDesideri?id=${prodotto.id}"><button class="button">rimuovi</button></a>
+          <a href="${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri?id=${prodotto.id}"><button class="button">rimuovi</button></a>
 
       </div>
 

@@ -132,7 +132,7 @@
         <div class="generalProfilo">
            <div id="cliente"><p id="p1">Dati cliente:</p><p id="p2">${accountUtent.dataClient.firstName} ${accountUtent.dataClient.lastName}</p></div>
 
-            <div>  <img src="${context}/icons/icons8-utente-60.png">
+            <div>  <img src="${pageContext.request.contextPath}/icons/icons8-utente-60.png">
             </div>
             <div class="sottodivPro">
 
@@ -164,7 +164,7 @@
 
             </div >
 
-            <div> <img src="${context}/icons/icons8-lucchetto.gif">
+            <div> <img src="${pageContext.request.contextPath}/icons/icons8-lucchetto.gif">
             </div>
             <div class="sottodivPro1">
 
@@ -173,7 +173,7 @@
                 </p>
             </div>
 
-            <div> <img src="${context}/icons/icons8-nuovo-messaggio-50.png">
+            <div> <img src="${pageContext.request.contextPath}/icons/icons8-nuovo-messaggio-50.png">
             </div>
 
             <div  class="sottodivPro1">
@@ -185,7 +185,7 @@
             </div>
 
 
-            <div>  <img src="${context}/icons/icons8-nome-utente-100.png">
+            <div>  <img src="${pageContext.request.contextPath}/icons/icons8-nome-utente-100.png">
             </div>
             <div class="sottodivPro1">
 
@@ -195,7 +195,7 @@
 
             </div>
 
-            <div><img src="${context}/icons/icons8-home-page-50.png"></div>
+            <div><img src="${pageContext.request.contextPath}/icons/icons8-home-page-50.png"></div>
 
             <div class="sottodivPro">
 
