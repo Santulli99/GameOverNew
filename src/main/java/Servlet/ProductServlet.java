@@ -2,13 +2,11 @@ package Servlet;
 
 
 import com.google.gson.Gson;
+import listaDesideri.service.ListaDesideriServiceImp;
 import model.dao.category.SqlCategoryDao;
 import model.dao.platform.SqlPlatformDao;
 import model.dao.product.SqlProductDao;
-import model.entity.Category;
-import model.entity.Platform;
-import model.entity.Prodotto;
-import model.entity.Review;
+import model.entity.*;
 import recensione.service.RecensioneServiceImp;
 
 import javax.servlet.RequestDispatcher;
@@ -202,16 +200,23 @@ public class ProductServlet extends HttpServlet {
 
             /**si vusualizza il prodotto con descrizione,prezzo...(UTENTE)**/
             case "/showProductUtente":
-
+                Account account=(Account) request.getSession(false).getAttribute("account");
                 try {
                     prodotto =sqlProductDao.searchProductWithCategory(Integer.parseInt(request.getParameter("id")));
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+                ListaDesideriServiceImp listaDesideriServiceImp=new ListaDesideriServiceImp();
+                ListaDesideri listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
+                boolean aggiunto=false;
+                if(listaDesideri.containsListaDesideri(prodotto)){
+                    aggiunto=true;
+                }
 
                 RecensioneServiceImp recensioneServiceImp1=new RecensioneServiceImp();
                 ArrayList<Review> reviews1=new ArrayList<>();
                 reviews1=recensioneServiceImp1.cercaRecensioniPerProdotto(prodotto);
+                request.setAttribute("aggiunto",aggiunto);
                 request.setAttribute("recensioni", reviews1);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");

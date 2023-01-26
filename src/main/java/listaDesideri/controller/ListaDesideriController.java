@@ -50,7 +50,9 @@ public class ListaDesideriController extends HttpServlet {
                         successo = true;
                     }
                     request.setAttribute("successo", successo);
-                    dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
+                    request.setAttribute("prodotto", prodotto);
+                    //dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
+                    dispatcher =request.getRequestDispatcher("/ProductServlet/showProductUtente");
                     dispatcher.forward(request,response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);

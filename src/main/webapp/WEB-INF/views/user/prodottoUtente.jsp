@@ -21,28 +21,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<script>
-    $(document).ready(function() {
-        const heart = document.getElementById('heart');
-        heart.addEventListener('click', function() {
-            heart.classList.toggle('red');
-        });
-    })();
-</script>
 
 
     <style>
-
-        #heart {
-            color: grey;
-            font-size: 50px;
-        }
-
-        #heart.red {
-            color: red;
+        .fa-heart{
+            font-size: 35px;
+            color: #1a1a1a;
         }
         .checked {
-            color: orange;
+            color: #ee3124;
         }
         /*prodotto*/
 
@@ -249,7 +236,14 @@
 
                     <a id="aa3"  href="${context}/CartServlet/addCart?id=${prodotto.id}"><button id="aa4" class="button">aggiungi al carrello</button></a>
                     <a id="aa3"  href="${pageContext.request.contextPath}/RecensioneController/scriviRecensione?id=${prodotto.id}"><button id="aa5" class="button">Aggiungi recensione</button></a>
-                    <i class="fa fa-heart" id="heart" ></i>
+                    <a id="aa7" href="${pageContext.request.contextPath}/ListaDesideriController/aggiungiListaDesideri?id=${prodotto.id}" class="fa fa-heart" style="text-decoration: none"></a>
+                    <script>
+                        var agg=${aggiunto};
+                        if(agg==true){
+                            document.getElementById("aa7").className="fa fa-heart checked";
+                            document.getElementById("aa7").removeAttribute("href");
+                        }
+                    </script>
                     <script defer>
                         var veri=${verifica};
 
