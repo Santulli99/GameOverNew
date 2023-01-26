@@ -95,8 +95,14 @@ public class RecensioneController extends HttpServlet {
                 dispatcher.forward(request,response);
 
                 break;
-            case "/login":
-                dispatcher =request.getRequestDispatcher("/WEB-INF/views/client/login1.jsp");
+            case "/scriviRecensione":
+                try {
+                    prodotto=productDao.searchProductWithCategory(Integer.parseInt(request.getParameter("id")));/*implementare con servizio*/
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                request.setAttribute("prodotto",prodotto);
+                dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/recensione.jsp");
                 dispatcher.forward(request,response);
                 break;
         }

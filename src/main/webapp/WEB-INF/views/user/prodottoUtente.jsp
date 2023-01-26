@@ -232,6 +232,7 @@
 
 
                     <a id="aa3"  href="${context}/CartServlet/addCart?id=${prodotto.id}"><button id="aa4" class="button">aggiungi al carrello</button></a>
+                    <a id="aa3"  href="${pageContext.request.contextPath}/RecensioneController/scriviRecensione?id=${prodotto.id}"><button id="aa5" class="button">Aggiungi recensione</button></a>
 
                     <script defer>
                         var veri=${verifica};
