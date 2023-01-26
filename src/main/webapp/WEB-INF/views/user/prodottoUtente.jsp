@@ -21,10 +21,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+<script>
+    $(document).ready(function() {
+        const heart = document.getElementById('heart');
+        heart.addEventListener('click', function() {
+            heart.classList.toggle('red');
+        });
+    })();
+</script>
 
 
     <style>
 
+        #heart {
+            color: grey;
+            font-size: 50px;
+        }
+
+        #heart.red {
+            color: red;
+        }
         .checked {
             color: orange;
         }
@@ -233,7 +249,7 @@
 
                     <a id="aa3"  href="${context}/CartServlet/addCart?id=${prodotto.id}"><button id="aa4" class="button">aggiungi al carrello</button></a>
                     <a id="aa3"  href="${pageContext.request.contextPath}/RecensioneController/scriviRecensione?id=${prodotto.id}"><button id="aa5" class="button">Aggiungi recensione</button></a>
-
+                    <i class="fa fa-heart" id="heart" ></i>
                     <script defer>
                         var veri=${verifica};
 

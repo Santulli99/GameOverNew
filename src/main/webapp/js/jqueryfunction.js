@@ -1,4 +1,9 @@
-
+$(document).ready(function() {
+    const heart = document.getElementById('heart');
+    heart.addEventListener('click', function() {
+        heart.classList.toggle('red');
+    });
+})();
 $(document).ready(function(){
     $("#menu2").on({
         'click': function(){$("#menu1").toggle();},
