@@ -41,7 +41,7 @@
 
 
 <div class="conteinerLogin">
-    <form class="form" name="modulo"  onsubmit="return validateFormAddress()" action="${context}/AddressServlet/updateAddress"   method="post">
+    <form class="form" name="modulo"  onsubmit="return validateFormAddress()" action="${pageContext.request.contextPath}/GestioneUtenteController/updateAddress"   method="post">
 
 
         <label class="label" for="città"> Citta'  </label>

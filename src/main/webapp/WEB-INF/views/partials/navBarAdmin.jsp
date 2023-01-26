@@ -30,7 +30,7 @@
                         <h4>Clienti</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/AccountServlet/showAllUtent">Visualizza Clienti </a>
+                        <a href="${pageContext.request.contextPath}/GestioneUtenteController/showAllUtent">Visualizza Clienti </a>
                     </li>
 
                 </ul>

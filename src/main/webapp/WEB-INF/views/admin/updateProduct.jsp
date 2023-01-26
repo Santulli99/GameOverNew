@@ -87,7 +87,7 @@
 
     <section class="containerCenter" id="ajax">
 
-        <form class="f_product" action="${context}/ProductServlet/updateProduct"
+        <form class="f_product" action="${pageContext.request.contextPath}/ProductServlet/updateProduct"
               method="post"  enctype="multipart/form-data" >
 
             <div id="number1">
@@ -117,7 +117,7 @@
 
 
         <div id="number6">
-            <a href="${context}/ProductServlet/deleteProduct?id=${model.dao.prodotto.id}"> <button class="button" >elimina prodotto</button></a>
+            <a href="${pageContext.request.contextPath}/ProductServlet/deleteProduct?id=${prodotto.id}"> <button class="button" >elimina prodotto</button></a>
 
         </div>
 

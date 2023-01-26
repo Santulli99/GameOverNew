@@ -193,7 +193,7 @@
                     <p id="p1">DIGITALE</p>
                     <p id="p2">${prodotto.price}&euro;</p>
 
-                    <a href="${context}/CartServlet/addCartGhost?id=${prodotto.id}"><button class="button">aggiungi al carrello</button></a>
+                    <a href="${pageContext.request.contextPath}/CartServlet/addCartGhost?id=${prodotto.id}"><button class="button">aggiungi al carrello</button></a>
 
                     <p id="p3">
                         Codice articolo:

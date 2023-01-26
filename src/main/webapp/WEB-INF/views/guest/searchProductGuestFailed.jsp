@@ -1,4 +1,4 @@
-<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'  %>
+<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,7 +6,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <jsp:include page="/WEB-INF/views/partials/head.jsp" >
+    <jsp:include page="/WEB-INF/views/partials/head.jsp">
         <jsp:param name="title" value="Ricerca Prodotti"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
 
@@ -16,7 +16,7 @@
 <body>
 
 <script>
-    i=0;
+    i = 0;
     bannerDinamic();
 
 </script>
@@ -37,15 +37,17 @@
 
         <div class="vetrina">
 
-            <div class="vetrinaAjax" >
+            <div class="vetrinaAjax">
 
-                <img src="${context}/icons/icons8-ricerca-50.png">
+                <img src="${pageContext.request.contextPath}/icons/icons8-ricerca-50.png">
 
                 <p> Siamo spiacenti, nessun risultato trovato! <br>
                     Sembra che non ci siano giochi corrispondenti alla tua richiesta
                 </p>
 
-                <a href="${context}/AccountServlet/homepage"><button class="button">Torna all'HomePage</button></a>
+                <a href="${pageContext.request.contextPath}/HomePageController/homePage">
+                    <button class="button">Torna all'HomePage</button>
+                </a>
 
 
             </div>

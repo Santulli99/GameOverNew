@@ -3,7 +3,7 @@
     <header class="topbar">
 
         <div class="logo">
-            <img onclick="myFunction()"  src="${pageContext.request.contextPath}/images/logo_nuovo.png">
+            <a href="${pageContext.request.contextPath}/HomePageController/homePage"><img src="${pageContext.request.contextPath}/images/logo_nuovo.png"></a>
         </div>
 
 

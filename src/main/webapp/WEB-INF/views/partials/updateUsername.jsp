@@ -39,7 +39,7 @@
 </script>
 
 <div class="conteinerLogin">
-    <form class="form" name="modulo" onsubmit="return (validateUsername()&&confermaUsername())" action="${context}/AccountServlet/updateUsername"   method="post">
+    <form class="form" name="modulo" onsubmit="return (validateUsername()&&confermaUsername())" action="${pageContext.request.contextPath}/GestioneUtenteController/updateUsername"   method="post">
 
 
         <label class="label" for="username">Nuova Username </label>
@@ -51,13 +51,10 @@
         <p id="pr16"></p>
         <br>
 
-        <button class="button"  type="submit"   >modifica</button>
+        <button class="button"  type="submit">modifica</button>
 
     </form>
 
 </div>
-
-
-
 </body>
 </html>

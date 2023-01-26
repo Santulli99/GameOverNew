@@ -41,7 +41,7 @@
                     Sembra che non ci siano giochi corrispondenti alla tua richiesta
                 </p>
 
-                <a href="${pageContext.request.contextPath}/AccountServlet/showAdmin"><button class="button">Torna all'HomePage</button></a>
+                <a href="${pageContext.request.contextPath}/HomePageController/homePageAdmin"><button class="button">Torna all'HomePage</button></a>
 
 
             </div>

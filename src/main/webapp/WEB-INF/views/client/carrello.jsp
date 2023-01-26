@@ -59,7 +59,7 @@
 
       <div class="hedercart">
 
-        <img src="${context}/cover/${prodotto.item.cover}">
+        <img src="${pageContext.request.contextPath}/cover/${prodotto.item.cover}">
         <div id="a2">
           <p>
             <b>Nome gioco:</b> ${prodotto.item.productName} <br>
@@ -70,7 +70,7 @@
         </div>
 
         <div id="a3">
-          <a href="${context}/CartServlet/removeCart?id=${prodotto.item.id}">rimuovi</a>
+          <a href="${pageContext.request.contextPath}/CartServlet/removeCart?id=${prodotto.item.id}">rimuovi</a>
           <p>prezzo: ${prodotto.item.price}&euro;</p>
         </div>
 
@@ -90,8 +90,8 @@
  </div>
 
    <div id="a7">
-     <a href="${context}/AccountServlet/utente"><button class="button">continua a navigare</button></a>
-     <a href="${context}/OrderServlet/createOrder"><button class="button">Procedi all'acquisto</button></a>
+     <a href="${pageContext.request.contextPath}/HomePageController/homePageUtent"><button class="button">continua a navigare</button></a>
+     <a href="${pageContext.request.contextPath}/OrderServlet/createOrder"><button class="button">Procedi all'acquisto</button></a>
    </div>
 
 </div>

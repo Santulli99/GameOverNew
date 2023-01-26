@@ -156,7 +156,7 @@
                             <div><p> ${order.dataString} </p></div>
                             <div><p> ${order.num_product} </p></div>
                             <div><p> ${order.account.username} </p></div>
-                            <div><a href="${pageContext.request.contextPath}/OrderServlet/showOrderAdmin?id=${model.dao.order.id}"><button>DETTAGLIO ORDINE</button></a></div>
+                            <div><a href="${pageContext.request.contextPath}/OrderServlet/showOrderAdmin?id=${order.id}"><button>DETTAGLIO ORDINE</button></a></div>
                         </li>
                 </c:forEach>
             </ul>

@@ -186,7 +186,7 @@
         <div class="generalProfilo">
             <h3>I miei dati</h3>
 
-            <div class="modifica">  <img src="${pageContext.request.contextPath}/icons/icons8-utente-60.png"> <a href="${pageContext.request.contextPath}/DataClientServlet/showDataClient"><button>modifica</button></a>
+            <div class="modifica">  <img src="${pageContext.request.contextPath}/icons/icons8-utente-60.png"> <a href="${pageContext.request.contextPath}/GestioneUtenteController/showDataClient"><button>modifica</button></a>
             </div>
             <div class="sottodivPro">
 
@@ -222,7 +222,7 @@
 
                 <img src="${pageContext.request.contextPath}/icons/icons8-lucchetto.gif">
 
-                <a href="${pageContext.request.contextPath}/AccountServlet/showUpdatePassword"><button>modifica</button></a>
+                <a href="${pageContext.request.contextPath}/GestioneUtenteController/showUpdatePassword"><button>modifica</button></a>
             </div>
             <div class="sottodivPro1">
 
@@ -235,7 +235,7 @@
 
                 <img src="${pageContext.request.contextPath}/icons/icons8-nuovo-messaggio-50.png">
 
-                <a href="${pageContext.request.contextPath}/AccountServlet/showUpdateEmail"><button>modifica</button></a>
+                <a href="${pageContext.request.contextPath}/GestioneUtenteController/showUpdateEmail"><button>modifica</button></a>
             </div>
 
             <div  class="sottodivPro1">
@@ -250,7 +250,7 @@
             <div class="modifica">
                 <img src="${pageContext.request.contextPath}/icons/icons8-nome-utente-100.png">
 
-                <a href="${pageContext.request.contextPath}/AccountServlet/showUpdateUsername"><button>modifica</button></a>
+                <a href="${pageContext.request.contextPath}/GestioneUtenteController/showUpdateUsername"><button>modifica</button></a>
             </div>
             <div class="sottodivPro1">
 
@@ -264,7 +264,7 @@
 
                 <img src="${pageContext.request.contextPath}/icons/icons8-home-page-50.png">
 
-                <a href="${pageContext.request.contextPath}/AddressServlet/showUpdateAddress"><button>modifica</button></a>
+                <a href="${pageContext.request.contextPath}/GestioneUtenteController/showUpdateAddress"><button>modifica</button></a>
             </div>
 
             <div class="sottodivPro">

@@ -126,7 +126,7 @@
                             <div><p> ${account.email} </p></div>
                             <div><p> ${account.username}</p></div>
                             <div id="button">
-                                <a href="${pageContext.request.contextPath}/AccountServlet/showAccount?id=${model.dao.account.id}"><button >VISUALIZZA</button></a>
+                                <a href="${pageContext.request.contextPath}/GestioneUtenteController/showAccount?id=${account.id}"><button >VISUALIZZA</button></a>
                             </div>
 
 

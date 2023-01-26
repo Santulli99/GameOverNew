@@ -3,7 +3,7 @@
   <header class="topbar">
 
     <div class="logo">
-      <a href="${pageContext.request.contextPath}/AccountServlet/showAdmin"><img src="${pageContext.request.contextPath}/images/logo_nuovo.png"></a>
+      <a href="${pageContext.request.contextPath}/HomePageController/homePageAdmin"><img src="${pageContext.request.contextPath}/images/logo_nuovo.png"></a>
     </div>
 
 
@@ -17,7 +17,7 @@
 
       <div class="utente" id="menu2">
 
-        <a href="${pageContext.request.contextPath}/AccountServlet/showAccountAdmin"><img src="${pageContext.request.contextPath}/icons/icons8-amministratore-uomo-96.png" title="Profilo"></a>
+        <a href="${pageContext.request.contextPath}/GestioneUtenteController/showAccountAdmin"><img src="${pageContext.request.contextPath}/icons/icons8-amministratore-uomo-96.png" title="Profilo"></a>
 
       </div>
 

@@ -27,7 +27,7 @@
                         <a href="${pageContext.request.contextPath}/AutenticazioneController/logout">Disconnetti</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/AccountServlet/showAccountUtent">Il mio profilo</a>
+                        <a href="${pageContext.request.contextPath}/GestioneUtenteController/showAccountUtent">Il mio profilo</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/OrderServlet/showOrdersUtent">I miei ordini</a>

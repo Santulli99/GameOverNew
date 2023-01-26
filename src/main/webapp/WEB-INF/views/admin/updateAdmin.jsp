@@ -53,7 +53,7 @@
     <section class="containerCenter" id="ajax">
         <div class="conteinerRegistrazione">
 
-            <form   action="AccountServlet/updateAdmin" method="post">
+            <form   action="GestioneUtenteController/updateAdmin" method="post">
 
                 <b class="titoli " >Il tuo profilo SIG.${account.dataClient.firstName}</b>
 
