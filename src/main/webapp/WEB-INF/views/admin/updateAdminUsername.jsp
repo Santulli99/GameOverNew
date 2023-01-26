@@ -27,7 +27,7 @@
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
 
-    <script src="/GameOver_war_exploded/js/validate.js"></script>
+    <script src="/GameOverNew_war_exploded/js/validate.js"></script>
 
 </head>
 
