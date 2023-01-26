@@ -23,7 +23,7 @@
 
     <style>
      .checked {
-         color: orange;
+         color: #ee3124;
      }
 
         /*prodotto*/

@@ -56,13 +56,12 @@ public class RegistrazioneServiceImp implements RegistrazioneService {
              account.setAdmin(false);
              try {
                  accountDao.createAccount(account);
-                 return account;
              } catch (SQLException throwables) {
                  throwables.printStackTrace();
              }
          }
 
-         return null;
+         return account;
 
     }
 

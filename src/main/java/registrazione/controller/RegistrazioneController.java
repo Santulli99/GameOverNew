@@ -4,7 +4,6 @@ import model.dao.account.SqlAccountDao;
 import model.entity.Account;
 import model.entity.Address;
 import model.entity.DataClient;
-import registrazione.service.RegistrazioneService;
 import registrazione.service.RegistrazioneServiceImp;
 
 import javax.servlet.RequestDispatcher;
@@ -13,12 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "RegistrazioneServlet", value = "/RegistrazioneServlet/*")
-public class RegistrazioneServlet  extends HttpServlet {
+@WebServlet(name = "RegistrazioneController", value = "/RegistrazioneController/*")
+public class RegistrazioneController extends HttpServlet {
 
     private RequestDispatcher dispatcher;
     private SqlAccountDao accountDao=new SqlAccountDao();

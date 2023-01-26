@@ -23,7 +23,7 @@
                         <a href="${pageContext.request.contextPath}/AutenticazioneController/login">login</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/RegistrazioneServlet/registrazione">registrazione</a>
+                        <a href="${pageContext.request.contextPath}/RegistrazioneController/registrazione">registrazione</a>
                     </li>
                 </ul>
 
