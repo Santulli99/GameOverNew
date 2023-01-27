@@ -4,7 +4,7 @@
         <div class="divVetrina">
             <p>${prodotto.productName}</p>
 
-            <a href="${pageContext.request.contextPath}/ProductServlet/showProduct?id=${prodotto.id}">
+            <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProduct?id=${prodotto.id}">
                 <img src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
             </a>
 

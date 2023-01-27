@@ -112,7 +112,7 @@
 
     <section class="containerCenter" id="ajax">
 
-        <form class="f_product" action="${pageContext.request.contextPath}/ProductServlet/createProduct"
+        <form class="f_product" action="${pageContext.request.contextPath}/GestioneProdottoController/createProduct"
               method="post"  enctype="multipart/form-data">
 
                <div id="number1">

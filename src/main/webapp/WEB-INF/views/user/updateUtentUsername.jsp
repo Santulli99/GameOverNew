@@ -13,7 +13,7 @@
     <jsp:param name="script" value="jqueryfunction.js"/>
   </jsp:include>
 
-  <script src="${context}/js/validate.js"></script>
+  <script src="${pageContext.request.contextPath}/js/validate.js"></script>
 </head>
 
 

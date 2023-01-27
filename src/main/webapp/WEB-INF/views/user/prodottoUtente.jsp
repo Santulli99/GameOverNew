@@ -225,7 +225,7 @@
                     </c:forEach>
 
 
-                    <a id="aa3" href="${context}/CartServlet/addCart?id=${prodotto.id}">
+                    <a id="aa3" href="${pageContext.request.contextPath}/CartServlet/addCart?id=${prodotto.id}">
                         <button id="aa4" class="button">aggiungi al carrello</button>
                     </a>
                     <a id="aa3"
