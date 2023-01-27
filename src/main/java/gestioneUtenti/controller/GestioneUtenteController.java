@@ -49,15 +49,11 @@ public class GestioneUtenteController extends HttpServlet {
                 if (newUsername.equals(username2) && (x == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
                     account.setUsername(newUsername);
-                    try {
-                        accountDao.updateAccount(account);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    gestioneUtenteService.ModificaDatiAccount(account);
                     modifica = true;
                     request.setAttribute("modificaUsername", modifica);
                     request.getSession(false).setAttribute("account", account);
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -65,7 +61,7 @@ public class GestioneUtenteController extends HttpServlet {
                         dispatcher.forward(request, response);
                     }
                 } else {
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminUsername.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -84,14 +80,10 @@ public class GestioneUtenteController extends HttpServlet {
                 boolean validato1_email = ValidateForm.searchEmail(newEmail2);
                 if ((validato_email == true) && (validato1_email || account.getEmail().equals(newEmail)) && (newEmail.equals(newEmail2))) {
                     account.setEmail(newEmail);
-                    try {
-                        accountDao.updateAccount(account);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    gestioneUtenteService.ModificaDatiAccount(account);
                     modificaEmail = true;
                     request.setAttribute("modificaEmail", modificaEmail);
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -101,7 +93,7 @@ public class GestioneUtenteController extends HttpServlet {
                 } else {
                     esiste = true;
                     request.setAttribute("esiste", esiste);
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminEmail.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -120,15 +112,11 @@ public class GestioneUtenteController extends HttpServlet {
                 if (newPassword.equals(newPassword2) && (b == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
                     account.setPassword(newPassword);
-                    try {
-                        accountDao.updateAccount(account);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+                    gestioneUtenteService.ModificaDatiAccount(account);
                     modifica = true;
                     request.setAttribute("modificaPassword", modifica);
                     request.getSession(false).setAttribute("account", account);
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -138,7 +126,7 @@ public class GestioneUtenteController extends HttpServlet {
                 } else {
                     modifica = false;
                     request.setAttribute("error", modifica);
-                    if (account.isAdmin() == true) {
+                    if (account.isAdmin()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminPassword.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -152,13 +140,13 @@ public class GestioneUtenteController extends HttpServlet {
             case "/updateDati":
                 account = (Account) request.getSession(false).getAttribute("account");
                 String nome = request.getParameter("nome");
-                boolean a= ValidateForm.validateNome(nome);
+                boolean a = ValidateForm.validateNome(nome);
 
-                String cell  =request.getParameter("telefono");
-                boolean d=ValidateForm.validateTelefono(cell);
-                boolean c=ValidateForm.searchTelefono(cell);
+                String cell = request.getParameter("telefono");
+                boolean d = ValidateForm.validateTelefono(cell);
+                boolean c = ValidateForm.searchTelefono(cell);
 
-                if(a && d && (c || account.getDataClient().getCell().equals(cell)) ) {
+                if (a && d && (c || account.getDataClient().getCell().equals(cell))) {
                     dataClient = new DataClient();
                     dataClient.setAccount(account);
                     dataClient.setFirstName(nome);
@@ -168,31 +156,29 @@ public class GestioneUtenteController extends HttpServlet {
                     dataClient.setDate(account.getDataClient().getDate());
                     dataClient.setCf(account.getDataClient().getCf());
 
-                    gestioneUtenteService.ModificaDatiAnagrafici(dataClient,account);
+                    gestioneUtenteService.ModificaDatiAnagrafici(dataClient, account);
 
-                    modifica=true;
-                    request.setAttribute("modificaDati",modifica);
+                    modifica = true;
+                    request.setAttribute("modificaDati", modifica);
                     account.setDataClient(dataClient);
                     request.getSession(false).setAttribute("account", account);
 
-                    if(account.isAdmin()==true) {
+                    if (account.isAdmin() == true) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
-                    }else {
+                    } else {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/showProfileUtent.jsp");
                         dispatcher.forward(request, response);
                     }
-                }
-                else{
-                    esiste=true;
-                    request.setAttribute("esiste",esiste);
-                    modifica=false;
-                    request.setAttribute("error",modifica);
-                    if(account.isAdmin()==true) {
+                } else {
+                    esiste = true;
+                    request.setAttribute("esiste", esiste);
+                    modifica = false;
+                    request.setAttribute("error", modifica);
+                    if (account.isAdmin() == true) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminDati.jsp");
                         dispatcher.forward(request, response);
-                    }
-                    else {
+                    } else {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateUtentDati.jsp");
                         dispatcher.forward(request, response);
                     }
@@ -201,17 +187,17 @@ public class GestioneUtenteController extends HttpServlet {
 
             /**si effettua la modifica dell'indirizzo**/
             case "/updateAddress":
-                String citta=request.getParameter("citta");
-                boolean a1= ValidateForm.validateResidenza(citta);
-                String provincia=request.getParameter("provincia");
-                boolean b1=ValidateForm.validateProvincia(provincia);
-                String via=request.getParameter("via");
-                boolean c1=ValidateForm.validateVia(via);
-                int civico= Integer.parseInt(request.getParameter("civico"));
-                boolean d1=ValidateForm.validateCivico(civico);
-                int cap= Integer.parseInt(request.getParameter("cap"));
-                boolean e=ValidateForm.validateCap(String.valueOf(cap));
-                if( a1 && b1 && c1 && d1 && e ) {
+                String citta = request.getParameter("citta");
+                boolean a1 = ValidateForm.validateResidenza(citta);
+                String provincia = request.getParameter("provincia");
+                boolean b1 = ValidateForm.validateProvincia(provincia);
+                String via = request.getParameter("via");
+                boolean c1 = ValidateForm.validateVia(via);
+                int civico = Integer.parseInt(request.getParameter("civico"));
+                boolean d1 = ValidateForm.validateCivico(civico);
+                int cap = Integer.parseInt(request.getParameter("cap"));
+                boolean e = ValidateForm.validateCap(String.valueOf(cap));
+                if (a1 && b1 && c1 && d1 && e) {
                     Account account = (Account) request.getSession(false).getAttribute("account");
                     address = new Address();
                     address.setAccount(account);
@@ -227,16 +213,14 @@ public class GestioneUtenteController extends HttpServlet {
                     request.setAttribute("modificaAddress", modifica);
                     account.setAddress(address);
                     request.getSession(false).setAttribute("account", account);
-                    if(account.isAdmin()==true) {
+                    if (account.isAdmin() == true) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
-                    }
-                    else {
+                    } else {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/showProfileUtent.jsp");
                         dispatcher.forward(request, response);
                     }
-                }
-                else {
+                } else {
                     if (account.isAdmin() == true) {
                         modifica = false;
                         request.setAttribute("error", modifica);
@@ -262,11 +246,7 @@ public class GestioneUtenteController extends HttpServlet {
             /**visualizza il profilo dell'Admin**/
             case "/showAccountAdmin":
                 account = (Account) request.getSession(false).getAttribute("account");
-                try {
-                    account = accountDao.searchAccountIdWithDataClientandAndress(account.getId());/** implementare servizi*/
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                account = gestioneUtenteService.getAccountDati(account);
                 request.setAttribute("account", account);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                 dispatcher.forward(request, response);
@@ -275,11 +255,7 @@ public class GestioneUtenteController extends HttpServlet {
             /**visualizza il profilo dell'Utente**/
             case "/showAccountUtent":
                 account = (Account) request.getSession(false).getAttribute("account");
-                try {
-                    account = accountDao.searchAccountIdWithDataClientandAndress(account.getId());
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                account = gestioneUtenteService.getAccountDati(account);
                 modificaEmail = false;
                 modifica = false;
                 request.setAttribute("modificaEmail", modificaEmail);
@@ -364,11 +340,7 @@ public class GestioneUtenteController extends HttpServlet {
             case "/showAllUtent":
 
                 ArrayList<Account> accounts = new ArrayList<>();
-                try {
-                    accounts = accountDao.searchAllAccount();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                accounts = gestioneUtenteService.getAllAccount();
                 request.setAttribute("accounts", accounts);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/allUtent.jsp");
                 dispatcher.forward(request, response);
@@ -377,11 +349,8 @@ public class GestioneUtenteController extends HttpServlet {
             /**si visualizza il singolo utente(ADMIN)**/
             case "/showAccount":
                 int id = Integer.parseInt(request.getParameter("id"));
-                try {
-                    account = accountDao.searchAccountIdWithDataClientandAndress(id);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                account = gestioneUtenteService.getAccount(id);
+                account = gestioneUtenteService.getAccountDati(account);
                 request.setAttribute("accountUtent", account);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showUtent.jsp");
                 dispatcher.forward(request, response);
@@ -393,14 +362,10 @@ public class GestioneUtenteController extends HttpServlet {
                 account = (Account) request.getSession(false).getAttribute("account");
                 trovato = account.getEmail().equals(email1);
                 if (!trovato) {
-                    try {
-                        account = accountDao.searchAccountEmail(email1);
-                        if (account != null) {
-                            response.setContentType("text/plain;charset=UTF-8");
-                            response.getWriter().println("Hey, sembra che l'indirizzo email corrisponda ad un  account già esistente.");
-                        }
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    account = gestioneUtenteService.getAccountEmail(email1);
+                    if (account != null) {
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println("Hey, sembra che l'indirizzo email corrisponda ad un  account già esistente.");
                     }
                 }
                 break;
@@ -422,14 +387,10 @@ public class GestioneUtenteController extends HttpServlet {
             /**verifica se il codice fiscale è gia presente nel database**/
             case "/checkCFSign":
                 String cf = request.getParameter("cf");
-                try {
-                    dataClient = sqlDataClientDao.searchDataClientWithCf(cf);
-                    if (dataClient != null) {
-                        response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che il codice fiscale corrisponda a un model.dao.account già esistente.");
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                dataClient = gestioneUtenteService.getDataClientCf(cf);
+                if (dataClient != null) {
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.getWriter().println("Hey, sembra che il codice fiscale corrisponda a un model.dao.account già esistente.");
                 }
                 break;
 
@@ -437,17 +398,12 @@ public class GestioneUtenteController extends HttpServlet {
             case "/checkTel":
                 String tel = request.getParameter("numeroTel");
                 account = (Account) request.getSession(false).getAttribute("account");
-                DataClient dataClient1;
                 trovato = account.getDataClient().getCell().equals(tel);
                 if (!trovato) {
-                    try {
-                        dataClient1 = sqlDataClientDao.searchDataClientWithTel(tel);
-                        if (dataClient1 != null) {
-                            response.setContentType("text/plain;charset=UTF-8");
-                            response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un model.dao.account già esistente.");
-                        }
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    dataClient = gestioneUtenteService.getDataClientTel(tel);
+                    if (dataClient != null) {
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un model.dao.account già esistente.");
                     }
                 }
                 break;

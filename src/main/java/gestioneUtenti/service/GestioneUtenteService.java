@@ -4,6 +4,8 @@ import model.entity.Account;
 import model.entity.Address;
 import model.entity.DataClient;
 
+import java.util.ArrayList;
+
 /**
  *  interfaccia per i metodi del sottosistema GestioneUtente implementata per rispettare il Facade Pattern
  *  @author Andrea Serpico
@@ -25,7 +27,18 @@ public interface GestioneUtenteService {
      */
     boolean ModificaDatiAnagrafici(DataClient dataClient,Account account) ;
 
+    boolean ModificaDatiAccount(Account account);
 
+    Account getAccountDati(Account account);
+    Account getAccount(int id_account);
+
+    ArrayList<Account> getAllAccount();
+
+    Account getAccountEmail(String email);
+
+    DataClient getDataClientTel(String numero);
+
+    DataClient getDataClientCf(String cf);
 
 
 }
