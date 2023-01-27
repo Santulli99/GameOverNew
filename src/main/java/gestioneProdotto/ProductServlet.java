@@ -1,4 +1,4 @@
-package Servlet;
+package gestioneProdotto;
 
 
 import com.google.gson.Gson;
@@ -50,22 +50,14 @@ public class ProductServlet extends HttpServlet {
 
             /**si visualizza la pagina per modificare il prodotto**/
             case "/updateProduct":
-
-
                 try {
                   prodotto =sqlProductDao.searchProductWithPlatformsAndCategory(Integer.parseInt(request.getParameter("id")));
-
                   request.setAttribute("product", prodotto);
                   dispatcher= request.getRequestDispatcher("/WEB-INF/views/admin/updateProduct.jsp");
                   dispatcher.forward(request,response);
-
-
-
-
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
                 break;
 
             /**si visualizzano tutti i prodotti**/
@@ -327,9 +319,6 @@ public class ProductServlet extends HttpServlet {
 
 
                 break;
-
-
-
             default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
         }
