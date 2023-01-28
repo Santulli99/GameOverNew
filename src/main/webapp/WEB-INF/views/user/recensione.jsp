@@ -49,7 +49,7 @@
             overflow: hidden;
             white-space: nowrap;
             cursor: pointer;
-            font-size: 30px;
+            font-size: 45px;
             color: #ccc;
         }
 
@@ -82,8 +82,8 @@
             margin-top: 20px;
             font-style: italic;
             font-weight: bold;
-            font-size: 5px;
-            padding-left: 20px;
+            font-size: 25px;
+            padding-left: 5px;
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7);
             border-radius: 10px;
 
