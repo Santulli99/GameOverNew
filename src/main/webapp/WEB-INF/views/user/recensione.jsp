@@ -38,7 +38,7 @@
         }
 
         .rate:not(:checked) > input {
-            position: absolute;
+            position: fixed;
             top: -9999px;
         }
 
