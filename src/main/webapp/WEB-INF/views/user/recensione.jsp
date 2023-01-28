@@ -6,12 +6,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <jsp:include page="/WEB-INF/views/partials/head.jsp">
-        <jsp:param name="title" value="Carrello"/>
+        <jsp:param name="title" value="Recensione"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
 
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -75,7 +74,6 @@
         }
 
 
-
         #boxrecensione {
             width: 100%;
             color: #8b8a8a;
@@ -108,7 +106,7 @@
 
         }
 
-        #box1 label{
+        #box1 label {
             width: 100%;
             font-style: italic;
             font-weight: bold;
@@ -201,7 +199,7 @@
 
 
                 <div id="box1">
-                        <label>${prodotto.productName}</label>
+                    <label>${prodotto.productName}</label>
                     <div id="cover">
                         <img style="border-radius: 10px;"
                              src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
@@ -214,15 +212,15 @@
                     <div>
                         <div class="rate">
                             <input type="radio" id="star1" name="rate" value="1"/>
-                            <label class="text" for="star1" title="text">1 star</label>
+                            <label for="star1" title="text">1 star</label>
                             <input type="radio" id="star2" name="rate" value="2"/>
-                            <label class="text" for="star2" title="text">2 stars</label>
+                            <label for="star2" title="text">2 stars</label>
                             <input type="radio" id="star3" name="rate" value="3"/>
-                            <label class="text" for="star3" title="text">3 stars</label>
+                            <label for="star3" title="text">3 stars</label>
                             <input type="radio" id="star4" name="rate" value="4"/>
-                            <label class="text" for="star4" title="text">4 stars</label>
+                            <label for="star4" title="text">4 stars</label>
                             <input type="radio" id="star5" name="rate" value="5"/>
-                            <label class="text" for="star5" title="text">5 stars</label>
+                            <label c for="star5" title="text">5 stars</label>
                         </div>
                     </div>
                 </div>
