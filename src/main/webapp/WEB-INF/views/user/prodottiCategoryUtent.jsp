@@ -32,7 +32,7 @@
                 <div class="divVetrina">
                     <p>${prodotto.productName}</p>
 
-                    <a href="${context}/ProductServlet/showProductUtente?id=${prodotto.id}"> <img  src="${context}/cover/${prodotto.cover}">
+                    <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductUtente?id=${prodotto.id}"> <img  src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
                     </a>
 
                     <p class="divPrezzo">${prodotto.price}&euro;</p>

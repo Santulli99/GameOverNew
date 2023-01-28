@@ -10,10 +10,10 @@
                         <h4 href="#">Prodotti </h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/ProductServlet/showCreatProduct">Aggiungi prodotto </a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showCreatProduct">Aggiungi prodotto </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/ProductServlet/showAllProduct">Visualizza prodotti</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showAllProduct">Visualizza prodotti</a>
                     </li>
 
 

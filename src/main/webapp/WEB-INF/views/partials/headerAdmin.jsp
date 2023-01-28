@@ -7,7 +7,7 @@
     </div>
 
 
-      <form class="ig-ricerca" action="${pageContext.request.contextPath}/ProductServlet/searchProductAdmin" method="get">
+      <form class="ig-ricerca" action="${pageContext.request.contextPath}/GestioneProdottoController/searchProductAdmin" method="get">
         <input id="ricerca1" name="stringa" onkeyup="ricercaAjaxAdmin()" class="ricerca" type="text" placeholder="ricerca" >
         <button class="ig-ricerca-submit" type="submit" value="" title="Ricerca avanzata"></button>
       </form>

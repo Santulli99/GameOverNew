@@ -13,19 +13,18 @@ import java.util.regex.Pattern;
 public class ValidateForm {
 
 
+    public static boolean confermaPassword(String pasword, String password2) {
 
-    public static boolean confermaPassword(String pasword, String password2){
-
-        if(pasword.equals(password2)){
+        if (pasword.equals(password2)) {
             return true;
         }
         return false;
 
     }
 
-    public static boolean confermaEmail(String email, String email2){
+    public static boolean confermaEmail(String email, String email2) {
 
-        if(email.equals(email2)){
+        if (email.equals(email2)) {
             return true;
         }
         return false;
@@ -33,26 +32,23 @@ public class ValidateForm {
     }
 
 
-
-
-    public static  boolean validateDateNascita(LocalDate date) {
+    public static boolean validateDateNascita(LocalDate date) {
 
         LocalDate dataOggi = LocalDate.now();
 
         LocalDate dataOrdine = date;
         LocalDate controllo = date.plusDays(6570);
 
-        if(controllo.isBefore(dataOggi)){
+        if (controllo.isBefore(dataOggi)) {
             return true;
         }
         return false;
     }
 
 
+    public static boolean validateEmail(String email) {
 
-    public static boolean validateEmail(String email){
-
-        String regex="^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
+        String regex = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
 
@@ -62,23 +58,23 @@ public class ValidateForm {
         return false;
     }
 
-    public static boolean searchEmail(String email){
-        SqlAccountDao sqlAccountDao= new SqlAccountDao();
-        Account account=new Account();
+    public static boolean searchEmail(String email) {
+        SqlAccountDao sqlAccountDao = new SqlAccountDao();
+        Account account = new Account();
         try {
-            account=sqlAccountDao.searchAccountEmail(email);
+            account = sqlAccountDao.searchAccountEmail(email);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        if (account==null)
+        if (account == null)
             return true;
 
         return false;
     }
 
-    public static boolean validatePassword(String password){
+    public static boolean validatePassword(String password) {
 
-        String regex="^[A-Za-z0-9]{8,20}$";
+        String regex = "^[A-Za-z0-9]{8,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
 
@@ -89,10 +85,9 @@ public class ValidateForm {
     }
 
 
+    public static boolean validateNome(String nome) {
 
-    public static boolean validateNome(String nome){
-
-        String regex="^[A-Za-z ]{3,30}$";
+        String regex = "^[A-Za-z ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(nome);
 
@@ -103,9 +98,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateCognome(String cognome){
+    public static boolean validateCognome(String cognome) {
 
-        String regex="^[A-Za-zàèùòì' ]{3,30}$";
+        String regex = "^[A-Za-zàèùòì' ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cognome);
 
@@ -116,9 +111,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateResidenza(String residenza){
+    public static boolean validateResidenza(String residenza) {
 
-        String regex="^[A-Za-z ]{3,30}$";
+        String regex = "^[A-Za-z ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(residenza);
 
@@ -129,9 +124,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateVia(String via){
+    public static boolean validateVia(String via) {
 
-        String regex="^[A-Za-z ]{3,30}$";
+        String regex = "^[A-Za-z ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(via);
 
@@ -142,9 +137,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateluogo_nascita(String luogo_nascita){
+    public static boolean validateluogo_nascita(String luogo_nascita) {
 
-        String regex="^[A-Za-z ]{3,30}$";
+        String regex = "^[A-Za-z ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(luogo_nascita);
 
@@ -155,9 +150,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateUsername(String username){
+    public static boolean validateUsername(String username) {
 
-        String regex="^[A-Za-z0-9_-]{3,15}$";
+        String regex = "^[A-Za-z0-9_-]{3,15}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
 
@@ -168,9 +163,9 @@ public class ValidateForm {
     }
 
 
-    public static boolean validateTelefono(String telefono){
+    public static boolean validateTelefono(String telefono) {
 
-        String regex="^((00|\\+)[\\. ]??)??3\\d{2}[\\. ]??\\d{6,7}$";
+        String regex = "^((00|\\+)[\\. ]??)??3\\d{2}[\\. ]??\\d{6,7}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(telefono);
         if (matcher.matches())
@@ -179,24 +174,24 @@ public class ValidateForm {
         return false;
     }
 
-    public static boolean searchTelefono(String telefono){
-        SqlDataClientDao sqlDataClientDao= new SqlDataClientDao();
-        DataClient dataClient= new DataClient();
+    public static boolean searchTelefono(String telefono) {
+        SqlDataClientDao sqlDataClientDao = new SqlDataClientDao();
+        DataClient dataClient = new DataClient();
         try {
-            dataClient=sqlDataClientDao.searchDataClientWithTel(telefono);
+            dataClient = sqlDataClientDao.searchDataClientWithTel(telefono);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        if (dataClient==null)
+        if (dataClient == null)
             return true;
 
         return false;
     }
 
 
-    public static boolean validateCf(String cf){
+    public static boolean validateCf(String cf) {
 
-        String regex="^[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]$";
+        String regex = "^[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cf);
         if (matcher.matches())
@@ -206,23 +201,23 @@ public class ValidateForm {
     }
 
 
-    public static boolean searchCf(String cf){
-        SqlDataClientDao sqlDataClientDao= new SqlDataClientDao();
-        DataClient dataClient= new DataClient();
+    public static boolean searchCf(String cf) {
+        SqlDataClientDao sqlDataClientDao = new SqlDataClientDao();
+        DataClient dataClient = new DataClient();
         try {
-            dataClient=sqlDataClientDao.searchDataClientWithCf(cf);
+            dataClient = sqlDataClientDao.searchDataClientWithCf(cf);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        if (dataClient==null)
+        if (dataClient == null)
             return true;
 
         return false;
     }
 
-    public static boolean validateProvincia(String provincia){
+    public static boolean validateProvincia(String provincia) {
 
-        String regex="^[A-Za-z ]{3,30}$";
+        String regex = "^[A-Za-z ]{3,30}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(provincia);
 
@@ -233,20 +228,18 @@ public class ValidateForm {
     }
 
 
+    public static boolean validateCivico(int civico) {
 
-    public static boolean validateCivico(int civico){
-
-        if (civico<=0 || civico>=500)
+        if (civico <= 0 || civico >= 500)
             return false;
 
         return true;
     }
 
 
+    public static boolean validateCap(String cap) {
 
-    public static boolean validateCap(String cap){
-
-        String regex="^\\d{5}$";
+        String regex = "^\\d{5}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cap);
 
@@ -255,9 +248,6 @@ public class ValidateForm {
 
         return false;
     }
-
-
-
 
 
 }

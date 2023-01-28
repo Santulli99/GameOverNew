@@ -35,7 +35,7 @@ public class GestioneUtenteController extends HttpServlet {
     private boolean esiste;
     private final GestioneUtenteService gestioneUtenteService = new GestioneUtenteServiceImp();
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
         switch (path) {
             case "/":
@@ -237,7 +237,7 @@ public class GestioneUtenteController extends HttpServlet {
         }
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
         switch (path) {
             case "/":
