@@ -74,13 +74,7 @@
             color: #c59b08;
         }
 
-        .divtitolo {
-            display: flex;
-            flex-flow: column;
-            justify-content: end;
-            margin-left: 20px;
 
-        }
 
         #boxrecensione {
             width: 100%;
@@ -88,7 +82,7 @@
             margin-top: 20px;
             font-style: italic;
             font-weight: bold;
-            font-size: 25px;
+            font-size: 5px;
             padding-left: 20px;
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7);
             border-radius: 10px;
@@ -108,9 +102,18 @@
 
         #box1 {
             display: flex;
-            flex-flow: row nowrap;
+            flex-flow: column;
             justify-content: flex-start;
             margin-bottom: 20px;
+
+        }
+
+        #box1 label{
+            width: 100%;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 25px;
+            margin-bottom: 10px;
         }
 
         #box2 {
@@ -118,6 +121,7 @@
             flex-flow: column;
             justify-content: flex-start;
             margin-bottom: 20px;
+
         }
 
         #box3 {
@@ -125,6 +129,7 @@
             flex-flow: column nowrap;
             justify-content: flex-start;
             margin-bottom: 20px;
+
         }
 
 
@@ -133,6 +138,7 @@
             flex-flow: column nowrap;
             justify-content: flex-start;
             margin-bottom: 20px;
+
         }
 
         #box5 {
@@ -146,7 +152,7 @@
             margin-bottom: 30px;
         }
 
-        #box1,#box4 label {
+        #box4 label {
             width: 100%;
             font-style: italic;
             font-size: 25px;
@@ -154,7 +160,7 @@
         }
 
 
-        .valc{
+        .valc {
             width: 100%;
             font-style: italic;
             font-size: 25px;
@@ -193,31 +199,31 @@
                     <label>Crea recensione</label>
                 </div>
 
+
                 <div id="box1">
+                        <label>${prodotto.productName}</label>
                     <div id="cover">
                         <img style="border-radius: 10px;"
                              src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
                     </div>
-                    <div class="divtitolo">
-                        <label>${prodotto.productName}</label>
-                    </div>
                 </div>
+
 
                 <div id="box2">
                     <label class="valc">Valutazione complessiva:</label>
                     <div>
-                    <div class="rate">
-                        <input type="radio" id="star1" name="rate" value="1"/>
-                        <label class="text" for="star1" title="text">1 star</label>
-                        <input type="radio" id="star2" name="rate" value="2"/>
-                        <label class="text" for="star2" title="text">2 stars</label>
-                        <input type="radio" id="star3" name="rate" value="3"/>
-                        <label class="text" for="star3" title="text">3 stars</label>
-                        <input type="radio" id="star4" name="rate" value="4"/>
-                        <label class="text" for="star4" title="text">4 stars</label>
-                        <input type="radio" id="star5" name="rate" value="5"/>
-                        <label class="text" for="star5" title="text">5 stars</label>
-                    </div>
+                        <div class="rate">
+                            <input type="radio" id="star1" name="rate" value="1"/>
+                            <label class="text" for="star1" title="text">1 star</label>
+                            <input type="radio" id="star2" name="rate" value="2"/>
+                            <label class="text" for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3"/>
+                            <label class="text" for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4"/>
+                            <label class="text" for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star5" name="rate" value="5"/>
+                            <label class="text" for="star5" title="text">5 stars</label>
+                        </div>
                     </div>
                 </div>
 
