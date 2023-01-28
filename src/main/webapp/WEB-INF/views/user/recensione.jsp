@@ -153,6 +153,7 @@
             margin-bottom: 10px;
         }
 
+
         .valc{
             width: 100%;
             font-style: italic;
