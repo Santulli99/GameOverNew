@@ -107,18 +107,6 @@
 
 </head>
 <body>
-
-
-<script>
-
-    var er1 =${carrelloVuoto};
-
-    if (er1 == true) {
-        JSalertWarning("Aggiungere almeno un prodotto per procedere all'acquisto");
-    }
-</script>
-
-
 <!-- header -->
 
 
@@ -143,8 +131,8 @@
             <c:forEach items="${lista.prodotti}" var="prodotto">
             <div id="prodottoDesiderato">
 
-                <div id="cover"><img style="border-radius: 10px;"
-                                     src="${pageContext.request.contextPath}/cover/${prodotto.cover}"></div>
+                <div id="cover">
+                    <img style="border-radius: 10px;" src="${pageContext.request.contextPath}/cover/${prodotto.cover}"></div>
                 <div id="descrizione">
 
                     <div id="titologioco">
