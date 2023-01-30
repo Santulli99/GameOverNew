@@ -1,5 +1,6 @@
 package recensione.controller;
 
+import gestioneProdotto.service.GestioneProdottoServiceImp;
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
 import model.entity.Prodotto;
@@ -24,6 +25,7 @@ public class RecensioneController extends HttpServlet {
 
     boolean successo=false;
     private SqlProductDao productDao=new SqlProductDao();
+    private GestioneProdottoServiceImp gestioneProdottoServiceImp=new GestioneProdottoServiceImp();
 
     private RecensioneServiceImp recensioneServiceImp=new RecensioneServiceImp();
     public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,11 +36,8 @@ public class RecensioneController extends HttpServlet {
                 break;
             case "/creaRecensione":
                 account=(Account) request.getSession(false).getAttribute("account");
-                try {
-                    prodotto=productDao.searchProductWithCategory(Integer.parseInt(request.getParameter("id")));/*implementare con servizio*/
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                prodotto=gestioneProdottoServiceImp.getProdottoConCategoria(Integer.parseInt(request.getParameter("id")));
+               // String titolo=request.getParameter("titoloRecensione");
                 String descrizione = request.getParameter("descrizione");
                 double valutazione = Double.parseDouble(request.getParameter("valutazione"));
                 successo=recensioneServiceImp.aggiungiRecensione(account,prodotto,descrizione,valutazione);

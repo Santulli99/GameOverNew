@@ -166,7 +166,14 @@
 
 </head>
 <body>
+<script>
 
+    var suc1=${successo};
+    if(suc1==true) {
+        JSalertSuccess("Recensione effettuata con successo!");
+    }
+
+</script>
 
 <!-- header -->
 
