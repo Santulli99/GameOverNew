@@ -35,17 +35,18 @@ import java.util.regex.Pattern;
 public class GestioneProdottoController extends HttpServlet {
 
     private String path;
-    private SqlProductDao sqlProductDao = new SqlProductDao();
-    private SqlCategoryDao sqlCategoryDao = new SqlCategoryDao();
-    private SqlPlatformDao sqlPlatformDao = new SqlPlatformDao();
-    private Prodotto prodotto=new Prodotto();
+    private Prodotto prodotto = new Prodotto();
     private RequestDispatcher dispatcher;
-    private ArrayList<Prodotto> prodotti=new ArrayList<>();
+    private ArrayList<Prodotto> prodotti = new ArrayList<>();
     private int id;
-    private Account account;
+    private Account account = new Account();
 
     private boolean eliminato;
-    ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
+    private String stringa;
+    private Pattern pattern;
+    private String categoria;
+    private ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
+    private ArrayList<Review> reviews = new ArrayList<>();
 
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
@@ -60,7 +61,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/updateProduct":
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
-                request.setAttribute("product", prodotto);
+                request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateProduct.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -68,20 +69,19 @@ public class GestioneProdottoController extends HttpServlet {
             /**si visualizzano tutti i prodotti**/
             case "/showAllProduct":
                 prodotti = gestioneProdottoServiceImp.getAllProdottiConCategoriaEPiattaforma();
-                request.setAttribute("products", prodotti);
+                request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showAllProduct.jsp");
                 dispatcher.forward(request, response);
-
                 break;
 
             /**ricerca prodotti con ajax(Utente)**/
             case "/searchProductUtent":
-                String stringa1 = request.getParameter("stringa");
-                Pattern pattern1 = Pattern.compile(stringa1, Pattern.CASE_INSENSITIVE);
+                stringa = request.getParameter("stringa");
+                pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
 
                 for (int i = 0; i < prodotti.size(); i++) {
-                    Matcher matcher = pattern1.matcher(prodotti.get(i).getProductName());
+                    Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
                         prodottoSearch.add(prodotti.get(i));
                 }
@@ -98,15 +98,14 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**ricerca prodotti con ajax(Guest)**/
             case "/searchProductGuest":
-                String stringa2 = request.getParameter("stringa");
-                Pattern pattern2 = Pattern.compile(stringa2, Pattern.CASE_INSENSITIVE);
+               stringa = request.getParameter("stringa");
+                pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
-                    Matcher matcher = pattern2.matcher(prodotti.get(i).getProductName());
+                    Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
                         prodottoSearch.add(prodotti.get(i));
                 }
-
                 if (prodottoSearch.size() == 0) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/searchProductGuestFailed.jsp");
                     dispatcher.forward(request, response);
@@ -116,12 +115,15 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
-
+            /**ricerca prodotti con ajax(ADMIN,UTENTE,GUEST)**/
             case "/searchProductWithAjax":
 
-                String stringa = request.getParameter("stringa");
-                Pattern pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
+                stringa = request.getParameter("stringa");
+                System.out.println("VALORE:"+stringa);
+                pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
+                System.out.println("VALORE pattern:"+pattern);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
+
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
@@ -136,7 +138,6 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showProduct":
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
-                ArrayList<Review> reviews = new ArrayList<>();
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
                 System.out.println(reviews.size());
                 request.setAttribute("recensioni1", reviews);
@@ -157,10 +158,9 @@ public class GestioneProdottoController extends HttpServlet {
                     aggiunto = true;
                 }
 
-                ArrayList<Review> reviews1 = new ArrayList<>();
-                reviews1 = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
                 request.setAttribute("aggiunto", aggiunto);
-                request.setAttribute("recensioni", reviews1);
+                request.setAttribute("recensioni", reviews);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                 dispatcher.forward(request, response);
@@ -168,7 +168,7 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**viene visualizzate la pagina con i prodotti per categoria e piattaforma **/
             case "/showProductsWithCatAndPla":
-                String categoria = request.getParameter("category");
+                categoria = request.getParameter("category");
                 id = Integer.parseInt(request.getParameter("pla"));
                 prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria, id);
                 request.setAttribute("prodotti", prodotti);
@@ -178,9 +178,9 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**viene visualizzate la pagina con i prodotti per categoria e piattaforma(UTENTE)**/
             case "/showProductsWithCatAndPlaUtent":
-                String categoria1 = request.getParameter("category");
+                categoria = request.getParameter("category");
                 id = Integer.parseInt(request.getParameter("pla"));
-                prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria1, id);
+                prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria, id);
                 request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottiCategoryUtent.jsp");
                 dispatcher.forward(request, response);
@@ -193,7 +193,7 @@ public class GestioneProdottoController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
 
-                /**si elimina un prodotto(ADMIN)**/
+            /**si elimina un prodotto(ADMIN)**/
 
             case "/deleteProduct":
                 id = Integer.parseInt(request.getParameter("id"));
@@ -211,15 +211,15 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
-            /**ricerca prodotti con ajax(ADMIN)**/
+
             case "/searchProductAdmin":
 
-                String stringa3 = request.getParameter("stringa");
-                Pattern pattern3 = Pattern.compile(stringa3, Pattern.CASE_INSENSITIVE);
+                stringa = request.getParameter("stringa");
+                pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
-                    Matcher matcher = pattern3.matcher(prodotti.get(i).getProductName());
+                    Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
                         prodottoSearch.add(prodotti.get(i));
                 }
@@ -280,6 +280,7 @@ public class GestioneProdottoController extends HttpServlet {
                 break;
             /**si modifica il prodotto**/
             case "/updateProduct":
+
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoPerId(id);
 
