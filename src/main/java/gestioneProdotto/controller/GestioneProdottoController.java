@@ -93,7 +93,7 @@ public class GestioneProdottoController extends HttpServlet {
                 }
                 break;
 
-            /**ricerca prodotti con ajax(Guest)**/
+            /**ricerca prodotti (Guest)**/
             case "/searchProductGuest":
                 String stringa2 = request.getParameter("stringa");
                 Pattern pattern2 = Pattern.compile(stringa2, Pattern.CASE_INSENSITIVE);
@@ -113,17 +113,21 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
-
+            /**ricerca prodotti con ajax(Guest,Utent,Admin)**/
             case "/searchProductWithAjax":
 
                 String stringa = request.getParameter("stringa");
+                System.out.println("VALORE:"+stringa);
                 Pattern pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                System.out.println("DIM:"+prodotti.size());
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
+                    System.out.println(matcher);
                     if (matcher.find())
                         prodottoSearch.add(prodotti.get(i));
                 }
+                //System.out.println(prodottoSearch);
                 String json = new Gson().toJson(prodottoSearch);
                 response.setContentType("text/plain;charset=UTF-8");
                 response.getWriter().println(json);
@@ -188,6 +192,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showCreatProduct":
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
                 dispatcher.forward(request, response);
+                break;
                 /**si elimina un prodotto(ADMIN)**/
 
             case "/deleteProduct":
@@ -206,12 +211,11 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
-            /**ricerca prodotti con ajax(ADMIN)**/
+            /**ricerca prodotti (ADMIN)**/
             case "/searchProductAdmin":
 
                 String stringa3 = request.getParameter("stringa");
                 Pattern pattern3 = Pattern.compile(stringa3, Pattern.CASE_INSENSITIVE);
-                ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern3.matcher(prodotti.get(i).getProductName());
@@ -257,7 +261,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setCover(fileName);
                 if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
                     InputStream inputStream = filePart.getInputStream();
-                    File file = new File("C:\\Users\\andre\\Desktop\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
                     boolean success = true;
                     request.setAttribute("success", success);
@@ -272,7 +276,15 @@ public class GestioneProdottoController extends HttpServlet {
                 break;
             /**si modifica il prodotto**/
             case "/updateProduct":
-                id = Integer.parseInt(request.getParameter("id"));
+                System.out.println("SONO DENTRO");
+                //product1=productDao2.searchProduct(Integer.parseInt(request.getParameter("id")));
+               /* System.out.println(request.getParameter("id"));
+
+                System.out.println(request.getParameter("nome"));
+                System.out.println(request.getParameter("description"));
+                System.out.println(request.getParameter("prezzo"));*/
+                id= Integer.parseInt(request.getParameter("id"));
+                //id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoPerId(id);
 
                 prodotto.setProductName(request.getParameter("nome"));

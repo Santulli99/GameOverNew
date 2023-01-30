@@ -1,4 +1,4 @@
-package Servlet;
+package gestioneAcquisti;
 
 import model.dao.product.SqlProductDao;
 import model.entity.Prodotto;
@@ -22,11 +22,7 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
-
-
 
         switch (path) {
 

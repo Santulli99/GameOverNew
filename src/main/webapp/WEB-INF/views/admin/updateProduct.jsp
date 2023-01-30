@@ -5,7 +5,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <jsp:include page="/WEB-INF/views/partials/head.jsp" >
+    <jsp:include page="/WEB-INF/views/partials/head.jsp">
         <jsp:param name="title" value="Modifica Prodotto"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
@@ -13,7 +13,7 @@
 
     <style>
 
-        .f_product label{
+        .f_product label {
 
             color: #1a1a1a;
             margin-bottom: 10px;
@@ -32,7 +32,7 @@
 
         }
 
-        #number1 div{
+        #number1 div {
 
             display: flex;
             flex-flow: column;
@@ -40,7 +40,7 @@
 
         }
 
-        #number2{
+        #number2 {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,13 +48,13 @@
             flex-flow: column;
         }
 
-        #number5{
+        #number5 {
             display: flex;
             justify-content: flex-start;
             align-items: center;
         }
 
-        #number6{
+        #number6 {
             position: absolute;
             bottom: 14px;
             left: 587px;
@@ -66,7 +66,6 @@
 
 
     </style>
-
 
 
 </head>
@@ -82,42 +81,45 @@
 <jsp:include page="/WEB-INF/views/partials/navBarAdmin.jsp"></jsp:include>
 
 
-
 <aside class="containerBackground">
 
     <section class="containerCenter" id="ajax">
 
         <form class="f_product" action="${pageContext.request.contextPath}/GestioneProdottoController/updateProduct"
-              method="post"  enctype="multipart/form-data" >
+              method="post" enctype="multipart/form-data">
 
             <div id="number1">
                 <div>
-                    <label for="nome" >Nome del prodotto</label>
-                    <input value="${prodotto.productName}" type="text" minlength="5" maxlength="50" id="nome" name="nome"  required >
+                    <label for="nome">Nome del prodotto</label>
+                    <input value="${prodotto.productName}" type="text" minlength="5" maxlength="50" id="nome"
+                           name="nome" required>
                 </div>
                 <div>
-                    <label for="prezzo" >Prezzo di base</label>
-                    <input value="${prodotto.price}" type="text"   id="prezzo" name="prezzo" required >
+                    <label for="prezzo">Prezzo di base</label>
+                    <input value="${prodotto.price}" type="text" id="prezzo" name="prezzo" required>
                 </div>
             </div>
 
             <div id="number2">
 
-                <label for="content" >Contenuto (max 5000 caratteri)</label>
-                <textarea   id="content" rows="20" maxlength="5000" cols="70" name="description"  required >${prodotto.description}</textarea>
+                <label for="content">Contenuto (max 5000 caratteri)</label>
+                <textarea id="content" rows="20" maxlength="5000" cols="70" name="description"
+                          required>${prodotto.description}</textarea>
 
             </div>
 
             <div id="number5">
-                <div><input type="hidden"  name="id"  value="${prodotto.id}">
-                <button class="button" type="submit" >modifica prodotto</button>
+                <div><input type="hidden" name="id" value="${prodotto.id}">
+                    <button class="button" type="submit">modifica prodotto</button>
                 </div>
             </div>
         </form>
 
 
         <div id="number6">
-            <a href="${pageContext.request.contextPath}/ProductServlet/deleteProduct?id=${prodotto.id}"> <button class="button" >elimina prodotto</button></a>
+            <a href="${pageContext.request.contextPath}/GestioneProdottoController/deleteProduct?id=${prodotto.id}">
+                <button class="button">elimina prodotto</button>
+            </a>
 
         </div>
 

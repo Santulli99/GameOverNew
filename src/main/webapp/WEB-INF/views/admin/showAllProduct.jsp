@@ -118,13 +118,13 @@
                     <div></div>
 
                 </li>
-                <c:forEach items="${prodottos}" var="prodotto">
+                <c:forEach items="${prodotti}" var="prodotto">
                     <li>
                         <div><p>${prodotto.productName}</p></div>
                         <div><p> ${prodotto.platform.platformName} </p></div>
                         <div><p> ${prodotto.category.categoryName} </p></div>
-                        <div><a href="${pageContext.request.contextPath}/ProductServlet/updateProduct?id=${prodotto.id}"><button>Modifica</button></a>
-                        <a href="${pageContext.request.contextPath}/ProductServlet/deleteProduct?id=${prodotto.id}"><button>Elimina</button></a></div>
+                        <div><a href="${pageContext.request.contextPath}/GestioneProdottoController/updateProduct?id=${prodotto.id}"><button>Modifica</button></a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/deleteProduct?id=${prodotto.id}"><button>Elimina</button></a></div>
                     </li>
                 </c:forEach>
             </ul>
