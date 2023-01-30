@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <jsp:include page="/WEB-INF/views/partials/head.jsp">
-        <jsp:param name="title" value="Recensione"/>
+        <jsp:param name="title" value="Modifica Recensione"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
 
@@ -184,9 +184,9 @@
 
 <script>
 
-    var suc1=${successo};
-    if(suc1==false) {
-        JSalertSuccess("Recensione fallita! Immettere parametri validi");
+    var suc1 =${successo};
+    if (suc1 == false){
+        JSalertError("Recensione fallita! Immettere parametri validi");
     }
 
 </script>
@@ -200,11 +200,11 @@
     <section class="containerCenter" id="ajax">
 
         <div id="principale">
-            <form action="${pageContext.request.contextPath}/RecensioneController/creaRecensione"
-                  method="post" >
+            <form action="${pageContext.request.contextPath}/RecensioneController/modificaRecensione"
+                  method="post">
 
                 <div id="boxrecensione">
-                    <label>Crea recensione</label>
+                    <label>Modifica recensione</label>
                 </div>
 
 
@@ -239,18 +239,19 @@
                     <label class="valc" for="sottobox3_2">Aggiungi un titolo</label>
                     <input style="border-radius: 5px" id="sottobox3_2" type="text" minlength="5" maxlength="50"
                            name="titoloRecensione"
+                            value="${recensione.titolo}"
                            required>
                 </div>
                 <div id="box4">
                     <label id="sottobox4_1" for="sottobox4_2">Aggiungi una recensione scritta</label>
                     <textarea style="border-radius: 5px" id="sottobox4_2" rows="5" maxlength="100" cols="90"
                               name="descrizione"
-                              required>
+                              required>${recensione.descrizione}
                     </textarea>
                 </div>
                 <div id="box5">
                     <input type="hidden" name="id" value="${prodotto.id}">
-                    <button class="button1" type="submit">invia</button>
+                    <button class="button1" type="submit">modifica</button>
                 </div>
             </form>
         </div>

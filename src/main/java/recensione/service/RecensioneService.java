@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public interface RecensioneService {
 
-    boolean  aggiungiRecensione(Account account,Prodotto prodotto,String descrizione,double valutazione);
+    boolean  aggiungiRecensione(Review review);
 
-    boolean modificaRecensione(String descrizione,double valutazione);
+    boolean modificaRecensione(Review review);
 
     boolean rimuoviRecensione(Account account,Prodotto prodotto);
 
@@ -18,5 +18,5 @@ public interface RecensioneService {
 
     ArrayList<Review> cercaRecensioniPerUtente(Account account);
 
-
+    Review cercaRecensionePerProdotto(Prodotto prodotto,Account account);
 }

@@ -19,7 +19,7 @@
 
     </jsp:include>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 
@@ -235,10 +235,17 @@
                     <a id="aa3" href="${pageContext.request.contextPath}/CartServlet/addCart?id=${prodotto.id}">
                         <button id="aa4" class="button">aggiungi al carrello</button>
                     </a>
-                    <a id="aa3"
+                    <a id="aa20"
                        href="${pageContext.request.contextPath}/RecensioneController/scriviRecensione?id=${prodotto.id}">
-                        <button id="aa5" class="button">Aggiungi recensione</button>
+                        <button id="aa5" class="button">Aggiungi Recensione</button>
                     </a>
+                    <script>
+                        var controllo=${controllo};
+                        if(controllo){
+                            document.getElementById("aa20").setAttribute("href","${pageContext.request.contextPath}/RecensioneController/modificaRecensione?id=${prodotto.id}");
+                            document.getElementById("aa5").innerHTML="Modifica Recensione";
+                        }
+                    </script>
                     <a id="aa7"
                        href="${pageContext.request.contextPath}/ListaDesideriController/aggiungiListaDesideri?id=${prodotto.id}"
                        class="fa fa-heart" style="text-decoration: none"></a>

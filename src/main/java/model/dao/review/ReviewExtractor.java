@@ -12,6 +12,7 @@ public class ReviewExtractor implements ResultSetExtractor<Review> {
         Review review=new Review();
         review.setDescrizione(resultSet.getString("review.descrizione"));
         review.setValutazione(resultSet.getInt("review.valutazione"));
+        review.setTitolo(resultSet.getString("review.titolo"));
         return review;
     }
 }

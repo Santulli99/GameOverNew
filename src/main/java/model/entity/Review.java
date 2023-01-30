@@ -2,11 +2,15 @@ package model.entity;
 
 public class Review {
     private String descrizione;
+    private String titolo;
+
     private double valutazione;
-    private  Account account;
+    private Account account;
     private Prodotto prodotto;
 
-    public Review(){super(); }
+    public Review() {
+        super();
+    }
 
     public Review(String descrizione, double valutazione, Account account, Prodotto prodotto) {
         this.descrizione = descrizione;
@@ -14,6 +18,23 @@ public class Review {
         this.account = account;
         this.prodotto = prodotto;
     }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
+
 
     public String getDescrizione() {
         return descrizione;
@@ -39,12 +60,6 @@ public class Review {
         this.account = account;
     }
 
-    public Prodotto getProduct() {
-        return prodotto;
-    }
 
-    public void setProduct(Prodotto prodotto) {
-        this.prodotto = prodotto;
-    }
 
 }

@@ -157,6 +157,12 @@ public class GestioneProdottoController extends HttpServlet {
                 }
 
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                boolean controllo=false;
+                for(int i =0;i<reviews.size();i++){
+                    if(account.getId()==reviews.get(i).getAccount().getId())
+                        controllo=true;
+                }
+                request.setAttribute("controllo",controllo);
                 request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("recensioni", reviews);
                 request.setAttribute("prodotto", prodotto);

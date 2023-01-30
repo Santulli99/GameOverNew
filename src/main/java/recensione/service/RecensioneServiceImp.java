@@ -17,13 +17,8 @@ public class RecensioneServiceImp implements RecensioneService {
     }
 
     @Override
-    public boolean aggiungiRecensione(Account account,Prodotto prodotto,String descrizione,double valutazione){
+    public boolean aggiungiRecensione(Review review){
         try {
-            Review review=new Review();
-            review.setAccount(account);
-            review.setProduct(prodotto);
-            review.setDescrizione(descrizione);
-            review.setValutazione(valutazione);
             if(reviewDao.createReview(review))
             return true;
         } catch (SQLException e) {
@@ -33,11 +28,8 @@ public class RecensioneServiceImp implements RecensioneService {
     }
 
     @Override
-    public boolean modificaRecensione(String descrizione,double valutazione) {
+    public boolean modificaRecensione(Review review) {
         try {
-            Review review=new Review();
-            review.setValutazione(valutazione);
-            review.setDescrizione(descrizione);
             if(reviewDao.updateReview(review))
             return true;
         } catch (SQLException e) {
@@ -77,5 +69,17 @@ public class RecensioneServiceImp implements RecensioneService {
             throw new RuntimeException(e);
         }
         return recensioni;
+    }
+
+    @Override
+    public Review cercaRecensionePerProdotto(Prodotto prodotto,Account account) {
+        Review review=new Review();
+        try {
+            if((review=reviewDao.searchReviewWithProductAndAccount(prodotto.getId(),account.getId()))!=null)
+                return review;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }
