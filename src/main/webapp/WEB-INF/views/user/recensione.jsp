@@ -243,7 +243,7 @@
                 </div>
                 <div id="box4">
                     <label id="sottobox4_1" for="sottobox4_2">Aggiungi una recensione scritta</label>
-                    <textarea style="border-radius: 5px" id="sottobox4_2" rows="5" maxlength="100" cols="90"
+                    <textarea  id="sottobox4_2" rows="5" maxlength="500" cols="90"
                               name="descrizione"
                               required>
                     </textarea>
