@@ -136,7 +136,7 @@ function  myFunctionXhr(xhr){
             "            Sembra che non ci siano giochi corrispondenti alla tua richiesta\n" +
             "        </p>\n" +
             "\n" +
-            "        <a href=\"/GameOverNew_war_exploded/HomePageController/homePageUtente\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
+            "        <a href=\"/GameOverNew_war_exploded/HomePageController/homePageUtent\"><button class=\"button\">Torna all'HomePage</button></a>\n" +
             "\n" +
             "\n" +
             "    </div>\n" +

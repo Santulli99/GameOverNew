@@ -1,15 +1,10 @@
 package gestioneProdotto.controller;
 
 import com.google.gson.Gson;
-import gestioneProdotto.service.GestioneProdottoService;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
 import listaDesideri.service.ListaDesideriServiceImp;
-import model.dao.category.SqlCategoryDao;
-import model.dao.platform.SqlPlatformDao;
-import model.dao.product.SqlProductDao;
 import model.entity.*;
 import recensione.service.RecensioneServiceImp;
-import validate.ValidateForm;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +40,7 @@ public class GestioneProdottoController extends HttpServlet {
     private String stringa;
     private Pattern pattern;
     private String categoria;
-    private ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
+    private ArrayList<Prodotto> prodottoSearch;
     private ArrayList<Review> reviews = new ArrayList<>();
 
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
@@ -76,6 +71,7 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**ricerca prodotti con ajax(Utente)**/
             case "/searchProductUtent":
+                prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
@@ -98,7 +94,8 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**ricerca prodotti con ajax(Guest)**/
             case "/searchProductGuest":
-               stringa = request.getParameter("stringa");
+                prodottoSearch = new ArrayList<>();
+                stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
@@ -106,6 +103,7 @@ public class GestioneProdottoController extends HttpServlet {
                     if (matcher.find())
                         prodottoSearch.add(prodotti.get(i));
                 }
+                System.out.println("SIZE:" + prodottoSearch.size());
                 if (prodottoSearch.size() == 0) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/searchProductGuestFailed.jsp");
                     dispatcher.forward(request, response);
@@ -117,11 +115,11 @@ public class GestioneProdottoController extends HttpServlet {
                 break;
             /**ricerca prodotti con ajax(ADMIN,UTENTE,GUEST)**/
             case "/searchProductWithAjax":
-
+                prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
-                System.out.println("VALORE:"+stringa);
+                System.out.println("VALORE:" + stringa);
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                System.out.println("VALORE pattern:"+pattern);
+                System.out.println("VALORE pattern:" + pattern);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
 
                 for (int i = 0; i < prodotti.size(); i++) {
@@ -210,13 +208,13 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);
                 }
+
                 break;
 
             case "/searchProductAdmin":
-
+                prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                ArrayList<Prodotto> prodottoSearch = new ArrayList<>();
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
