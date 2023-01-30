@@ -71,6 +71,7 @@ public class GestioneProdottoController extends HttpServlet {
                 request.setAttribute("products", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showAllProduct.jsp");
                 dispatcher.forward(request, response);
+
                 break;
 
             /**ricerca prodotti con ajax(Utente)**/
