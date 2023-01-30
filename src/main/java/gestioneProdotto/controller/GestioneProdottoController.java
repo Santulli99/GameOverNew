@@ -245,9 +245,8 @@ public class GestioneProdottoController extends HttpServlet {
             /**si crea il prodotto**/
             case "/createProduct":
                 int idCategoria = Integer.parseInt(request.getParameter("categoria"));
-                System.out.println(idCategoria);
                 int idPiattaforma = Integer.parseInt(request.getParameter("piattaforma"));
-                System.out.println(idPiattaforma);
+
 
                 Platform platform = gestioneProdottoServiceImp.getPiattaforma(idPiattaforma);
                 Category category = gestioneProdottoServiceImp.getCategoria(idCategoria);
