@@ -13,6 +13,7 @@ import validate.ValidateForm;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +31,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @WebServlet(name = "GestioneProdottoController", value = "/GestioneProdottoController/*")
+@MultipartConfig
 public class GestioneProdottoController extends HttpServlet {
 
     private String path;
     private SqlProductDao sqlProductDao = new SqlProductDao();
     private SqlCategoryDao sqlCategoryDao = new SqlCategoryDao();
     private SqlPlatformDao sqlPlatformDao = new SqlPlatformDao();
-    private Prodotto prodotto;
+    private Prodotto prodotto=new Prodotto();
     private RequestDispatcher dispatcher;
-    private ArrayList<Prodotto> prodotti;
+    private ArrayList<Prodotto> prodotti=new ArrayList<>();
     private int id;
     private Account account;
 
@@ -188,6 +190,8 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showCreatProduct":
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
                 dispatcher.forward(request, response);
+                break;
+
                 /**si elimina un prodotto(ADMIN)**/
 
             case "/deleteProduct":
@@ -240,7 +244,9 @@ public class GestioneProdottoController extends HttpServlet {
             /**si crea il prodotto**/
             case "/createProduct":
                 int idCategoria = Integer.parseInt(request.getParameter("categoria"));
+                System.out.println(idCategoria);
                 int idPiattaforma = Integer.parseInt(request.getParameter("piattaforma"));
+                System.out.println(idPiattaforma);
 
                 Platform platform = gestioneProdottoServiceImp.getPiattaforma(idPiattaforma);
                 Category category = gestioneProdottoServiceImp.getCategoria(idCategoria);
@@ -251,13 +257,13 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setDate(LocalDate.parse(request.getParameter("data")));
                 prodotto.setDescription(request.getParameter("description"));
                 prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
-
+                prodotto.setValutazioneMedia(0);
                 Part filePart = request.getPart("cover");
                 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                 prodotto.setCover(fileName);
                 if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
                     InputStream inputStream = filePart.getInputStream();
-                    File file = new File("C:\\Users\\andre\\Desktop\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
                     boolean success = true;
                     request.setAttribute("success", success);
@@ -269,6 +275,7 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);
                 }
+
                 break;
             /**si modifica il prodotto**/
             case "/updateProduct":

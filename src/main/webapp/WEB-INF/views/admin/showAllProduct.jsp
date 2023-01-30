@@ -118,7 +118,7 @@
                     <div></div>
 
                 </li>
-                <c:forEach items="${prodottos}" var="prodotto">
+                <c:forEach items="${products}" var="prodotto">
                     <li>
                         <div><p>${prodotto.productName}</p></div>
                         <div><p> ${prodotto.platform.platformName} </p></div>
