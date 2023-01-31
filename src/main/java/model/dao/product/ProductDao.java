@@ -28,6 +28,7 @@ public interface ProductDao <E extends  Exception>{
     boolean updateProduct(Prodotto prodotto) throws E;
     boolean deleteProduct(int id) throws E;
 
+    boolean updateProductValuation(Prodotto prodotto) throws E;
 
     Prodotto searchProductWithCategory(int id) throws E;
     Prodotto searchProductWithPlatforms(int id) throws E;

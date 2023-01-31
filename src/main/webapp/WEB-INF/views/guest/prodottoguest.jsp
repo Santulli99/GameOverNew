@@ -221,6 +221,7 @@
                 <h3>Recensioni</h3>
                 <c:forEach items="${recensioni1}" var="recensione">
                     <div style="border:solid 2px black">
+                        <p><b>${recensione.titolo}</b></p>
                         <p>${recensione.descrizione}</p>
                         <p>
                             <div style="width: 50%" id="${recensione.account.id}">

@@ -25,4 +25,5 @@ public interface GestioneProdottoService  {
     boolean aggiungiProdotto(Prodotto prodotto);
     boolean modificaProdotto(Prodotto prodotto);
 
+    boolean modificaValutazioneMediaProdotto(Prodotto prodotto);
 }

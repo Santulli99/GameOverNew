@@ -190,7 +190,7 @@
 
     if(er==true){
 
-        JSalertWarning( "Hey, sembra che alcuni dati  corrispondano a un model.dao.account già esistente.");
+        JSalertWarning( "Hey, sembra che alcuni dati  corrispondano a un account già esistente.");
     }
 
 </script>

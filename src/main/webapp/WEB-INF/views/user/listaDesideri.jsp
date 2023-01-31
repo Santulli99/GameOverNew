@@ -149,7 +149,6 @@
                                 valutazioneChecked(${prodotto.valutazioneMedia}, ${prodotto.id});
                             </script>
                         </div>
-                        <div><p>totali valutazioni </p></div>
                     </div>
                     <div id="prezzo">
 

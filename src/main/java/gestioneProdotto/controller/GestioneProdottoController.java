@@ -166,6 +166,7 @@ public class GestioneProdottoController extends HttpServlet {
                 request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("recensioni", reviews);
                 request.setAttribute("prodotto", prodotto);
+                request.setAttribute("size",reviews.size());
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                 dispatcher.forward(request, response);
                 break;

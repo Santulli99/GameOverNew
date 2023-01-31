@@ -1,8 +1,10 @@
 package recensione.controller;
 
 import gestioneProdotto.service.GestioneProdottoServiceImp;
+import listaDesideri.service.ListaDesideriServiceImp;
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
+import model.entity.ListaDesideri;
 import model.entity.Prodotto;
 import model.entity.Review;
 import recensione.service.RecensioneServiceImp;
@@ -29,7 +31,7 @@ public class RecensioneController extends HttpServlet {
     boolean successo=false;
     private SqlProductDao productDao=new SqlProductDao();
     private GestioneProdottoServiceImp gestioneProdottoServiceImp=new GestioneProdottoServiceImp();
-
+    private ListaDesideriServiceImp listaDesideriServiceImp=new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp=new RecensioneServiceImp();
     public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
@@ -57,6 +59,12 @@ public class RecensioneController extends HttpServlet {
                     if(account.getId()==reviews.get(i).getAccount().getId())
                         controllo=true;
                 }
+                boolean aggiunto = false;
+                ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                if (listaDesideri.containsListaDesideri(prodotto)) {
+                    aggiunto = true;
+                }
+                request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("controllo",controllo);
                 request.setAttribute("successo", successo);
                 request.setAttribute("prodotto",prodotto);
@@ -90,6 +98,12 @@ public class RecensioneController extends HttpServlet {
                     if(account.getId()==reviews.get(i).getAccount().getId())
                         controllo1=true;
                 }
+                boolean aggiunto1 = false;
+                ListaDesideri listaDesideri1 = listaDesideriServiceImp.getListaDesideri(account);
+                if (listaDesideri1.containsListaDesideri(prodotto)) {
+                    aggiunto1 = true;
+                }
+                request.setAttribute("aggiunto", aggiunto1);
                 request.setAttribute("controllo",controllo1);
                 request.setAttribute("recensioni", reviews);
                 request.setAttribute("successo", successo);

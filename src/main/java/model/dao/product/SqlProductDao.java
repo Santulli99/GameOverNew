@@ -264,7 +264,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     public boolean updateProduct(Prodotto prodotto) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query = "UPDATE product SET descrizione=?,prezzo=?,nome=? WHERE id_prodotto=?;";
+            String query = "UPDATE product SET descrizione=?,prezzo=?,nome=?, WHERE id_prodotto=?;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, prodotto.getDescription());
@@ -293,6 +293,20 @@ public class SqlProductDao implements  ProductDao<SQLException>{
             }
         }
 
+    }
+
+    @Override
+    public boolean updateProductValuation(Prodotto prodotto) throws SQLException {
+        try(Connection connection=SqlDao.getConnection()) {
+            String query = "UPDATE product SET valutazione_media=? WHERE id_prodotto=?;";
+
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setDouble(1, prodotto.getValutazioneMedia());
+                ps.setDouble(2, prodotto.getId());
+                int rows = ps.executeUpdate();
+                return rows == 1;
+            }
+        }
     }
 
     @Override

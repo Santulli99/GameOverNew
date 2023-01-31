@@ -255,6 +255,7 @@
                             document.getElementById("aa7").className = "fa fa-heart checked";
                             document.getElementById("aa7").removeAttribute("href");
                         }
+
                     </script>
                     <script defer>
                         var veri =${verifica};
@@ -291,7 +292,9 @@
             <div class="descrizione">
                 <h3>Recensioni</h3>
                 <c:forEach items="${recensioni}" var="recensione">
-                    <div style="border:solid 2px black">
+
+                    <div id="val1" style="border:solid 2px black">
+                        <p><b>${recensione.titolo}</b></p>
                         <p>${recensione.descrizione}</p>
                         <p>
                         <div style="width: 50%" id="${recensione.account.id}">
@@ -306,6 +309,12 @@
                         </div>
                         </p>
                     </div>
+                    <script>
+                        var i=${size};
+                        if(i==0){
+                            document.getElementById("val1").innerHTML="Non ci sono recensioni";
+                        }
+                    </script>
                 </c:forEach>
             </div>
 

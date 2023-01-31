@@ -138,4 +138,13 @@ public class GestioneProdottoServiceImp implements GestioneProdottoService{
         }
         return false;
     }
+    public boolean modificaValutazioneMediaProdotto(Prodotto prodotto){
+        try {
+            if(sqlProductDao.updateProductValuation(prodotto))
+                return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }
