@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
     <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
@@ -163,13 +162,12 @@
 
 </style>
 
-
 </head>
 <body>
 <script>
 
-    var suc1=${successo};
-    if(suc1==true) {
+    var suc1 =${successo};
+    if (suc1 == true) {
         JSalertSuccess("Recensione effettuata con successo!");
     }
 
@@ -240,10 +238,10 @@
                         <button id="aa5" class="button">Aggiungi Recensione</button>
                     </a>
                     <script>
-                        var controllo=${controllo};
-                        if(controllo){
-                            document.getElementById("aa20").setAttribute("href","${pageContext.request.contextPath}/RecensioneController/modificaRecensione?id=${prodotto.id}");
-                            document.getElementById("aa5").innerHTML="Modifica Recensione";
+                        var controllo =${controllo};
+                        if (controllo) {
+                            document.getElementById("aa20").setAttribute("href", "${pageContext.request.contextPath}/RecensioneController/modificaRecensione?id=${prodotto.id}");
+                            document.getElementById("aa5").innerHTML = "Modifica Recensione";
                         }
                     </script>
                     <a id="aa7"
@@ -310,9 +308,9 @@
                         </p>
                     </div>
                     <script>
-                        var i=${size};
-                        if(i==0){
-                            document.getElementById("val1").innerHTML="Non ci sono recensioni";
+                        var i =${size};
+                        if (i == 0) {
+                            document.getElementById("val1").innerHTML = "Non ci sono recensioni";
                         }
                     </script>
                 </c:forEach>
