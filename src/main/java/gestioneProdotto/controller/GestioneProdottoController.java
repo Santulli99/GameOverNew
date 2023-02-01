@@ -137,9 +137,10 @@ public class GestioneProdottoController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
-                System.out.println(reviews.size());
+
                 request.setAttribute("recensioni1", reviews);
                 request.setAttribute("prodotto", prodotto);
+                request.setAttribute("size",reviews.size());
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/prodottoguest.jsp");
                 dispatcher.forward(request, response);
                 break;

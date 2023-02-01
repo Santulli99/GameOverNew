@@ -159,6 +159,12 @@
         margin-bottom: 10px;
     }
 
+    #NoRecensioni{
+        font-size: 20px;
+        text-align: center;
+        font-style: italic;
+    }
+
 
 </style>
 
@@ -170,7 +176,6 @@
     if (suc1 == true) {
         JSalertSuccess("Recensione effettuata con successo!");
     }
-
 </script>
 
 <!-- header -->
@@ -288,8 +293,16 @@
             </div>
 
             <div class="descrizione">
-                <h3>Recensioni</h3>
+                <h3>RECENSIONI</h3>
+                <p id="NoRecensioni"></p>
+                <script>
+                    var i =${size};
+                    if (i == 0) {
+                        document.getElementById("NoRecensioni").innerHTML="Non ci sono recensioni";
+                    }
+                </script>
                 <c:forEach items="${recensioni}" var="recensione">
+
 
                     <div id="val1" style="border:solid 2px black">
                         <p><b>${recensione.titolo}</b></p>
@@ -307,12 +320,7 @@
                         </div>
                         </p>
                     </div>
-                    <script>
-                        var i =${size};
-                        if (i == 0) {
-                            document.getElementById("val1").innerHTML = "Non ci sono recensioni";
-                        }
-                    </script>
+
                 </c:forEach>
             </div>
 

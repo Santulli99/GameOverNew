@@ -68,15 +68,16 @@ public class ListaDesideriController extends HttpServlet {
                 ArrayList<Prodotto> prodotti=listaDesideri.getProdotti();
                 for(int i=0;i<prodotti.size();i++){
                     reviews=recensioneServiceImp.cercaRecensioniPerProdotto(prodotti.get(i));
-                    double valutazioneTotale=0;
-                    for(int j=0;j<reviews.size();j++){
-                        valutazioneTotale+=reviews.get(j).getValutazione();
+                    if(reviews.size()>0){
+                        double valutazioneTotale=0;
+                        for(int j=0;j<reviews.size();j++){
+                            valutazioneTotale+=reviews.get(j).getValutazione();
+                        }
+                        double valutazioneMedia=valutazioneTotale/reviews.size();
+                        prodotti.get(i).setValutazioneMedia(valutazioneMedia);
+                        gestioneProdottoServiceImp.modificaValutazioneMediaProdotto(prodotti.get(i));
                     }
-                    double valutazioneMedia=valutazioneTotale/reviews.size();
-                    prodotti.get(i).setValutazioneMedia(valutazioneMedia);
-                    gestioneProdottoServiceImp.modificaValutazioneMediaProdotto(prodotti.get(i));
                 }
-
                 listaDesideri.setProducts(prodotti);
                 request.setAttribute("lista", listaDesideri);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/listaDesideri.jsp");

@@ -54,11 +54,12 @@ public class RecensioneServiceImp implements RecensioneService {
     @Override
     public ArrayList<Review> cercaRecensioniPerProdotto(Prodotto prodotto) {
         try {
-            recensioni=reviewDao.searchAllReviewWithProduct(prodotto.getId());
+            if((recensioni=reviewDao.searchAllReviewWithProduct(prodotto.getId()))!=null)
+                return recensioni;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return recensioni;
+        return null;
     }
 
     @Override

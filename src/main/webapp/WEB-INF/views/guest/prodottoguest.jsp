@@ -132,9 +132,15 @@
             font-size: 18px;
             color: #8b8a8a;
             font-style: italic;
-
-
         }
+        #NoRecensioni{
+            font-size: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+
+
+
     </style>
 
 
@@ -206,7 +212,14 @@
 
             <!-- div per le recensioni  -->
             <div class="descrizione">
-                <h3>Recensioni</h3>
+                <h3>RECENSIONI</h3>
+                <p id="NoRecensioni"></p>
+                <script>
+                    var i =${size};
+                    if (i == 0) {
+                        document.getElementById("NoRecensioni").innerHTML="Non ci sono recensioni";
+                    }
+                </script>
                 <c:forEach items="${recensioni1}" var="recensione">
                     <div style="border:solid 2px black">
                         <p><b>${recensione.titolo}</b></p>
