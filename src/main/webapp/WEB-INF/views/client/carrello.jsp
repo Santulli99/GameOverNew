@@ -70,7 +70,7 @@
         </div>
 
         <div id="a3">
-          <a href="${pageContext.request.contextPath}/CartServlet/removeCart?id=${prodotto.item.id}">rimuovi</a>
+          <a href="${pageContext.request.contextPath}/GestioneAcquistiController/removeCart?id=${prodotto.item.id}">rimuovi</a>
           <p>prezzo: ${prodotto.item.price}&euro;</p>
         </div>
 
@@ -91,7 +91,7 @@
 
    <div id="a7">
      <a href="${pageContext.request.contextPath}/HomePageController/homePageUtent"><button class="button">continua a navigare</button></a>
-     <a href="${pageContext.request.contextPath}/OrderServlet/createOrder"><button class="button">Procedi all'acquisto</button></a>
+     <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showAcquisto"><button class="button">Procedi all'acquisto</button></a>
    </div>
 
 </div>

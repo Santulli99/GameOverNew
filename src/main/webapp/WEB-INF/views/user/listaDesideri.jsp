@@ -99,6 +99,7 @@
 
         a {
             font-size: 20px;
+
         }
 
 
@@ -132,7 +133,8 @@
             <div id="prodottoDesiderato">
 
                 <div id="cover">
-                    <img style="border-radius: 10px;" src="${pageContext.request.contextPath}/cover/${prodotto.cover}"></div>
+                    <img style="border-radius: 10px;" src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
+                </div>
                 <div id="descrizione">
 
                     <div id="titologioco">
@@ -164,14 +166,30 @@
 
                 <div id="bottoni">
 
-                    <a href="${pageContext.request.contextPath}/AccountServlet/utente">
-                        <button class="button">aggiungi al carrello</button>
+
+                    <a id="a${prodotto.id}" style="margin-left: 100px"
+                       href="${pageContext.request.contextPath}/GestioneAcquistiController/addCart?id=${prodotto.id}">
+                        <button id="button${prodotto.id}" class="button">aggiungi al carrello</button>
                     </a>
+                    <c:forEach items="${prodottiNelCarrello}" var="prodotto1">
+                        <c:set var="valore" value="${prodotto.id}"></c:set>
+                        <c:if test="${prodotto1.id ==valore}">
+
+                            <script>
+                                document.getElementById("a${prodotto.id}").setAttribute("href", "");
+                                document.getElementById("a${prodotto.id}").innerHTML="prodotto gia nel carrello";
+                                document.getElementById("a${prodotto.id}").style.textDecoration="none";
+                            </script>
+
+                        </c:if>
+
+                    </c:forEach>
                     <a href="${pageContext.request.contextPath}/ListaDesideriController/rimuoviListaDesideri?id=${prodotto.id}">
                         <button class="button">rimuovi</button>
                     </a>
 
                 </div>
+
 
             </div>
 

@@ -1,5 +1,6 @@
 import autenticazione.service.AutenticazioneService;
 import autenticazione.service.AutenticazioneServiceImp;
+import gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.dao.cart.SqlCartDao;
 import model.dao.order.SqlOrderDao;
@@ -30,11 +31,13 @@ public class HomePageController extends HttpServlet {
     private SqlProductDao productDao = new SqlProductDao();
 
     private SqlOrderDao orderDao = new SqlOrderDao();
+    private Cart cart = new Cart();
 
     private SqlCartDao cartDao = new SqlCartDao();
     private SqlListaDesideriDao wishlistDao = new SqlListaDesideriDao();
     private Account account = new Account();
     private AutenticazioneService autenticazioneService = new AutenticazioneServiceImp();
+    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
 
     public void init() throws ServletException {
         super.init();
@@ -124,14 +127,8 @@ public class HomePageController extends HttpServlet {
 
                 break;
             case "/homePageUtent":
-                Account account = (Account) session.getAttribute("account");
-                //realizzare carrello
-                Cart cart = new Cart();
-                try {
-                    cart = cartDao.searchCartWithAccount(account); /*mettere come service*/
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                account = (Account) request.getSession(false).getAttribute("account");
+                cart = gestioneAcquistiServiceImp.getCart(account);
                 if (cart != null) {
                     request.getSession(false).setAttribute("carrello", cart);
                     request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);

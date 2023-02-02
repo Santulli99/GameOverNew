@@ -49,7 +49,7 @@ public class SqlCartDao implements CartDao {
     @Override
     public Cart searchCartWithAccount(Account account) throws Exception {
         try (Connection connection = SqlDao.getConnection()) {
-            String query = "SELECT * FROM  product,cart where id_cliente=?  and product.id_prodotto=cart.id_prodotto;";
+            String query = "SELECT * FROM  product AS pro,cart where id_cliente=?  and pro.id_prodotto=cart.id_prodotto;";
 
             try (PreparedStatement ps1 = connection.prepareStatement(query)) {
                 ps1.setInt(1, account.getId());

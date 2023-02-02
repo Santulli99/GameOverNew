@@ -394,6 +394,15 @@ function valutazioneChecked(valutazione,id){
         }
 }
 
+function controlloProdotti(prodotti,id){
+    var i;
+    for (i = 0; i < prodotti.length; i++) {
+        if (prodotti[i].id ==id) {
+            document.getElementById("a40").setAttribute("href", "");
+            document.getElementById("button40").innerHTML="prodotto gia nel carrello";
+        }
+    }
+}
 
 
 /** validare form **/
