@@ -206,7 +206,7 @@
                 </div>
 
                 <div id="a7">
-                    <a href="${pageContext.request.contextPath}/OrderServlet/showOrders"><button class="button">continua a navigare</button></a>
+                    <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showOrders"><button class="button">continua a navigare</button></a>
                 </div>
 
             </div>

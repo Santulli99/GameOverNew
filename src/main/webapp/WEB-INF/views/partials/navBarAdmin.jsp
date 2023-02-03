@@ -42,7 +42,7 @@
                         <h4 >Ordini</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/OrderServlet/showOrders">Visualizza Ordini </a>
+                        <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showOrders">Visualizza Ordini </a>
                     </li>
 
 

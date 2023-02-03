@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <jsp:include page="/WEB-INF/views/partials/head.jsp">
-        <jsp:param name="title" value="Login"/>
+        <jsp:param name="title" value="Pagamento"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
 
@@ -33,12 +33,12 @@
 <body>
 
 
-<jsp:include page="/WEB-INF/views/partials/headerGuest.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/partials/headerUtent.jsp"></jsp:include>
 
 
 <!-- barra di navigazione  -->
 
-<jsp:include page="/WEB-INF/views/partials/navBarGuest.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/partials/navBarUtent.jsp"></jsp:include>
 
 
 <aside class="containerBackground">
@@ -66,7 +66,7 @@
             <input type="text" name="cvc" id="CvcCarta" placeholder="CVC" required>
             <br>
             <p></p>
-            <a href="${pageContext.request.contextPath}/GestioneAcquistiController/">
+            <a href="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder">
                 <button class="button" type="submit">conferma pagamento</button>
             </a>
         </div>

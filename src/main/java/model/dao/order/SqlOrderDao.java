@@ -10,9 +10,10 @@ import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.sql.Date;
+import java.util.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class  SqlOrderDao implements OrderDao<SQLException>{
 
@@ -158,15 +159,15 @@ public class  SqlOrderDao implements OrderDao<SQLException>{
 
     @Override
     public boolean createOrder(Order order) throws SQLException {
+
         try(Connection connection=SqlDao.getConnection()) {
             String query1 = "INSERT INTO orders(data_ordine, n_prodotti, id_cliente) VALUES (?,?,?);";
             String query2 = "INSERT INTO order_product(id_ordine, id_prodotto) VALUES (?,?);";
-
             connection.setAutoCommit(false);
 
          try( PreparedStatement ps1 = connection.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS)) {
             // PreparedStatement psAssoc = connection.prepareStatement(query2);
-
+            System.out.println("Data nella query:"+Date.valueOf(order.getDate()));
              ps1.setDate(1, Date.valueOf(order.getDate()));
              ps1.setInt(2, order.getNum_product());
              ps1.setInt(3, order.getAccount().getId());

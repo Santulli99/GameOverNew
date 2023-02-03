@@ -30,7 +30,7 @@
                         <a href="${pageContext.request.contextPath}/GestioneUtenteController/showAccountUtent">Il mio profilo</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/OrderServlet/showOrdersUtent">I miei ordini</a>
+                        <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showOrdersUtent">I miei ordini</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/ListaDesideriController/visualizzaListaDesideri">Lista Desideri</a>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="carrello">
-                <a href="${pageContext.request.contextPath}/CartServlet/showCart">  <img src="${pageContext.request.contextPath}/icons/icons8-carrello-della-spesa-48.png">
+                <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showCart">  <img src="${pageContext.request.contextPath}/icons/icons8-carrello-della-spesa-48.png">
                 </a>
 
             </div>

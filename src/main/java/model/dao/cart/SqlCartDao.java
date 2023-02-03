@@ -71,4 +71,18 @@ public class SqlCartDao implements CartDao {
         }
 
     }
+
+    @Override
+    public boolean removeAllProductFromCart(int idCliente) throws Exception {
+        try (Connection connection = SqlDao.getConnection()) {
+            String query = "DELETE  FROM cart WHERE  id_cliente=?;";
+
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setInt(1, idCliente);
+
+                int rows = ps.executeUpdate();
+                return rows == 1;
+            }
+        }
+    }
 }
