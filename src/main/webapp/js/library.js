@@ -408,7 +408,37 @@ function controlloProdotti(prodotti,id){
 /** validare form **/
 
 
+function getCardType() {
 
+    var cardNumber=document.getElementById("NumCarta").value;
+    console.log(cardNumber);
+    var re = new RegExp("^4");
+    if (cardNumber.match(re) != null)
+        document.getElementById("tipoCarta").setAttribute("src","/GameOverNew_war_exploded/icons/icons8-visa-48(1).png");
+
+
+    re = new RegExp("^(5[1-5]|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)");
+    if (cardNumber.match(re) != null)
+        document.getElementById("tipoCarta").setAttribute("src","/GameOverNew_war_exploded/icons/icons8-logo-mastercard-48.png");
+
+
+    re = new RegExp("^5[0-9]{15}");
+    if (cardNumber.match(re) != null)
+        document.getElementById("tipoCarta").setAttribute("src","/GameOverNew_war_exploded/icons/icons8-jcb-48.png");
+
+
+    re = new RegExp("^3[47]");
+    if (cardNumber.match(re) != null)
+        document.getElementById("tipoCarta").setAttribute("src","/GameOverNew_war_exploded/icons/icons8-credit-card-48.png");
+
+
+    re = new RegExp("^(6011|65)");
+    if (cardNumber.match(re) != null)
+        document.getElementById("tipoCarta").setAttribute("src","/GameOverNew_war_exploded/icons/icons8-discover-48.png");
+
+    if(cardNumber =="")
+        document.getElementById("tipoCarta").setAttribute("src","");
+}
 
 
 

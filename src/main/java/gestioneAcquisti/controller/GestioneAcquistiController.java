@@ -84,10 +84,11 @@ public class GestioneAcquistiController extends HttpServlet {
                 break;
             case "/showAcquisto":
 
-                dispatcher= request.getRequestDispatcher("/WEB-INF/views/client/acquisto.jsp");
+                dispatcher= request.getRequestDispatcher("/WEB-INF/views/user/pagamento.jsp");
                 dispatcher.forward(request,response);
                 break;
         }
+
     }
 
     @Override
