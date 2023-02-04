@@ -20,8 +20,8 @@
 <body>
 <script>
     var acquisto=${acquistoFialed};
-    if(acquisto==true) {
-        JSalertWarning("Effettuare login o registrazione per continuare l'acquisto");
+    if(acquisto==false) {
+        JSalertWarning("Effettuare login o registrazione per poter acquistare prodotti");
     }
 
 </script>

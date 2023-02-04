@@ -117,9 +117,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/searchProductWithAjax":
                 prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
-                System.out.println("VALORE:" + stringa);
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                System.out.println("VALORE pattern:" + pattern);
                 prodotti = gestioneProdottoServiceImp.getAllProdotti();
 
                 for (int i = 0; i < prodotti.size(); i++) {

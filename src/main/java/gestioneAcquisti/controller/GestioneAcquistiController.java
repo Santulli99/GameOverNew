@@ -33,13 +33,13 @@ public class GestioneAcquistiController extends HttpServlet {
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
     private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
 
-    private ListaDesideri listaDesideri=new ListaDesideri();
-    private ListaDesideriServiceImp listaDesideriServiceImp=new ListaDesideriServiceImp();
+    private ListaDesideri listaDesideri = new ListaDesideri();
+    private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private Prodotto prodotto;
     private Account account;
     private Cart cart;
     private int idProdotto;
-    private Order order=new Order();
+    private Order order = new Order();
 
     private RequestDispatcher dispatcher;
     private ArrayList<Order> orders = new ArrayList<>();
@@ -63,6 +63,16 @@ public class GestioneAcquistiController extends HttpServlet {
                 request.getSession(false).setAttribute("carrello", cart);
                 request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
                 response.sendRedirect("/GameOverNew_war_exploded/GestioneAcquistiController/showCart");
+                break;
+
+            /**aggiungere prodotto al carrello per un utente non registrato(che lo porta alla pagina di login o registrazione)**/
+            case "/addCartGhost":
+
+                boolean acquistoFailed = false;
+                request.setAttribute("acquistoFialed", acquistoFailed);
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/login1.jsp");
+                dispatcher.forward(request, response);
+
                 break;
             /**aggiunta di un prodotto nel carrello dell'utente**/
             case "/addCart":
@@ -128,10 +138,10 @@ public class GestioneAcquistiController extends HttpServlet {
                 order.setCart(cart);
 
                 boolean successo = gestioneAcquistiServiceImp.creaOrdine(order);
-                listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
-                ArrayList<CartItem> prodottoArrayList=cart.getCartItems();
-                for(int i=0;i<prodottoArrayList.size();i++){
-                    for(int j=0;j<listaDesideri.getProdotti().size();j++) {
+                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                ArrayList<CartItem> prodottoArrayList = cart.getCartItems();
+                for (int i = 0; i < prodottoArrayList.size(); i++) {
+                    for (int j = 0; j < listaDesideri.getProdotti().size(); j++) {
                         if (listaDesideri.getProdotti().get(j).getId() == (prodottoArrayList.get(i).getItem().getId())) {
                             listaDesideriServiceImp.eliminaProdottoListaDesideri(listaDesideri.getProdotti().get(j), account);
                         }
@@ -186,7 +196,7 @@ public class GestioneAcquistiController extends HttpServlet {
                 }
                 request.setAttribute("order", order);
                 request.setAttribute("totale", Math.round(totale * 100.0) / 100.0);
-                if(account.isAdmin()){
+                if (account.isAdmin()) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showOrder.jsp");
                     dispatcher.forward(request, response);
                 }
@@ -232,8 +242,8 @@ public class GestioneAcquistiController extends HttpServlet {
             /**vengono visualizzati gli ordini in base a data e user del cliente(ADMIN con Ajax)**/
             case "/showOrdersWithAjax":
 
-                String valore =request.getParameter("valore");
-                orders=gestioneAcquistiServiceImp.getAllOrdiniConAccount();
+                String valore = request.getParameter("valore");
+                orders = gestioneAcquistiServiceImp.getAllOrdiniConAccount();
 
                 switch (valore) {
 
@@ -259,6 +269,7 @@ public class GestioneAcquistiController extends HttpServlet {
                         break;
                 }
                 break;
+
         }
 
 
