@@ -1,11 +1,12 @@
 package gestioneAcquisti.controller;
 
-import gestioneAcquisti.service.GestioneAcquistiService;
+import gestioneAcquisti.OrdinareCliente;
+import gestioneAcquisti.OrdinareDataCrescente;
+import gestioneAcquisti.OrdinareDataDecrescente;
+import com.google.gson.Gson;
 import gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
-import listaDesideri.service.ListaDesideriService;
 import listaDesideri.service.ListaDesideriServiceImp;
-import model.dao.product.SqlProductDao;
 import model.entity.Account;
 import model.entity.ListaDesideri;
 import model.entity.Order;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 @WebServlet(name = "GestioneAcquistiController", value = "/GestioneAcquistiController/*")
 public class GestioneAcquistiController extends HttpServlet {
@@ -118,7 +120,7 @@ public class GestioneAcquistiController extends HttpServlet {
                 account = (Account) request.getSession(false).getAttribute("account");
                 int prodotti = (int) request.getSession(false).getAttribute("quantity");
 
-                LocalDate data = LocalDate.now();
+                LocalDate data = LocalDate.now().plusDays(1);
                 order = new Order();
                 order.setDate(data);
                 order.setNum_product(prodotti);
@@ -127,7 +129,6 @@ public class GestioneAcquistiController extends HttpServlet {
 
                 boolean successo = gestioneAcquistiServiceImp.creaOrdine(order);
                 listaDesideri=listaDesideriServiceImp.getListaDesideri(account);
-               // ArrayList<Prodotto> prodottoArrayList=order.getProducts();
                 ArrayList<CartItem> prodottoArrayList=cart.getCartItems();
                 for(int i=0;i<prodottoArrayList.size();i++){
                     for(int j=0;j<listaDesideri.getProdotti().size();j++) {
@@ -172,8 +173,9 @@ public class GestioneAcquistiController extends HttpServlet {
                 }
                 break;
 
-            /**si visualizza il singolo ordine(UTENTE)**/
-            case "/showOrderUtent":
+            /**si visualizza il singolo ordine(UTENTE,ADMIN)**/
+            case "/showOrder":
+                account = (Account) request.getSession(false).getAttribute("account");
                 order = gestioneAcquistiServiceImp.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
                 double totale = 0;
                 for (int i = 0; i < order.getProducts().size(); i++) {
@@ -184,6 +186,10 @@ public class GestioneAcquistiController extends HttpServlet {
                 }
                 request.setAttribute("order", order);
                 request.setAttribute("totale", Math.round(totale * 100.0) / 100.0);
+                if(account.isAdmin()){
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showOrder.jsp");
+                    dispatcher.forward(request, response);
+                }
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/orderUtent.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -222,6 +228,36 @@ public class GestioneAcquistiController extends HttpServlet {
                 request.setAttribute("elimina", elimina);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/allOrdersUtent.jsp");
                 dispatcher.forward(request, response);
+                break;
+            /**vengono visualizzati gli ordini in base a data e user del cliente(ADMIN con Ajax)**/
+            case "/showOrdersWithAjax":
+
+                String valore =request.getParameter("valore");
+                orders=gestioneAcquistiServiceImp.getAllOrdiniConAccount();
+
+                switch (valore) {
+
+                    case "data crescente":
+                        Collections.sort(orders, new OrdinareDataCrescente());
+                        String json = new Gson().toJson(orders);
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println(json);
+                        break;
+
+                    case "data decrescente":
+                        Collections.sort(orders, new OrdinareDataDecrescente());
+                        String json1 = new Gson().toJson(orders);
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println(json1);
+                        break;
+
+                    case "cliente":
+                        Collections.sort(orders, new OrdinareCliente());
+                        String json2 = new Gson().toJson(orders);
+                        response.setContentType("text/plain;charset=UTF-8");
+                        response.getWriter().println(json2);
+                        break;
+                }
                 break;
         }
 

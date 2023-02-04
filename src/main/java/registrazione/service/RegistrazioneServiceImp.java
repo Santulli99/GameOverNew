@@ -114,7 +114,7 @@ public class RegistrazioneServiceImp implements RegistrazioneService {
             dataClient.setLastName(cognome);
             dataClient.setCell(telefono);
             dataClient.setCity(cittaNascita);
-            dataClient.setDate(dataNascita);
+            dataClient.setDate(dataNascita.plusDays(1));
             dataClient.setCf(cf);
             try {
                 sqlDataClientDao.createDataClient(dataClient);

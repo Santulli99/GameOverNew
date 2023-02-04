@@ -261,7 +261,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setProductName(request.getParameter("nome"));
                 prodotto.setCategory(category);
                 prodotto.setPlatform(platform);
-                prodotto.setDate(LocalDate.parse(request.getParameter("data")));
+                prodotto.setDate(LocalDate.parse(request.getParameter("data")).plusDays(1));
                 prodotto.setDescription(request.getParameter("description"));
                 prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
                 prodotto.setValutazioneMedia(0);
@@ -270,7 +270,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setCover(fileName);
                 if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
                     InputStream inputStream = filePart.getInputStream();
-                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
                     boolean success = true;
                     request.setAttribute("success", success);

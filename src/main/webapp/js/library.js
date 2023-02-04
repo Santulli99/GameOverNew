@@ -293,7 +293,7 @@ function  ricercaOrdiniAjax(valore){
 
         }
     };
-    xhr.open("GET","/GameOverNew_war_exploded/OrderServlet/showOrdersWithAjax?valore="+valore,true);
+    xhr.open("GET","/GameOverNew_war_exploded/GestioneAcquistiController/showOrdersWithAjax?valore="+valore,true);
     xhr.send();
 
 }
@@ -342,7 +342,7 @@ function  ricercaOrdiniXhrAjax(xhr,valore) {
             "                            <div><p> " + data[i].date.day+"/"+data[i].date.month+"/"+data[i].date.year+ " </p></div>\n" +
             "                            <div><p> " + data[i].num_product + " </p></div>\n" +
             "                             <div><p>"+ data[i].account.username+" </p></div>  \n"    +
-            "                            <div><a href=\"/GameOverNewNew_war_exploded/OrderServlet/showOrderAdmin?id=" + data[i].id + "\"><button>DETTAGLIO ORDINE</button></a></div>\n" +
+            "                            <div><a href=\"/GameOverNewNew_war_exploded/GestioneAcquistiController/showOrderAdmin?id=" + data[i].id + "\"><button>DETTAGLIO ORDINE</button></a></div>\n" +
             "                        </li>"
 
 

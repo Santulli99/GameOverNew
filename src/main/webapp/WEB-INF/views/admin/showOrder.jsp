@@ -166,13 +166,13 @@
         <div class="generalOrder">
             <div class="ordTitolo">
 
-                <p>ORDINE n.${orderAdmin.id}</p>
+                <p>ORDINE n.${order.id}</p>
 
             </div>
 
             <!--lista prodotti nel carrello -->
 
-            <c:forEach items="${orderAdmin.prodottos}" var="prodotto">
+            <c:forEach items="${order.products}" var="prodotto">
 
             <div class="headerOrd">
 

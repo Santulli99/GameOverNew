@@ -1,4 +1,4 @@
-package Servlet;
+package gestioneAcquisti;
 
 import model.entity.Order;
 

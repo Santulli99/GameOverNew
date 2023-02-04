@@ -164,7 +164,7 @@
                         <p> <b>DATA: </b> <br>${order.dataString}</p>
                         <p> <b>NUM_PRODOTTI:</b> <br> ${order.num_product} </p>
 
-                      <div>  <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showOrderUtent?id=${order.id}"><button >VISUALIZZA</button></a>
+                      <div>  <a href="${pageContext.request.contextPath}/GestioneAcquistiController/showOrder?id=${order.id}"><button >VISUALIZZA</button></a>
                         <a href="${pageContext.request.contextPath}/GestioneAcquistiController/removeOrderUtent?id=${order.id}"><button >ELIMINA</button></a></div>
 
                     </li>

@@ -643,7 +643,7 @@ function  checkEmailSignAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOverNew_war_exploded/AccountServlet/checkEmailSign?email="+email,true);
+    xhr.open("GET","/GameOverNew_war_exploded/RegistrazioneController/checkEmailSign?email="+email,true);
     xhr.send();
 
 }
@@ -669,7 +669,7 @@ function  checkEmailAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/AccountServlet/checkEmail?email="+email,true);
+    xhr.open("GET","/GameOverNew_war_exploded/GestioneUtenteController/checkEmail?email="+email,true);
     xhr.send();
 
 }
@@ -695,7 +695,7 @@ function  checkTelSignAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/DataClientServlet/checkTelSign?numeroTel="+tel,true);
+    xhr.open("GET","/GameOverNew_war_exploded/GestioneUtenteController/checkTelSign?numeroTel="+tel,true);
     xhr.send();
 
 }
@@ -724,7 +724,7 @@ function  checkTelAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/DataClientServlet/checkTel?numeroTel="+tel,true);
+    xhr.open("GET","/GameOverNew_war_exploded/GestioneUtenteController/checkTel?numeroTel="+tel,true);
     xhr.send();
 
 
@@ -751,7 +751,7 @@ function  checkCfSignAjax(){
             }
         }
     };
-    xhr.open("GET","/GameOver_war_exploded/DataClientServlet/checkCFSign?cf="+cf,true);
+    xhr.open("GET","/GameOverNew_war_exploded/GestioneUtenteController/checkCFSign?cf="+cf,true);
     xhr.send();
 
 }
