@@ -206,17 +206,12 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto = gestioneProdottoServiceImp.getProdottoPerId(id);
                 eliminato = gestioneProdottoServiceImp.rimuoviProdotto(id);
                 if (eliminato) {
-                    File file = new File("" + prodotto.getCover());
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
                     file.delete();
-                    request.setAttribute("delete", eliminato);
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
-                    dispatcher.forward(request, response);
-                } else {
-                    request.setAttribute("delete", eliminato);
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
-                    dispatcher.forward(request, response);
                 }
-
+                request.setAttribute("delete", eliminato);
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
+                dispatcher.forward(request, response);
                 break;
 
             case "/searchProductAdmin":
