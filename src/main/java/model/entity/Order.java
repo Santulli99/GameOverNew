@@ -18,7 +18,7 @@ public class Order {
 
 
     private String dataString;
-    private ArrayList<Prodotto> prodottos =new ArrayList<>();
+    private ArrayList<Prodotto> products =new ArrayList<>();
     private Cart cart;
 
 
@@ -28,8 +28,8 @@ public class Order {
     }
 
     public double getTotal() {
-        for(int i = 0; i< prodottos.size(); i++){
-            total+= prodottos.get(i).getPrice();
+        for(int i = 0; i< products.size(); i++){
+            total+= products.get(i).getPrice();
         }
         return total;
     }
@@ -79,11 +79,11 @@ public class Order {
     }
 
     public ArrayList<Prodotto> getProducts() {
-        return prodottos;
+        return products;
     }
 
     public void setProducts(ArrayList<Prodotto> prodottos) {
-        this.prodottos = prodottos;
+        this.products = prodottos;
     }
 
     public Cart getCart() {

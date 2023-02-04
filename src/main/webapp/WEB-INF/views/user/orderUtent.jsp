@@ -176,7 +176,7 @@
 
             <!--lista prodotti nel carrello -->
 
-            <c:forEach items="${order.prodottos}" var="prodotto">
+            <c:forEach items="${order.products}" var="prodotto">
 
             <div class="headerOrd">
 
