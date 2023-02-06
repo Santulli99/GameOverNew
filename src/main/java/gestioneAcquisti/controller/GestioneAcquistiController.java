@@ -124,41 +124,6 @@ public class GestioneAcquistiController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
 
-            /**si crea l'ordine**/
-            case "/createOrder":
-                cart = (Cart) request.getSession(false).getAttribute("carrello");
-                account = (Account) request.getSession(false).getAttribute("account");
-                int prodotti = (int) request.getSession(false).getAttribute("quantity");
-
-                LocalDate data = LocalDate.now().plusDays(1);
-                order = new Order();
-                order.setDate(data);
-                order.setNum_product(prodotti);
-                order.setAccount(account);
-                order.setCart(cart);
-
-                boolean successo = gestioneAcquistiServiceImp.creaOrdine(order);
-                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
-                ArrayList<CartItem> prodottoArrayList = cart.getCartItems();
-                for (int i = 0; i < prodottoArrayList.size(); i++) {
-                    for (int j = 0; j < listaDesideri.getProdotti().size(); j++) {
-                        if (listaDesideri.getProdotti().get(j).getId() == (prodottoArrayList.get(i).getItem().getId())) {
-                            listaDesideriServiceImp.eliminaProdottoListaDesideri(listaDesideri.getProdotti().get(j), account);
-                        }
-                    }
-                }
-
-                gestioneAcquistiServiceImp.rimuoviAllProdottiDalCarrello(account.getId());
-                cart = gestioneAcquistiServiceImp.getCart(account);
-                request.getSession(false).setAttribute("carrello", cart);
-                request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
-                request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
-                request.setAttribute("successo", successo);
-                dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
-                dispatcher.forward(request, response);
-
-                break;
-
             /**si visualizzano tutti gli ordini(ADMIN)**/
             case "/showOrders":
                 orders = gestioneAcquistiServiceImp.getAllOrdiniConAccount();
@@ -281,6 +246,40 @@ public class GestioneAcquistiController extends HttpServlet {
         switch (path) {
 
             case "/":
+                break;
+            /**si crea l'ordine**/
+            case "/createOrder":
+                cart = (Cart) request.getSession(false).getAttribute("carrello");
+                account = (Account) request.getSession(false).getAttribute("account");
+                int prodotti = (int) request.getSession(false).getAttribute("quantity");
+
+                LocalDate data = LocalDate.now().plusDays(1);
+                order = new Order();
+                order.setDate(data);
+                order.setNum_product(prodotti);
+                order.setAccount(account);
+                order.setCart(cart);
+
+                boolean successo = gestioneAcquistiServiceImp.creaOrdine(order);
+                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                ArrayList<CartItem> prodottoArrayList = cart.getCartItems();
+                for (int i = 0; i < prodottoArrayList.size(); i++) {
+                    for (int j = 0; j < listaDesideri.getProdotti().size(); j++) {
+                        if (listaDesideri.getProdotti().get(j).getId() == (prodottoArrayList.get(i).getItem().getId())) {
+                            listaDesideriServiceImp.eliminaProdottoListaDesideri(listaDesideri.getProdotti().get(j), account);
+                        }
+                    }
+                }
+
+                gestioneAcquistiServiceImp.rimuoviAllProdottiDalCarrello(account.getId());
+                cart = gestioneAcquistiServiceImp.getCart(account);
+                request.getSession(false).setAttribute("carrello", cart);
+                request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
+                request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
+                request.setAttribute("successo", successo);
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
+                dispatcher.forward(request, response);
+
                 break;
 
         }

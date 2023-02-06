@@ -26,10 +26,11 @@
             color: #ee3124;
         }
 
-        .dataScadenza{
+        .dataScadenza {
             display: flex;
-            flex-flow:row nowrap;
+            flex-flow: row nowrap;
         }
+
     </style>
 
 </head>
@@ -52,40 +53,49 @@
 
         <div class="conteinerLogin">
 
-            <label class="label" for="inteCarta">Intestatario carta</label>
-            <input type="text" onblur="checkIntestatario()" name="intestatario" id="inteCarta" placeholder="Nome e Cognome" required>
-            <p id="pr1"></p>
-            <br>
+            <form action="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder" method="post">
+                <label class="label" for="inteCarta">Intestatario carta</label>
+                <input type="text" onblur="checkIntestatario()" name="intestatario" id="inteCarta"
+                       placeholder="Nome e Cognome" required>
+                <p id="pr1"></p>
+                <br>
 
-            <label class="label" for="NumCarta">Numero Carta </label>
-            <input type="text" onblur="checkNumeroCarta()" name="numeroCarta" id="NumCarta" onkeyup="getCardType()" placeholder="Numero Carta"
-                   required>
-            <p id="pr2"></p>
-            <div >
-                 <img  id="tipoCarta">
+                <label class="label" for="NumCarta">Numero Carta </label>
+                <input type="text" onblur="checkNumeroCarta()" name="numeroCarta" id="NumCarta" onkeyup="getCardType()"
+                       placeholder="Numero Carta" maxlength="16"
+                       required>
+                <p id="pr2"></p>
+                <div>
+                    <img id="tipoCarta">
 
-            </div>
-            <br>
-            <label class="label" for="annoCarta">Data scadenza carta </label>
-                <div onblur="checkDataScadenza()" class="dataScadenza">
-                <input type="text" maxlength="2" size="1" name="meseCarta" id="meseCarta" onblur="meseCheck()" placeholder="MM"  required>
-                    <b>&nbsp/&nbsp</b>
-                <input type="text" maxlength="4" size="3" name="annoCarta" id="annoCarta" placeholder="AAAA"  required>
                 </div>
-            <p id="pr3"></p>
+                <br>
+                <label class="label" for="annoCarta">Data scadenza carta </label>
 
-            <br>
-            <label class="label" for="CvcCarta">CVC/CVV </label>
-            <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC/CVV" required>
-            <p id="pr4"></p>
-            <br>
-            <p></p>
-            <a href="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder">
-                <button class="button" type="submit">conferma pagamento</button>
-            </a>
+                <div class="dataScadenza">
+                    <input type="text" maxlength="2" size="1" name="meseCarta" id="meseCarta" onblur="meseCheck0();meseCheck()"
+                           placeholder="MM" required>
+                    <b>&nbsp/&nbsp</b>
+                    <input type="text" maxlength="4" size="3" name="annoCarta" id="annoCarta" placeholder="AAAA" onblur="annoCheck()"
+                           required>
+
+                </div>
+                <p id="pr3"></p>
+                <p id="pr5"></p>
+
+                <br>
+                <label class="label" for="CvcCarta">CVC/CVV </label>
+                <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC/CVV" required>
+                <p id="pr4"></p>
+                <br>
+                <button class="button" id="confermaPagamento" type="submit" onclick="validateAcquisto()">conferma pagamento</button>
+
+
+            </form>
+
+
+
         </div>
-
-
     </section>
 </aside>
 

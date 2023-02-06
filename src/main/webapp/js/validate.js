@@ -612,55 +612,57 @@ function checkNumeroCarta(){
 }
 
 
-function meseCheck(){
+function meseCheck0(){
     var mese=document.getElementById("meseCarta").value;
     if(mese.length==1){
         document.getElementById("meseCarta").value="0"+mese;
     }
 }
 
-
-
-
-function checkDataScadenza(){
+function meseCheck(){
     var mese=document.getElementById("meseCarta").value;
-    var mese=document.getElementById("annoCarta").value;
-    var dataCarta=new Date();
-    dataCarta.setFullYear(anno);
-    dataCarta.setMonth(mese);
-    var dataOggi=new Date();
-    dataOggi.setFullYear(dataOggi.getFullYear());
-    dataOggi.setMonth(dataOggi.getMonth());
-    if((data == "") || (data == "undefined") || (mese>12) ){
-        document.getElementById("dateCarta").style.border="2px solid #ee3124";
-        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#ee3124";
-        document.getElementById("pr3").innerHTML="Inserire Data di Scadenza corretta";
-        document.getElementById("pr3").style.display="block";
-        return false;
-    }
-    else if((dataOggi<dataCarta)){
-        document.getElementById("dateCarta").style.outline="initial";
-        document.getElementById("dateCarta").style.border="";
-        document.getElementById("dateCarta").style.boxShadow="none";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#0a9a0d";
+    if(mese!= "" && mese <=12){
+        document.getElementById("meseCarta").style.outline="initial";
+        document.getElementById("meseCarta").style.border="";
+        document.getElementById("meseCarta").style.boxShadow="none";
+        document.getElementById("meseCarta").style.outline="1px solid";
+        document.getElementById("meseCarta").style.outlineColor="#0a9a0d";
         document.getElementById("pr3").style.display="none";
         return true;
-    }else{
-        document.getElementById("dateCarta").style.border="2px solid #ee3124";
-        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#ee3124";
-        document.getElementById("pr3").innerHTML="L'anno di scadenza della carta è nel passato.";
+    }
+    else{
+        document.getElementById("pr3").innerHTML="Mese non valido.";
+        document.getElementById("meseCarta").style.border="2px solid #ee3124";
+        document.getElementById("meseCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("meseCarta").style.outline="1px solid";
+        document.getElementById("meseCarta").style.outlineColor="#ee3124";
         document.getElementById("pr3").style.display="block";
         return false;
     }
-
 }
 
-
+function annoCheck(){
+    var anno=document.getElementById("annoCarta").value;
+    var data=new Date();
+    var annoAttuale=data.getFullYear();
+    if(anno>=annoAttuale){
+        document.getElementById("annoCarta").style.outline="initial";
+        document.getElementById("annoCarta").style.border="";
+        document.getElementById("annoCarta").style.boxShadow="none";
+        document.getElementById("annoCarta").style.outline="1px solid";
+        document.getElementById("annoCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr5").style.display="none";
+        return true;
+    }else{
+        document.getElementById("pr5").innerHTML="L'anno di scadenza della carta è nel passato.";
+        document.getElementById("annoCarta").style.border="2px solid #ee3124";
+        document.getElementById("annoCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("annoCarta").style.outline="1px solid";
+        document.getElementById("annoCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr5").style.display="block";
+        return false;
+    }
+}
 
 
 function  checkCvC(){
@@ -698,7 +700,15 @@ function  checkCvC(){
 }
 
 
+function validateAcquisto(){
+    if((checkIntestatario() && checkNumeroCarta() && meseCheck() && annoCheck() && checkCvC())==false){
+        document.getElementById("confermaPagamento").disabled=true;
+    }
+    else{
+        document.getElementById("confermaPagamento").disabled=false;
 
+    }
+}
 
 
 
