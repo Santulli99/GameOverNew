@@ -1,6 +1,7 @@
 package model.dao.order;
 
 
+import model.entity.Account;
 import model.entity.Order;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public interface OrderDao <E extends Exception > {
     boolean deleteOrder(Order order) throws E;
     ArrayList<Order> searchAllOrdersByAccount(int id_Account) throws E;
     ArrayList<Order> searchAllOrdersWithAccount() throws E;
+
+    ArrayList<Order> searchAllOrderWithProductsbyAccount(Account account) throws E;
     /** amministratore **/
     /** ricerca  ordini relativi al prodotto(nome)**/
 

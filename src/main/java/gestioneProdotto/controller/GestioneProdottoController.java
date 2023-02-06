@@ -152,10 +152,11 @@ public class GestioneProdottoController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
                 ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
-                orders=gestioneAcquistiServiceImp.getAllOrdiniDiUnAccount(account.getId());
+                orders=gestioneAcquistiServiceImp.searchAllOrderWithProductsbyAccount(account);
                 boolean presente=false;
                 for(int j=0;j<orders.size();j++){
                     ArrayList<Prodotto> prodottiArrayList=orders.get(j).getProducts();
+                    System.out.println(prodottiArrayList.size());
                     for(int z=0;z<prodottiArrayList.size();z++){
                         if(prodottiArrayList.get(z).getId()==prodotto.getId())
                             presente=true;
@@ -217,7 +218,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto = gestioneProdottoServiceImp.getProdottoPerId(id);
                 eliminato = gestioneProdottoServiceImp.rimuoviProdotto(id);
                 if (eliminato) {
-                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
+                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
                     file.delete();
                 }
                 request.setAttribute("delete", eliminato);
@@ -276,7 +277,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setCover(fileName);
                 if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
                     InputStream inputStream = filePart.getInputStream();
-                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
                     boolean success = true;
                     request.setAttribute("success", success);

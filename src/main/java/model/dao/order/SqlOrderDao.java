@@ -74,7 +74,41 @@ public class  SqlOrderDao implements OrderDao<SQLException>{
         }
     }
 
+    public ArrayList<Order> searchAllOrderWithProductsbyAccount(Account account) throws SQLException {
 
+        try(Connection connection=SqlDao.getConnection()) {
+
+            String query = "SELECT *  FROM orders AS ord,product AS pro,order_product AS op WHERE ord.id_cliente=? AND ord.id_ordine=op.id_ordine AND op.id_prodotto=pro.id_prodotto";
+
+            try(PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setInt(1,account.getId());
+                ResultSet rs = ps.executeQuery();
+
+                Order order = null;
+                OrderExtractor orderExtractor = new OrderExtractor();
+                Prodotto prodotto = null;
+                ProductExtractor productExtractor = new ProductExtractor();
+                HashMap<Integer, Order> hashMap = new LinkedHashMap();
+                while (rs.next()) {
+
+                    int id_ordine = rs.getInt("id_ordine");
+
+                    //relazione N:
+                    if (!hashMap.containsKey(id_ordine)) {
+                        order = orderExtractor.extract(rs);
+                        hashMap.put(id_ordine, order);
+                    }
+                    prodotto = productExtractor.extract(rs);
+                    hashMap.get(id_ordine).getProducts().add(prodotto);
+                }
+
+
+                return new ArrayList<>(hashMap.values());
+            }
+
+        }
+
+    }
 
     @Override
     public ArrayList<Order> searchAllOrderWithProducts() throws SQLException {

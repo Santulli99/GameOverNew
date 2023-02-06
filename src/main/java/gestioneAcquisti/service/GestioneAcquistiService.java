@@ -20,6 +20,7 @@ public interface GestioneAcquistiService {
      *
      * @return boolean
      */
+
     boolean rimuoviProdottoDalCarrello(int idCliente, int id_product);
     /**
      * firma del metodo che implementa la rimozione dei prodotti dal carrello
@@ -57,6 +58,11 @@ public interface GestioneAcquistiService {
      * @return ArrayList di ordini
      */
     ArrayList<Order> getAllOrdiniConAccount();
+
+
+    ArrayList<Order> searchAllOrderWithProductsbyAccount(Account account);
+
+
     /**
      * firma del metodo che restituisce tutti gli ordini di un Account
      * @param id int rappresenta l'id dell'acount

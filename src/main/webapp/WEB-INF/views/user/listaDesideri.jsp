@@ -167,7 +167,7 @@
                 <div id="bottoni">
 
 
-                    <a id="a${prodotto.id}" style="margin-left: 100px"
+                    <a id="a${prodotto.id}"
                        href="${pageContext.request.contextPath}/GestioneAcquistiController/addCart?id=${prodotto.id}">
                         <button id="button${prodotto.id}" class="button">aggiungi al carrello</button>
                     </a>
@@ -177,8 +177,9 @@
 
                             <script>
                                 document.getElementById("a${prodotto.id}").setAttribute("href", "");
-                                document.getElementById("a${prodotto.id}").innerHTML="prodotto gia nel carrello";
-                                document.getElementById("a${prodotto.id}").style.textDecoration="none";
+                                document.getElementById("button${prodotto.id}").innerHTML="prodotto nel carrello";
+                                document.getElementById("a${prodotto.id}").style.pointerEvents="none";
+                                document.getElementById("button${prodotto.id}").style.backgroundColor="#329542"
                             </script>
 
                         </c:if>

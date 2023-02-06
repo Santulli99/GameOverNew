@@ -82,6 +82,19 @@ public class GestioneAcquistiServiceImp implements GestioneAcquistiService {
     }
 
     @Override
+    public ArrayList<Order> searchAllOrderWithProductsbyAccount(Account account) {
+        ArrayList<Order> ordini=new ArrayList<>();
+        try {
+            if((ordini=orderDao.searchAllOrderWithProductsbyAccount(account))!=null)
+                return ordini;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+    @Override
     public ArrayList<Order> getAllOrdiniDiUnAccount(int id) {
         ArrayList<Order> ordini=new ArrayList<>();
         try {

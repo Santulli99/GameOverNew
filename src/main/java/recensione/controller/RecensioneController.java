@@ -64,11 +64,13 @@ public class RecensioneController extends HttpServlet {
                 if (listaDesideri.containsListaDesideri(prodotto)) {
                     aggiunto = true;
                 }
+                boolean presente=true;
                 request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("controllo",controllo);
                 request.setAttribute("successo", successo);
                 request.setAttribute("prodotto",prodotto);
                 request.setAttribute("recensioni", reviews);
+                request.setAttribute("presente",presente);
                 if(successo){
                     dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                     dispatcher.forward(request,response);
