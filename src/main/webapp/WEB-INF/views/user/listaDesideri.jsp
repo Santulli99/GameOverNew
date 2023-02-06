@@ -177,9 +177,12 @@
 
                             <script>
                                 document.getElementById("a${prodotto.id}").setAttribute("href", "");
-                                document.getElementById("button${prodotto.id}").innerHTML="prodotto nel carrello";
+                                document.getElementById("button${prodotto.id}").innerHTML="Prodotto nel carrello";
                                 document.getElementById("a${prodotto.id}").style.pointerEvents="none";
-                                document.getElementById("button${prodotto.id}").style.backgroundColor="#329542"
+                                document.getElementById("button${prodotto.id}").style.backgroundColor="#FFFFFF";
+                                document.getElementById("button${prodotto.id}").style.color="#000000";
+                                document.getElementById("button${prodotto.id}").style.border="none";
+                                document.getElementById("button${prodotto.id}").style.boxShadow="none";
                             </script>
 
                         </c:if>

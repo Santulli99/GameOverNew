@@ -30,10 +30,21 @@
             </div>
 
             <div class="carrello">
-                 <img id="img1"   src="${pageContext.request.contextPath}/icons/icons8-carrello-della-spesa-48.png">
+                 <img id="img1"  src="${pageContext.request.contextPath}/icons/icons8-carrello-della-spesa-48.png">
 
                 <script>
-                    document.getElementById("img1").onclick = function()  {JSalertWarning("Effettuare login o registrazione per visualizzare il carrello")};
+                    document.getElementById("img1").onclick = function() {
+                        swal({
+                            title: "Attenzione!!!",
+                            text: "Effettuare login o registrazione per visualizzare il carrello",
+                            icon: "warning",
+                            button: "Ok",
+                        }).then((value) => {
+                            if (value) {
+                                swal(location.replace("http://localhost:8080/GameOverNew_war_exploded/AutenticazioneController/login"));
+                            }
+                        });
+                    };
                 </script>
             </div>
 

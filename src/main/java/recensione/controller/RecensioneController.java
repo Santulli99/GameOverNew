@@ -105,6 +105,7 @@ public class RecensioneController extends HttpServlet {
                 if (listaDesideri1.containsListaDesideri(prodotto)) {
                     aggiunto1 = true;
                 }
+                request.setAttribute("presente",true);
                 request.setAttribute("aggiunto", aggiunto1);
                 request.setAttribute("controllo",controllo1);
                 request.setAttribute("recensioni", reviews);

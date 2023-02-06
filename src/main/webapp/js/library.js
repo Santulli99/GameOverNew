@@ -7,7 +7,7 @@ function  myFunction(){
 
 function  myFunction2(){
 
-    location.replace("http://localhost:8080/GameOver_war_exploded/AccountServlet/registrazione");
+    location.replace("http://localhost:8080/GameOverNew_war_exploded/AutenticazioneController/login");
 
 }
 
