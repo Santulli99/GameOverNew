@@ -612,28 +612,35 @@ function checkNumeroCarta(){
 }
 
 
+function meseCheck(){
+    var mese=document.getElementById("meseCarta").value;
+    if(mese.length==1){
+        document.getElementById("meseCarta").value="0"+mese;
+    }
+}
+
+
 
 
 function checkDataScadenza(){
-    var data=document.getElementById("dateCarta").value;
-    var mese=data.substring(0,2);
-    var anno=data.substring(3,7);
+    var mese=document.getElementById("meseCarta").value;
+    var mese=document.getElementById("annoCarta").value;
     var dataCarta=new Date();
     dataCarta.setFullYear(anno);
     dataCarta.setMonth(mese);
     var dataOggi=new Date();
     dataOggi.setFullYear(dataOggi.getFullYear());
     dataOggi.setMonth(dataOggi.getMonth());
-    if((data == "") || (data == "undefined")){
+    if((data == "") || (data == "undefined") || (mese>12) ){
         document.getElementById("dateCarta").style.border="2px solid #ee3124";
         document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
         document.getElementById("dateCarta").style.outline="1px solid";
         document.getElementById("dateCarta").style.outlineColor="#ee3124";
-        document.getElementById("pr3").innerHTML="Inserire Data di Scadenza";
+        document.getElementById("pr3").innerHTML="Inserire Data di Scadenza corretta";
         document.getElementById("pr3").style.display="block";
         return false;
     }
-    else if(dataOggi<dataCarta){
+    else if((dataOggi<dataCarta)){
         document.getElementById("dateCarta").style.outline="initial";
         document.getElementById("dateCarta").style.border="";
         document.getElementById("dateCarta").style.boxShadow="none";
@@ -657,36 +664,35 @@ function checkDataScadenza(){
 
 
 function  checkCvC(){
-    var dataCarta=document.getElementById("dateCarta").value;
-    var dataCartaRegex=/^[A-Z][a-z]+\s[A-Za-zàèùòì' ]+$/;
-    if((dataCarta == "") || (dataCarta == "undefined")){
-        document.getElementById("dateCarta").style.border="2px solid #ee3124";
-        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#ee3124";
-        document.getElementById("pr3").innerHTML="Inserire Nome e Cognome";
-        document.getElementById("pr3").style.display="block";
+    var cvcCarta=document.getElementById("CvcCarta").value;
+    var cvcCartaRegex=/^\d{3,4}$/;
+    if((cvcCarta == "") || (cvcCarta == "undefined")){
+        document.getElementById("CvcCarta").style.border="2px solid #ee3124";
+        document.getElementById("CvcCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("CvcCarta").style.outline="1px solid";
+        document.getElementById("CvcCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr4").innerHTML="Inserire CVC/CVV";
+        document.getElementById("pr4").style.display="block";
         return false;
     }
 
-    else if(!dataCartaRegex.test(dataCarta)) {
-        document.getElementById("pr3").innerHTML="Numero Carta di Credito non valido.<br>Il numero della Carta di Credio deve essere di 16 cifre.";
-        document.getElementById("dateCarta").style.border="2px solid #ee3124";
-        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#ee3124";
-        document.getElementById("pr3").style.display="block";
+    else if(!cvcCartaRegex.test(cvcCarta)) {
+        document.getElementById("pr4").innerHTML="CVC/CVV non valido.<br>Il CVC/CVV deve essere di 3/4 cifre.";
+        document.getElementById("CvcCarta").style.border="2px solid #ee3124";
+        document.getElementById("CvcCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("CvcCarta").style.outline="1px solid";
+        document.getElementById("CvcCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr4").style.display="block";
         return false;
 
     }
     else{
-
-        document.getElementById("dateCarta").style.outline="initial";
-        document.getElementById("dateCarta").style.border="";
-        document.getElementById("dateCarta").style.boxShadow="none";
-        document.getElementById("dateCarta").style.outline="1px solid";
-        document.getElementById("dateCarta").style.outlineColor="#0a9a0d";
-        document.getElementById("pr3").style.display="none";
+        document.getElementById("CvcCarta").style.outline="initial";
+        document.getElementById("CvcCarta").style.border="";
+        document.getElementById("CvcCarta").style.boxShadow="none";
+        document.getElementById("CvcCarta").style.outline="1px solid";
+        document.getElementById("CvcCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr4").style.display="none";
         return true;
     }
 }

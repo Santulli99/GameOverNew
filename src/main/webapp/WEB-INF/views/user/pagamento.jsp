@@ -25,6 +25,11 @@
             font-size: 15px;
             color: #ee3124;
         }
+
+        .dataScadenza{
+            display: flex;
+            flex-flow:row nowrap;
+        }
     </style>
 
 </head>
@@ -61,12 +66,17 @@
 
             </div>
             <br>
-            <label class="label" for="dateCarta">Data scadenza carta </label>
-            <input type="text" maxlength="7" size="7" onblur="checkDataScadenza()" name="dataCarta" id="dateCarta" placeholder="MM/AAAA" pattern="(0[1-9]|1[0-2])[/](20\d{2})" required>
+            <label class="label" for="annoCarta">Data scadenza carta </label>
+                <div onblur="checkDataScadenza()" class="dataScadenza">
+                <input type="text" maxlength="2" size="1" name="meseCarta" id="meseCarta" onblur="meseCheck()" placeholder="MM"  required>
+                    <b>&nbsp/&nbsp</b>
+                <input type="text" maxlength="4" size="3" name="annoCarta" id="annoCarta" placeholder="AAAA"  required>
+                </div>
             <p id="pr3"></p>
+
             <br>
-            <label class="label" for="CvcCarta">Cvc </label>
-            <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC" required>
+            <label class="label" for="CvcCarta">CVC/CVV </label>
+            <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC/CVV" required>
             <p id="pr4"></p>
             <br>
             <p></p>
