@@ -22,6 +22,8 @@ public interface AccountDao<E extends Exception> {
     boolean createAccount(Account account) throws E;
     boolean updateAccount(Account account) throws E;
 
+    boolean updatePasswordAccount(Account account) throws E;
+
 
     //query che mappano olte all'model.dao.account anche ordini indirizzo e dati anagrafici
 

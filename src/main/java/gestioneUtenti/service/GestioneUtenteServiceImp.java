@@ -66,6 +66,17 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
     }
 
     @Override
+    public boolean ModificaPasswordAccount(Account account) {
+        try {
+            if (accountDAO.updatePasswordAccount(account))
+                return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public Account getAccountDati(Account account) {
         int id = account.getId();
         try {

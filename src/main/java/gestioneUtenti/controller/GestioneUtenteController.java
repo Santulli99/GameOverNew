@@ -48,6 +48,7 @@ public class GestioneUtenteController extends HttpServlet {
 
                 if (newUsername.equals(username2) && (x == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
+                    System.out.println("PASSWORD:"+account.getPassword());
                     account.setUsername(newUsername);
                     gestioneUtenteService.ModificaDatiAccount(account);
                     modifica = true;
@@ -112,7 +113,7 @@ public class GestioneUtenteController extends HttpServlet {
                 if (newPassword.equals(newPassword2) && (b == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
                     account.setPassword(newPassword);
-                    gestioneUtenteService.ModificaDatiAccount(account);
+                    gestioneUtenteService.ModificaPasswordAccount(account);
                     modifica = true;
                     request.setAttribute("modificaPassword", modifica);
                     request.getSession(false).setAttribute("account", account);

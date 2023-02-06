@@ -39,6 +39,7 @@ public interface GestioneUtenteService {
      */
     boolean ModificaDatiAccount(Account account);
 
+    boolean ModificaPasswordAccount(Account account);
     /**
      * firma del metodo che restituisce i dati dell'account
      *

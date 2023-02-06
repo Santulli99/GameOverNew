@@ -173,13 +173,26 @@ public class SqlAccountDao implements AccountDao<SQLException> {
     public boolean updateAccount(Account account) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query="UPDATE account SET password=?,username=?,email=? WHERE(id_cliente=?);";
+            String query="UPDATE account SET username=?,email=? WHERE(id_cliente=?);";
+
+            try(PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, account.getUsername());
+                ps.setString(2, account.getEmail());
+                ps.setInt(3, account.getId());
+
+                int rows = ps.executeUpdate();
+                return rows == 1;
+            }
+        }
+    }
+
+    public boolean updatePasswordAccount(Account account) throws SQLException{
+        try(Connection connection=SqlDao.getConnection()) {
+            String query="UPDATE account SET password=? WHERE(id_cliente=?);";
 
             try(PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, account.getPassword());
-                ps.setString(2, account.getUsername());
-                ps.setString(3, account.getEmail());
-                ps.setInt(4, account.getId());
+                ps.setInt(2, account.getId());
 
                 int rows = ps.executeUpdate();
                 return rows == 1;
