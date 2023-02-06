@@ -577,6 +577,37 @@ function checkIntestatario(){
 }
 
 function checkNumeroCarta(){
+    var numCarta=document.getElementById("NumCarta").value;
+    var numCartaRegex=/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$/;
+    if((numCarta == "") || (numCarta == "undefined")){
+        document.getElementById("NumCarta").style.border="2px solid #ee3124";
+        document.getElementById("NumCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("NumCarta").style.outline="1px solid";
+        document.getElementById("NumCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr2").innerHTML="Inserire numero Carta di Credito";
+        document.getElementById("pr2").style.display="block";
+        return false;
+    }
+    else if(!numCartaRegex.test(numCarta)) {
+        document.getElementById("pr2").innerHTML="Numero Carta di Credito non valido.<br>Il numero della Carta di Credio deve essere di 16 cifre.";
+        document.getElementById("NumCarta").style.border="2px solid #ee3124";
+        document.getElementById("NumCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("NumCarta").style.outline="1px solid";
+        document.getElementById("NumCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr2").style.display="block";
+        return false;
+
+    }
+    else{
+
+        document.getElementById("NumCarta").style.outline="initial";
+        document.getElementById("NumCarta").style.border="";
+        document.getElementById("NumCarta").style.boxShadow="none";
+        document.getElementById("NumCarta").style.outline="1px solid";
+        document.getElementById("NumCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr2").style.display="none";
+        return true;
+    }
 
 }
 
@@ -584,6 +615,43 @@ function checkNumeroCarta(){
 
 
 function checkDataScadenza(){
+    var data=document.getElementById("dateCarta").value;
+    var mese=data.substring(0,2);
+    console.log("Mese:"+mese)
+    var anno=data.substring(3,7);
+    console.log("ANNO"+anno);
+    var dataCarta=new Date();
+    dataCarta.setFullYear(anno);
+    dataCarta.setMonth(mese);
+    var dataOggi=new Date();
+    dataOggi.setFullYear(dataOggi.getFullYear());
+    dataOggi.setMonth(dataOggi.getMonth());
+    if((data == "") || (data == "undefined")){
+        document.getElementById("dateCarta").style.border="2px solid #ee3124";
+        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr3").innerHTML="Inserire Data di Scadenza";
+        document.getElementById("pr3").style.display="block";
+        return false;
+    }
+    else if(dataOggi<dataCarta){
+        document.getElementById("dateCarta").style.outline="initial";
+        document.getElementById("dateCarta").style.border="";
+        document.getElementById("dateCarta").style.boxShadow="none";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr3").style.display="none";
+        return true;
+    }else{
+        document.getElementById("dateCarta").style.border="2px solid #ee3124";
+        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr3").innerHTML="L'anno di scadenza della carta è nel passato.";
+        document.getElementById("pr3").style.display="block";
+        return false;
+    }
 
 }
 
@@ -591,9 +659,38 @@ function checkDataScadenza(){
 
 
 function  checkCvC(){
+    var dataCarta=document.getElementById("dateCarta").value;
+    var dataCartaRegex=/^[A-Z][a-z]+\s[A-Za-zàèùòì' ]+$/;
+    if((dataCarta == "") || (dataCarta == "undefined")){
+        document.getElementById("dateCarta").style.border="2px solid #ee3124";
+        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr3").innerHTML="Inserire Nome e Cognome";
+        document.getElementById("pr3").style.display="block";
+        return false;
+    }
 
+    else if(!dataCartaRegex.test(dataCarta)) {
+        document.getElementById("pr3").innerHTML="Numero Carta di Credito non valido.<br>Il numero della Carta di Credio deve essere di 16 cifre.";
+        document.getElementById("dateCarta").style.border="2px solid #ee3124";
+        document.getElementById("dateCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr3").style.display="block";
+        return false;
 
+    }
+    else{
 
+        document.getElementById("dateCarta").style.outline="initial";
+        document.getElementById("dateCarta").style.border="";
+        document.getElementById("dateCarta").style.boxShadow="none";
+        document.getElementById("dateCarta").style.outline="1px solid";
+        document.getElementById("dateCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr3").style.display="none";
+        return true;
+    }
 }
 
 

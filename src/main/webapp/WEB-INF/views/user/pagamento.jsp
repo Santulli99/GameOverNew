@@ -62,7 +62,7 @@
             </div>
             <br>
             <label class="label" for="dateCarta">Data scadenza carta </label>
-            <input type="text" onblur="checkDataScadenza()" name="dataCarta" id="dateCarta" placeholder="MM/AAAA" required>
+            <input type="text" maxlength="7" size="7" onblur="checkDataScadenza()" name="dataCarta" id="dateCarta" placeholder="MM/AAAA" required>
             <p id="pr3"></p>
             <br>
             <label class="label" for="CvcCarta">Cvc </label>
