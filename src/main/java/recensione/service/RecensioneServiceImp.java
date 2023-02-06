@@ -62,15 +62,6 @@ public class RecensioneServiceImp implements RecensioneService {
         return null;
     }
 
-    @Override
-    public ArrayList<Review> cercaRecensioniPerUtente(Account account) {
-        try {
-            recensioni=reviewDao.searchAllReviewWithAccount(account.getId());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return recensioni;
-    }
 
     @Override
     public Review cercaRecensionePerProdotto(Prodotto prodotto,Account account) {
