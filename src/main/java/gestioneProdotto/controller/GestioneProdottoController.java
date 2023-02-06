@@ -1,6 +1,7 @@
 package gestioneProdotto.controller;
 
 import com.google.gson.Gson;
+import gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
 import listaDesideri.service.ListaDesideriServiceImp;
 import model.entity.*;
@@ -42,7 +43,9 @@ public class GestioneProdottoController extends HttpServlet {
     private String categoria;
     private ArrayList<Prodotto> prodottoSearch;
     private ArrayList<Review> reviews = new ArrayList<>();
+    private ArrayList<Order> orders=new ArrayList<>();
 
+    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp=new GestioneAcquistiServiceImp();
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
@@ -149,6 +152,15 @@ public class GestioneProdottoController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
                 ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                orders=gestioneAcquistiServiceImp.getAllOrdiniDiUnAccount(account.getId());
+                boolean presente=false;
+                for(int j=0;j<orders.size();j++){
+                    ArrayList<Prodotto> prodottiArrayList=orders.get(j).getProducts();
+                    for(int z=0;z<prodottiArrayList.size();z++){
+                        if(prodottiArrayList.get(z).getId()==prodotto.getId())
+                            presente=true;
+                    }
+                }
 
                 boolean aggiunto = false;
                 if (listaDesideri.containsListaDesideri(prodotto)) {
@@ -161,6 +173,7 @@ public class GestioneProdottoController extends HttpServlet {
                     if(account.getId()==reviews.get(i).getAccount().getId())
                         controllo=true;
                 }
+                request.setAttribute("presente",presente);
                 request.setAttribute("controllo",controllo);
                 request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("recensioni", reviews);

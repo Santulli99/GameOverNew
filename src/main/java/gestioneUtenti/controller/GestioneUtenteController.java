@@ -24,12 +24,9 @@ import java.util.ArrayList;
 public class GestioneUtenteController extends HttpServlet {
     private Account account;
     private RequestDispatcher dispatcher;
-    private SqlAddressDao sqlAddressDao = new SqlAddressDao();
-    private SqlDataClientDao sqlDataClientDao = new SqlDataClientDao();
     private Address address;
     private DataClient dataClient;
     private boolean modifica;
-    private SqlAccountDao accountDao = new SqlAccountDao();
     private boolean modificaEmail;
     private boolean trovato;
     private boolean esiste;
@@ -48,7 +45,7 @@ public class GestioneUtenteController extends HttpServlet {
 
                 if (newUsername.equals(username2) && (x == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
-                    System.out.println("PASSWORD:"+account.getPassword());
+                    System.out.println("PASSWORD:" + account.getPassword());
                     account.setUsername(newUsername);
                     gestioneUtenteService.ModificaDatiAccount(account);
                     modifica = true;
@@ -374,14 +371,10 @@ public class GestioneUtenteController extends HttpServlet {
             /**verifica se il numero di telefono è gia presente nel database**/
             case "/checkTelSign":
                 String numero = request.getParameter("numeroTel");
-                try {
-                    dataClient = sqlDataClientDao.searchDataClientWithTel(numero);
-                    if (dataClient != null) {
-                        response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un model.dao.account già esistente.");
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                dataClient = gestioneUtenteService.getDataClientTel(numero);
+                if (dataClient != null) {
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un account già esistente.");
                 }
                 break;
 
@@ -391,7 +384,7 @@ public class GestioneUtenteController extends HttpServlet {
                 dataClient = gestioneUtenteService.getDataClientCf(cf);
                 if (dataClient != null) {
                     response.setContentType("text/plain;charset=UTF-8");
-                    response.getWriter().println("Hey, sembra che il codice fiscale corrisponda a un model.dao.account già esistente.");
+                    response.getWriter().println("Hey, sembra che il codice fiscale corrisponda a un account già esistente.");
                 }
                 break;
 
@@ -404,7 +397,7 @@ public class GestioneUtenteController extends HttpServlet {
                     dataClient = gestioneUtenteService.getDataClientTel(tel);
                     if (dataClient != null) {
                         response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un model.dao.account già esistente.");
+                        response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un account già esistente.");
                     }
                 }
                 break;
@@ -414,4 +407,3 @@ public class GestioneUtenteController extends HttpServlet {
         }
     }
 }
-//gestioneutente

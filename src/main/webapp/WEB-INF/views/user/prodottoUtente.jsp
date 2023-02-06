@@ -238,15 +238,19 @@
                     <a id="aa3" href="${pageContext.request.contextPath}/GestioneAcquistiController/addCart?id=${prodotto.id}">
                         <button id="aa4" class="button">aggiungi al carrello</button>
                     </a>
-                    <a id="aa20"
+                    <a id="aa20" style="display: none"
                        href="${pageContext.request.contextPath}/RecensioneController/scriviRecensione?id=${prodotto.id}">
-                        <button id="aa5" class="button">Aggiungi Recensione</button>
+                        <button id="aa5" class="button" >Aggiungi Recensione</button>
                     </a>
                     <script>
                         var controllo =${controllo};
+                        var presente=${presente};
                         if (controllo) {
                             document.getElementById("aa20").setAttribute("href", "${pageContext.request.contextPath}/RecensioneController/modificaRecensione?id=${prodotto.id}");
                             document.getElementById("aa5").innerHTML = "Modifica Recensione";
+                        }
+                        if(presente){
+                            document.getElementById("aa20").style.display="block";
                         }
                     </script>
                     <a id="aa7"
