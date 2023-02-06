@@ -48,22 +48,26 @@
         <div class="conteinerLogin">
 
             <label class="label" for="inteCarta">Intestatario carta</label>
-            <input type="text" name="intestatario" id="inteCarta" placeholder="Nome e Cognome" required>
+            <input type="text" onblur="checkIntestatario()" name="intestatario" id="inteCarta" placeholder="Nome e Cognome" required>
+            <p id="pr1"></p>
             <br>
 
             <label class="label" for="NumCarta">Numero Carta </label>
-            <input type="text" name="numeroCarta" id="NumCarta" onkeyup="getCardType()" placeholder="Numero Carta"
+            <input type="text" onblur="checkNumeroCarta()" name="numeroCarta" id="NumCarta" onkeyup="getCardType()" placeholder="Numero Carta"
                    required>
+            <p id="pr2"></p>
             <div >
                  <img  id="tipoCarta">
 
             </div>
             <br>
             <label class="label" for="dateCarta">Data scadenza carta </label>
-            <input type="text" name="dataCarta" id="dateCarta" placeholder="MM/AAAA" required>
+            <input type="text" onblur="checkDataScadenza()" name="dataCarta" id="dateCarta" placeholder="MM/AAAA" required>
+            <p id="pr3"></p>
             <br>
             <label class="label" for="CvcCarta">Cvc </label>
-            <input type="text" name="cvc" id="CvcCarta" placeholder="CVC" required>
+            <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC" required>
+            <p id="pr4"></p>
             <br>
             <p></p>
             <a href="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder">

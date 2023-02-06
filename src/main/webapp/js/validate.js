@@ -540,6 +540,87 @@ function  validatePassword(){
     }
 
 }
+/*validate pagamento*/
+function checkIntestatario(){
+    var inteCarta=document.getElementById("inteCarta").value;
+    var inteCartaRegex=/^[A-Z][a-z]+\s[A-Za-zàèùòì' ]+$/;
+    if((inteCarta == "") || (inteCarta == "undefined")){
+        document.getElementById("inteCarta").style.border="2px solid #ee3124";
+        document.getElementById("inteCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("inteCarta").style.outline="1px solid";
+        document.getElementById("inteCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr1").innerHTML="Inserire Nome e Cognome";
+        document.getElementById("pr1").style.display="block";
+        return false;
+    }
+
+    else if(!inteCartaRegex.test(inteCarta)) {
+        document.getElementById("pr1").innerHTML="Nome e/o Cognome  non  valido.<br>Il Nome e Cognome  devono iniziare con lettera maiuscola e contenere solo lettere minuscole.";
+        document.getElementById("inteCarta").style.border="2px solid #ee3124";
+        document.getElementById("inteCarta").style.boxShadow="0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("inteCarta").style.outline="1px solid";
+        document.getElementById("inteCarta").style.outlineColor="#ee3124";
+        document.getElementById("pr1").style.display="block";
+        return false;
+
+    }
+    else{
+
+        document.getElementById("inteCarta").style.outline="initial";
+        document.getElementById("inteCarta").style.border="";
+        document.getElementById("inteCarta").style.boxShadow="none";
+        document.getElementById("inteCarta").style.outline="1px solid";
+        document.getElementById("inteCarta").style.outlineColor="#0a9a0d";
+        document.getElementById("pr1").style.display="none";
+        return true;
+    }
+}
+
+function checkNumeroCarta(){
+
+}
+
+
+
+
+function checkDataScadenza(){
+
+}
+
+
+
+
+function  checkCvC(){
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************/
+
+
+
+
 
 
 
@@ -757,6 +838,11 @@ function  checkCfSignAjax(){
 }
 
 
+
+
+
+
+
 /****************************w*********************************************************/
 function validateForm(){
     if(validateCap() && validateCf() && validateCitta() && validatecittaNascita() && validateCivico()
@@ -777,3 +863,5 @@ function validateFormAddress() {
 
 
 }
+
+
