@@ -38,7 +38,12 @@ public interface GestioneUtenteService {
      * @return un boolean che indica se la modifica va a buon fine
      */
     boolean ModificaDatiAccount(Account account);
-
+    /**
+     * firma del metodo che implementa la modifica della password dell'account di un utente
+     *
+     * @param account Account che contiene le modifiche da applicare
+     * @return un boolean che indica se la modifica va a buon fine
+     */
     boolean ModificaPasswordAccount(Account account);
     /**
      * firma del metodo che restituisce i dati dell'account
