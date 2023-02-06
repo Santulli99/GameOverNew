@@ -617,9 +617,7 @@ function checkNumeroCarta(){
 function checkDataScadenza(){
     var data=document.getElementById("dateCarta").value;
     var mese=data.substring(0,2);
-    console.log("Mese:"+mese)
     var anno=data.substring(3,7);
-    console.log("ANNO"+anno);
     var dataCarta=new Date();
     dataCarta.setFullYear(anno);
     dataCarta.setMonth(mese);
