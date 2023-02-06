@@ -76,7 +76,7 @@
                         <h4 href="#">Playstation Giochi</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPlaUtent?model.dao.category=CASUAL-GAME&pla=2">CASUAL-GAME</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPlaUtent?category=CASUAL-GAME&pla=2">CASUAL-GAME</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPlaUtent?category=AZIONE-AVVENTURA&pla=2">AZIONE-AVVENTURA</a>
