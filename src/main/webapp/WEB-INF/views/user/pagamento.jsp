@@ -53,7 +53,7 @@
 
         <div class="conteinerLogin">
 
-            <form action="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder" method="post">
+            <form action="${pageContext.request.contextPath}/GestioneAcquistiController/createOrder" onsubmit="return validateAcquisto()" method="post">
                 <label class="label" for="inteCarta">Intestatario carta</label>
                 <input type="text" onblur="checkIntestatario()" name="intestatario" id="inteCarta"
                        placeholder="Nome e Cognome" required>
@@ -88,7 +88,7 @@
                 <input type="text" onblur="checkCvC()" name="cvc" id="CvcCarta" placeholder="CVC/CVV" required>
                 <p id="pr4"></p>
                 <br>
-                <button class="button" id="confermaPagamento" type="submit" onclick="validateAcquisto()">conferma pagamento</button>
+                <button class="button" id="confermaPagamento" type="submit">conferma pagamento</button>
 
 
             </form>
