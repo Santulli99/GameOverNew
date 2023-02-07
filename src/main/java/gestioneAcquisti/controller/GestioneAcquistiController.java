@@ -22,10 +22,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+
+
+/**
+ * implementa il controller che si occupa  del sottosistema GestioneAcquisti
+ *
+ * @author Andrea Serpico
+ * @see HttpServlet fornisce l'interfaccia per creare una servlet
+ */
 
 @WebServlet(name = "GestioneAcquistiController", value = "/GestioneAcquistiController/*")
 public class GestioneAcquistiController extends HttpServlet {
@@ -285,3 +292,4 @@ public class GestioneAcquistiController extends HttpServlet {
         }
     }
 }
+

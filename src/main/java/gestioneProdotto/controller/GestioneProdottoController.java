@@ -20,11 +20,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
+/**
+ * Implementa il controller che si occupa  del sottosistema GestioneProdotto
+ *
+ * @author Gerardo Esposito
+ * @see HttpServlet fornisce l'interfaccia per creare una servlet
+ */
 
 @WebServlet(name = "GestioneProdottoController", value = "/GestioneProdottoController/*")
 @MultipartConfig
@@ -43,9 +50,9 @@ public class GestioneProdottoController extends HttpServlet {
     private String categoria;
     private ArrayList<Prodotto> prodottoSearch;
     private ArrayList<Review> reviews = new ArrayList<>();
-    private ArrayList<Order> orders=new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
 
-    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp=new GestioneAcquistiServiceImp();
+    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
@@ -141,7 +148,7 @@ public class GestioneProdottoController extends HttpServlet {
 
                 request.setAttribute("recensioni1", reviews);
                 request.setAttribute("prodotto", prodotto);
-                request.setAttribute("size",reviews.size());
+                request.setAttribute("size", reviews.size());
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/prodottoguest.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -152,14 +159,14 @@ public class GestioneProdottoController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
                 ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
-                orders=gestioneAcquistiServiceImp.searchAllOrderWithProductsbyAccount(account);
-                boolean presente=false;
-                for(int j=0;j<orders.size();j++){
-                    ArrayList<Prodotto> prodottiArrayList=orders.get(j).getProducts();
+                orders = gestioneAcquistiServiceImp.searchAllOrderWithProductsbyAccount(account);
+                boolean presente = false;
+                for (int j = 0; j < orders.size(); j++) {
+                    ArrayList<Prodotto> prodottiArrayList = orders.get(j).getProducts();
                     System.out.println(prodottiArrayList.size());
-                    for(int z=0;z<prodottiArrayList.size();z++){
-                        if(prodottiArrayList.get(z).getId()==prodotto.getId())
-                            presente=true;
+                    for (int z = 0; z < prodottiArrayList.size(); z++) {
+                        if (prodottiArrayList.get(z).getId() == prodotto.getId())
+                            presente = true;
                     }
                 }
 
@@ -169,17 +176,17 @@ public class GestioneProdottoController extends HttpServlet {
                 }
 
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
-                boolean controllo=false;
-                for(int i =0;i<reviews.size();i++){
-                    if(account.getId()==reviews.get(i).getAccount().getId())
-                        controllo=true;
+                boolean controllo = false;
+                for (int i = 0; i < reviews.size(); i++) {
+                    if (account.getId() == reviews.get(i).getAccount().getId())
+                        controllo = true;
                 }
-                request.setAttribute("presente",presente);
-                request.setAttribute("controllo",controllo);
+                request.setAttribute("presente", presente);
+                request.setAttribute("controllo", controllo);
                 request.setAttribute("aggiunto", aggiunto);
                 request.setAttribute("recensioni", reviews);
                 request.setAttribute("prodotto", prodotto);
-                request.setAttribute("size",reviews.size());
+                request.setAttribute("size", reviews.size());
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                 dispatcher.forward(request, response);
                 break;

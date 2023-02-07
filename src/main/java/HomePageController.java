@@ -9,7 +9,6 @@ import model.dao.wishlist.SqlListaDesideriDao;
 import model.entity.Account;
 import model.entity.Order;
 import model.entity.Prodotto;
-import model.entity.ListaDesideri;
 import model.entity.cart.Cart;
 
 import javax.servlet.RequestDispatcher;
@@ -18,12 +17,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * classe principale che si occupa di recuperare tutti i prodotti dal DB di una determinata piattaforma
+ * e caricarli  nella vetrina del sito web in modo tale da visualizzarli sulla HomePage
+ * Implementa il controller per l'HomePage
+ *
+ * @author Andrea Serpico,Andrea Santulli,Gerardo Esposito
+ */
 @WebServlet(name = "HomePageController", value = "/HomePageController/*")
 public class HomePageController extends HttpServlet {
     private RequestDispatcher dispatcher;
@@ -41,26 +46,19 @@ public class HomePageController extends HttpServlet {
 
     public void init() throws ServletException {
         super.init();
-
-        /** carico i prodotti nella vetrina nella memoria globlale **/
-
         try {
             ArrayList<Prodotto> prodottos;
             SqlProductDao sqlProductDao = new SqlProductDao();
             prodottos = sqlProductDao.searchProductsvetrina(2);
             getServletContext().setAttribute("vetrina", prodottos);
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
-        HttpSession session = request.getSession(false);
 
         switch (path) {
             case "/":
@@ -84,23 +82,16 @@ public class HomePageController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
-        System.out.println("IL PATH è:" + path);
-        HttpSession session = request.getSession(false);
 
         switch (path) {
             case "/":
                 break;
             case "/homePageAdmin":
                 try {
-                    /* numero prodotti*/
                     ArrayList<Prodotto> prodottos = productDao.searchAllProducts();
                     request.getSession(false).setAttribute("n_products", prodottos.size());
-
-                    /*numero utenti*/
                     ArrayList<Account> accounts = accountDao.searchAllAccount();
                     request.getSession(false).setAttribute("n_client", accounts.size());
-
-                    /*Numero ordini mensili*/
                     ArrayList<Order> orders = orderDao.searchAllOrderWithProducts();
                     ArrayList<Order> newOrdini = new ArrayList<>();
                     LocalDate now = LocalDate.now();
@@ -110,7 +101,6 @@ public class HomePageController extends HttpServlet {
                             newOrdini.add(orders.get(i));
                         }
                     }
-                    /*Totale incasso mensile*/
                     double totale = 0;
                     for (int j = 0; j < newOrdini.size(); j++) {
                         totale += newOrdini.get(j).getTotal();

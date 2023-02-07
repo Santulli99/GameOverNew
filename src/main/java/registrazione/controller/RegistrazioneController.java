@@ -1,5 +1,6 @@
 package registrazione.controller;
 
+import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
 import model.entity.Address;
@@ -13,80 +14,70 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
+
+
+/**
+ * implementa il controller che si occupa  del sottosistema Registrazione
+ *
+ * @author Gerardo Esposito
+ * @see HttpServlet fornisce l'interfaccia per creare una servlet
+ */
 
 @WebServlet(name = "RegistrazioneController", value = "/RegistrazioneController/*")
 public class RegistrazioneController extends HttpServlet {
     private Account account;
     private RequestDispatcher dispatcher;
-    private SqlAccountDao accountDao=new SqlAccountDao();
+    private SqlAccountDao accountDao = new SqlAccountDao();
 
-    private RegistrazioneServiceImp registrazioneServiceImp= new RegistrazioneServiceImp();
+    private RegistrazioneServiceImp registrazioneServiceImp = new RegistrazioneServiceImp();
+
+    private GestioneUtenteServiceImp gestioneUtenteServiceImp = new GestioneUtenteServiceImp();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
+        String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
 
 
-        switch (path){
+        switch (path) {
             case "/":
                 break;
             case "/registrazione":
-                dispatcher =request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
-                dispatcher.forward(request,response);
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
+                dispatcher.forward(request, response);
                 break;
-
-            /**la servlet vede se è gia presente un email con lo stesso indirizzo**/
-
             case "/checkEmailSign":
-
-                String email=request.getParameter("email");
-
-                try {
-                    account= accountDao.searchAccountEmail(email);
-
-                    if(account!=null){
-
-
-                        response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda ad un account già esistente.");
-
-
-                    }
-
-                }
-                catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                String email = request.getParameter("email");
+                account = gestioneUtenteServiceImp.getAccountEmail(email);
+                if (account != null) {
+                    response.setContentType("text/plain;charset=UTF-8");
+                    response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda ad un account già esistente.");
                 }
                 break;
-
         }
-
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
+        String path = (request.getPathInfo() != null) ? request.getPathInfo() : "/";
 
 
-        switch (path){
+        switch (path) {
             case "/":
                 break;
             case "/registrazione":
                 boolean registrazione;
-                Account account=registrazioneServiceImp.registrazioneAccount(request);
+                Account account = registrazioneServiceImp.registrazioneAccount(request);
                 System.out.println(account);
-                DataClient dataClient=registrazioneServiceImp.registrazioneDataClient(request,account);
-                Address address=registrazioneServiceImp.registrazioneAddressClient(request,account);
-                if(dataClient!=null && address!=null){
+                DataClient dataClient = registrazioneServiceImp.registrazioneDataClient(request, account);
+                Address address = registrazioneServiceImp.registrazioneAddressClient(request, account);
+                if (dataClient != null && address != null) {
                     registrazione = true;
                     request.setAttribute("registrazione", registrazione);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/login1.jsp");
                     dispatcher.forward(request, response);
-                }
-                else {
-                    boolean errore_dati=true;
-                    request.setAttribute("errore_dati",errore_dati);
+                } else {
+                    boolean errore_dati = true;
+                    request.setAttribute("errore_dati", errore_dati);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
                     dispatcher.forward(request, response);
                 }
