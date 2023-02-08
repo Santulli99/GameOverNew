@@ -71,7 +71,7 @@ function confermaUsername() {
         document.forms["modulo"]["username2"].style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
         document.forms["modulo"]["username2"].style.outline = "1px solid";
         document.forms["modulo"]["username2"].style.outlineColor = "#ee3124";
-        document.getElementById("pr16").innerHTML = "La password di conferma è obbligatoria";
+        document.getElementById("pr16").innerHTML = "L'username di conferma è obbligatorio";
         document.getElementById("pr16").style.display = "block";
         return false;
     } else if (userConferma != user) {
