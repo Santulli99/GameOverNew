@@ -3,15 +3,22 @@ package gestioneUtenti.service;
 import model.dao.account.SqlAccountDao;
 import model.dao.address.SqlAddressDao;
 import model.dao.dataClient.SqlDataClientDao;
-import model.dao.product.ProductDao;
+
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
 import model.entity.Address;
 import model.entity.DataClient;
-import validate.ValidateForm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+
+/**
+ * implementa la classe che esplicita i metodi definiti nell'interfaccia di GestioneUtenteService
+ *
+ * @author Andrea Santulli
+ */
+
 
 public class GestioneUtenteServiceImp implements GestioneUtenteService {
 
@@ -31,6 +38,14 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         dataClientDAO = new SqlDataClientDao();
     }
 
+
+    /**
+     * Implementa la funzionalità per la modifica dell'indirizzo di un utente
+     *
+     * @param address oggetto della classe Address che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
+     */
+
     @Override
     public boolean ModificaDatiIndirizzo(Address address) {
         try {
@@ -41,6 +56,14 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         }
         return false;
     }
+
+    /**
+     * Implementa la funzionalità per la modifica dei dati anagrafici di un utente
+     *
+     * @param account oggetto della classe Account su cui si effettua la modifica dei dati anagrafici
+     * @param dataClient oggetto della classe DataClient che contiene i dati dell'account da modificare
+     * @return un boolean indica la riuscita dell'operazione
+     */
 
 
     @Override
@@ -54,6 +77,14 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         return false;
     }
 
+
+    /**
+     * Implementa la funzionalità per la modifica dei dati account di un utente
+     *
+     * @param account oggetto della classe Account che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
+     */
+
     @Override
     public boolean ModificaDatiAccount(Account account) {
         try {
@@ -65,6 +96,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         return false;
     }
 
+    /**
+     * Implementa la funzionalità per la modifica della password dell'account di un utente
+     *
+     * @param account oggetto della classe Account che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
+     */
+
     @Override
     public boolean ModificaPasswordAccount(Account account) {
         try {
@@ -75,6 +113,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         }
         return false;
     }
+
+    /**
+     * Implementa la funzionalità che restituisce i dati dell'account con dati anagrafici e indirizzo
+     *
+     * @param account oggetto della classe Account che contiene i dati dell'account da estrarre
+     * @return oggetto della classe Account che contiene i dati di un utente
+     */
 
     @Override
     public Account getAccountDati(Account account) {
@@ -88,15 +133,29 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         return null;
     }
 
-    public Account getAccount(int id) {
+
+    /**
+     * Implementa la funzionalità  che restituisce i dati dell'account
+     *
+     * @param id_account int che contiene l'id dell'account da prendere
+     * @return Account con uno specifico id
+     */
+
+    public Account getAccount(int id_account) {
         try {
-            if ((account = accountDAO.searchAccountId(id)) != null)
+            if ((account = accountDAO.searchAccountId(id_account)) != null)
                 return account;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
     }
+
+    /**
+     * Implementa la funzionalità  che restituisce tutti gli account
+     *
+     * @return ArrayList di account
+     */
 
     @Override
     public ArrayList<Account> getAllAccount() {
@@ -110,6 +169,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         return null;
     }
 
+    /**
+     * Implementa la funzionalità che restituisce gli account data l'email
+     *
+     * @param email String che contiene l'email dell'account da estrarre
+     * @return oggetto della classe Account
+     */
+
     @Override
     public Account getAccountEmail(String email) {
         try {
@@ -121,6 +187,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         return null;
     }
 
+    /**
+     * Implementa la funzionalità  che restituisce i dati dell'account dato il numero di telefono
+     *
+     * @param numero String che contiene il numero di  telefono dell'account da estrarre
+     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
+     */
+
     @Override
     public DataClient getDataClientTel(String numero) {
         try {
@@ -131,6 +204,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         }
         return null;
     }
+
+    /**
+     * Implementa la funzionalità  che restituisce i dati dell'account dato il codice fiscale
+     *
+     * @param cf String che contiene il codice fiscale  dell'account da estrarre
+     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
+     */
 
     @Override
     public DataClient getDataClientCf(String cf) {

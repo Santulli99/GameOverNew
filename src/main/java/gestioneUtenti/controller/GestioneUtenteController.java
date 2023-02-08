@@ -2,9 +2,6 @@ package gestioneUtenti.controller;
 
 import gestioneUtenti.service.GestioneUtenteService;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
-import model.dao.account.SqlAccountDao;
-import model.dao.address.SqlAddressDao;
-import model.dao.dataClient.SqlDataClientDao;
 import model.entity.Account;
 import model.entity.Address;
 import model.entity.DataClient;
@@ -17,8 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+/**
+ * implementa il controller che si occupa  del sottosistema GestioneUtente
+ *
+ * @author Andrea Serpico
+ * @see HttpServlet fornisce l'interfaccia per creare una servlet
+ */
+
+
 
 @WebServlet(name = "GestioneUtenteController", value = "/GestioneUtenteController/*")
 public class GestioneUtenteController extends HttpServlet {

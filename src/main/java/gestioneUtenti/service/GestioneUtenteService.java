@@ -7,7 +7,7 @@ import model.entity.DataClient;
 import java.util.ArrayList;
 
 /**
- * interfaccia per i metodi del sottosistema GestioneUtente implementata per rispettare il Façade Pattern
+ * interfaccia per i metodi del sottosistema GestioneUtente
  *
  * @author Andrea Serpico
  */
@@ -17,39 +17,39 @@ public interface GestioneUtenteService {
     /**
      * firma del metodo che implementa la modifica dell'indirizzo di un utente
      *
-     * @param address Account che contiene le modifiche da applicare
-     * @return un boolean che indica se la modifica va a buon fine
+     * @param address oggetto della classe Address che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
      */
     boolean ModificaDatiIndirizzo(Address address);
 
     /**
      * firma del metodo che implementa la modifica dei dati anagrafici di un utente
      *
-     * @param account Account che contiene l'account da modificare
-     * @param dataClient DataClient che contiene i dati dell'account da modificare
-     * @return un boolean che indica se la modifica va a buon fine
+     * @param account oggetto della classe Account su cui si effettua la modifica dei dati anagrafici
+     * @param dataClient oggetto della classe DataClient che contiene i dati dell'account da modificare
+     * @return un boolean indica la riuscita dell'operazione
      */
     boolean ModificaDatiAnagrafici(DataClient dataClient, Account account);
 
     /**
      * firma del metodo che implementa la modifica dei dati account di un utente
      *
-     * @param account Account che contiene le modifiche da applicare
-     * @return un boolean che indica se la modifica va a buon fine
+     * @param account oggetto della classe Account che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
      */
     boolean ModificaDatiAccount(Account account);
     /**
      * firma del metodo che implementa la modifica della password dell'account di un utente
      *
-     * @param account Account che contiene le modifiche da applicare
-     * @return un boolean che indica se la modifica va a buon fine
+     * @param account oggetto della classe Account che contiene le modifiche da applicare
+     * @return un boolean indica la riuscita dell'operazione
      */
     boolean ModificaPasswordAccount(Account account);
     /**
-     * firma del metodo che restituisce i dati dell'account
+     * firma del metodo che restituisce i dati dell'account con dati anagrafici e indirizzo
      *
-     * @param account Account che contiene i dati dell'account da prendere
-     * @return Account
+     * @param account oggetto della classe Account che contiene i dati dell'account da estrarre
+     * @return oggetto della classe Account che contiene i dati di un utente
      */
     Account getAccountDati(Account account);
 
@@ -72,24 +72,24 @@ public interface GestioneUtenteService {
     /**
      * firma del metodo che restituisce gli account data l'email
      *
-     * @param email String che contiene l'email dell'account da prendere
-     * @return Account con una specifico email
+     * @param email String che contiene l'email dell'account da estrarre
+     * @return oggetto della classe Account
      */
     Account getAccountEmail(String email);
 
     /**
      * firma del metodo che restituisce i dati dell'account dato il numero di telefono
      *
-     * @param numero String che contiene il telefono dell'account da prendere
-     * @return DataClient dato uno specifico numero di telefono
+     * @param numero String che contiene il numero di  telefono dell'account da estrarre
+     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
      */
     DataClient getDataClientTel(String numero);
 
     /**
      * firma del metodo che restituisce i dati dell'account dato il codice fiscale
      *
-     * @param cf String che contiene il codice fiscale  dell'account da prendere
-     * @return DataClient dato uno specifico codice fiscale
+     * @param cf String che contiene il codice fiscale  dell'account da estrarre
+     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
      */
     DataClient getDataClientCf(String cf);
 
