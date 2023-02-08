@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Account {
 
-    private String email,password,username;
+    private String email, password, username;
     boolean admin;
 
     private ArrayList<Review> reviews;
@@ -19,14 +19,12 @@ public class Account {
     private ListaDesideri listaDesideri;
 
 
-
-
     // rappresenta il mapping con la tabella dati anagrafici
     private DataClient dataClient;
 
-  // rappresenta il mapping con la tabella ordini
-  // cardinalità N dalla parte di Account e quindi aggiungo una lista di Ordini
-    private ArrayList<Order> orders=new ArrayList<>();
+    // rappresenta il mapping con la tabella ordini
+    // cardinalità N dalla parte di Account e quindi aggiungo una lista di Ordini
+    private ArrayList<Order> orders = new ArrayList<>();
 
     //model.dao.account
     public Account() {
@@ -56,7 +54,6 @@ public class Account {
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
-
 
 
     public String getEmail() {
@@ -103,6 +100,7 @@ public class Account {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }

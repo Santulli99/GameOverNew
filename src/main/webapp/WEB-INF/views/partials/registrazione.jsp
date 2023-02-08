@@ -107,77 +107,7 @@
                   </div>
             </div>
 
-            <div class="label1">
-            <div>   <label> luogo di nascita *</label></div>
-            <div>   <input onblur="validatecittaNascita()" type="text" name="cittaNascita" id="cittN" placeholder="luogo di nascita" value="${cittaNascita}" required>
-                <p id="pr9"></p>
-            </div>
-            </div>
 
-          </div>
-
-
-            <div id="num3">
-
-            <div class="label1">
-                <div><label> data nascita *</label></div>
-                <div> <input onblur="validateDate()"  type="date" name="dataNascita" id="dataN"  value="${dataNascita}" required>
-                        <p id="pdata"></p>
-                </div>
-
-
-            </div>
-
-            <div class="label1">
-                <div>  <label> codice fiscale *</label></div>
-                <div>   <input onblur="validateCf();checkCfSignAjax()" type="text" name="codiceFiscale" id="codiceFiscale" placeholder="codice fiscale"  value="${codiceFiscale}"required>
-                    <p id="pr10"></p>
-                    <p id="pr1000"></p>
-                </div>
-            </div>
-
-                  <div class="label1">
-                      <div>  <label>citta' *</label></div>
-                      <div>   <input onblur="validateCitta()"  type="text" name="citta" id="città"  placeholder="citta'" value="${citta}" required>
-                          <p id="pr11"></p>
-                      </div>
-
-                  </div>
-
-            <div class="label1">
-            <div>    <label>provincia *</label></div>
-            <div>    <input onblur="validateProvincia()" type="text" name="provincia" id="provincia"  placeholder="provincia" value="${provincia}"  required>
-                <p id="pr12"></p>
-            </div>
-            </div>
-
-              </div>
-
-           <div id="num4">
-            <div class="label1">
-            <div> <label>via *</label></div>
-            <div> <input onblur="validateVia()" type="text" name="via" id="via"  placeholder="via" value="${via}" required >
-                <p id="pr13"></p>
-            </div>
-
-            </div>
-
-            <div  class="label1">
-            <div>   <label>n°civico *</label></div>
-        <div>     <input onblur="validateCivico()" type="number" name="civico" id="civico"  placeholder="N°civico" value="${civico}" required>
-            <p id="pr14"></p>
-        </div>
-
-            </div>
-
-            <div  class="label1">
-            <div>   <label>cap *</label></div>
-            <div> <input onblur="validateCap()" class="set" type="number" name="cap" id="cap"  placeholder="cap" value="${cap}" required>
-                <p id="pr15"></p>
-            </div>
-            </div>
-
-           </div>
 
         <div id="num5">
             <button class="button" type="submit" >registrati ora!</button>

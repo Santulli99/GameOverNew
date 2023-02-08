@@ -4,6 +4,7 @@ import gestioneAcquisti.OrdinareCliente;
 import gestioneAcquisti.OrdinareDataCrescente;
 import gestioneAcquisti.OrdinareDataDecrescente;
 import com.google.gson.Gson;
+import gestioneAcquisti.RandomString;
 import gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
 import listaDesideri.service.ListaDesideriServiceImp;
@@ -278,12 +279,19 @@ public class GestioneAcquistiController extends HttpServlet {
                     }
                 }
 
+                RandomString randomString=new RandomString();
+                ArrayList<String> codiciSeriali=new ArrayList<>();
+                for(int i=0;i<prodottoArrayList.size();i++){
+                    codiciSeriali.add(randomString.nextString());
+                }
+
                 gestioneAcquistiServiceImp.rimuoviAllProdottiDalCarrello(account.getId());
                 cart = gestioneAcquistiServiceImp.getCart(account);
                 request.getSession(false).setAttribute("carrello", cart);
                 request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
                 request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
                 request.setAttribute("successo", successo);
+                request.setAttribute("codiciSeriali",codiciSeriali);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
                 dispatcher.forward(request, response);
 

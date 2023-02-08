@@ -20,6 +20,24 @@
 
   <style>
 
+    .swal-text {
+      font-size: 30px;
+      position: relative;
+      float: none;
+      line-height: normal;
+      vertical-align: top;
+      text-align: center;
+      display: inline-block;
+      margin: 0;
+      padding: 0 10px;
+      font-weight: 400;
+      color: rgba(0,0,0,.64);
+      max-width: calc(100% - 20px);
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+      font-weight: bold;
+    }
+
     #para1 {
 
       font-size: 18px;
@@ -46,9 +64,13 @@
 </script>
 <script>
 
+  var codiciSeriali="${codiciSeriali}";
+  codiciSeriali = codiciSeriali.replace(/[\[\],]/g, "");
+  codiciSeriali=codiciSeriali.replace(" ","\n");
   var suc1=${successo};
+
   if(suc1==true) {
-    JSalertSuccess("Il tuo acquisto è effettuato!");
+    JScodiciSeriali("Acquisto effettuato.","Codici Seriali:\n"+codiciSeriali);
   }
 
 </script>
@@ -100,6 +122,7 @@
      <jsp:include page="/WEB-INF/views/user/vetrinaUtent.jsp"></jsp:include>
 
     </div>
+
 
   </section>
 </aside>

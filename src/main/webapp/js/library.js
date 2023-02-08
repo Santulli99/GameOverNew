@@ -102,6 +102,10 @@ function JSalertWarning(message){
 
 }
 
+function JScodiciSeriali(titolo,messaggio){
+    swal(titolo,messaggio,"success");
+}
+
 /******************ricerca ajax per utente************************/
 function  ricercaAjax(){
 
