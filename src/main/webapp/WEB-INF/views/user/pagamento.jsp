@@ -140,11 +140,11 @@
                     </div>
 
                     <div class="dataScadenza">
-                        <input type="text" maxlength="2" size="2" name="meseCarta" id="meseCarta"
+                        <input type="text" maxlength="2" size="3" name="meseCarta" id="meseCarta"
                                onblur="meseCheck0();meseCheck()"
                                placeholder="MM" required>
                         <b>&nbsp/&nbsp</b>
-                        <input type="text" maxlength="4" size="3" name="annoCarta" id="annoCarta" placeholder="AAAA"
+                        <input type="text" maxlength="4" size="4" name="annoCarta" id="annoCarta" placeholder="AAAA"
                                onblur="annoCheck()"
                                required>
                     </div>
