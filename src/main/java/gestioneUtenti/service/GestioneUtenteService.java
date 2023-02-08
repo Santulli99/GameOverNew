@@ -1,7 +1,6 @@
 package gestioneUtenti.service;
 
 import model.entity.Account;
-import model.entity.Address;
 import model.entity.DataClient;
 
 import java.util.ArrayList;
@@ -14,22 +13,7 @@ import java.util.ArrayList;
 public interface GestioneUtenteService {
 
 
-    /**
-     * firma del metodo che implementa la modifica dell'indirizzo di un utente
-     *
-     * @param address oggetto della classe Address che contiene le modifiche da applicare
-     * @return un boolean indica la riuscita dell'operazione
-     */
-    boolean ModificaDatiIndirizzo(Address address);
 
-    /**
-     * firma del metodo che implementa la modifica dei dati anagrafici di un utente
-     *
-     * @param account oggetto della classe Account su cui si effettua la modifica dei dati anagrafici
-     * @param dataClient oggetto della classe DataClient che contiene i dati dell'account da modificare
-     * @return un boolean indica la riuscita dell'operazione
-     */
-    boolean ModificaDatiAnagrafici(DataClient dataClient, Account account);
 
     /**
      * firma del metodo che implementa la modifica dei dati account di un utente
@@ -45,13 +29,6 @@ public interface GestioneUtenteService {
      * @return un boolean indica la riuscita dell'operazione
      */
     boolean ModificaPasswordAccount(Account account);
-    /**
-     * firma del metodo che restituisce i dati dell'account con dati anagrafici e indirizzo
-     *
-     * @param account oggetto della classe Account che contiene i dati dell'account da estrarre
-     * @return oggetto della classe Account che contiene i dati di un utente
-     */
-    Account getAccountDati(Account account);
 
     /**
      * firma del metodo che restituisce i dati dell'account
@@ -77,21 +54,8 @@ public interface GestioneUtenteService {
      */
     Account getAccountEmail(String email);
 
-    /**
-     * firma del metodo che restituisce i dati dell'account dato il numero di telefono
-     *
-     * @param numero String che contiene il numero di  telefono dell'account da estrarre
-     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
-     */
-    DataClient getDataClientTel(String numero);
 
-    /**
-     * firma del metodo che restituisce i dati dell'account dato il codice fiscale
-     *
-     * @param cf String che contiene il codice fiscale  dell'account da estrarre
-     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
-     */
-    DataClient getDataClientCf(String cf);
+
 
 
 }

@@ -3,7 +3,6 @@ package gestioneUtenti.controller;
 import gestioneUtenti.service.GestioneUtenteService;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.entity.Account;
-import model.entity.Address;
 import model.entity.DataClient;
 import validate.ValidateForm;
 
@@ -24,12 +23,10 @@ import java.util.ArrayList;
  */
 
 
-
 @WebServlet(name = "GestioneUtenteController", value = "/GestioneUtenteController/*")
 public class GestioneUtenteController extends HttpServlet {
     private Account account;
     private RequestDispatcher dispatcher;
-    private Address address;
     private DataClient dataClient;
     private boolean modifica;
     private boolean modificaEmail;
@@ -56,7 +53,7 @@ public class GestioneUtenteController extends HttpServlet {
                     modifica = true;
                     request.setAttribute("modificaUsername", modifica);
                     request.getSession(false).setAttribute("account", account);
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -64,7 +61,7 @@ public class GestioneUtenteController extends HttpServlet {
                         dispatcher.forward(request, response);
                     }
                 } else {
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminUsername.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -86,7 +83,7 @@ public class GestioneUtenteController extends HttpServlet {
                     gestioneUtenteService.ModificaDatiAccount(account);
                     modificaEmail = true;
                     request.setAttribute("modificaEmail", modificaEmail);
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -96,7 +93,7 @@ public class GestioneUtenteController extends HttpServlet {
                 } else {
                     esiste = true;
                     request.setAttribute("esiste", esiste);
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminEmail.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -119,7 +116,7 @@ public class GestioneUtenteController extends HttpServlet {
                     modifica = true;
                     request.setAttribute("modificaPassword", modifica);
                     request.getSession(false).setAttribute("account", account);
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -129,7 +126,7 @@ public class GestioneUtenteController extends HttpServlet {
                 } else {
                     modifica = false;
                     request.setAttribute("error", modifica);
-                    if (account.isAdmin()) {
+                    if (account.isVenditore()) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminPassword.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -145,28 +142,20 @@ public class GestioneUtenteController extends HttpServlet {
                 String nome = request.getParameter("nome");
                 boolean a = ValidateForm.validateNome(nome);
 
-                String cell = request.getParameter("telefono");
-                boolean d = ValidateForm.validateTelefono(cell);
-                boolean c = ValidateForm.searchTelefono(cell);
+                String cognome = request.getParameter("cognome");
+                boolean d = ValidateForm.validateCognome(cognome);
 
-                if (a && d && (c || account.getDataClient().getCell().equals(cell))) {
-                    dataClient = new DataClient();
-                    dataClient.setAccount(account);
-                    dataClient.setFirstName(nome);
-                    dataClient.setLastName(account.getDataClient().getLastName());
-                    dataClient.setCity(account.getDataClient().getCity());
-                    dataClient.setCell(cell);
-                    dataClient.setDate(account.getDataClient().getDate());
-                    dataClient.setCf(account.getDataClient().getCf());
 
-                    gestioneUtenteService.ModificaDatiAnagrafici(dataClient, account);
+                if (a && d) {
+                    account.setFirstName(nome);
+                    account.setLastName(cognome);
 
+                    gestioneUtenteService.ModificaDatiAccount(account);
                     modifica = true;
                     request.setAttribute("modificaDati", modifica);
-                    account.setDataClient(dataClient);
                     request.getSession(false).setAttribute("account", account);
 
-                    if (account.isAdmin() == true) {
+                    if (account.isVenditore() == true) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                         dispatcher.forward(request, response);
                     } else {
@@ -174,65 +163,13 @@ public class GestioneUtenteController extends HttpServlet {
                         dispatcher.forward(request, response);
                     }
                 } else {
-                    esiste = true;
-                    request.setAttribute("esiste", esiste);
                     modifica = false;
                     request.setAttribute("error", modifica);
-                    if (account.isAdmin() == true) {
+                    if (account.isVenditore() == true) {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminDati.jsp");
                         dispatcher.forward(request, response);
                     } else {
                         dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateUtentDati.jsp");
-                        dispatcher.forward(request, response);
-                    }
-                }
-                break;
-
-            /**si effettua la modifica dell'indirizzo**/
-            case "/updateAddress":
-                String citta = request.getParameter("citta");
-                boolean a1 = ValidateForm.validateResidenza(citta);
-                String provincia = request.getParameter("provincia");
-                boolean b1 = ValidateForm.validateProvincia(provincia);
-                String via = request.getParameter("via");
-                boolean c1 = ValidateForm.validateVia(via);
-                int civico = Integer.parseInt(request.getParameter("civico"));
-                boolean d1 = ValidateForm.validateCivico(civico);
-                int cap = Integer.parseInt(request.getParameter("cap"));
-                boolean e = ValidateForm.validateCap(String.valueOf(cap));
-                if (a1 && b1 && c1 && d1 && e) {
-                    Account account = (Account) request.getSession(false).getAttribute("account");
-                    address = new Address();
-                    address.setAccount(account);
-                    address.setCity(citta);
-                    address.setPostalCode(cap);
-                    address.setProvince(provincia);
-                    address.setStreet(via);
-                    address.setStreetNumber(civico);
-
-                    gestioneUtenteService.ModificaDatiIndirizzo(address);
-
-                    modifica = true;
-                    request.setAttribute("modificaAddress", modifica);
-                    account.setAddress(address);
-                    request.getSession(false).setAttribute("account", account);
-                    if (account.isAdmin() == true) {
-                        dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
-                        dispatcher.forward(request, response);
-                    } else {
-                        dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/showProfileUtent.jsp");
-                        dispatcher.forward(request, response);
-                    }
-                } else {
-                    if (account.isAdmin() == true) {
-                        modifica = false;
-                        request.setAttribute("error", modifica);
-                        dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminAddress.jsp");
-                        dispatcher.forward(request, response);
-                    } else {
-                        modifica = false;
-                        request.setAttribute("error", modifica);
-                        dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateUtentAddress.jsp");
                         dispatcher.forward(request, response);
                     }
                 }
@@ -249,7 +186,7 @@ public class GestioneUtenteController extends HttpServlet {
             /**visualizza il profilo dell'Admin**/
             case "/showAccountAdmin":
                 account = (Account) request.getSession(false).getAttribute("account");
-                account = gestioneUtenteService.getAccountDati(account);
+                account = gestioneUtenteService.getAccount(account.getId());
                 request.setAttribute("account", account);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showProfileAdmin.jsp");
                 dispatcher.forward(request, response);
@@ -258,7 +195,7 @@ public class GestioneUtenteController extends HttpServlet {
             /**visualizza il profilo dell'Utente**/
             case "/showAccountUtent":
                 account = (Account) request.getSession(false).getAttribute("account");
-                account = gestioneUtenteService.getAccountDati(account);
+                account = gestioneUtenteService.getAccount(account.getId());
                 modificaEmail = false;
                 modifica = false;
                 request.setAttribute("modificaEmail", modificaEmail);
@@ -268,22 +205,11 @@ public class GestioneUtenteController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
 
-            /**viene visualizzata la pagina per la modifica dell'indirizzo**/
-            case "/showUpdateAddress":
-                account = (Account) request.getSession(false).getAttribute("account");
-                if (account.isAdmin() == true) {
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminAddress.jsp");
-                    dispatcher.forward(request, response);
-                } else {
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateUtentAddress.jsp");
-                    dispatcher.forward(request, response);
-                }
-                break;
 
             /**visualizza la pagine per la modifica dei dati**/
             case "/showDataClient":
                 account = (Account) request.getSession(false).getAttribute("account");
-                if (account.isAdmin() == true) {
+                if (account.isVenditore() == true) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminDati.jsp");
                     dispatcher.forward(request, response);
                 } else {
@@ -292,11 +218,6 @@ public class GestioneUtenteController extends HttpServlet {
                 }
                 break;
 
-            /**visualizza la pagina di modifica dati dell'admin*//**probabile stronzata */
-            case "/updateAdmin":
-                dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdmin.jsp");
-                dispatcher.forward(request, response);
-                break;
 
 
             /** visualizza le pagine di modifica dei dati dell'utente e dell'admin **/
@@ -304,8 +225,8 @@ public class GestioneUtenteController extends HttpServlet {
             case "/showUpdateUsername":
                 account = (Account) request.getSession(false).getAttribute("account");
 
-                if (account.isAdmin() == true) {
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminEmail.jsp");
+                if (account.isVenditore() == true) {
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminUsername.jsp");
                     dispatcher.forward(request, response);
                 } else {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateUtentUsername.jsp");
@@ -317,7 +238,7 @@ public class GestioneUtenteController extends HttpServlet {
 
                 account = (Account) request.getSession(false).getAttribute("account");
 
-                if (account.isAdmin() == true) {
+                if (account.isVenditore() == true) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminEmail.jsp");
                     dispatcher.forward(request, response);
                 } else {
@@ -330,7 +251,7 @@ public class GestioneUtenteController extends HttpServlet {
 
             case "/showUpdatePassword":
                 account = (Account) request.getSession(false).getAttribute("account");
-                if (account.isAdmin() == true) {
+                if (account.isVenditore() == true) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateAdminPassword.jsp");
                     dispatcher.forward(request, response);
                 } else {
@@ -353,7 +274,6 @@ public class GestioneUtenteController extends HttpServlet {
             case "/showAccount":
                 int id = Integer.parseInt(request.getParameter("id"));
                 account = gestioneUtenteService.getAccount(id);
-                account = gestioneUtenteService.getAccountDati(account);
                 request.setAttribute("accountUtent", account);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showUtent.jsp");
                 dispatcher.forward(request, response);
@@ -369,40 +289,6 @@ public class GestioneUtenteController extends HttpServlet {
                     if (account != null) {
                         response.setContentType("text/plain;charset=UTF-8");
                         response.getWriter().println("Hey, sembra che l'indirizzo email corrisponda ad un  account già esistente.");
-                    }
-                }
-                break;
-
-            /**verifica se il numero di telefono è gia presente nel database**/
-            case "/checkTelSign":
-                String numero = request.getParameter("numeroTel");
-                dataClient = gestioneUtenteService.getDataClientTel(numero);
-                if (dataClient != null) {
-                    response.setContentType("text/plain;charset=UTF-8");
-                    response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un account già esistente.");
-                }
-                break;
-
-            /**verifica se il codice fiscale è gia presente nel database**/
-            case "/checkCFSign":
-                String cf = request.getParameter("cf");
-                dataClient = gestioneUtenteService.getDataClientCf(cf);
-                if (dataClient != null) {
-                    response.setContentType("text/plain;charset=UTF-8");
-                    response.getWriter().println("Hey, sembra che il codice fiscale corrisponda a un account già esistente.");
-                }
-                break;
-
-            /**verifica se il tel è proprio quello dell model.dao.account **/
-            case "/checkTel":
-                String tel = request.getParameter("numeroTel");
-                account = (Account) request.getSession(false).getAttribute("account");
-                trovato = account.getDataClient().getCell().equals(tel);
-                if (!trovato) {
-                    dataClient = gestioneUtenteService.getDataClientTel(tel);
-                    if (dataClient != null) {
-                        response.setContentType("text/plain;charset=UTF-8");
-                        response.getWriter().println("Hey, sembra che il numero di telefono corrisponda a un account già esistente.");
                     }
                 }
                 break;

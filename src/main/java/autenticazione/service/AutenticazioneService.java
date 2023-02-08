@@ -27,7 +27,7 @@ public interface AutenticazioneService {
      * @return un boolean true mi indica che l'account è l'admin  del sito web
      */
 
-    boolean verificaAdmin(Account account);
+    boolean verificaVenditore(Account account);
 
     /**
      * firma del metodo che implementa l'uscita dal sito web

@@ -58,7 +58,7 @@ public class AutenticazioneController extends HttpServlet {
                 }
                 session.setAttribute("account", account);
 
-                if (autenticazioneService.verificaAdmin(account)) {
+                if (autenticazioneService.verificaVenditore(account)) {
                     dispatcher = request.getRequestDispatcher("/HomePageController/homePageAdmin");
                     dispatcher.forward(request, response);
                 } else {

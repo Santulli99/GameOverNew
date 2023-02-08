@@ -169,7 +169,7 @@ public class GestioneAcquistiController extends HttpServlet {
                 }
                 request.setAttribute("order", order);
                 request.setAttribute("totale", Math.round(totale * 100.0) / 100.0);
-                if (account.isAdmin()) {
+                if (account.isVenditore()) {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showOrder.jsp");
                     dispatcher.forward(request, response);
                 }

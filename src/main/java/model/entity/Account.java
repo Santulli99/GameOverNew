@@ -4,26 +4,23 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Account {
 
     private String email, password, username;
-    boolean admin;
-
+    private String firstName,lastName,dataString;
+    boolean venditore;
+    int id;
+    private LocalDate date;
     private ArrayList<Review> reviews;
 
-    int id;
-    private Address address;
 
     private ListaDesideri listaDesideri;
 
-
-    // rappresenta il mapping con la tabella dati anagrafici
-    private DataClient dataClient;
-
-    // rappresenta il mapping con la tabella ordini
-    // cardinalità N dalla parte di Account e quindi aggiungo una lista di Ordini
     private ArrayList<Order> orders = new ArrayList<>();
 
     //model.dao.account
@@ -31,20 +28,36 @@ public class Account {
         super();
     }
 
-    public Address getAddress() {
-        return address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public DataClient getDataClient() {
-        return dataClient;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setDataClient(DataClient dataClient) {
-        this.dataClient = dataClient;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public ListaDesideri getListaDesideri() {
+        return listaDesideri;
+    }
+
+    public void setListaDesideri(ListaDesideri listaDesideri) {
+        this.listaDesideri = listaDesideri;
     }
 
     public ArrayList<Order> getOrders() {
@@ -55,6 +68,14 @@ public class Account {
         this.orders = orders;
     }
 
+    public String getDataString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(Locale.ITALY);
+        return date.format(formatter);
+    }
+
+    public void setDataString(String dataString) {
+        this.dataString = dataString;
+    }
 
     public String getEmail() {
         return email;
@@ -89,12 +110,12 @@ public class Account {
         this.username = username;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public boolean isVenditore() {
+        return venditore;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setVenditore(boolean venditore) {
+        this.venditore = venditore;
     }
 
     public int getId() {
@@ -111,14 +132,6 @@ public class Account {
 
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public ListaDesideri getWishlist() {
-        return listaDesideri;
-    }
-
-    public void setWishlist(ListaDesideri listaDesideri) {
-        this.listaDesideri = listaDesideri;
     }
 
     @Override

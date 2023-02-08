@@ -1,12 +1,9 @@
 package gestioneUtenti.service;
 
 import model.dao.account.SqlAccountDao;
-import model.dao.address.SqlAddressDao;
-import model.dao.dataClient.SqlDataClientDao;
 
 import model.dao.product.SqlProductDao;
 import model.entity.Account;
-import model.entity.Address;
 import model.entity.DataClient;
 
 import java.sql.SQLException;
@@ -25,56 +22,13 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
     private SqlAccountDao accountDAO;
     private SqlProductDao productDA0;
 
-    private SqlAddressDao addressDAO;
 
-    private SqlDataClientDao dataClientDAO;
     private Account account;
     private DataClient dataClient;
 
     public GestioneUtenteServiceImp() {
         accountDAO = new SqlAccountDao();
         productDA0 = new SqlProductDao();
-        addressDAO = new SqlAddressDao();
-        dataClientDAO = new SqlDataClientDao();
-    }
-
-
-    /**
-     * Implementa la funzionalità per la modifica dell'indirizzo di un utente
-     *
-     * @param address oggetto della classe Address che contiene le modifiche da applicare
-     * @return un boolean indica la riuscita dell'operazione
-     */
-
-    @Override
-    public boolean ModificaDatiIndirizzo(Address address) {
-        try {
-            if (addressDAO.updateAddress(address))
-                return true;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        return false;
-    }
-
-    /**
-     * Implementa la funzionalità per la modifica dei dati anagrafici di un utente
-     *
-     * @param account oggetto della classe Account su cui si effettua la modifica dei dati anagrafici
-     * @param dataClient oggetto della classe DataClient che contiene i dati dell'account da modificare
-     * @return un boolean indica la riuscita dell'operazione
-     */
-
-
-    @Override
-    public boolean ModificaDatiAnagrafici(DataClient dataClient, Account account) {
-        try {
-            if (dataClientDAO.updateDataClient(dataClient, account))
-                return true;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
     }
 
 
@@ -112,25 +66,6 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
             throwables.printStackTrace();
         }
         return false;
-    }
-
-    /**
-     * Implementa la funzionalità che restituisce i dati dell'account con dati anagrafici e indirizzo
-     *
-     * @param account oggetto della classe Account che contiene i dati dell'account da estrarre
-     * @return oggetto della classe Account che contiene i dati di un utente
-     */
-
-    @Override
-    public Account getAccountDati(Account account) {
-        int id = account.getId();
-        try {
-            if ((account = accountDAO.searchAccountIdWithDataClientandAndress(id)) != null)
-                return account;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
     }
 
 
@@ -186,42 +121,5 @@ public class GestioneUtenteServiceImp implements GestioneUtenteService {
         }
         return null;
     }
-
-    /**
-     * Implementa la funzionalità  che restituisce i dati dell'account dato il numero di telefono
-     *
-     * @param numero String che contiene il numero di  telefono dell'account da estrarre
-     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
-     */
-
-    @Override
-    public DataClient getDataClientTel(String numero) {
-        try {
-            if ((dataClientDAO.searchDataClientWithTel(numero)) != null)
-                return dataClient;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    /**
-     * Implementa la funzionalità  che restituisce i dati dell'account dato il codice fiscale
-     *
-     * @param cf String che contiene il codice fiscale  dell'account da estrarre
-     * @return oggetto della classe DataClient contenente i dati anagrafici dell'account
-     */
-
-    @Override
-    public DataClient getDataClientCf(String cf) {
-        try {
-            if ((dataClient = dataClientDAO.searchDataClientWithCf(cf)) != null)
-                return dataClient;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
 
 }

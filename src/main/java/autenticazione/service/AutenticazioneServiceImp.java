@@ -40,8 +40,7 @@ public class AutenticazioneServiceImp implements AutenticazioneService {
 
         Account account = new Account();
         try {
-            account = sqlAccountDao.searchAccountIdWithDataClientandAndressLogin(password, email);
-
+            account = sqlAccountDao.searchAccountLogin(password, email);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -56,9 +55,9 @@ public class AutenticazioneServiceImp implements AutenticazioneService {
      */
 
     @Override
-    public boolean verificaAdmin(Account account) {
+    public boolean verificaVenditore(Account account) {
 
-        return account.isAdmin();
+        return account.isVenditore();
     }
 
     /**

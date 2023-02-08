@@ -3,7 +3,6 @@ package registrazione.controller;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
-import model.entity.Address;
 import model.entity.DataClient;
 import registrazione.service.RegistrazioneServiceImp;
 
@@ -67,10 +66,7 @@ public class RegistrazioneController extends HttpServlet {
             case "/registrazione":
                 boolean registrazione;
                 Account account = registrazioneServiceImp.registrazioneAccount(request);
-                System.out.println(account);
-                DataClient dataClient = registrazioneServiceImp.registrazioneDataClient(request, account);
-                Address address = registrazioneServiceImp.registrazioneAddressClient(request, account);
-                if (dataClient != null && address != null) {
+                if (account != null) {
                     registrazione = true;
                     request.setAttribute("registrazione", registrazione);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/login1.jsp");

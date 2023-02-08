@@ -52,7 +52,7 @@
 
         </ul>
 
-        <div id="para1"> Benvenuto Admin: ${account.dataClient.firstName} </div>
+        <div id="para1"> Benvenuto Admin: ${account.firstName} </div>
     </nav>
 
 
