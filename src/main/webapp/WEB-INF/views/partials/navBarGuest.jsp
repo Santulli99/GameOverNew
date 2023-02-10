@@ -52,7 +52,7 @@
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=3XBOX">SIMULAZIONE  </a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=XBOX">SIMULAZIONE  </a>
                     </li>
 
                     <li>

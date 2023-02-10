@@ -280,7 +280,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto.setCover(fileName);
                 if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
                     InputStream inputStream = filePart.getInputStream();
-                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
                     boolean success = true;
                     request.setAttribute("success", success);

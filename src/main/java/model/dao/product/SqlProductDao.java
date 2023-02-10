@@ -110,17 +110,17 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     public boolean createProduct(Prodotto prodotto) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query1 = "INSERT INTO product(id_categoria, nome, descrizione, path_img, prezzo, data_uscita,id_piattaforma) " +
+            String query1 = "INSERT INTO product(categoria, nome, descrizione, path_img, prezzo, data_uscita,piattaforma) " +
                     "VALUES (?,?,?,?,?,?,?);";
 
             try (PreparedStatement ps1 = connection.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS)) {
-               // ps1.setInt(1, prodotto.getCategory().getId());
+                ps1.setString(1, prodotto.getCategoryName());
                 ps1.setString(2, prodotto.getProductName());
                 ps1.setString(3, prodotto.getDescription());
                 ps1.setString(4, prodotto.getCover());
                 ps1.setDouble(5, prodotto.getPrice());
                 ps1.setDate(6, Date.valueOf(prodotto.getDate()));
-               // ps1.setInt(7, prodotto.getPlatform().getId());
+                ps1.setString(7, prodotto.getPlatformName());
                 int rows = ps1.executeUpdate();
 
                 ResultSet rs = ps1.getGeneratedKeys();
@@ -137,7 +137,7 @@ public class SqlProductDao implements  ProductDao<SQLException>{
     public boolean updateProduct(Prodotto prodotto) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query = "UPDATE product SET descrizione=?,prezzo=?,nome=?, WHERE id_prodotto=?;";
+            String query = "UPDATE product SET descrizione=?,prezzo=?,nome=? WHERE id_prodotto=?;";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, prodotto.getDescription());
