@@ -2,7 +2,6 @@ package model.dao.product;
 
 import model.entity.Prodotto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface ProductDao <E extends  Exception>{

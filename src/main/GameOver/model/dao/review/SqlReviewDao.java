@@ -100,30 +100,6 @@ public class SqlReviewDao implements ReviewDao<SQLException> {
     }
 
     @Override
-    public ArrayList<Review> searchAllReviewWithAccount(int id_account) throws SQLException {
-        try (Connection connection = SqlDao.getConnection()) {
-            String query = "SELECT *  FROM review,account AS acc WHERE review.id_cliente=acc.id_cliente and acc.id_cliente=?;";
-
-            try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setInt(1, id_account);
-                ResultSet rs = ps.executeQuery();
-                Review review = null;
-                ReviewExtractor reviewExtractor = new ReviewExtractor();
-                Account account = null;
-                AccountExtractor accountExtractor = new AccountExtractor();
-                ArrayList<Review> reviews = new ArrayList<>();
-                while (rs.next()) {
-                    review = reviewExtractor.extract(rs);
-                    account = accountExtractor.extract(rs);
-                    review.setAccount(account);
-                    reviews.add(review);
-                }
-                return reviews;
-            }
-        }
-    }
-
-    @Override
     public Review searchReviewWithProductAndAccount(int id_product, int id_account) throws SQLException {
         try (Connection connection = SqlDao.getConnection()) {
             String query = "SELECT *  FROM review,product AS pro WHERE review.id_prodotto=pro.id_prodotto and pro.id_prodotto=? and review.id_cliente=?;";

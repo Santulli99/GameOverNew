@@ -148,50 +148,6 @@ public class  SqlOrderDao implements OrderDao<SQLException>{
     }
 
     @Override
-    public ArrayList<Order> searchAllOrder() throws SQLException {
-        try(Connection connection=SqlDao.getConnection()) {
-            String query="SELECT * FROM orders AS ord;";
-
-            try(PreparedStatement ps = connection.prepareStatement(query)) {
-                ResultSet rs = ps.executeQuery();
-
-                ArrayList<Order> orders = new ArrayList<>();
-                Order order = null;
-                OrderExtractor orderExtractor = new OrderExtractor();
-
-                while (rs.next()) {
-                    order = orderExtractor.extract(rs);
-                    orders.add(order);
-                }
-                return orders;
-            }
-        }
-    }
-
-    @Override
-    public Order searchOrderWithAccount(int id_Ordine,int id_Account) throws SQLException {
-
-        try(Connection connection=SqlDao.getConnection()) {
-            String query = "SELECT *  FROM orders AS ord WHERE id_ordine=? AND id_cliente=?;";
-
-            try(  PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setInt(1,id_Ordine);
-                ps.setInt(2,id_Account);
-
-                ResultSet rs = ps.executeQuery();
-
-                Order order = null;
-                OrderExtractor orderExtractor = new OrderExtractor();
-
-                if (rs.next()) {
-                    order = orderExtractor.extract(rs);
-                }
-                return order;
-            }
-        }
-    }
-
-    @Override
     public boolean createOrder(Order order) throws SQLException {
         try(Connection connection=SqlDao.getConnection()) {
             String query1 = "INSERT INTO orders(data_ordine, n_prodotti, id_cliente) VALUES (?,?,?);";

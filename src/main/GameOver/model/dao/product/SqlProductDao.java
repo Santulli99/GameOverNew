@@ -1,19 +1,10 @@
 package model.dao.product;
 
-import model.entity.Category;
-import model.dao.category.CategoryExtractor;
-import model.entity.Order;
-import model.entity.Prodotto;
-import model.dao.order.OrderExtractor;
-import model.entity.Platform;
-import model.dao.platform.PlatformExtractor;
-import model.dao.storage.SqlDao;
 
+import model.entity.Prodotto;
+import model.dao.storage.SqlDao;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class SqlProductDao implements  ProductDao<SQLException>{
 

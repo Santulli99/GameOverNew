@@ -1,7 +1,4 @@
 package model.dao.wishlist;
-
-import model.dao.category.CategoryExtractor;
-import model.dao.platform.PlatformExtractor;
 import model.dao.product.ProductExtractor;
 import model.dao.storage.SqlDao;
 import model.entity.*;

@@ -187,25 +187,6 @@ public class GestioneAcquistiController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
 
-            /**si rimuove l'ordine da parte dell'utente**/
-            case "/removeOrderUtent":
-                account = (Account) request.getSession(false).getAttribute("account");
-                boolean elimina = false;
-                order = gestioneAcquistiServiceImp.getOrdine(Integer.parseInt(request.getParameter("id")));
-
-                LocalDate dataOggi = LocalDate.now();
-                LocalDate dataOrdine = order.getDate();
-                LocalDate dataReso = dataOrdine.plusDays(15);
-                if (dataOggi.isBefore(dataReso)) {
-                    elimina = gestioneAcquistiServiceImp.rimuoviOrdine(order);
-                }
-
-                orders = gestioneAcquistiServiceImp.getAllOrdiniDiUnAccount(account.getId());
-                request.setAttribute("orders", orders);
-                request.setAttribute("elimina", elimina);
-                dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/allOrdersUtent.jsp");
-                dispatcher.forward(request, response);
-                break;
             /**vengono visualizzati gli ordini in base a data e user del cliente(ADMIN con Ajax)**/
             case "/showOrdersWithAjax":
 

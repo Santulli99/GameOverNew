@@ -3,8 +3,6 @@ package gestioneProdotto.service;
 import model.dao.category.SqlCategoryDao;
 import model.dao.platform.SqlPlatformDao;
 import model.dao.product.SqlProductDao;
-import model.entity.Category;
-import model.entity.Platform;
 import model.entity.Prodotto;
 
 import java.sql.SQLException;

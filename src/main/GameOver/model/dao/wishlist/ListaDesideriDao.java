@@ -11,6 +11,4 @@ public interface ListaDesideriDao<E extends Exception> {
     ListaDesideri cercaListaDesideriPerUtente(Account account) throws E;
 
 
-
-
 }

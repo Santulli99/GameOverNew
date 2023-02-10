@@ -1,7 +1,5 @@
 package gestioneProdotto.service;
 
-import model.entity.Category;
-import model.entity.Platform;
 import model.entity.Prodotto;
 
 import java.util.ArrayList;
