@@ -155,8 +155,8 @@
                     <div id="prezzo">
 
                         <div class="divprezzo"><p>${prodotto.price}&euro;</p></div>
-                        <div class="divprezzo"><p>${prodotto.platform.platformName}</p></div>
-                        <div class="divprezzo"><p>${prodotto.category.categoryName}</p></div>
+                        <div class="divprezzo"><p>${prodotto.platformName}</p></div>
+                        <div class="divprezzo"><p>${prodotto.categoryName}</p></div>
 
                     </div>
 

@@ -7,13 +7,12 @@ import java.util.Locale;
 
 public class Prodotto {
 
-    private String productName,description,cover,dataString;
+    private String productName,description,cover,dataString,platformName,categoryName;
+
     private double price;
     private LocalDate date;
     private int id;
     private ArrayList<Order> orders=new ArrayList<>();
-    private Category category;
-    private Platform platform;
     private ArrayList<Review> reviews;
     private ListaDesideri listaDesideri;
 
@@ -48,12 +47,21 @@ public class Prodotto {
         this.dataString = dataString;
     }
 
-    public Platform getPlatform() {
-        return platform;
+
+    public String getPlatformName() {
+        return platformName;
     }
 
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getProductName() {
@@ -110,14 +118,6 @@ public class Prodotto {
 
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public ArrayList<Review> getReviews() {

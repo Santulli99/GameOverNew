@@ -63,9 +63,9 @@
         <div id="a2">
           <p>
             <b>Nome gioco:</b> ${prodotto.item.productName} <br>
-            <b>Piattaforma:</b> ${prodotto.item.platform.platformName} <br>
+            <b>Piattaforma:</b> ${prodotto.item.platformName} <br>
             <b>Data uscita:</b> ${prodotto.item.dataString}<br>
-            <b>Categoria:</b> ${prodotto.item.category.categoryName}<br>
+            <b>Categoria:</b> ${prodotto.item.categoryName}<br>
           </p>
         </div>
 

@@ -48,7 +48,7 @@ public class RecensioneController extends HttpServlet {
                 break;
             case "/creaRecensione":
                 account=(Account) request.getSession(false).getAttribute("account");
-                prodotto=gestioneProdottoServiceImp.getProdottoConCategoria(Integer.parseInt(request.getParameter("id")));
+                prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
                 String titolo=request.getParameter("titoloRecensione");
                 String descrizione = request.getParameter("descrizione");
                 double valutazione = Double.parseDouble(request.getParameter("valutazione"));
@@ -89,7 +89,7 @@ public class RecensioneController extends HttpServlet {
 
             case "/modificaRecensione":
                 account=(Account) request.getSession(false).getAttribute("account");
-                prodotto=gestioneProdottoServiceImp.getProdottoConCategoria(Integer.parseInt(request.getParameter("id")));
+                prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
                 String titolo1=request.getParameter("titoloRecensione");
                 String desc=request.getParameter("descrizione");
                 double val= Double.parseDouble(request.getParameter("valutazione"));
@@ -137,7 +137,7 @@ public class RecensioneController extends HttpServlet {
                 break;
             case "/eliminaRecensione":
                 account=(Account) request.getSession(false).getAttribute("account");
-                prodotto=gestioneProdottoServiceImp.getProdottoConCategoria(Integer.parseInt(request.getParameter("id")));
+                prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
                 successo=recensioneServiceImp.rimuoviRecensione(account,prodotto);
                 request.setAttribute("successo",successo);
                 request.setAttribute("prodotto",prodotto);
@@ -146,7 +146,7 @@ public class RecensioneController extends HttpServlet {
 
                 break;
             case "/scriviRecensione":
-                prodotto=gestioneProdottoServiceImp.getProdottoConCategoria(Integer.parseInt(request.getParameter("id")));
+                prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
                 request.setAttribute("prodotto",prodotto);
                 dispatcher =request.getRequestDispatcher("/WEB-INF/views/user/recensione.jsp");
                 dispatcher.forward(request,response);
@@ -154,7 +154,7 @@ public class RecensioneController extends HttpServlet {
             case "/modificaRecensione":
                 account=(Account) request.getSession(false).getAttribute("account");
                 int id=Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdottoPerId(id);
+                prodotto = gestioneProdottoServiceImp.getProdotto(id);
                 review=new Review();
                 review=recensioneServiceImp.cercaRecensionePerProdotto(prodotto,account);
                 request.setAttribute("recensione",review);

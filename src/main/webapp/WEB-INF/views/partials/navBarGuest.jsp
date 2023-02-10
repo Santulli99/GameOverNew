@@ -10,26 +10,26 @@
                         <h4 href="#">PC Giochi</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=1">CASUAL-GAME</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=PC">CASUAL-GAME</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=1">AZIONE-AVVENTURA</a>
-                    </li>
-
-                    <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=1">SIMULAZIONE  </a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=PC">AZIONE-AVVENTURA</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=1">SPORT</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=PC">SIMULAZIONE  </a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=1">RPG</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=PC">SPORT</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=1">GUIDA</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=PC">RPG</a>
+                    </li>
+
+                    <li>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=PC">GUIDA</a>
                     </li>
 
                 </ul>
@@ -45,26 +45,26 @@
                         <h4 href="#">XBOX Giochi</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=3">CASUAL-GAME</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=XBOX">CASUAL-GAME</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=3">AZIONE-AVVENTURA</a>
-                    </li>
-
-                    <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=3">SIMULAZIONE  </a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=XBOX">AZIONE-AVVENTURA</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=3">SPORT</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=3XBOX">SIMULAZIONE  </a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=3">RPG</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=XBOX">SPORT</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=3">GUIDA</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=XBOX">RPG</a>
+                    </li>
+
+                    <li>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=XBOX">GUIDA</a>
                     </li>
 
                 </ul>
@@ -76,26 +76,26 @@
                         <h4 href="#">Playstation Giochi</h4>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=2">CASUAL-GAME</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=CASUAL-GAME&pla=PS4">CASUAL-GAME</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=2">AZIONE-AVVENTURA</a>
-                    </li>
-
-                    <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=2">SIMULAZIONE  </a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=AZIONE-AVVENTURA&pla=PS4">AZIONE-AVVENTURA</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=2">SPORT</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SIMULAZIONE&pla=PS4">SIMULAZIONE  </a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=2">RPG</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=SPORT&pla=PS4">SPORT</a>
                     </li>
 
                     <li>
-                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=2">GUIDA</a>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=RPG&pla=PS4">RPG</a>
+                    </li>
+
+                    <li>
+                        <a href="${pageContext.request.contextPath}/GestioneProdottoController/showProductsWithCatAndPla?category=GUIDA&pla=PS4">GUIDA</a>
                     </li>
 
                 </ul>

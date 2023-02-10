@@ -19,49 +19,9 @@ import java.util.ArrayList;
 public class GestioneProdottoServiceImp implements GestioneProdottoService {
 
     private Prodotto prodotto;
-    private Platform piattaforma;
-    private Category categoria;
-    private SqlPlatformDao sqlPlatformDao = new SqlPlatformDao();
     private SqlProductDao sqlProductDao = new SqlProductDao();
-    private SqlCategoryDao sqlCategoryDao = new SqlCategoryDao();
     private ArrayList<Prodotto> prodotti = new ArrayList<>();
 
-
-    /**
-     * Implementa la funzionalità che restituisce il tipo di piattaforma del prodotto
-     *
-     * @param id int rappresenta l'id della piattaforma
-     * @return oggetto della classe Platform che contiene i dati relativi alla piattaforma
-     */
-
-
-    @Override
-    public Platform getPiattaforma(int id) {
-        try {
-            if ((piattaforma = sqlPlatformDao.searchPlatform(id)) != null)
-                return piattaforma;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    /**
-     * Implementa la funzionalità che restituisce la categoria del prodotto
-     *
-     * @param id int rappresenta l'id della categoria
-     * @return l'oggetto category
-     */
-    @Override
-    public Category getCategoria(int id) {
-        try {
-            if ((categoria = sqlCategoryDao.searchCategory(id)) != null)
-                return categoria;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
 
     /**
      * Implementa la funzionalità che restituisce il prodotto
@@ -73,62 +33,8 @@ public class GestioneProdottoServiceImp implements GestioneProdottoService {
     @Override
     public Prodotto getProdotto(int id) {
         try {
-            if ((prodotto = sqlProductDao.searchProductWithPlatformsAndCategory(id)) != null)
-                return prodotto;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    /**
-     * Implementa la funzionalità che restituisce un prodotto dato un id
-     *
-     * @param id int rappresenta l'id del prodotto
-     * @return l'oggetto prodotto
-     */
-
-    @Override
-    public Prodotto getProdottoPerId(int id) {
-        try {
             if ((prodotto = sqlProductDao.searchProduct(id)) != null)
                 return prodotto;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-
-    /**
-     * Implementa la funzionalità che restituisce un prodotto con la relativa categoria
-     *
-     * @param id int rappresenta l'id del prodotto
-     * @return l'oggetto prodotto
-     */
-
-    @Override
-    public Prodotto getProdottoConCategoria(int id) {
-        try {
-            if ((prodotto = sqlProductDao.searchProductWithCategory(id)) != null)
-                return prodotto;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    /**
-     * Implementa la funzionalità che restituisce tutti i prodotti del sito web con categoria e piattaforma
-     *
-     * @return ArrayList di prodotti
-     */
-
-    @Override
-    public ArrayList<Prodotto> getAllProdottiConCategoriaEPiattaforma() {
-        try {
-            if ((prodotti = sqlProductDao.searchProductsByCategoryAndPlatform1()) != null)
-                return prodotti;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -144,7 +50,7 @@ public class GestioneProdottoServiceImp implements GestioneProdottoService {
      */
 
     @Override
-    public ArrayList<Prodotto> getAllProdottiPerCategoriaEPiattaforma(String categoria, int piattaforma) {
+    public ArrayList<Prodotto> getAllProdottiPerCategoriaEPiattaforma(String categoria, String piattaforma) {
         try {
             if ((prodotti = sqlProductDao.searchProductsByCategoryAndPlatform(categoria, piattaforma)) != null)
                 return prodotti;

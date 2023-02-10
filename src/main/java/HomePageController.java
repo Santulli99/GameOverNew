@@ -49,7 +49,7 @@ public class HomePageController extends HttpServlet {
         try {
             ArrayList<Prodotto> prodottos;
             SqlProductDao sqlProductDao = new SqlProductDao();
-            prodottos = sqlProductDao.searchProductsvetrina(2);
+            prodottos = sqlProductDao.searchProductsvetrina("PS4");
             getServletContext().setAttribute("vetrina", prodottos);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

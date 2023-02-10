@@ -162,9 +162,6 @@ public class GestioneAcquistiController extends HttpServlet {
                 order = gestioneAcquistiServiceImp.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
                 double totale = 0;
                 for (int i = 0; i < order.getProducts().size(); i++) {
-                    prodotto = gestioneProdottoServiceImp.getProdotto(order.getProducts().get(i).getId());
-                    order.getProducts().get(i).setPlatform(prodotto.getPlatform());
-                    order.getProducts().get(i).setCategory(prodotto.getCategory());
                     totale += order.getProducts().get(i).getPrice();
                 }
                 request.setAttribute("order", order);
@@ -182,9 +179,6 @@ public class GestioneAcquistiController extends HttpServlet {
                 order = gestioneAcquistiServiceImp.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
                 double total = 0;
                 for (int i = 0; i < order.getProducts().size(); i++) {
-                    prodotto = gestioneProdottoServiceImp.getProdotto(order.getProducts().get(i).getId());
-                    order.getProducts().get(i).setPlatform(prodotto.getPlatform());
-                    order.getProducts().get(i).setCategory(prodotto.getCategory());
                     total += order.getProducts().get(i).getPrice();
                 }
                 request.setAttribute("orderAdmin", order);

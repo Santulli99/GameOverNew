@@ -3,7 +3,6 @@ package gestioneUtenti.controller;
 import gestioneUtenti.service.GestioneUtenteService;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.entity.Account;
-import model.entity.DataClient;
 import validate.ValidateForm;
 
 import javax.servlet.RequestDispatcher;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 public class GestioneUtenteController extends HttpServlet {
     private Account account;
     private RequestDispatcher dispatcher;
-    private DataClient dataClient;
     private boolean modifica;
     private boolean modificaEmail;
     private boolean trovato;

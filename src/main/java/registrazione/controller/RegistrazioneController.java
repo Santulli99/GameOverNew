@@ -3,7 +3,6 @@ package registrazione.controller;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
-import model.entity.DataClient;
 import registrazione.service.RegistrazioneServiceImp;
 
 import javax.servlet.RequestDispatcher;

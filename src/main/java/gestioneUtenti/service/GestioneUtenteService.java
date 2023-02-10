@@ -1,7 +1,6 @@
 package gestioneUtenti.service;
 
 import model.entity.Account;
-import model.entity.DataClient;
 
 import java.util.ArrayList;
 

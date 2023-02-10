@@ -121,8 +121,8 @@
                 <c:forEach items="${prodotti}" var="prodotto">
                     <li>
                         <div><p>${prodotto.productName}</p></div>
-                        <div><p> ${prodotto.platform.platformName} </p></div>
-                        <div><p> ${prodotto.category.categoryName} </p></div>
+                        <div><p> ${prodotto.platformName} </p></div>
+                        <div><p> ${prodotto.categoryName} </p></div>
                         <div><a href="${pageContext.request.contextPath}/GestioneProdottoController/updateProduct?id=${prodotto.id}"><button>Modifica</button></a>
                         <a href="${pageContext.request.contextPath}/GestioneProdottoController/deleteProduct?id=${prodotto.id}"><button>Elimina</button></a></div>
                     </li>

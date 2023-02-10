@@ -194,7 +194,7 @@
                         ${prodotto.id}
                         <br>
                         Genere:
-                        ${prodotto.category.categoryName}
+                        ${prodotto.categoryName}
                         <br>
                         Rilascio:
                         ${prodotto.dataString}

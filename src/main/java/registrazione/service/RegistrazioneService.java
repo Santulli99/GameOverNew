@@ -1,7 +1,6 @@
 package registrazione.service;
 
 import model.entity.Account;
-import model.entity.DataClient;
 
 import javax.servlet.http.HttpServletRequest;
 

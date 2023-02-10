@@ -147,20 +147,20 @@
 
                 <div>
                     <select name="categoria" required>
-                        <option value="1">CASUAL-GAME</option>
-                        <option value="2">AZIONE-AVVENTURA</option>
-                        <option value="3">SIMULAZIONE</option>
-                        <option value="4">SPORT</option>
-                        <option value="5">RPG</option>
-                        <option value="6">GUIDA</option>
+                        <option value="CASUAL-GAME">CASUAL-GAME</option>
+                        <option value="AZIONE-AVVENTURA">AZIONE-AVVENTURA</option>
+                        <option value="SIMULAZIONE">SIMULAZIONE</option>
+                        <option value="SPORT">SPORT</option>
+                        <option value="RPG">RPG</option>
+                        <option value="GUIDA">GUIDA</option>
                     </select>
                 </div>
 
                 <div>
                     <select name="piattaforma" required>
-                        <option value="1">PC</option>
-                        <option value="2">PS4</option>
-                        <option value="3">XBOX</option>
+                        <option value="PC">PC</option>
+                        <option value="PS4">PS4</option>
+                        <option value="XBOX">XBOX</option>
                     </select>
                 </div>
             </div>

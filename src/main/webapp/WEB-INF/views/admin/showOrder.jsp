@@ -179,9 +179,9 @@
                 <div id="a2">
                     <img src="${pageContext.request.contextPath}/cover/${prodotto.cover}">
                     <p><b>Nome gioco:</b> ${prodotto.productName} <br>
-                        <b>Piattaforma:</b> ${prodotto.platform.platformName} <br>
+                        <b>Piattaforma:</b> ${prodotto.platformName} <br>
                         <b>Data uscita:</b> ${prodotto.dataString}<br>
-                        <b>Categoria:</b> ${prodotto.category.categoryName}<br>
+                        <b>Categoria:</b> ${prodotto.categoryName}<br>
 
                     </p>
                 </div>

@@ -2,9 +2,7 @@ package gestioneUtenti.service;
 
 import model.dao.account.SqlAccountDao;
 
-import model.dao.product.SqlProductDao;
 import model.entity.Account;
-import model.entity.DataClient;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,15 +18,12 @@ import java.util.ArrayList;
 public class GestioneUtenteServiceImp implements GestioneUtenteService {
 
     private SqlAccountDao accountDAO;
-    private SqlProductDao productDA0;
 
 
     private Account account;
-    private DataClient dataClient;
 
     public GestioneUtenteServiceImp() {
         accountDAO = new SqlAccountDao();
-        productDA0 = new SqlProductDao();
     }
 
 

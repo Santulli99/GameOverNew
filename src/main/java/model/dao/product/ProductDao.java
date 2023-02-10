@@ -9,11 +9,8 @@ public interface ProductDao <E extends  Exception>{
 
     //cercare in base alle proprietà
 
-    ArrayList<Prodotto> searchProductsByName(String nome) throws E;
-    ArrayList<Prodotto> searchProductsByPrice(double price_MAX) throws E;
-    ArrayList<Prodotto> searchProductsByCategory(String category) throws E;
-    ArrayList<Prodotto> searchProductsByCategoryAndPlatform(String category, int idPlatform) throws E;
-    ArrayList<Prodotto> searchProductsByDate(LocalDate date) throws E;
+    ArrayList<Prodotto> searchProductsByCategoryAndPlatform(String category, String platform) throws E;
+
 
     
 
@@ -21,7 +18,7 @@ public interface ProductDao <E extends  Exception>{
 
     ArrayList<Prodotto> searchAllProducts() throws E;
 
-    ArrayList<Prodotto> searchProductsvetrina(int idpiattaforma) throws E;
+    ArrayList<Prodotto> searchProductsvetrina(String piattaforma) throws E;
 
 
     boolean createProduct(Prodotto prodotto) throws E;
@@ -30,15 +27,6 @@ public interface ProductDao <E extends  Exception>{
 
     boolean updateProductValuation(Prodotto prodotto) throws E;
 
-    Prodotto searchProductWithCategory(int id) throws E;
-    Prodotto searchProductWithPlatforms(int id) throws E;
-    Prodotto searchProductWithPlatformsAndCategory(int id) throws E;
-    Prodotto searchProductWithOrders(int id) throws E;
-    ArrayList<Prodotto> searchProductsByCategoryAndPlatform1() throws E;
 
-    //hash MAP
-    ArrayList<Prodotto> searchProductWithCategory() throws E;
-    ArrayList<Prodotto> searchProductWithPlatform(int idpiattaforma) throws E;
-    ArrayList<Prodotto> searchProductWithOrders() throws E;
 
 }

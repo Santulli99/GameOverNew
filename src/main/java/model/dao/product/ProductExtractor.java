@@ -17,6 +17,8 @@ public class ProductExtractor implements ResultSetExtractor<Prodotto> {
         prodotto.setCover(resultSet.getString("pro.path_img"));
         prodotto.setDate(resultSet.getDate("pro.data_uscita").toLocalDate());
         prodotto.setValutazioneMedia(resultSet.getDouble("pro.valutazione_media"));
+        prodotto.setCategoryName(resultSet.getString("pro.categoria"));
+        prodotto.setPlatformName(resultSet.getString("pro.piattaforma"));
         return prodotto;
     }
 }

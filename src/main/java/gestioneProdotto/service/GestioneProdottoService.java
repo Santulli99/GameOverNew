@@ -15,23 +15,6 @@ import java.util.ArrayList;
 public interface GestioneProdottoService {
 
     /**
-     * firma del metodo che restituisce il tipo di piattaforma del prodotto
-     *
-     * @param id int rappresenta l'id della piattaforma
-     * @return oggetto della classe Platform che contiene i dati relativi alla piattaforma
-     */
-    Platform getPiattaforma(int id);
-
-    /**
-     * firma del metodo che restituisce la categoria del prodotto
-     *
-     * @param id int rappresenta l'id della categoria
-     * @return l'oggetto category
-     */
-
-    Category getCategoria(int id);
-
-    /**
      * firma del metodo che restituisce il prodotto
      *
      * @param id int rappresenta l'id del prodotto
@@ -40,20 +23,13 @@ public interface GestioneProdottoService {
     Prodotto getProdotto(int id);
 
     /**
-     * firma del metodo che restituisce tutti i prodotti del sito web con categoria e piattaforma
-     *
-     * @return ArrayList di prodotti
-     */
-    ArrayList<Prodotto> getAllProdottiConCategoriaEPiattaforma();
-
-    /**
      * firma del metodo che restituisce tutti i prodotti di una data categoria e piattaforma
      *
      * @param categoria   String rappresenta la categoria del prodotto
      * @param piattaforma int rappresenta l'id della piattaforma
      * @return ArrayList di prodotti
      */
-    ArrayList<Prodotto> getAllProdottiPerCategoriaEPiattaforma(String categoria, int piattaforma);
+    ArrayList<Prodotto> getAllProdottiPerCategoriaEPiattaforma(String categoria, String piattaforma);
 
     /**
      * firma del metodo che restituisce tutti i  prodotti
@@ -62,21 +38,6 @@ public interface GestioneProdottoService {
      */
     ArrayList<Prodotto> getAllProdotti();
 
-    /**
-     * firma del metodo che restituisce un prodotto con la relativa categoria
-     *
-     * @param id int rappresenta l'id del prodotto
-     * @return l'oggetto prodotto
-     */
-    Prodotto getProdottoConCategoria(int id);
-
-    /**
-     * firma del metodo che restituisce un prodotto dato un id
-     *
-     * @param id int rappresenta l'id del prodotto
-     * @return l'oggetto prodotto
-     */
-    Prodotto getProdottoPerId(int id);
 
     /**
      * firma del metodo che implementa la rimozione di un prodotto dal sito

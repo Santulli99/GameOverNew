@@ -31,7 +31,6 @@ import java.util.ArrayList;
 @WebServlet(name = "ListaDesideriController", value = "/ListaDesideriController/*")
 public class ListaDesideriController extends HttpServlet {
     private RequestDispatcher dispatcher;
-    private SqlProductDao sqlProdottoDao = new SqlProductDao();
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
@@ -61,7 +60,7 @@ public class ListaDesideriController extends HttpServlet {
                 break;
             case "/aggiungiListaDesideri":
                 account = (Account) request.getSession(false).getAttribute("account");
-                prodotto = gestioneProdottoServiceImp.getProdottoPerId(Integer.parseInt(request.getParameter("id")));
+                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
 
                 if (listaDesideriServiceImp.aggiungiProdottoListaDesideri(prodotto, account)) {
                     successo = true;
@@ -103,7 +102,7 @@ public class ListaDesideriController extends HttpServlet {
 
             case "/rimuoviListaDesideri":
                 account = (Account) request.getSession(false).getAttribute("account");
-                prodotto = gestioneProdottoServiceImp.getProdottoPerId(Integer.parseInt(request.getParameter("id")));
+                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
 
                 if (listaDesideriServiceImp.eliminaProdottoListaDesideri(prodotto, account))
                     successo = true;
