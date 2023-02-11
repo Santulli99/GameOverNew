@@ -12,13 +12,6 @@ public class Review {
         super();
     }
 
-    public Review(String descrizione, double valutazione, Account account, Prodotto prodotto) {
-        this.descrizione = descrizione;
-        this.valutazione = valutazione;
-        this.account = account;
-        this.prodotto = prodotto;
-    }
-
     public String getTitolo() {
         return titolo;
     }
@@ -59,7 +52,5 @@ public class Review {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-
 
 }

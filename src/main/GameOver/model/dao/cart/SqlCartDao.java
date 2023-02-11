@@ -26,7 +26,6 @@ public class SqlCartDao implements CartDao {
                 return rows == 1;
             }
         }
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class SqlCartDao implements CartDao {
                 return rows == 1;
             }
         }
-
     }
 
     @Override

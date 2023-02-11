@@ -12,11 +12,6 @@ public class ListaDesideri {
 
     public ListaDesideri() { super(); }
 
-    public ListaDesideri(Account account, ArrayList<Prodotto> prodotto) {
-        this.account = account;
-        this.prodotti = prodotto;
-    }
-
     public Account getAccount() {
         return account;
     }

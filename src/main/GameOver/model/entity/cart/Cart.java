@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Cart {
 
     private ArrayList<CartItem> cartItems;
-    private boolean isPresent;
 
     public Cart() {
         this.cartItems = new ArrayList<>();
@@ -19,21 +18,6 @@ public class Cart {
 
     public void setCartItems(ArrayList<CartItem> cartItems) {
         this.cartItems = cartItems;
-    }
-
-    public void addProduct(Prodotto p){
-        cartItems.add(new CartItem(p));
-    }
-
-    public void removeProduct(Prodotto p){
-
-        for (int i=0; i<cartItems.size(); i++){
-
-            if(p.equals(cartItems.get(i).getItem())){
-                cartItems.remove(i);
-            }
-
-        }
     }
 
     public boolean isPresent(Prodotto p){

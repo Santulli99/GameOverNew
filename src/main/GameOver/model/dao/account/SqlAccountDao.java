@@ -16,22 +16,17 @@ public class SqlAccountDao implements AccountDao<SQLException> {
     public Account searchAccountEmail(String email) throws SQLException {
 
         try (Connection connection = SqlDao.getConnection()) {
-            String query = "SELECT * " +
-                    "FROM account AS acc  " +
-                    "WHERE  acc.email=? ";
+            String query = "SELECT * FROM account AS acc WHERE  acc.email=? ";
 
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, email);
-
                 ResultSet rs = ps.executeQuery();
-
                 Account account = null;
                 AccountExtractor accountExtractor = new AccountExtractor();
 
                 if (rs.next()) {
                     account = accountExtractor.extract(rs);
                 }
-
                 return account;
             }
         }
@@ -46,10 +41,8 @@ public class SqlAccountDao implements AccountDao<SQLException> {
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
-
                 Account account = null;
                 AccountExtractor acc = new AccountExtractor();
-
                 if (rs.next()) {
                     account = acc.extract(rs);
                 }
@@ -147,8 +140,7 @@ public class SqlAccountDao implements AccountDao<SQLException> {
     public Account  searchAccountLogin(String pass,String email) throws SQLException {
 
         try(Connection connection=SqlDao.getConnection()) {
-            String query="SELECT * " +
-                    "FROM account AS acc WHERE acc.password=SHA1(?) AND acc.email=? ; ";
+            String query="SELECT * FROM account AS acc WHERE acc.password=SHA1(?) AND acc.email=?;";
             try(PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, pass);
                 ps.setString(2, email);

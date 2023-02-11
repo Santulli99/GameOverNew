@@ -16,10 +16,6 @@ public class Account {
     boolean venditore;
     int id;
     private LocalDate date;
-    private ArrayList<Review> reviews;
-
-
-    private ListaDesideri listaDesideri;
 
     private ArrayList<Order> orders = new ArrayList<>();
 
@@ -50,14 +46,6 @@ public class Account {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public ListaDesideri getListaDesideri() {
-        return listaDesideri;
-    }
-
-    public void setListaDesideri(ListaDesideri listaDesideri) {
-        this.listaDesideri = listaDesideri;
     }
 
     public ArrayList<Order> getOrders() {
@@ -124,14 +112,6 @@ public class Account {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ArrayList<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(ArrayList<Review> reviews) {
-        this.reviews = reviews;
     }
 
     @Override

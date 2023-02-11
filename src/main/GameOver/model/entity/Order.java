@@ -12,11 +12,7 @@ public class Order {
     private int id,num_product;
     private LocalDate date;
     private Account account;
-
-
     private double total;
-
-
     private String dataString;
     private ArrayList<Prodotto> products =new ArrayList<>();
     private Cart cart;
@@ -39,9 +35,6 @@ public class Order {
         return id;
     }
 
-    /*public int entries(){
-        return model.entity.model.dao.cart.getCartItems().size();
-    }*/
     public String getDataString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(Locale.ITALY);
         return date.format(formatter);

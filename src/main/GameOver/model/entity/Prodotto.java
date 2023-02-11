@@ -111,8 +111,6 @@ public class Prodotto {
         this.orders = orders;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
