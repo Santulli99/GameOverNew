@@ -13,18 +13,9 @@ public class Prodotto {
     private LocalDate date;
     private int id;
     private ArrayList<Order> orders=new ArrayList<>();
-    private ArrayList<Review> reviews;
-    private ListaDesideri listaDesideri;
 
     private double valutazioneMedia;
 
-    public ListaDesideri getListaDesideri() {
-        return listaDesideri;
-    }
-
-    public void setListaDesideri(ListaDesideri listaDesideri) {
-        this.listaDesideri = listaDesideri;
-    }
 
     public double getValutazioneMedia() {
         return valutazioneMedia;
@@ -120,21 +111,7 @@ public class Prodotto {
         this.orders = orders;
     }
 
-    public ArrayList<Review> getReviews() {
-        return reviews;
-    }
 
-    public void setReviews(ArrayList<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public ListaDesideri getWishlist() {
-        return listaDesideri;
-    }
-
-    public void setWishlist(ListaDesideri listaDesideri) {
-        this.listaDesideri = listaDesideri;
-    }
 
     @Override
     public boolean equals(Object o) {
