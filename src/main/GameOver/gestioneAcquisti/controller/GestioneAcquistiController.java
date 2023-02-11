@@ -14,8 +14,6 @@ import model.entity.Order;
 import model.entity.Prodotto;
 import model.entity.cart.Cart;
 import model.entity.cart.CartItem;
-
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

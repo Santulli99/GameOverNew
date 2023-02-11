@@ -151,7 +151,7 @@ public class GestioneAcquistiServiceImp implements GestioneAcquistiService {
     }
 
     /**
-     * Implementa la funzionalità che restituisce tutti gli ordini con i prodotti  effettuati
+     * Implementa la funzionalità che restituisce tutti gli ordini effettuati
      * da un singolo utente registrato al sito web e loggato in quel momento
      *
      * @param id int rappresenta l'id dell'acount
@@ -189,5 +189,23 @@ public class GestioneAcquistiServiceImp implements GestioneAcquistiService {
         }
         return null;
     }
+
+    /**
+     * Implemeneta la funzionalità che restituisce tutti gli ordini con i prodotti
+     *
+     * @return ArrayList di ordini
+     */
+    @Override
+    public ArrayList<Order> getAllOrdiniConProdotti() {
+        ArrayList<Order> ordini = new ArrayList<>();
+        try {
+            if ((ordini = orderDao.searchAllOrderWithProducts()) != null)
+                return ordini;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
 
 }

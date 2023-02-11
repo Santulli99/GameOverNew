@@ -91,4 +91,12 @@ public interface GestioneAcquistiService {
      */
     Order getOrdineConProdotti(int id_ordine);
 
+    /**
+     * firma del metodo che restituisce tutti gli ordini con i prodotti
+     *
+     * @return ArrayList di ordini
+     */
+    ArrayList<Order> getAllOrdiniConProdotti();
+
+
 }

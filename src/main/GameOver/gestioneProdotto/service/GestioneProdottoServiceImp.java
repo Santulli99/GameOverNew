@@ -18,6 +18,24 @@ public class GestioneProdottoServiceImp implements GestioneProdottoService {
     private ArrayList<Prodotto> prodotti = new ArrayList<>();
 
 
+
+    /**
+     * Implementa la funzionalità che restituisce i prodotti per la vetrina
+     *
+     * @param piattaforma String che rappresenta in nome della piattaforma del prodotto
+     * @return ArrayList di prodotti
+     */
+    @Override
+    public ArrayList<Prodotto> getProdottiVetrina(String piattaforma) {
+        try {
+            if ((prodotti = sqlProductDao.searchProductsvetrina(piattaforma)) != null)
+                return prodotti;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     /**
      * Implementa la funzionalità che restituisce il prodotto
      *

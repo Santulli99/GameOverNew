@@ -303,9 +303,8 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
                     dispatcher.forward(request, response);
                 }
-
-
                 break;
+
             /**si modifica il prodotto**/
             case "/updateProduct":
 

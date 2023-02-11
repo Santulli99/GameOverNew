@@ -1,16 +1,10 @@
-import autenticazione.service.AutenticazioneService;
-import autenticazione.service.AutenticazioneServiceImp;
 import gestioneAcquisti.service.GestioneAcquistiServiceImp;
-import model.dao.account.SqlAccountDao;
-import model.dao.cart.SqlCartDao;
-import model.dao.order.SqlOrderDao;
-import model.dao.product.SqlProductDao;
-import model.dao.wishlist.SqlListaDesideriDao;
+import gestioneProdotto.service.GestioneProdottoServiceImp;
+import gestioneUtenti.service.GestioneUtenteServiceImp;
 import model.entity.Account;
 import model.entity.Order;
 import model.entity.Prodotto;
 import model.entity.cart.Cart;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -32,28 +25,19 @@ import java.util.ArrayList;
 @WebServlet(name = "HomePageController", value = "/HomePageController/*")
 public class HomePageController extends HttpServlet {
     private RequestDispatcher dispatcher;
-    private SqlAccountDao accountDao = new SqlAccountDao();
-    private SqlProductDao productDao = new SqlProductDao();
-
-    private SqlOrderDao orderDao = new SqlOrderDao();
     private Cart cart = new Cart();
-
-    private SqlCartDao cartDao = new SqlCartDao();
-    private SqlListaDesideriDao wishlistDao = new SqlListaDesideriDao();
     private Account account = new Account();
-    private AutenticazioneService autenticazioneService = new AutenticazioneServiceImp();
+
     private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
+
+    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
+    private GestioneUtenteServiceImp gestioneUtenteServiceImp = new GestioneUtenteServiceImp();
 
     public void init() throws ServletException {
         super.init();
-        try {
-            ArrayList<Prodotto> prodottos;
-            SqlProductDao sqlProductDao = new SqlProductDao();
-            prodottos = sqlProductDao.searchProductsvetrina("PS4");
-            getServletContext().setAttribute("vetrina", prodottos);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        ArrayList<Prodotto> prodottos;
+        prodottos = gestioneProdottoServiceImp.getProdottiVetrina("PS4");
+        getServletContext().setAttribute("vetrina", prodottos);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,35 +71,30 @@ public class HomePageController extends HttpServlet {
             case "/":
                 break;
             case "/homePageAdmin":
-                try {
-                    ArrayList<Prodotto> prodottos = productDao.searchAllProducts();
-                    request.getSession(false).setAttribute("n_products", prodottos.size());
-                    ArrayList<Account> accounts = accountDao.searchAllAccount();
-                    request.getSession(false).setAttribute("n_client", accounts.size());
-                    ArrayList<Order> orders = orderDao.searchAllOrderWithProducts();
-                    ArrayList<Order> newOrdini = new ArrayList<>();
-                    LocalDate now = LocalDate.now();
+                ArrayList<Prodotto> prodottos = gestioneProdottoServiceImp.getAllProdotti();
+                request.getSession(false).setAttribute("n_products", prodottos.size());
+                ArrayList<Account> accounts = gestioneUtenteServiceImp.getAllAccount();
+                request.getSession(false).setAttribute("n_client", accounts.size());
+                ArrayList<Order> orders = gestioneAcquistiServiceImp.getAllOrdiniConProdotti();
+                ArrayList<Order> newOrdini = new ArrayList<>();
+                LocalDate now = LocalDate.now();
 
-                    for (int i = 0; i < orders.size(); i++) {
-                        if (orders.get(i).getDate().getMonth().equals(now.getMonth())) {
-                            newOrdini.add(orders.get(i));
-                        }
+                for (int i = 0; i < orders.size(); i++) {
+                    if (orders.get(i).getDate().getMonth().equals(now.getMonth())) {
+                        newOrdini.add(orders.get(i));
                     }
-                    double totale = 0;
-                    for (int j = 0; j < newOrdini.size(); j++) {
-                        totale += newOrdini.get(j).getTotal();
-                    }
-                    request.getSession(false).setAttribute("totale_incasso", Math.round(totale * 100.0) / 100.0);
-
-                    request.getSession(false).setAttribute("n_ordini", newOrdini.size());
-
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
-                    dispatcher.forward(request, response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                }
+                double totale = 0;
+                for (int j = 0; j < newOrdini.size(); j++) {
+                    totale += newOrdini.get(j).getTotal();
                 }
 
+                request.getSession(false).setAttribute("totale_incasso", Math.round(totale * 100.0) / 100.0);
+                request.getSession(false).setAttribute("n_ordini", newOrdini.size());
+                dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
+                dispatcher.forward(request, response);
                 break;
+
             case "/homePageUtent":
                 account = (Account) request.getSession(false).getAttribute("account");
                 cart = gestioneAcquistiServiceImp.getCart(account);

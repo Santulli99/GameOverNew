@@ -13,6 +13,15 @@ import java.util.ArrayList;
 public interface GestioneProdottoService {
 
     /**
+     * firma del metodo che restituisce i prodotti per la vetrina
+     *
+     * @param piattaforma String che rappresenta in nome della piattaforma del prodotto
+     * @return ArrayList di prodotti
+     */
+    ArrayList<Prodotto> getProdottiVetrina(String piattaforma);
+
+
+    /**
      * firma del metodo che restituisce il prodotto
      *
      * @param id int rappresenta l'id del prodotto
