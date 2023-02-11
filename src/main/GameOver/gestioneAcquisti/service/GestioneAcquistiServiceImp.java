@@ -190,42 +190,4 @@ public class GestioneAcquistiServiceImp implements GestioneAcquistiService {
         return null;
     }
 
-    /**
-     * Implementa la funzionalità che implementa la rimozione di un ordine
-     *
-     * @param ordine oggetto della classe Order che rappresenta l'ordine da rimuovere
-     * @return boolean indica la riuscita dell'operazione
-     */
-
-    @Override
-    public boolean rimuoviOrdine(Order ordine) {
-        try {
-            if (orderDao.deleteOrder(ordine))
-                return true;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
-    /**
-     * Implementa la funzionalità che restituisce l'ordine
-     *
-     * @param id int rappresenta l'id dell'ordine
-     * @return oggetto della classe Order che contiene le info sull'acquisto effettuato
-     */
-
-
-    @Override
-    public Order getOrdine(int id) {
-        Order ord = new Order();
-        try {
-            if ((ord = orderDao.searchOrderId(id)) != null)
-                return ord;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
 }

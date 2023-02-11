@@ -91,19 +91,4 @@ public interface GestioneAcquistiService {
      */
     Order getOrdineConProdotti(int id_ordine);
 
-    /**
-     * firma del metodo che implementa la rimozione di un ordine
-     *
-     * @param ordine oggetto della classe Order che rappresenta l'ordine da rimuovere
-     * @return boolean indica la riuscita dell'operazione
-     */
-    boolean rimuoviOrdine(Order ordine);
-
-    /**
-     * firma del metodo che restituisce l'ordine
-     *
-     * @param id int rappresenta l'id dell'ordine
-     * @return oggetto della classe Order che contiene le info sull'acquisto effettuato
-     */
-    Order getOrdine(int id);
 }

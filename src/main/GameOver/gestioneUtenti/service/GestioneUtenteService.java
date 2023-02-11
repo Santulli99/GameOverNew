@@ -54,7 +54,4 @@ public interface GestioneUtenteService {
     Account getAccountEmail(String email);
 
 
-
-
-
 }

@@ -450,6 +450,174 @@ function validateEmail() {
 
 }
 
+function validateNomeProdotto(){
+    var nome = document.getElementById("nome").value;
+    var nomeRegex = /^.{3,50}$/;
+
+
+    if ((nome == "") || (nome == "undefined")) {
+        document.getElementById("nome").style.border = "2px solid #ee3124";
+        document.getElementById("nome").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("nome").style.outline = "1px solid";
+        document.getElementById("nome").style.outlineColor = "#ee3124";
+        document.getElementById("pr1").innerHTML = "Il nome del prodotto è obbligatorio";
+        document.getElementById("pr1").style.display = "block";
+        return false;
+    } else if (!nomeRegex.test(nome)) {
+        document.getElementById("pr1").innerHTML = "Il nome del prodotto non è valido.<br>Il nome del prodotto deve contenere solo<br>caratteri alfanumerici di lunghezza min 3.";
+        document.getElementById("nome").style.border = "2px solid #ee3124";
+        document.getElementById("nome").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("nome").style.outline = "1px solid";
+        document.getElementById("nome").style.outlineColor = "#ee3124";
+        document.getElementById("pr1").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("nome").style.outline = "initial";
+        document.getElementById("nome").style.border = "";
+        document.getElementById("nome").style.boxShadow = "none";
+        document.getElementById("nome").style.outline = "1px solid";
+        document.getElementById("nome").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr1").style.display = "none";
+        return true;
+    }
+}
+
+function validatePrezzoProdotto(){
+    var prezzo = document.getElementById("prezzo").value;
+    var prezzoRegex = /^\d+(\.\d{2})?$/;
+
+
+    if ((prezzo == "") || (prezzo == "undefined")) {
+        document.getElementById("prezzo").style.border = "2px solid #ee3124";
+        document.getElementById("prezzo").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("prezzo").style.outline = "1px solid";
+        document.getElementById("prezzo").style.outlineColor = "#ee3124";
+        document.getElementById("pr2").innerHTML = "Il prezzo del prodotto è obbligatorio";
+        document.getElementById("pr2").style.display = "block";
+        return false;
+    } else if (!prezzoRegex.test(prezzo)) {
+        document.getElementById("pr2").innerHTML = "Il prezzo del prodotto non è valido.<br>Il prezzo del prodotto deve contenere<br>solo cifre e il <b>.</b>";
+        document.getElementById("prezzo").style.border = "2px solid #ee3124";
+        document.getElementById("prezzo").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("prezzo").style.outline = "1px solid";
+        document.getElementById("prezzo").style.outlineColor = "#ee3124";
+        document.getElementById("pr2").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("prezzo").style.outline = "initial";
+        document.getElementById("prezzo").style.border = "";
+        document.getElementById("prezzo").style.boxShadow = "none";
+        document.getElementById("prezzo").style.outline = "1px solid";
+        document.getElementById("prezzo").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr2").style.display = "none";
+        return true;
+    }
+}
+
+function validateDescrizioneProdotto(){
+    var testo = document.getElementById("content");
+    var descrizione=testo.value;
+    var descrizioneRegex = /^.{10,5000}$/;
+
+    if ((descrizione == "") || (descrizione == "undefined")) {
+        document.getElementById("content").style.border = "2px solid #ee3124";
+        document.getElementById("content").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("content").style.outline = "1px solid";
+        document.getElementById("content").style.outlineColor = "#ee3124";
+        document.getElementById("pr3").innerHTML = "La descrizione è obbligatoria";
+        document.getElementById("pr3").style.display = "block";
+        return false;
+    } else if (!descrizioneRegex.test(descrizione)) {
+        document.getElementById("pr3").innerHTML = "Descrizione non valida.La descrizione deve contenere minimo 10 caratteri e massimo 5000 caratteri.";
+        document.getElementById("content").style.border = "2px solid #ee3124";
+        document.getElementById("content").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("content").style.outline = "1px solid";
+        document.getElementById("content").style.outlineColor = "#ee3124";
+        document.getElementById("pr3").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("content").style.outline = "initial";
+        document.getElementById("content").style.border = "";
+        document.getElementById("content").style.boxShadow = "none";
+        document.getElementById("content").style.outline = "1px solid";
+        document.getElementById("content").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr3").style.display = "none";
+        return true;
+    }
+}
+
+function validateCoverProdotto(){
+    const file = document.getElementById("cover");
+    const fileTrovato=file.files[0];
+
+    if (fileTrovato.size > 1024 * 1024) {
+        document.getElementById("pr4").innerHTML = "Cover non valida.<br>La cover deve avere dimensione massima 1MB";
+        document.getElementById("cover").style.border = "2px solid #ee3124";
+        document.getElementById("cover").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("cover").style.outline = "1px solid";
+        document.getElementById("cover").style.outlineColor = "#ee3124";
+        document.getElementById("pr4").style.display = "block";
+        return false;
+    }else{
+        document.getElementById("cover").style.outline = "initial";
+        document.getElementById("cover").style.border = "";
+        document.getElementById("cover").style.boxShadow ="none";
+        document.getElementById("pr4").style.display = "none";
+        return true;
+    }
+}
+
+function validateDataUscitaProdotto(){
+    var data = document.getElementById("datau").value;
+    var dataUscita = new Date(data);
+    var dataOggi = new Date();
+
+    if ((data == "") || (data == "undefined")) {
+        document.getElementById("datau").style.border = "2px solid #ee3124";
+        document.getElementById("datau").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("datau").style.outline = "1px solid";
+        document.getElementById("datau").style.outlineColor = "#ee3124";
+        document.getElementById("pr5").innerHTML = "La data di uscita è obbligatoria";
+        document.getElementById("pr5").style.display = "block";
+        return false;
+    } else if (dataUscita>dataOggi) {
+        document.getElementById("pr5").innerHTML = "Data di uscita non valida.<br>La data di uscita deve precedere<br>la data odierna";
+        document.getElementById("datau").style.border = "2px solid #ee3124";
+        document.getElementById("datau").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("datau").style.outline = "1px solid";
+        document.getElementById("datau").style.outlineColor = "#ee3124";
+        document.getElementById("pr5").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("datau").style.outline = "initial";
+        document.getElementById("datau").style.border = "";
+        document.getElementById("datau").style.boxShadow = "none";
+        document.getElementById("datau").style.outline = "1px solid";
+        document.getElementById("datau").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr5").style.display = "none";
+        return true;
+    }
+}
+
+function validateAddProdotto(){
+    if (validateNomeProdotto() && validatePrezzoProdotto() && validateDescrizioneProdotto() &&
+        validateCoverProdotto() && validateDataUscitaProdotto()) {
+        return true;
+    }
+    return false;
+}
+function validateUpdateProdotto(){
+    if (validateNomeProdotto() && validatePrezzoProdotto() && validateDescrizioneProdotto()) {
+        return true;
+    }
+    return false;
+}
+
+
 /*******************Ajax per verificare se email già presente nel database************************/
 
 function checkEmailSignAjax() {

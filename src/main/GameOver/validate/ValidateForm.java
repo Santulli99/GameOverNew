@@ -3,6 +3,11 @@ package validate;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
@@ -121,18 +126,56 @@ public class ValidateForm {
         return false;
     }
 
+    public static boolean validateNomeProdotto(String nome) {
 
+        String regex = "^.{3,50}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nome);
 
+        if (matcher.matches())
+            return true;
 
+        return false;
+    }
 
+    public static boolean validatePrezzoProdotto(String prezzo) {
+        String regex = "^\\d+(\\.\\d{2})?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(prezzo);
 
+        if (matcher.matches())
+            return true;
 
+        return false;
+    }
 
+    public static boolean validateDescrizioneProdotto(String descrizione) {
+        String regex = "^.{10,5000}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(descrizione);
 
+        if (matcher.matches())
+            return true;
 
+        return false;
+    }
 
+    public static boolean validateCoverProdotto(Part file) throws IOException {
+        long fileSize = file.getSize();
+        long maxFileSize = 1 * 1024 * 1024; // 1 MB in byte
+        if (fileSize > maxFileSize) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    public static boolean validateDataUscitaProdotto(LocalDate date) {
 
-
-
+        LocalDate dataOggi = LocalDate.now();
+        if (date.isBefore(dataOggi)) {
+            return true;
+        }
+        return false;
+    }
 }

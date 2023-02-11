@@ -10,7 +10,7 @@
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
 
-
+    <script src="/GameOverNew_war_exploded/js/validate.js"></script>
     <style>
 
         .f_product label {
@@ -64,14 +64,29 @@
             margin-bottom: 10px;
         }
 
+        p {
+
+            margin: 5px 0 0 0;
+            display: none;
+            font-size: 15px;
+            color: #ee3124;
+        }
 
     </style>
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
+<script>
 
+    var a=${update};
+
+    if(a==false){
+        JSalertWarning("Prodotto non modificato.\nAttenzione alcuni campi potrebbero essre non validi.");
+    }
+
+</script>
 <!-- header-->
 
 <jsp:include page="/WEB-INF/views/partials/headerAdmin.jsp"></jsp:include>
@@ -86,26 +101,28 @@
     <section class="containerCenter" id="ajax">
 
         <form class="f_product" action="${pageContext.request.contextPath}/GestioneProdottoController/updateProduct"
-              method="post" enctype="multipart/form-data">
+              method="post" onsubmit="return validateUpdateProdotto()" enctype="multipart/form-data">
 
             <div id="number1">
                 <div>
                     <label for="nome">Nome del prodotto</label>
-                    <input value="${prodotto.productName}" type="text" minlength="5" maxlength="50" id="nome"
+                    <input value="${prodotto.productName}" onblur="validateNomeProdotto()" type="text" minlength="5" maxlength="50" id="nome"
                            name="nome" required>
+                    <p id="pr1"></p>
                 </div>
                 <div>
                     <label for="prezzo">Prezzo di base</label>
-                    <input value="${prodotto.price}" type="text" id="prezzo" name="prezzo" required>
+                    <input value="${prodotto.price}" onblur="validatePrezzoProdotto()" type="text" id="prezzo" name="prezzo" required>
+                    <p id="pr2"></p>
                 </div>
             </div>
 
             <div id="number2">
 
                 <label for="content">Contenuto (max 5000 caratteri)</label>
-                <textarea id="content" rows="20" maxlength="5000" cols="70" name="description"
+                <textarea id="content" onblur="validateDescrizioneProdotto()" rows="20"  maxlength="5000" cols="70" name="description"
                           required>${prodotto.description}</textarea>
-
+                <p id="pr3"></p>
             </div>
 
             <div id="number5">

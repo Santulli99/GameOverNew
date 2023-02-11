@@ -8,6 +8,7 @@
         <jsp:param name="title" value="Aggiungi Prodotto"/>
         <jsp:param name="script" value="jqueryfunction.js"/>
     </jsp:include>
+    <script src="/GameOverNew_war_exploded/js/validate.js"></script>
 
     <style>
 
@@ -85,13 +86,29 @@
             align-items: center;
         }
 
+        p {
+
+            margin: 5px 0 0 0;
+            display: none;
+            font-size: 15px;
+            color: #ee3124;
+        }
+
 
     </style>
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+<script>
 
+    var a=${success};
+
+    if(a==false){
+        JSalertWarning("Prodotto non aggiunto.\nAttenzione alcuni campi potrebbero essere non validi.");
+    }
+
+</script>
 
 <!-- header-->
 
@@ -107,38 +124,42 @@
     <section class="containerCenter" id="ajax">
 
         <form class="f_product" action="${pageContext.request.contextPath}/GestioneProdottoController/createProduct"
-              method="post" enctype="multipart/form-data">
+              method="post" onsubmit="return validateAddProdotto()" enctype="multipart/form-data">
 
             <div id="number1">
                 <div>
                     <label for="nome">Nome del prodotto</label>
-                    <input type="text" minlength="5" maxlength="50" id="nome" name="nome" required>
+                    <input type="text" onblur="validateNomeProdotto()" minlength="3" maxlength="50" id="nome" name="nome" required>
+                    <p id="pr1"></p>
                 </div>
                 <div>
                     <label for="prezzo">Prezzo di base</label>
-                    <input type="text" id="prezzo" name="prezzo" required>
+                    <input type="text" onblur="validatePrezzoProdotto()" id="prezzo" name="prezzo" required>
+                    <p id="pr2"></p>
                 </div>
             </div>
 
             <div id="number2">
 
                 <label for="content">Contenuto (max 5000 caratteri)</label>
-                <textarea id="content" rows="20" maxlength="5000" cols="70" name="description" required></textarea>
-
+                <textarea id="content" onblur="validateDescrizioneProdotto()" rows="20" maxlength="5000" cols="70" name="description" required></textarea>
+                <p id="pr3"></p>
             </div>
 
             <div id="number3">
 
                 <div>
                     <label for="cover">Immagine di copertina</label>
-                    <input type="file"
+                    <input type="file" onblur="validateCoverProdotto()"
                            accept=".apng, .avif, .gif, .jpg, .jpeg, .jfif, .pjpeg, .pjp, .png, .svg, .webp"
                            id="cover" name="cover" required>
+                    <p id="pr4"></p>
                 </div>
 
                 <div>
-                    <label for="datau">data uscita</label>
-                    <input type="date" name="data" id="datau" required>
+                    <label for="datau">Data Uscita</label>
+                    <input type="date" name="data" id="datau" onblur="validateDataUscitaProdotto()" required>
+                    <p id="pr5"></p>
                 </div>
             </div>
 

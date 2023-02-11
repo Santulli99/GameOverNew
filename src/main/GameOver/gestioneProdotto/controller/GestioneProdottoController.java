@@ -6,6 +6,7 @@ import gestioneProdotto.service.GestioneProdottoServiceImp;
 import listaDesideri.service.ListaDesideriServiceImp;
 import model.entity.*;
 import recensione.service.RecensioneServiceImp;
+import validate.ValidateForm;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -228,7 +229,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
                 eliminato = gestioneProdottoServiceImp.rimuoviProdotto(id);
                 if (eliminato) {
-                    File file = new File("C:\\Users\\Gerry\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
                     file.delete();
                 }
                 request.setAttribute("delete", eliminato);
@@ -267,31 +268,42 @@ public class GestioneProdottoController extends HttpServlet {
                 break;
             /**si crea il prodotto**/
             case "/createProduct":
-                prodotto=new Prodotto();
-                prodotto.setProductName(request.getParameter("nome"));
-                prodotto.setCategoryName(request.getParameter("categoria"));
-                prodotto.setPlatformName(request.getParameter("piattaforma"));
-                prodotto.setDate(LocalDate.parse(request.getParameter("data")).plusDays(1));
-                prodotto.setDescription(request.getParameter("description"));
-                prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
-                prodotto.setValutazioneMedia(0);
-                Part filePart = request.getPart("cover");
-                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                prodotto.setCover(fileName);
-                if (gestioneProdottoServiceImp.aggiungiProdotto(prodotto)) {
+
+                boolean nome= ValidateForm.validateNomeProdotto(request.getParameter("nome"));
+                boolean prezzo=ValidateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
+                boolean descrizione=ValidateForm.validateDescrizioneProdotto(request.getParameter("description"));
+                boolean cover=ValidateForm.validateCoverProdotto(request.getPart("cover"));
+                boolean dataUscita=ValidateForm.validateDataUscitaProdotto(LocalDate.parse(request.getParameter("data")).plusDays(1));
+
+
+                if(nome && prezzo && dataUscita && descrizione && cover){
+                    prodotto=new Prodotto();
+                    prodotto.setProductName(request.getParameter("nome"));
+                    prodotto.setCategoryName(request.getParameter("categoria"));
+                    prodotto.setPlatformName(request.getParameter("piattaforma"));
+                    prodotto.setDate(LocalDate.parse(request.getParameter("data")).plusDays(1));
+                    prodotto.setDescription(request.getParameter("description"));
+                    prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
+                    prodotto.setValutazioneMedia(0);
+                    Part filePart = request.getPart("cover");
+                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                    prodotto.setCover(fileName);
+
+                    boolean success=gestioneProdottoServiceImp.aggiungiProdotto(prodotto);
                     InputStream inputStream = filePart.getInputStream();
                     File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
                     Files.copy(inputStream, file.toPath());
-                    boolean success = true;
-                    request.setAttribute("success", success);
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
-                    dispatcher.forward(request, response);
-                } else {
-                    boolean success = false;
                     request.setAttribute("success", success);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);
                 }
+                else {
+                    boolean success1 = false;
+                    request.setAttribute("success", success1);
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
+                    dispatcher.forward(request, response);
+                }
+
 
                 break;
             /**si modifica il prodotto**/
@@ -300,19 +312,23 @@ public class GestioneProdottoController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
 
-                prodotto.setProductName(request.getParameter("nome"));
-                prodotto.setDescription(request.getParameter("description"));
-                prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
-
-                if (gestioneProdottoServiceImp.modificaProdotto(prodotto)) {
-                    boolean update = true;
+                boolean nomeUpdate= ValidateForm.validateNomeProdotto(request.getParameter("nome"));
+                boolean prezzoUpdate=ValidateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
+                boolean descrizioneUpdate=ValidateForm.validateDescrizioneProdotto(request.getParameter("description"));
+                boolean update=false;
+                if(nomeUpdate && prezzoUpdate && descrizioneUpdate){
+                    prodotto.setProductName(request.getParameter("nome"));
+                    prodotto.setDescription(request.getParameter("description"));
+                    prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
+                    update = gestioneProdottoServiceImp.modificaProdotto(prodotto);
                     request.setAttribute("update", update);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);
                 } else {
-                    boolean update = false;
+                    update = false;
                     request.setAttribute("update", update);
-                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
+                    request.setAttribute("prodotto",prodotto);
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateProduct.jsp");
                     dispatcher.forward(request, response);
                 }
                 break;
