@@ -17,8 +17,13 @@ public class GestioneProdottoServiceImp implements GestioneProdottoService {
     private SqlProductDao sqlProductDao = new SqlProductDao();
     private ArrayList<Prodotto> prodotti = new ArrayList<>();
 
+    public GestioneProdottoServiceImp(SqlProductDao sqlProductDao) {
+        this.sqlProductDao=sqlProductDao;
+    }
 
+    public GestioneProdottoServiceImp() {
 
+    }
     /**
      * Implementa la funzionalità che restituisce i prodotti per la vetrina
      *
