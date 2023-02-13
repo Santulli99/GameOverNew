@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Locale;
 
 public class Account {
@@ -77,6 +78,8 @@ public class Account {
         return password;
     }
 
+
+
     public void setPassword(String password) {
         try {
             MessageDigest digest =
@@ -89,6 +92,7 @@ public class Account {
             throw new RuntimeException(e);
         }
     }
+
 
     public String getUsername() {
         return username;
