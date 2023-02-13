@@ -76,7 +76,7 @@ public class RegistrazioneServiceImp implements RegistrazioneService {
             account.setVenditore(false);
             account.setFirstName(nome);
             account.setLastName(cognome);
-            account.setDate(dataNascita.plusDays(1));
+            account.setDate(dataNascita);
             try {
                 if (accountDao.createAccount(account)) {
                     return account;

@@ -1,6 +1,7 @@
 import gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
 import gestioneUtenti.service.GestioneUtenteServiceImp;
+import model.dao.product.SqlProductDao;
 import model.entity.Account;
 import model.entity.Order;
 import model.entity.Prodotto;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -35,9 +37,14 @@ public class HomePageController extends HttpServlet {
 
     public void init() throws ServletException {
         super.init();
-        ArrayList<Prodotto> prodottos;
-        prodottos = gestioneProdottoServiceImp.getProdottiVetrina("PS4");
-        getServletContext().setAttribute("vetrina", prodottos);
+        try {
+            ArrayList<Prodotto> products;
+            SqlProductDao sqlProductDao= new SqlProductDao();
+            products=sqlProductDao.searchProductsvetrina("PS4");
+            getServletContext().setAttribute("vetrina",products);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -281,7 +281,7 @@ public class GestioneProdottoController extends HttpServlet {
                     prodotto.setProductName(request.getParameter("nome"));
                     prodotto.setCategoryName(request.getParameter("categoria"));
                     prodotto.setPlatformName(request.getParameter("piattaforma"));
-                    prodotto.setDate(LocalDate.parse(request.getParameter("data")).plusDays(1));
+                    prodotto.setDate(LocalDate.parse(request.getParameter("data")));
                     prodotto.setDescription(request.getParameter("description"));
                     prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
                     prodotto.setValutazioneMedia(0);

@@ -4,6 +4,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.TimeZone;
 
 public class SqlDao {
 
@@ -15,9 +16,10 @@ public class SqlDao {
 
         if (datasource == null) {
             PoolProperties p = new PoolProperties();
-            p.setUrl("jdbc:mysql://localhost1.mysql.database.azure.com:3306/progetto?useSSL=true");
+           // p.setUrl("jdbc:mysql://localhost1.mysql.database.azure.com:3306/progetto?useSSL=true");
+            p.setUrl("jdbc:mysql://localhost:3306/progetto?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            p.setUsername("root1");
+            p.setUsername("root");
             p.setPassword("Milito22");
             p.setMaxActive(100);
             p.setInitialSize(10);

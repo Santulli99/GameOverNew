@@ -234,7 +234,7 @@ public class GestioneAcquistiController extends HttpServlet {
                 account = (Account) request.getSession(false).getAttribute("account");
                 int prodotti = (int) request.getSession(false).getAttribute("quantity");
 
-                LocalDate data = LocalDate.now().plusDays(1);
+                LocalDate data = LocalDate.now();
                 order = new Order();
                 order.setDate(data);
                 order.setNum_product(prodotti);
