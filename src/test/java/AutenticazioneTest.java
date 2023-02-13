@@ -25,14 +25,13 @@ public class AutenticazioneTest {
 
 
 
-
     @Test
     void veryLoginTrue() throws SQLException {
-        String email="a.santulli3@studenti.unisa.it";
-        String pass="Mancini99";
+        String email="a.santulli3@studenti.unisa.iy";
+        String pass="Mancini90";
         Account account=new Account();
         account.setEmail(email);
-        account.setPassword(pass);
+        account.setPassword1(pass);
 
         SqlAccountDao accountDao= Mockito.mock(SqlAccountDao.class);
         AutenticazioneServiceImp autenticazioneServiceImp=new AutenticazioneServiceImp(accountDao);
