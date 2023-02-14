@@ -9,8 +9,9 @@ import validate.ValidateForm;
 
 import java.sql.SQLException;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class RecensioneTest {
 
