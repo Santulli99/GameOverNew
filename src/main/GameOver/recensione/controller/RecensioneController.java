@@ -44,6 +44,9 @@ public class RecensioneController extends HttpServlet {
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
     private ValidateForm validateForm = new ValidateForm();
 
+    public RecensioneController(){
+
+    }
     public RecensioneController(RecensioneServiceImp recensioneService) {
         this.recensioneServiceImp=recensioneService;
     }

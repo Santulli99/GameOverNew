@@ -44,7 +44,7 @@ public class GestioneProdottoController extends HttpServlet {
     private ArrayList<Prodotto> prodotti = new ArrayList<>();
     private int id;
     private Account account = new Account();
-
+    private boolean success;
     private boolean eliminato;
     private String stringa;
     private Pattern pattern;
@@ -59,22 +59,24 @@ public class GestioneProdottoController extends HttpServlet {
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
 
+    public GestioneProdottoController(){
+
+    }
     public GestioneProdottoController(GestioneProdottoServiceImp mockGestioneProdotto) {
         this.gestioneProdottoServiceImp=mockGestioneProdotto;
     }
 
 
-    public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, Part cover, LocalDate data, String categoria, String piattaforma) {
+    public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, String cover, LocalDate data, String categoria, String piattaforma) {
 
         ValidateForm validateForm = new ValidateForm();
         boolean nome1 = validateForm.validateNomeProdotto(nome);
         boolean prezzo1 = validateForm.validatePrezzoProdotto(prezzo);
         boolean descrizione1 = validateForm.validateDescrizioneProdotto(descrizione);
-        boolean cover1 = validateForm.validateCoverProdotto(cover);
         boolean dataUscita = validateForm.validateDataUscitaProdotto(data);
 
 
-        if (nome1 && prezzo1 && dataUscita && descrizione1 && cover1) {
+        if (nome1 && prezzo1 && dataUscita && descrizione1) {
             prodotto = new Prodotto();
             prodotto.setProductName(nome);
             prodotto.setCategoryName(categoria);
@@ -83,8 +85,7 @@ public class GestioneProdottoController extends HttpServlet {
             prodotto.setDescription(descrizione);
             prodotto.setPrice(Double.parseDouble(prezzo));
             prodotto.setValutazioneMedia(0);
-            String fileName = Paths.get(cover.getSubmittedFileName()).getFileName().toString();
-            prodotto.setCover(fileName);
+            prodotto.setCover(cover);
 
             gestioneProdottoServiceImp.aggiungiProdotto(prodotto);
             return true;
@@ -311,7 +312,11 @@ public class GestioneProdottoController extends HttpServlet {
                 String piattaforma = request.getParameter("piattaforma");
 
 
-                boolean success = aggiungiProdotto(nome, prezzo, descrizione, cover, dataUscita, categoria, piattaforma);
+                ValidateForm validateForm=new ValidateForm();
+                if(validateForm.validateCoverProdotto(cover)){
+                    String fileName = Paths.get(cover.getSubmittedFileName()).getFileName().toString();
+                    success = aggiungiProdotto(nome, prezzo, descrizione, fileName, dataUscita, categoria, piattaforma);
+                }
 
                 if (success) {
                     String fileName = Paths.get(cover.getSubmittedFileName()).getFileName().toString();
@@ -322,8 +327,7 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);
                 } else {
-                    boolean success1 = false;
-                    request.setAttribute("success", success1);
+                    request.setAttribute("success", success);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
                     dispatcher.forward(request, response);
                 }
