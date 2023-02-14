@@ -51,11 +51,25 @@ public class AggiungiProdottoTest  {
         String descrizione="Gioco Sportivo";
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
-
         ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(false);
+        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
+        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
+        Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
         boolean prezzoErrato=mockValidate.validatePrezzoProdotto(prezzo);
-        assertFalse(prezzoErrato);
+        boolean dataCoretta=mockValidate.validateDataUscitaProdotto(dataInserita);
+        boolean copertinaCorretta=mockValidate.validateSizeCoverProdotto(cover);
+        boolean descrizioneCorretta=mockValidate.validateDescrizioneProdotto(descrizione);
+        boolean nomeCorretto=mockValidate.validateNome(nome);
+
+        assertTrue(dataCoretta,"Data Corretta");
+        assertTrue(descrizioneCorretta,"Descrizione Corretta");
+        assertTrue(copertinaCorretta,"Copertina Corretta");
+        assertTrue(nomeCorretto,"Nome Corretto");
+        assertFalse(prezzoErrato, "Prezzo non conforme ai parametri");
     }
 
     @Test
@@ -65,13 +79,26 @@ public class AggiungiProdottoTest  {
         String descrizione="";
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
-
         ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
-        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(false);
-        boolean descrizioneErrata=mockValidate.validateDescrizioneProdotto(descrizione);
-        assertFalse(descrizioneErrata);
-    }
 
+        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(false);
+        Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
+        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
+        Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
+        boolean descrizioneErrata=mockValidate.validateDescrizioneProdotto(descrizione);
+        boolean prezzoCorretto=mockValidate.validatePrezzoProdotto(prezzo);
+        boolean dataCoretta=mockValidate.validateDataUscitaProdotto(dataInserita);
+        boolean copertinaCorretta=mockValidate.validateSizeCoverProdotto(cover);
+        boolean nomeCorretto=mockValidate.validateNome(nome);
+
+        assertTrue(dataCoretta,"Data Corretta");
+        assertTrue(prezzoCorretto,"Prezzo Corretta");
+        assertTrue(copertinaCorretta,"Copertina Corretta");
+        assertTrue(nomeCorretto,"Nome Corretto");
+        assertFalse(descrizioneErrata,"Descrizione non conforme ai parametri");
+    }
 
     @Test
     public void CopertinaNonCorrettaTest()  {
@@ -83,8 +110,22 @@ public class AggiungiProdottoTest  {
 
         ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
         Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(false);
+        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
+        Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
+        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
+        boolean descrizioneCorretta=mockValidate.validateDescrizioneProdotto(descrizione);
+        boolean prezzoCorretto=mockValidate.validatePrezzoProdotto(prezzo);
+        boolean dataCoretta=mockValidate.validateDataUscitaProdotto(dataInserita);
+        boolean nomeCorretto=mockValidate.validateNome(nome);
         boolean copertinaErrata=mockValidate.validateSizeCoverProdotto(cover);
-        assertFalse(copertinaErrata);
+
+        assertTrue(dataCoretta,"Data Corretta");
+        assertTrue(prezzoCorretto,"Prezzo Corretta");
+        assertTrue(descrizioneCorretta,"Descrizione Corretta");
+        assertTrue(nomeCorretto,"Nome Corretto");
+        assertFalse(copertinaErrata,"Copertina non conforme ai parametri");
     }
 
 
@@ -98,8 +139,22 @@ public class AggiungiProdottoTest  {
 
         ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(false);
+        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
+        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
+        Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
+        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+
+        boolean descrizioneCorretta=mockValidate.validateDescrizioneProdotto(descrizione);
+        boolean prezzoCorretto=mockValidate.validatePrezzoProdotto(prezzo);
+        boolean nomeCorretto=mockValidate.validateNome(nome);
+        boolean copertinaCorretta=mockValidate.validateSizeCoverProdotto(cover);
         boolean dataErrata=mockValidate.validateDataUscitaProdotto(dataInserita);
-        assertFalse(dataErrata);
+
+        assertTrue(copertinaCorretta,"Copertina Corretta");
+        assertTrue(prezzoCorretto,"Prezzo Corretta");
+        assertTrue(descrizioneCorretta,"Descrizione Corretta");
+        assertTrue(nomeCorretto,"Nome Corretto");
+        assertFalse(dataErrata,"Data inserita non conforme ai parametri");
 
     }
 
@@ -128,6 +183,6 @@ public class AggiungiProdottoTest  {
 
         SqlProductDao mockProductDao=Mockito.mock(SqlProductDao.class);
         Mockito.when(mockProductDao.createProduct(prodotto)).thenReturn(true);
-        assertTrue(mockProductDao.createProduct(prodotto));
+        assertTrue(mockProductDao.createProduct(prodotto),"Prodotto inserito correttamente");
     }
 }
