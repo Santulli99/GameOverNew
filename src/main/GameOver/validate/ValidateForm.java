@@ -186,4 +186,14 @@ public class ValidateForm {
         }
         return false;
     }
+
+    public boolean validateTitoloReview(String titolo){
+
+        return titolo.length()>0 && titolo.length()<101 ;
+    }
+    public boolean validateCommentoReview(String commento){
+
+        return commento.length()>0 && commento.length()<501 ;
+    }
+
 }

@@ -1,7 +1,6 @@
 
 import model.dao.product.SqlProductDao;
 import model.entity.Prodotto;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import validate.ValidateForm;
@@ -28,8 +27,21 @@ public class AggiungiProdottoTest  {
 
         ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
         Mockito.when(mockValidate.validateNome(nome)).thenReturn(false);
+        Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
+        Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
+        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
+        Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+        boolean dataCoretta=mockValidate.validateDataUscitaProdotto(dataInserita);
+        boolean copertinaCorretta=mockValidate.validateSizeCoverProdotto(cover);
+        boolean descrizioneCorretta=mockValidate.validateDescrizioneProdotto(descrizione);
+        boolean prezzoCorretto=mockValidate.validatePrezzoProdotto(prezzo);
         boolean nomeErrato=mockValidate.validateNome(nome);
-        assertFalse(nomeErrato);
+        assertTrue(dataCoretta,"Data Corretta");
+        assertTrue(descrizioneCorretta,"Descrizione Corretta");
+        assertTrue(copertinaCorretta,"Copertina Corretta");
+        assertTrue(prezzoCorretto,"Prezzo Corretto");
+        assertFalse(nomeErrato,"Nome non conforme ai parametri");
+
     }
 
     @Test
