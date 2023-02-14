@@ -178,7 +178,17 @@
             border: 2px solid #8b8a8a;
 
         }
+
+        p {
+            margin: 5px 0 0 0;
+            display: none;
+            font-size: 15px;
+            color: #ee3124;
+        }
+
     </style>
+
+    <script src="${pageContext.request.contextPath}/js/validate.js"></script>
 </head>
 <body>
 
@@ -221,6 +231,7 @@
                     <label class="valc">Valutazione complessiva:</label>
                     <div>
                         <div class="rate">
+
                             <input type="radio" id="star1" name="valutazione" value="5"/>
                             <label for="star1" title="text">1 star</label>
                             <input type="radio" id="star2" name="valutazione" value="4"/>
@@ -229,7 +240,7 @@
                             <label for="star3" title="text">3 stars</label>
                             <input type="radio" id="star4" name="valutazione" value="2"/>
                             <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star5" name="valutazione" value="1"/>
+                            <input type="radio" id="star5" name="valutazione" value="1" checked/>
                             <label for="star5" title="text">5 stars</label>
                         </div>
                     </div>
@@ -237,21 +248,24 @@
 
                 <div id="box3">
                     <label class="valc" for="sottobox3_2">Aggiungi un titolo</label>
-                    <input style="border-radius: 5px" id="sottobox3_2" type="text" minlength="5" maxlength="50"
-                           name="titoloRecensione"
-                           required>
+                    <input style="border-radius: 5px" id="sottobox3_2" onblur="validateTitoloRecensione()"
+                           type="text" name="titoloRecensione"  required>
+                    <p id="pr1"></p>
                 </div>
+
                 <div id="box4">
                     <label id="sottobox4_1" for="sottobox4_2">Aggiungi una recensione scritta</label>
-                    <textarea  id="sottobox4_2" rows="5" maxlength="500" cols="90"
-                              name="descrizione"
-                              required>
+                    <textarea  id="sottobox4_2" onblur="validateDescrizioneRecensione()"
+                               rows="5" cols="90"  name="descrizione"  required>
                     </textarea>
+                    <p id="pr2"></p>
                 </div>
+
                 <div id="box5">
                     <input type="hidden" name="id" value="${prodotto.id}">
                     <button class="button1" type="submit">invia</button>
                 </div>
+
             </form>
         </div>
     </section>

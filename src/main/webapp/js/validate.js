@@ -603,6 +603,70 @@ function validateDataUscitaProdotto(){
     }
 }
 
+function validateTitoloRecensione(){
+    var titolo = document.getElementById("sottobox3_2").value;
+    console.log(titolo);
+
+    if ((titolo == "") || (titolo == "undefined")) {
+        document.getElementById("sottobox3_2").style.border = "2px solid #ee3124";
+        document.getElementById("sottobox3_2").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("sottobox3_2").style.outline = "1px solid";
+        document.getElementById("sottobox3_2").style.outlineColor = "#ee3124";
+        document.getElementById("pr1").innerHTML = "Il titolo è obbligatorio";
+        document.getElementById("pr1").style.display = "block";
+        return false;
+    } else if (titolo.length>100) {
+        document.getElementById("pr1").innerHTML = "Titolo non valido.Inserire un titolo la cui lunghezza non sia > di 100 caratteri";
+        document.getElementById("sottobox3_2").style.border = "2px solid #ee3124";
+        document.getElementById("sottobox3_2").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("sottobox3_2").style.outline = "1px solid";
+        document.getElementById("sottobox3_2").style.outlineColor = "#ee3124";
+        document.getElementById("pr1").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("sottobox3_2").style.outline = "initial";
+        document.getElementById("sottobox3_2").style.border = "";
+        document.getElementById("sottobox3_2").style.boxShadow = "none";
+        document.getElementById("sottobox3_2").style.outline = "1px solid";
+        document.getElementById("sottobox3_2").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr1").style.display = "none";
+        return true;
+    }
+}
+
+function validateDescrizioneRecensione(){
+    var descrizione = document.getElementById("sottobox4_2").value;
+    console.log(descrizione);
+    if ((descrizione == "") || (descrizione == "undefined")) {
+        document.getElementById("sottobox4_2").style.border = "2px solid #ee3124";
+        document.getElementById("sottobox4_2").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("sottobox4_2").style.outline = "1px solid";
+        document.getElementById("sottobox4_2").style.outlineColor = "#ee3124";
+        document.getElementById("pr2").innerHTML = "La descrizione è obbligatoria";
+        document.getElementById("pr2").style.display = "block";
+        return false;
+    } else if (descrizione.length>500) {
+        document.getElementById("pr2").innerHTML = "Descrizione non valida.Inserire una descrizione la cui lunghezza non sia > di 500 caratteri";
+        document.getElementById("sottobox4_2").style.border = "2px solid #ee3124";
+        document.getElementById("sottobox4_2").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
+        document.getElementById("sottobox4_2").style.outline = "1px solid";
+        document.getElementById("sottobox4_2").style.outlineColor = "#ee3124";
+        document.getElementById("pr2").style.display = "block";
+        return false;
+
+    } else {
+        document.getElementById("sottobox4_2").style.outline = "initial";
+        document.getElementById("sottobox4_2").style.border = "";
+        document.getElementById("sottobox4_2").style.boxShadow = "none";
+        document.getElementById("sottobox4_2").style.outline = "1px solid";
+        document.getElementById("sottobox4_2").style.outlineColor = "#0a9a0d";
+        document.getElementById("pr2").style.display = "none";
+        return true;
+    }
+}
+
+
 function validateAddProdotto(){
     if (validateNomeProdotto() && validatePrezzoProdotto() && validateDescrizioneProdotto() &&
         validateCoverProdotto() && validateDataUscitaProdotto()) {

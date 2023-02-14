@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 
+        p {
+            margin: 5px 0 0 0;
+            display: none;
+            font-size: 15px;
+            color: #ee3124;
+        }
 
         .checked {
             color: orange;
@@ -179,6 +185,9 @@
 
         }
     </style>
+
+    <script src="${pageContext.request.contextPath}/js/validate.js"></script>
+
 </head>
 <body>
 
@@ -229,7 +238,7 @@
                             <label for="star3" title="text">3 stars</label>
                             <input type="radio" id="star4" name="valutazione" value="2"/>
                             <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star5" name="valutazione" value="1"/>
+                            <input type="radio" id="star5" name="valutazione" value="1" checked/>
                             <label for="star5" title="text">5 stars</label>
                         </div>
                     </div>
@@ -237,17 +246,16 @@
 
                 <div id="box3">
                     <label class="valc" for="sottobox3_2">Aggiungi un titolo</label>
-                    <input style="border-radius: 5px" id="sottobox3_2" type="text" minlength="5" maxlength="50"
-                           name="titoloRecensione"
-                            value="${recensione.titolo}"
-                           required>
+                    <input style="border-radius: 5px" id="sottobox3_2"  type="text" name="titoloRecensione"
+                           onblur="validateTitoloRecensione()" value="${recensione.titolo}" required>
+                    <p id="pr1"></p>
                 </div>
                 <div id="box4">
                     <label id="sottobox4_1" for="sottobox4_2">Aggiungi una recensione scritta</label>
-                    <textarea id="sottobox4_2" rows="5" maxlength="500" cols="90"
-                              name="descrizione"
-                              required>${recensione.descrizione}
+                    <textarea id="sottobox4_2" rows="5"  cols="90" name="descrizione"
+                              onblur="validateDescrizioneRecensione()"  required>${recensione.descrizione}
                     </textarea>
+                    <p id="pr2"></p>
                 </div>
                 <div id="box5">
                     <input type="hidden" name="id" value="${prodotto.id}">

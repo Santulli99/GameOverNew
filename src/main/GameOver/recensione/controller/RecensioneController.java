@@ -8,6 +8,7 @@ import model.entity.ListaDesideri;
 import model.entity.Prodotto;
 import model.entity.Review;
 import recensione.service.RecensioneServiceImp;
+import validate.ValidateForm;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,6 +41,7 @@ public class RecensioneController extends HttpServlet {
     private GestioneProdottoServiceImp gestioneProdottoServiceImp=new GestioneProdottoServiceImp();
     private ListaDesideriServiceImp listaDesideriServiceImp=new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp=new RecensioneServiceImp();
+    private ValidateForm validateForm=new ValidateForm();
     public  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String  path=(request.getPathInfo()!=null) ? request.getPathInfo():"/";
 
@@ -52,36 +54,43 @@ public class RecensioneController extends HttpServlet {
                 String titolo=request.getParameter("titoloRecensione");
                 String descrizione = request.getParameter("descrizione");
                 double valutazione = Double.parseDouble(request.getParameter("valutazione"));
-                review=new Review();
-                review.setAccount(account);
-                review.setProdotto(prodotto);
-                review.setDescrizione(descrizione);
-                review.setValutazione(valutazione);
-                review.setTitolo(titolo);
+                boolean titRecensione=validateForm.validateTitoloReview(titolo);
+                boolean desRecensione=validateForm.validateDescrizioneProdotto(descrizione);
+                if(titRecensione && desRecensione){
+                    review=new Review();
+                    review.setAccount(account);
+                    review.setProdotto(prodotto);
+                    review.setDescrizione(descrizione);
+                    review.setValutazione(valutazione);
+                    review.setTitolo(titolo);
 
-                successo=recensioneServiceImp.aggiungiRecensione(review);
-                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
-                boolean controllo=false;
-                for(int i =0;i<reviews.size();i++){
-                    if(account.getId()==reviews.get(i).getAccount().getId())
-                        controllo=true;
-                }
-                boolean aggiunto = false;
-                ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
-                if (listaDesideri.containsListaDesideri(prodotto)) {
-                    aggiunto = true;
-                }
-                boolean presente=true;
-                request.setAttribute("aggiunto", aggiunto);
-                request.setAttribute("controllo",controllo);
-                request.setAttribute("successo", successo);
-                request.setAttribute("prodotto",prodotto);
-                request.setAttribute("recensioni", reviews);
-                request.setAttribute("presente",presente);
-                if(successo){
-                    dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
-                    dispatcher.forward(request,response);
-                }else{
+                    successo=recensioneServiceImp.aggiungiRecensione(review);
+                    reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                    boolean controllo=false;
+                    for(int i =0;i<reviews.size();i++){
+                        if(account.getId()==reviews.get(i).getAccount().getId())
+                            controllo=true;
+                    }
+                    boolean aggiunto = false;
+                    ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                    if (listaDesideri.containsListaDesideri(prodotto)) {
+                        aggiunto = true;
+                    }
+                    boolean presente=true;
+                    request.setAttribute("aggiunto", aggiunto);
+                    request.setAttribute("controllo",controllo);
+                    request.setAttribute("successo", successo);
+                    request.setAttribute("prodotto",prodotto);
+                    request.setAttribute("recensioni", reviews);
+                    request.setAttribute("presente",presente);
+                    if(successo){
+                        dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
+                        dispatcher.forward(request,response);
+                    }else{
+                        dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/recensione.jsp");
+                        dispatcher.forward(request,response);
+                    }
+                }else {
                     dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/recensione.jsp");
                     dispatcher.forward(request,response);
                 }
