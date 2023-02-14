@@ -62,11 +62,12 @@ public class GestioneProdottoController extends HttpServlet {
 
     public void aggiungiProdotto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
-        boolean nome= ValidateForm.validateNomeProdotto(request.getParameter("nome"));
-        boolean prezzo=ValidateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
-        boolean descrizione=ValidateForm.validateDescrizioneProdotto(request.getParameter("description"));
-        boolean cover=ValidateForm.validateCoverProdotto(request.getPart("cover"));
-        boolean dataUscita=ValidateForm.validateDataUscitaProdotto(LocalDate.parse(request.getParameter("data")));
+        ValidateForm validateForm=new ValidateForm();
+        boolean nome= validateForm.validateNomeProdotto(request.getParameter("nome"));
+        boolean prezzo=validateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
+        boolean descrizione=validateForm.validateDescrizioneProdotto(request.getParameter("description"));
+        boolean cover=validateForm.validateCoverProdotto(request.getPart("cover"));
+        boolean dataUscita=validateForm.validateDataUscitaProdotto(LocalDate.parse(request.getParameter("data")));
 
 
         if(nome && prezzo && dataUscita && descrizione && cover){
@@ -312,13 +313,13 @@ public class GestioneProdottoController extends HttpServlet {
 
             /**si modifica il prodotto**/
             case "/updateProduct":
-
+                ValidateForm validateForm1= new ValidateForm();
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
 
-                boolean nomeUpdate= ValidateForm.validateNomeProdotto(request.getParameter("nome"));
-                boolean prezzoUpdate=ValidateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
-                boolean descrizioneUpdate=ValidateForm.validateDescrizioneProdotto(request.getParameter("description"));
+                boolean nomeUpdate= validateForm1.validateNomeProdotto(request.getParameter("nome"));
+                boolean prezzoUpdate=validateForm1.validatePrezzoProdotto(request.getParameter("prezzo"));
+                boolean descrizioneUpdate=validateForm1.validateDescrizioneProdotto(request.getParameter("description"));
                 boolean update=false;
                 if(nomeUpdate && prezzoUpdate && descrizioneUpdate){
                     prodotto.setProductName(request.getParameter("nome"));

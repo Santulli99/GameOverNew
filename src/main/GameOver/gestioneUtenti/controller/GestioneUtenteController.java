@@ -39,9 +39,10 @@ public class GestioneUtenteController extends HttpServlet {
                 break;
             /**si effettua la modifica dell'username**/
             case "/updateUsername":
+                ValidateForm validateForm3=new ValidateForm();
                 String newUsername = request.getParameter("username");
                 String username2 = request.getParameter("username2");
-                boolean x = ValidateForm.validateUsername(newUsername);
+                boolean x = validateForm3.validateUsername(newUsername);
 
                 if (newUsername.equals(username2) && (x == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
@@ -71,11 +72,13 @@ public class GestioneUtenteController extends HttpServlet {
 
             /**si effettua la modifica dell'email**/
             case "/updateEmail":
+                ValidateForm validateForm=new ValidateForm();
+
                 account = (Account) request.getSession(false).getAttribute("account");
                 String newEmail = request.getParameter("email");
                 String newEmail2 = request.getParameter("email1");
-                boolean validato_email = ValidateForm.validateEmail(newEmail);
-                boolean validato1_email = ValidateForm.searchEmail(newEmail2);
+                boolean validato_email = validateForm.validateEmail(newEmail);
+                boolean validato1_email = validateForm.searchEmail(newEmail2);
                 if ((validato_email == true) && (validato1_email || account.getEmail().equals(newEmail)) && (newEmail.equals(newEmail2))) {
                     account.setEmail(newEmail);
                     gestioneUtenteService.ModificaDatiAccount(account);
@@ -103,9 +106,10 @@ public class GestioneUtenteController extends HttpServlet {
 
             /**si effettua la modifica della password**/
             case "/updatePassword":
+                ValidateForm validateForm1=new ValidateForm();
                 String newPassword = request.getParameter("password");
                 String newPassword2 = request.getParameter("password2");
-                boolean b = ValidateForm.validatePassword(newPassword);
+                boolean b = validateForm1.validatePassword(newPassword);
 
                 if (newPassword.equals(newPassword2) && (b == true)) {
                     account = (Account) request.getSession(false).getAttribute("account");
@@ -136,12 +140,13 @@ public class GestioneUtenteController extends HttpServlet {
 
             /**vengono aggiornati i dati**/
             case "/updateDati":
+                ValidateForm validateForm2=new ValidateForm();
                 account = (Account) request.getSession(false).getAttribute("account");
                 String nome = request.getParameter("nome");
-                boolean a = ValidateForm.validateNome(nome);
+                boolean a = validateForm2.validateNome(nome);
 
                 String cognome = request.getParameter("cognome");
-                boolean d = ValidateForm.validateCognome(cognome);
+                boolean d = validateForm2.validateCognome(cognome);
 
 
                 if (a && d) {

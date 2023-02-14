@@ -2,9 +2,11 @@ import autenticazione.service.AutenticazioneServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
 import org.junit.jupiter.api.Test;
+
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -34,9 +36,6 @@ public class AutenticazioneTest {
         Mockito.when(accountDao.searchAccountLogin(pass,email)).thenReturn(null);
         assertNull(autenticazioneServiceImp.login(email,pass));
     }
-
-
-
 
     @Test
     void verifyLoginTrue() throws SQLException {
