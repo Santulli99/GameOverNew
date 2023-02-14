@@ -109,7 +109,7 @@ public class RecensioneController extends HttpServlet {
                 review.setValutazione(val);
                 review.setAccount(account);
                 review.setProdotto(prodotto);
-                successo=recensioneServiceImp.modificaRecensione(review);
+                boolean modifica=recensioneServiceImp.modificaRecensione(review);
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
                 boolean controllo1=false;
                 for(int i =0;i<reviews.size();i++){
@@ -125,9 +125,9 @@ public class RecensioneController extends HttpServlet {
                 request.setAttribute("aggiunto", aggiunto1);
                 request.setAttribute("controllo",controllo1);
                 request.setAttribute("recensioni", reviews);
-                request.setAttribute("successo", successo);
+                request.setAttribute("modifica", modifica);
                 request.setAttribute("prodotto",prodotto);
-                if(successo){
+                if(modifica){
                     dispatcher=request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
                     dispatcher.forward(request,response);
                 }else{

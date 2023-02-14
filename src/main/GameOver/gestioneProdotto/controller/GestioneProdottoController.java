@@ -60,42 +60,32 @@ public class GestioneProdottoController extends HttpServlet {
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
 
 
-    public void aggiungiProdotto(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, Part cover, LocalDate data, String categoria, String piattaforma) throws ServletException, IOException {
 
-        ValidateForm validateForm=new ValidateForm();
-        boolean nome= validateForm.validateNomeProdotto(request.getParameter("nome"));
-        boolean prezzo=validateForm.validatePrezzoProdotto(request.getParameter("prezzo"));
-        boolean descrizione=validateForm.validateDescrizioneProdotto(request.getParameter("description"));
-        boolean cover=validateForm.validateCoverProdotto(request.getPart("cover"));
-        boolean dataUscita=validateForm.validateDataUscitaProdotto(LocalDate.parse(request.getParameter("data")));
+        ValidateForm validateForm = new ValidateForm();
+        boolean nome1 = validateForm.validateNomeProdotto(nome);
+        boolean prezzo1 = validateForm.validatePrezzoProdotto(prezzo);
+        boolean descrizione1 = validateForm.validateDescrizioneProdotto(descrizione);
+        boolean cover1 = validateForm.validateCoverProdotto(cover);
+        boolean dataUscita = validateForm.validateDataUscitaProdotto(data);
 
 
-        if(nome && prezzo && dataUscita && descrizione && cover){
-            prodotto=new Prodotto();
-            prodotto.setProductName(request.getParameter("nome"));
-            prodotto.setCategoryName(request.getParameter("categoria"));
-            prodotto.setPlatformName(request.getParameter("piattaforma"));
-            prodotto.setDate(LocalDate.parse(request.getParameter("data")));
-            prodotto.setDescription(request.getParameter("description"));
-            prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
+        if (nome1 && prezzo1 && dataUscita && descrizione1 && cover1) {
+            prodotto = new Prodotto();
+            prodotto.setProductName(nome);
+            prodotto.setCategoryName(categoria);
+            prodotto.setPlatformName(piattaforma);
+            prodotto.setDate(data);
+            prodotto.setDescription(descrizione);
+            prodotto.setPrice(Double.parseDouble(prezzo));
             prodotto.setValutazioneMedia(0);
-            Part filePart = request.getPart("cover");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            String fileName = Paths.get(cover.getSubmittedFileName()).getFileName().toString();
             prodotto.setCover(fileName);
 
-            boolean success=gestioneProdottoServiceImp.aggiungiProdotto(prodotto);
-            InputStream inputStream = filePart.getInputStream();
-            File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
-            Files.copy(inputStream, file.toPath());
-            request.setAttribute("success", success);
-            dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
-            dispatcher.forward(request, response);
-        }
-        else {
-            boolean success1 = false;
-            request.setAttribute("success", success1);
-            dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
-            dispatcher.forward(request, response);
+            gestioneProdottoServiceImp.aggiungiProdotto(prodotto);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -186,7 +176,7 @@ public class GestioneProdottoController extends HttpServlet {
             /**si vusualizza il prodotto con descrizione,prezzo...**/
             case "/showProduct":
                 id = Integer.parseInt(request.getParameter("id"));
-               // prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
+                // prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
                 reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
 
@@ -248,7 +238,7 @@ public class GestioneProdottoController extends HttpServlet {
             /**viene visualizzate la pagina con i prodotti per categoria e piattaforma(UTENTE)**/
             case "/showProductsWithCatAndPlaUtent":
                 categoria = request.getParameter("category");
-                piattaforma =request.getParameter("pla");
+                piattaforma = request.getParameter("pla");
                 prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria, piattaforma);
                 request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottiCategoryUtent.jsp");
@@ -308,20 +298,44 @@ public class GestioneProdottoController extends HttpServlet {
                 break;
             /**si crea il prodotto**/
             case "/createProduct":
-                aggiungiProdotto(request,response);
+                String nome = request.getParameter("nome");
+                String prezzo = (request.getParameter("prezzo"));
+                String descrizione = request.getParameter("description");
+                Part cover = request.getPart("cover");
+                LocalDate dataUscita = LocalDate.parse(request.getParameter("data"));
+                String categoria = request.getParameter("categoria");
+                String piattaforma = request.getParameter("piattaforma");
+
+
+                boolean success = aggiungiProdotto(nome, prezzo, descrizione, cover, dataUscita, categoria, piattaforma);
+
+                if (success) {
+                    String fileName = Paths.get(cover.getSubmittedFileName()).getFileName().toString();
+                    InputStream inputStream = cover.getInputStream();
+                    File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + fileName);
+                    Files.copy(inputStream, file.toPath());
+                    request.setAttribute("success", success);
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    boolean success1 = false;
+                    request.setAttribute("success", success1);
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/addProduct.jsp");
+                    dispatcher.forward(request, response);
+                }
                 break;
 
             /**si modifica il prodotto**/
             case "/updateProduct":
-                ValidateForm validateForm1= new ValidateForm();
+                ValidateForm validateForm1 = new ValidateForm();
                 id = Integer.parseInt(request.getParameter("id"));
                 prodotto = gestioneProdottoServiceImp.getProdotto(id);
 
-                boolean nomeUpdate= validateForm1.validateNomeProdotto(request.getParameter("nome"));
-                boolean prezzoUpdate=validateForm1.validatePrezzoProdotto(request.getParameter("prezzo"));
-                boolean descrizioneUpdate=validateForm1.validateDescrizioneProdotto(request.getParameter("description"));
-                boolean update=false;
-                if(nomeUpdate && prezzoUpdate && descrizioneUpdate){
+                boolean nomeUpdate = validateForm1.validateNomeProdotto(request.getParameter("nome"));
+                boolean prezzoUpdate = validateForm1.validatePrezzoProdotto(request.getParameter("prezzo"));
+                boolean descrizioneUpdate = validateForm1.validateDescrizioneProdotto(request.getParameter("description"));
+                boolean update = false;
+                if (nomeUpdate && prezzoUpdate && descrizioneUpdate) {
                     prodotto.setProductName(request.getParameter("nome"));
                     prodotto.setDescription(request.getParameter("description"));
                     prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
@@ -332,7 +346,7 @@ public class GestioneProdottoController extends HttpServlet {
                 } else {
                     update = false;
                     request.setAttribute("update", update);
-                    request.setAttribute("prodotto",prodotto);
+                    request.setAttribute("prodotto", prodotto);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateProduct.jsp");
                     dispatcher.forward(request, response);
                 }

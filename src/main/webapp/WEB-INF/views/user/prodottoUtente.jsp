@@ -177,6 +177,13 @@
         JSalertSuccess("Recensione effettuata con successo!");
     }
 </script>
+<script>
+
+    var suc1 =${modifica};
+    if (suc1 == true) {
+        JSalertSuccess("Recensione modificata con successo!");
+    }
+</script>
 
 <!-- header -->
 
