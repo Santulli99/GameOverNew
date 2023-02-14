@@ -6,6 +6,9 @@ import model.entity.Review;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import recensione.controller.RecensioneController;
+import recensione.service.RecensioneService;
+import recensione.service.RecensioneServiceImp;
 import validate.ValidateForm;
 
 import java.sql.SQLException;
@@ -48,17 +51,17 @@ public class RecensioneTest {
     }
 
     @Test
-    public void RecensioneCorrettaTest() throws SQLException {
+    public void RecensioneCorrettaTest(){
         String titolo = "Ottimo";
         String commento = "Ottimo prodotto ad un prezzo conveniente.";
-
-
+        double valutazione=5;
+        RecensioneServiceImp MockRecensioneService=Mockito.mock(RecensioneServiceImp.class);
         ValidateForm mockValidateForm = Mockito.mock(ValidateForm.class);
         Mockito.when(mockValidateForm.validateTitoloReview(titolo)).thenReturn(true);
         Mockito.when(mockValidateForm.validateCommentoReview(commento)).thenReturn(true);
 
         Account account = new Account();
-        account.setEmail("a.serpico7@studenti.unisa.it");
+      /*  account.setEmail("a.serpico7@studenti.unisa.it");
         account.setFirstName("Andrea");
         account.setLastName("Serpico");
         account.setVenditore(false);
@@ -67,24 +70,30 @@ public class RecensioneTest {
         account.setDate(date);
         account.setPassword("Mancini99");
         account.setUsername("andrea7");
-
+*/
         int idProdotto = 1;
         Prodotto prodotto = new Prodotto();
+
         GestioneProdottoServiceImp mockProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         Mockito.when(mockProdotto.getProdotto(idProdotto)).thenReturn(prodotto);
-
+/*
         Review review = new Review();
         review.setTitolo(titolo);
         review.setDescrizione(commento);
         review.setProdotto(prodotto);
         review.setAccount(account);
         review.setValutazione(3);
+*/
 
+        RecensioneController recensioneController=new RecensioneController(MockRecensioneService);
+        Mockito.when(recensioneController.aggiungiRecensione(titolo,commento,valutazione,account,prodotto)).thenReturn(true);
+        assertTrue(recensioneController.aggiungiRecensione(titolo,commento,valutazione,account,prodotto));
+        /*
         SqlReviewDao mockReviewDao = Mockito.mock(SqlReviewDao.class);
         Mockito.when(mockReviewDao.createReview(review)).thenReturn(true);
         boolean reviewSuccess = mockReviewDao.createReview(review);
         assertTrue(reviewSuccess);
-
+*/
     }
 
 }

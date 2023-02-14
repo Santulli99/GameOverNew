@@ -7,6 +7,7 @@ import model.entity.Account;
 import model.entity.ListaDesideri;
 import model.entity.Prodotto;
 import model.entity.Review;
+import recensione.service.RecensioneService;
 import recensione.service.RecensioneServiceImp;
 import validate.ValidateForm;
 
@@ -42,6 +43,10 @@ public class RecensioneController extends HttpServlet {
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
     private ValidateForm validateForm = new ValidateForm();
+
+    public RecensioneController(RecensioneServiceImp recensioneService) {
+        this.recensioneServiceImp=recensioneService;
+    }
 
 
     public boolean aggiungiRecensione(String titolo, String descrizione, double valutazione, Account account, Prodotto prodotto) {

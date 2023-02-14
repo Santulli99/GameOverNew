@@ -59,6 +59,10 @@ public class GestioneProdottoController extends HttpServlet {
     private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
 
+    public GestioneProdottoController(GestioneProdottoServiceImp mockGestioneProdotto) {
+        this.gestioneProdottoServiceImp=mockGestioneProdotto;
+    }
+
 
     public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, Part cover, LocalDate data, String categoria, String piattaforma) {
 

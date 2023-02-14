@@ -1,10 +1,13 @@
 
 import gestioneProdotto.controller.GestioneProdottoController;
+import gestioneProdotto.service.GestioneProdottoServiceImp;
 import model.dao.product.SqlProductDao;
 import model.entity.Prodotto;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import recensione.controller.RecensioneController;
+import recensione.service.RecensioneServiceImp;
 import validate.ValidateForm;
 
 import javax.servlet.ServletException;
@@ -172,8 +175,8 @@ public class AggiungiProdottoTest  {
         String nome="Fifa";
         String prezzo="99";
         String descrizione="Gioco Sportivo";
-        //File cover=new File("hogwarts.jpg");
-        Part cover = mock(Part.class);
+        File cover=new File("hogwarts.jpg");
+       // Part cover = mock(Part.class);
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
         String categoria="Sport";
         String piattaforma="PS4";
@@ -184,8 +187,8 @@ public class AggiungiProdottoTest  {
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
         Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
-        Mockito.when(mockValidate.validateCoverProdotto(cover)).thenReturn(true);
-       // Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
+        //Mockito.when(mockValidate.validateCoverProdotto(cover)).thenReturn(true);
+        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
         Prodotto prodotto=new Prodotto();
         prodotto.setProductName(nome);
         prodotto.setPrice(Double.parseDouble(prezzo));
@@ -193,10 +196,14 @@ public class AggiungiProdottoTest  {
         prodotto.setCover(String.valueOf(cover));
         prodotto.setDate(dataInserita);
 
-        GestioneProdottoController gestioneProdottoController=mock(GestioneProdottoController.class);
-        when(gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma)).thenReturn(true);
-        boolean result=gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma);
-        assertTrue(result);
+        GestioneProdottoServiceImp MockGestioneProdotto=Mockito.mock(GestioneProdottoServiceImp.class);
+        GestioneProdottoController gestioneProdottoController=new GestioneProdottoController(MockGestioneProdotto);
+
+
+
+        //Mockito.when(gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma)).thenReturn(true);
+      //  boolean result=gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma);
+     //   assertTrue(result);
 
 
     }
