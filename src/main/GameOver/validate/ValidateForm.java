@@ -162,13 +162,13 @@ public class ValidateForm {
 
         return false;
     }
-    public boolean validateSizeCoverProdotto(File file) throws IOException {
+    public boolean validateSizeCoverProdotto(File file){
         long fileSizeInBytes = file.length();
         long fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
         return fileSizeInMegabytes > 1;
     }
 
-    public boolean validateCoverProdotto(Part file) throws IOException {
+    public boolean validateCoverProdotto(Part file){
         long fileSize = file.getSize();
         long maxFileSize = 1 * 1024 * 1024; // 1 MB in byte
         if (fileSize > maxFileSize) {

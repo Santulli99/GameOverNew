@@ -1,18 +1,11 @@
 
-import gestioneProdotto.controller.GestioneProdottoController;
-import gestioneProdotto.service.GestioneProdottoServiceImp;
-
 import model.dao.product.SqlProductDao;
-
 import model.entity.Prodotto;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import validate.ValidateForm;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
@@ -22,7 +15,8 @@ import java.io.File;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class AggiungiProdottoTest {
+public class AggiungiProdottoTest  {
+
 
     @Test
     public void NomeNonCorrettoTest(){
@@ -68,7 +62,7 @@ public class AggiungiProdottoTest {
 
 
     @Test
-    public void CopertinaNonCorrettaTest() throws IOException {
+    public void CopertinaNonCorrettaTest()  {
         String nome="Fifa";
         String prezzo="99";
         String descrizione="";
@@ -98,7 +92,7 @@ public class AggiungiProdottoTest {
     }
 
     @Test
-    public void AggiungiProdottoCorrettoTest() throws IOException, SQLException {
+    public void AggiungiProdottoCorrettoTest() throws SQLException {
         String nome="Fifa";
         String prezzo="99";
         String descrizione="Gioco Sportivo";
