@@ -48,7 +48,7 @@ public class RecensioneTest {
     }
 
     @Test
-    public void RecensioeCorrettaTest() throws SQLException {
+    public void RecensioneCorrettaTest() throws SQLException {
         String titolo = "Ottimo";
         String commento = "Ottimo prodotto ad un prezzo conveniente.";
 

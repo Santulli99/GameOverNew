@@ -60,7 +60,7 @@ public class GestioneProdottoController extends HttpServlet {
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
 
 
-    public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, Part cover, LocalDate data, String categoria, String piattaforma) throws ServletException, IOException {
+    public boolean aggiungiProdotto(String nome, String prezzo, String descrizione, Part cover, LocalDate data, String categoria, String piattaforma) {
 
         ValidateForm validateForm = new ValidateForm();
         boolean nome1 = validateForm.validateNomeProdotto(nome);

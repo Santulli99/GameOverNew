@@ -1,10 +1,15 @@
 
+import gestioneProdotto.controller.GestioneProdottoController;
 import model.dao.product.SqlProductDao;
 import model.entity.Prodotto;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import validate.ValidateForm;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,10 +17,13 @@ import java.time.Month;
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class AggiungiProdottoTest  {
-
+    @Mock
+    private GestioneProdottoController gestioneProdottoController;
 
     @Test
     public void NomeNonCorrettoTest(){
@@ -25,7 +33,7 @@ public class AggiungiProdottoTest  {
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
 
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
         Mockito.when(mockValidate.validateNome(nome)).thenReturn(false);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
@@ -51,7 +59,7 @@ public class AggiungiProdottoTest  {
         String descrizione="Gioco Sportivo";
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
 
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(false);
         Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
@@ -79,7 +87,7 @@ public class AggiungiProdottoTest  {
         String descrizione="";
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
 
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(false);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
@@ -108,7 +116,7 @@ public class AggiungiProdottoTest  {
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
 
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
         Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(false);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
@@ -137,7 +145,7 @@ public class AggiungiProdottoTest  {
         File cover=new File("hogwarts.jpg");
         LocalDate dataInserita=LocalDate.of(2025, Month.NOVEMBER,22);
 
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(false);
         Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
@@ -158,22 +166,26 @@ public class AggiungiProdottoTest  {
 
     }
 
+
     @Test
-    public void AggiungiProdottoCorrettoTest() throws SQLException {
+    public void AggiungiProdottoCorrettoTest(){
         String nome="Fifa";
         String prezzo="99";
         String descrizione="Gioco Sportivo";
-        File cover=new File("hogwarts.jpg");
+        //File cover=new File("hogwarts.jpg");
+        Part cover = mock(Part.class);
         LocalDate dataInserita=LocalDate.of(2022, Month.NOVEMBER,22);
+        String categoria="Sport";
+        String piattaforma="PS4";
 
-        ValidateForm mockValidate=Mockito.mock(ValidateForm.class);
+        ValidateForm mockValidate= mock(ValidateForm.class);
 
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
         Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
-        Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
-
+        Mockito.when(mockValidate.validateCoverProdotto(cover)).thenReturn(true);
+       // Mockito.when(mockValidate.validateSizeCoverProdotto(cover)).thenReturn(true);
         Prodotto prodotto=new Prodotto();
         prodotto.setProductName(nome);
         prodotto.setPrice(Double.parseDouble(prezzo));
@@ -181,8 +193,11 @@ public class AggiungiProdottoTest  {
         prodotto.setCover(String.valueOf(cover));
         prodotto.setDate(dataInserita);
 
-        SqlProductDao mockProductDao=Mockito.mock(SqlProductDao.class);
-        Mockito.when(mockProductDao.createProduct(prodotto)).thenReturn(true);
-        assertTrue(mockProductDao.createProduct(prodotto),"Prodotto inserito correttamente");
+        GestioneProdottoController gestioneProdottoController=mock(GestioneProdottoController.class);
+        when(gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma)).thenReturn(true);
+        boolean result=gestioneProdottoController.aggiungiProdotto(nome,prezzo,descrizione, cover, dataInserita,categoria,piattaforma);
+        assertTrue(result);
+
+
     }
 }
