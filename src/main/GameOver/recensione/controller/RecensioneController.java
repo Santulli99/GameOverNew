@@ -49,14 +49,15 @@ public class RecensioneController extends HttpServlet {
             case "/":
                 break;
             case "/creaRecensione":
-                account=(Account) request.getSession(false).getAttribute("account");
-                prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
+
                 String titolo=request.getParameter("titoloRecensione");
                 String descrizione = request.getParameter("descrizione");
                 double valutazione = Double.parseDouble(request.getParameter("valutazione"));
                 boolean titRecensione=validateForm.validateTitoloReview(titolo);
                 boolean desRecensione=validateForm.validateDescrizioneProdotto(descrizione);
                 if(titRecensione && desRecensione){
+                    account=(Account) request.getSession(false).getAttribute("account");
+                    prodotto=gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
                     review=new Review();
                     review.setAccount(account);
                     review.setProdotto(prodotto);
