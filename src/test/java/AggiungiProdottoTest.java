@@ -21,18 +21,20 @@ public class AggiungiProdottoTest {
 
     @Test
     public void NomeNonCorrettoTest() {
-        String nome = "";
+        String nome = "Fi";
         String prezzo = "99";
         String descrizione = "Gioco Sportivo";
         String cover = "hogwarts.jpg";
         LocalDate dataInserita = LocalDate.of(2022, Month.NOVEMBER, 22);
         String categoria = "Sport";
         String piattaforma = "PS4";
+
         ValidateForm mockValidate = mock(ValidateForm.class);
-        Mockito.when(mockValidate.validateNome(nome)).thenReturn(false);
+        Mockito.when(mockValidate.validateNomeProdotto(nome)).thenReturn(false);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
         GestioneProdottoServiceImp MockGestioneProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         GestioneProdottoController gestioneProdottoController = new GestioneProdottoController(MockGestioneProdotto);
         boolean result = gestioneProdottoController.aggiungiProdotto(nome, prezzo, descrizione, cover, dataInserita, categoria, piattaforma);
@@ -49,10 +51,12 @@ public class AggiungiProdottoTest {
         ValidateForm mockValidate = mock(ValidateForm.class);
         String categoria = "Sport";
         String piattaforma = "PS4";
+
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(false);
-        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateNomeProdotto(nome)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
         GestioneProdottoServiceImp MockGestioneProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         GestioneProdottoController gestioneProdottoController = new GestioneProdottoController(MockGestioneProdotto);
         boolean result = gestioneProdottoController.aggiungiProdotto(nome, prezzo, descrizione, cover, dataInserita, categoria, piattaforma);
@@ -69,10 +73,12 @@ public class AggiungiProdottoTest {
         ValidateForm mockValidate = mock(ValidateForm.class);
         String categoria = "Sport";
         String piattaforma = "PS4";
+
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(false);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
-        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateNomeProdotto(nome)).thenReturn(true);
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
+
         GestioneProdottoServiceImp MockGestioneProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         GestioneProdottoController gestioneProdottoController = new GestioneProdottoController(MockGestioneProdotto);
         boolean result = gestioneProdottoController.aggiungiProdotto(nome, prezzo, descrizione, cover, dataInserita, categoria, piattaforma);
@@ -94,7 +100,7 @@ public class AggiungiProdottoTest {
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(false);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
-        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateNomeProdotto(nome)).thenReturn(true);
 
         GestioneProdottoServiceImp MockGestioneProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         GestioneProdottoController gestioneProdottoController = new GestioneProdottoController(MockGestioneProdotto);
@@ -117,7 +123,7 @@ public class AggiungiProdottoTest {
         Mockito.when(mockValidate.validateDataUscitaProdotto(dataInserita)).thenReturn(true);
         Mockito.when(mockValidate.validateDescrizioneProdotto(descrizione)).thenReturn(true);
         Mockito.when(mockValidate.validatePrezzoProdotto(prezzo)).thenReturn(true);
-        Mockito.when(mockValidate.validateNome(nome)).thenReturn(true);
+        Mockito.when(mockValidate.validateNomeProdotto(nome)).thenReturn(true);
 
         GestioneProdottoServiceImp MockGestioneProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
         GestioneProdottoController gestioneProdottoController = new GestioneProdottoController(MockGestioneProdotto);
