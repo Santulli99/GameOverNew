@@ -51,16 +51,10 @@ public class RecensioneTest {
         Mockito.when(mockValidateForm.validateCommentoReview(commento)).thenReturn(true);
 
         Account account = new Account();
-
-        int idProdotto = 1;
         Prodotto prodotto = new Prodotto();
 
-        GestioneProdottoServiceImp mockProdotto = Mockito.mock(GestioneProdottoServiceImp.class);
-        Mockito.when(mockProdotto.getProdotto(idProdotto)).thenReturn(prodotto);
-
-
         RecensioneController recensioneController = new RecensioneController(MockRecensioneService);
-        Mockito.when(recensioneController.aggiungiRecensione(titolo, commento, valutazione, account, prodotto)).thenReturn(true);
+        //Mockito.when(recensioneController.aggiungiRecensione(titolo, commento, valutazione, account, prodotto)).thenReturn(true);
         assertTrue(recensioneController.aggiungiRecensione(titolo, commento, valutazione, account, prodotto));
     }
 
@@ -106,4 +100,26 @@ public class RecensioneTest {
         assertFalse(result);
     }
 
+
+
+    @Test
+    public void aggiungiRecensioneTestFalse() {
+        // Setup
+        String titolo = "";
+        String descrizione = "";
+        double valutazione = 3.0;
+        Account account = new Account();
+        Prodotto prodotto = new Prodotto();
+        RecensioneServiceImp mockRecensioneService = Mockito.mock(RecensioneServiceImp.class);
+        ValidateForm mockValidateForm = Mockito.mock(ValidateForm.class);
+        Mockito.when(mockValidateForm.validateTitoloReview(titolo)).thenReturn(false);
+        Mockito.when(mockValidateForm.validateCommentoReview(descrizione)).thenReturn(false);
+
+        // Call the method under test
+        RecensioneController recensioneController = new RecensioneController(mockRecensioneService);
+        boolean result = recensioneController.aggiungiRecensione(titolo, descrizione, valutazione, account, prodotto);
+
+        // Verify the result
+        assertFalse(result);
+    }
 }
