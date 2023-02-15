@@ -1,19 +1,20 @@
 import autenticazione.service.AutenticazioneServiceImp;
 import model.dao.account.SqlAccountDao;
 import model.entity.Account;
-import org.junit.jupiter.api.Test;
 
-import org.mockito.Mockito;
+import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 public class AutenticazioneTest {
+
     @Test
-    void verifyEmailFalse() throws SQLException {
+    public void  verifyEmailFalse() throws SQLException {
         String email="g.esposito7studenti.unisa.it";
         String pass="Esposito95";
 
@@ -25,7 +26,7 @@ public class AutenticazioneTest {
     }
 
     @Test
-    void verifyPasswordFalse() throws SQLException {
+    public void verifyPasswordFalse() throws SQLException {
         String email="g.esposito7@studenti.unisa.it";
         String pass="esposito95";
 
@@ -37,7 +38,7 @@ public class AutenticazioneTest {
     }
 
     @Test
-    void verifyLoginTrue() throws SQLException {
+    public void verifyLoginTrue() throws SQLException {
         String email="g.esposito7@studenti.unisa.it";
         String pass="Esposito95";
         Account account=new Account();

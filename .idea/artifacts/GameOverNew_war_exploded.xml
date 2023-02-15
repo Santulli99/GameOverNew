@@ -34,6 +34,9 @@
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-analysis:9.2" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:9.2" />
           <element id="library" level="project" name="Maven: org.jacoco:org.jacoco.report:0.8.8" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
