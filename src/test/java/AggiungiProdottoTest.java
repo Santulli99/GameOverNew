@@ -2,22 +2,18 @@
 import gestioneProdotto.controller.GestioneProdottoController;
 import gestioneProdotto.service.GestioneProdottoServiceImp;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import validate.ValidateForm;
+
 import java.time.LocalDate;
 import java.time.Month;
-
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 
-
 public class AggiungiProdottoTest {
-    @Mock
-    private GestioneProdottoController gestioneProdottoController;
 
     @Test
     public void NomeNonCorrettoTest() {

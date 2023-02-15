@@ -36,14 +36,10 @@ public class AutenticazioneServiceImp implements AutenticazioneService {
      */
 
     @Override
-    public Account login(String email, String password) {
+    public Account login(String email, String password) throws SQLException {
 
         Account account = new Account();
-        try {
-            account = sqlAccountDao.searchAccountLogin(password, email);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        account = sqlAccountDao.searchAccountLogin(password, email);
         return account;
     }
 

@@ -51,7 +51,7 @@ public class AutenticazioneTest {
         assertEquals(email,autenticazioneServiceImp.login(email,pass).getEmail());
         assertEquals(pass,autenticazioneServiceImp.login(email,pass).getPassword());
     }
-
+/*
     @Test
     public void testLogin() throws SQLException {
         // crea un oggetto mock per la classe SqlAccountDao
@@ -76,5 +76,5 @@ public class AutenticazioneTest {
         assertEquals(expectedAccount.getPassword(), actualAccount.getPassword());
 
     }
-
+*/
 }

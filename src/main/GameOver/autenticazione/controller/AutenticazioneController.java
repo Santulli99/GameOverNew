@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * implementa il controller che si occupa  del sottosistema autenticazione
@@ -49,7 +50,11 @@ public class AutenticazioneController extends HttpServlet {
                 String password = request.getParameter("password");
                 String email = request.getParameter("email");
                 session = request.getSession(true);
-                account = autenticazioneService.login(email, password);
+                try {
+                    account = autenticazioneService.login(email, password);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
                 if (account == null) {
                     boolean login = false;

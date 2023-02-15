@@ -1,4 +1,3 @@
-import gestioneProdotto.service.GestioneProdottoServiceImp;
 
 import model.entity.Account;
 import model.entity.Prodotto;

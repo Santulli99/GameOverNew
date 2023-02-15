@@ -3,6 +3,7 @@ package autenticazione.service;
 import model.entity.Account;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 
 /**
  * interfaccia per i metodi del sottosistema Autenticazione
@@ -18,7 +19,7 @@ public interface AutenticazioneService {
      * @param email    String contiene l'email per accedere al sito
      * @return utente loggato
      */
-    Account login(String email, String password);
+    Account login(String email, String password) throws SQLException;
 
     /**
      * firma del metodo che implementa la verifica dell'account che si è loggato, se è l'admin del sito web
