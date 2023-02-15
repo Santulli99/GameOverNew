@@ -23,6 +23,7 @@ import java.io.IOException;
 @WebServlet(name = "AutenticazioneController", value = "/AutenticazioneController/*")
 public class AutenticazioneController extends HttpServlet {
 
+
     private HttpSession session;
     private RequestDispatcher dispatcher;
     private Account account = new Account();

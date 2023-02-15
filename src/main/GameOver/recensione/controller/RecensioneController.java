@@ -66,7 +66,9 @@ public class RecensioneController extends HttpServlet {
             successo = recensioneServiceImp.aggiungiRecensione(review);
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
