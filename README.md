@@ -1,3 +1,3 @@
 # Jacoco Test Coverage Report
 
-Click [here](https:/.//coverage/index.html) to view the Jacoco test coverage report.
+Clicca <a href="https://GameOverNew/coverage/index.html" style="text-transform: uppercase;">G</a><a href="https://GameOverNew/coverage/index.html">ame</a> <a href="https://GameOverNew/coverage/index.html" style="text-transform: uppercase;">O</a><a href="https://GameOverNew/coverage/index.html">ver</a> <a href="https://GameOverNew/coverage/index.html" style="text-transform: uppercase;">N</a><a href="https://GameOverNew/coverage/index.html">ew</a> per visualizzare il report di copertura dei test Jacoco.
