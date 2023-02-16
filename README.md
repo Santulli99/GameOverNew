@@ -1,2 +1,2 @@
 # Jacoco Test Coverage Report
-<a href="http://localhost:63342/GameOverNew/target/site/jacoco/index.html">report jacoco</a>
+<a href="https://santulli99.github.io/GameOverNew/coverage/jacoco/">Report Jacoco</a>
