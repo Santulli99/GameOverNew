@@ -18,6 +18,7 @@ public interface AutenticazioneService {
      * @param password String che contiene la password per accedere al sito web
      * @param email    String contiene l'email per accedere al sito
      * @return utente loggato
+     * @throws SQLException
      */
     Account login(String email, String password) throws SQLException;
 

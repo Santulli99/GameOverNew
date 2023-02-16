@@ -117,8 +117,8 @@ public class GestioneAcquistiController extends HttpServlet {
                 break;
             case "/showAcquisto":
                 cart = (Cart) request.getSession(false).getAttribute("carrello");
-                int quantità = (int) request.getSession(false).getAttribute("quantity");
-                if (quantità == 0) {
+                int quantity = (int) request.getSession(false).getAttribute("quantity");
+                if (quantity == 0) {
                     boolean carrellovuoto = true;
                     request.setAttribute("carrelloVuoto", carrellovuoto);
 
