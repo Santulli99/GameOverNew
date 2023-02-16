@@ -1,0 +1,26 @@
+unnamed package
+autenticazione.controller
+autenticazione.service
+gestioneAcquisti
+gestioneAcquisti.controller
+gestioneAcquisti.service
+gestioneProdotto.controller
+gestioneProdotto.service
+gestioneUtenti.controller
+gestioneUtenti.service
+listaDesideri.controller
+listaDesideri.service
+model.dao.account
+model.dao.cart
+model.dao.order
+model.dao.product
+model.dao.review
+model.dao.storage
+model.dao.wishlist
+model.entity
+model.entity.cart
+recensione.controller
+recensione.service
+registrazione.controller
+registrazione.service
+validate
