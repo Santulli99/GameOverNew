@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SqlOrderDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">model.dao.order</a> &gt; <span class="el_source">SqlOrderDao.java</span></div><h1>SqlOrderDao.java</h1><pre class="source lang-java linenums">package model.dao.order;
+
+import model.entity.Account;
+import model.dao.account.AccountExtractor;
+import model.entity.cart.CartItem;
+import model.entity.Order;
+import model.entity.Prodotto;
+import model.dao.product.ProductExtractor;
+import model.dao.storage.SqlDao;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public class SqlOrderDao implements OrderDao&lt;SQLException&gt; {
+    public SqlOrderDao() {
+<span class="fc" id="L18">        super();</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public Order searchOrderId(int id) throws SQLException {
+
+<span class="nc" id="L24">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L25">            String query = &quot;SELECT *  FROM orders AS ord WHERE id_ordine=?;&quot;;</span>
+
+<span class="nc" id="L27">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L28">                ps.setInt(1, id);</span>
+
+<span class="nc" id="L30">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L32">                Order order = null;</span>
+<span class="nc" id="L33">                OrderExtractor orderExtractor = new OrderExtractor();</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                if (rs.next()) {</span>
+<span class="nc" id="L36">                    order = orderExtractor.extract(rs);</span>
+                }
+<span class="nc" id="L38">                return order;</span>
+            }
+        }
+    }
+
+    @Override
+    public Order searchOrderWithProducts(int id_order) throws SQLException {
+
+<span class="nc" id="L46">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L47">            String query = &quot;SELECT *  FROM  orders AS ord,product AS pro,order_product AS op &quot; +</span>
+                    &quot;WHERE ord.id_ordine=op.id_ordine AND op.id_prodotto=pro.id_prodotto AND ord.id_ordine=? &quot;;
+<span class="nc" id="L49">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+
+<span class="nc" id="L51">                ps.setInt(1, id_order);</span>
+
+<span class="nc" id="L53">                ResultSet resultSet = ps.executeQuery();</span>
+<span class="nc" id="L54">                Order order = null;</span>
+<span class="nc" id="L55">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if (resultSet.next()) {</span>
+<span class="nc" id="L57">                    OrderExtractor orderExtractor = new OrderExtractor();</span>
+<span class="nc" id="L58">                    order = orderExtractor.extract(resultSet);</span>
+<span class="nc" id="L59">                    order.getProducts().add(productExtractor.extract(resultSet));</span>
+
+                }
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                while (resultSet.next()) {</span>
+<span class="nc" id="L63">                    order.getProducts().add(productExtractor.extract(resultSet));</span>
+                }
+
+<span class="nc" id="L66">                return order;</span>
+            }
+        }
+    }
+
+    public ArrayList&lt;Order&gt; searchAllOrderWithProductsbyAccount(Account account) throws SQLException {
+
+<span class="nc" id="L73">        try (Connection connection = SqlDao.getConnection()) {</span>
+
+<span class="nc" id="L75">            String query = &quot;SELECT *  FROM orders AS ord,product AS pro,order_product AS op WHERE ord.id_cliente=?&quot; +</span>
+                    &quot; AND ord.id_ordine=op.id_ordine AND op.id_prodotto=pro.id_prodotto&quot;;
+
+<span class="nc" id="L78">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L79">                ps.setInt(1, account.getId());</span>
+<span class="nc" id="L80">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L82">                Order order = null;</span>
+<span class="nc" id="L83">                OrderExtractor orderExtractor = new OrderExtractor();</span>
+<span class="nc" id="L84">                Prodotto prodotto = null;</span>
+<span class="nc" id="L85">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc" id="L86">                HashMap&lt;Integer, Order&gt; hashMap = new LinkedHashMap();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L88">                    int id_ordine = rs.getInt(&quot;id_ordine&quot;);</span>
+                    //relazione N:
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                    if (!hashMap.containsKey(id_ordine)) {</span>
+<span class="nc" id="L91">                        order = orderExtractor.extract(rs);</span>
+<span class="nc" id="L92">                        hashMap.put(id_ordine, order);</span>
+                    }
+<span class="nc" id="L94">                    prodotto = productExtractor.extract(rs);</span>
+<span class="nc" id="L95">                    hashMap.get(id_ordine).getProducts().add(prodotto);</span>
+<span class="nc" id="L96">                }</span>
+<span class="nc" id="L97">                return new ArrayList&lt;&gt;(hashMap.values());</span>
+            }
+
+        }
+
+    }
+
+    @Override
+    public ArrayList&lt;Order&gt; searchAllOrderWithProducts() throws SQLException {
+
+<span class="nc" id="L107">        try (Connection connection = SqlDao.getConnection()) {</span>
+
+<span class="nc" id="L109">            String query = &quot;SELECT *  FROM orders AS ord,product AS pro,order_product AS op &quot; +</span>
+                    &quot;WHERE ord.id_ordine=op.id_ordine AND op.id_prodotto=pro.id_prodotto&quot;;
+
+<span class="nc" id="L112">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L113">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L115">                Order order = null;</span>
+<span class="nc" id="L116">                OrderExtractor orderExtractor = new OrderExtractor();</span>
+<span class="nc" id="L117">                Prodotto prodotto = null;</span>
+<span class="nc" id="L118">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc" id="L119">                HashMap&lt;Integer, Order&gt; hashMap = new LinkedHashMap();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L121">                    int id_ordine = rs.getInt(&quot;id_ordine&quot;);</span>
+                    //relazione N:
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                    if (!hashMap.containsKey(id_ordine)) {</span>
+<span class="nc" id="L124">                        order = orderExtractor.extract(rs);</span>
+<span class="nc" id="L125">                        hashMap.put(id_ordine, order);</span>
+                    }
+<span class="nc" id="L127">                    prodotto = productExtractor.extract(rs);</span>
+<span class="nc" id="L128">                    hashMap.get(id_ordine).getProducts().add(prodotto);</span>
+<span class="nc" id="L129">                }</span>
+<span class="nc" id="L130">                return new ArrayList&lt;&gt;(hashMap.values());</span>
+            }
+
+        }
+
+    }
+
+    @Override
+    public boolean createOrder(Order order) throws SQLException {
+<span class="nc" id="L139">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L140">            String query1 = &quot;INSERT INTO orders(data_ordine, n_prodotti, id_cliente) VALUES (?,?,?);&quot;;</span>
+<span class="nc" id="L141">            String query2 = &quot;INSERT INTO order_product(id_ordine, id_prodotto) VALUES (?,?);&quot;;</span>
+
+<span class="nc" id="L143">            connection.setAutoCommit(false);</span>
+
+<span class="nc" id="L145">            try (PreparedStatement ps1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L146">                ps1.setDate(1, Date.valueOf(order.getDate()));</span>
+<span class="nc" id="L147">                ps1.setInt(2, order.getNum_product());</span>
+<span class="nc" id="L148">                ps1.setInt(3, order.getAccount().getId());</span>
+<span class="nc" id="L149">                int rows = ps1.executeUpdate();</span>
+<span class="nc" id="L150">                PreparedStatement psAssoc = connection.prepareStatement(query2);</span>
+<span class="nc" id="L151">                int total = rows;</span>
+
+<span class="nc" id="L153">                ResultSet rs = ps1.getGeneratedKeys();</span>
+<span class="nc" id="L154">                rs.next();</span>
+<span class="nc" id="L155">                int id = rs.getInt(1);</span>
+<span class="nc" id="L156">                order.setId(id);</span>
+
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                for (CartItem item : order.getCart().getCartItems()) {</span>
+<span class="nc" id="L159">                    psAssoc.setInt(1, order.getId());</span>
+<span class="nc" id="L160">                    psAssoc.setInt(2, item.getItem().getId());</span>
+<span class="nc" id="L161">                    total += psAssoc.executeUpdate();</span>
+<span class="nc" id="L162">                }</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">                if (total == (rows + order.getNum_product())) {</span>
+<span class="nc" id="L164">                    connection.commit();</span>
+<span class="nc" id="L165">                    connection.setAutoCommit(true);</span>
+<span class="nc" id="L166">                    return true;</span>
+                } else {
+<span class="nc" id="L168">                    connection.rollback();</span>
+<span class="nc" id="L169">                    connection.setAutoCommit(true);</span>
+<span class="nc" id="L170">                    return false;</span>
+                }
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            }</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        }</span>
+    }
+
+    @Override
+    public boolean deleteOrder(Order order) throws SQLException {
+
+<span class="nc" id="L179">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L180">            String query1 = &quot;DELETE FROM orders WHERE (id_ordine=?);&quot;;</span>
+<span class="nc" id="L181">            String query2 = &quot;DELETE FROM order_product WHERE (id_ordine=?);&quot;;</span>
+<span class="nc" id="L182">            try (PreparedStatement ps = connection.prepareStatement(query1)) {</span>
+<span class="nc" id="L183">                PreparedStatement ps1 = connection.prepareStatement(query2);</span>
+
+<span class="nc" id="L185">                ps.setInt(1, order.getId());</span>
+<span class="nc" id="L186">                ps1.setInt(1, order.getId());</span>
+
+<span class="nc" id="L188">                int rows = ps.executeUpdate();</span>
+
+<span class="nc" id="L190">                ps1.executeUpdate();</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+
+
+    @Override
+    public ArrayList&lt;Order&gt; searchAllOrdersByAccount(int id_Account) throws SQLException {
+
+<span class="nc" id="L200">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L201">            String query = &quot;SELECT *  FROM orders AS ord WHERE (ord.id_cliente=?);&quot;;</span>
+
+<span class="nc" id="L203">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L204">                ps.setInt(1, id_Account);</span>
+
+<span class="nc" id="L206">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L208">                Order order = null;</span>
+<span class="nc" id="L209">                OrderExtractor orderExtractor = new OrderExtractor();</span>
+<span class="nc" id="L210">                ArrayList&lt;Order&gt; orders = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L212" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L213">                    order = orderExtractor.extract(rs);</span>
+<span class="nc" id="L214">                    orders.add(order);</span>
+                }
+<span class="nc" id="L216">                return orders;</span>
+            }
+        }
+    }
+
+
+    public ArrayList&lt;Order&gt; searchAllOrdersWithAccount() throws SQLException {
+
+<span class="nc" id="L224">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L225">            String query = &quot;SELECT *  FROM orders AS ord,account AS acc  WHERE ord.id_cliente=acc.id_cliente;&quot;;</span>
+
+<span class="nc" id="L227">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+
+
+<span class="nc" id="L230">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L232">                Order order = null;</span>
+<span class="nc" id="L233">                OrderExtractor orderExtractor = new OrderExtractor();</span>
+<span class="nc" id="L234">                ArrayList&lt;Order&gt; orders = new ArrayList&lt;&gt;();</span>
+                Account account;
+<span class="nc" id="L236">                AccountExtractor accountExtractor = new AccountExtractor();</span>
+
+<span class="nc bnc" id="L238" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L239">                    order = orderExtractor.extract(rs);</span>
+<span class="nc" id="L240">                    account = accountExtractor.extract(rs);</span>
+<span class="nc" id="L241">                    order.setAccount(account);</span>
+<span class="nc" id="L242">                    orders.add(order);</span>
+                }
+<span class="nc" id="L244">                return orders;</span>
+            }
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

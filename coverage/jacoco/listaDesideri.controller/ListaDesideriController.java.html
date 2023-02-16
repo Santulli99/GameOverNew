@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListaDesideriController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">listaDesideri.controller</a> &gt; <span class="el_source">ListaDesideriController.java</span></div><h1>ListaDesideriController.java</h1><pre class="source lang-java linenums">package listaDesideri.controller;
+
+import gestioneProdotto.service.GestioneProdottoServiceImp;
+import listaDesideri.service.ListaDesideriServiceImp;
+import model.dao.product.SqlProductDao;
+import model.entity.Account;
+import model.entity.ListaDesideri;
+import model.entity.Prodotto;
+import model.entity.Review;
+import model.entity.cart.Cart;
+import recensione.service.RecensioneServiceImp;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+/**
+ * implementa il controller che si occupa  del sottosistema ListaDesideri
+ *
+ * @author Andrea Santulli
+ * @see HttpServlet fornisce l'interfaccia per creare una servlet
+ */
+
+
+@WebServlet(name = &quot;ListaDesideriController&quot;, value = &quot;/ListaDesideriController/*&quot;)
+<span class="nc" id="L32">public class ListaDesideriController extends HttpServlet {</span>
+    private RequestDispatcher dispatcher;
+<span class="nc" id="L34">    private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();</span>
+<span class="nc" id="L35">    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();</span>
+<span class="nc" id="L36">    private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();</span>
+<span class="nc" id="L37">    ListaDesideri listaDesideri = new ListaDesideri();</span>
+<span class="nc" id="L38">    private Prodotto prodotto = new Prodotto();</span>
+<span class="nc" id="L39">    private Account account = new Account();</span>
+<span class="nc" id="L40">    private ArrayList&lt;Review&gt; reviews = new ArrayList&lt;&gt;();</span>
+    private Cart cart;
+<span class="nc" id="L42">    private boolean successo = false;</span>
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        String path = (request.getPathInfo() != null) ? request.getPathInfo() : &quot;/&quot;;</span>
+
+<span class="nc" id="L47">        switch (path) {</span>
+            case &quot;/&quot;:
+                break;
+
+        }
+<span class="nc" id="L52">    }</span>
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        String path = (request.getPathInfo() != null) ? request.getPathInfo() : &quot;/&quot;;</span>
+
+
+<span class="nc bnc" id="L58" title="All 5 branches missed.">        switch (path) {</span>
+            case &quot;/&quot;:
+<span class="nc" id="L60">                break;</span>
+            case &quot;/aggiungiListaDesideri&quot;:
+<span class="nc" id="L62">                account = (Account) request.getSession(false).getAttribute(&quot;account&quot;);</span>
+<span class="nc" id="L63">                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter(&quot;id&quot;)));</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                if (listaDesideriServiceImp.aggiungiProdottoListaDesideri(prodotto, account)) {</span>
+<span class="nc" id="L66">                    successo = true;</span>
+                }
+
+<span class="nc" id="L69">                dispatcher = request.getRequestDispatcher(&quot;/GestioneProdottoController/showProductUtente&quot;);</span>
+<span class="nc" id="L70">                dispatcher.forward(request, response);</span>
+<span class="nc" id="L71">                break;</span>
+
+            case &quot;/visualizzaListaDesideri&quot;:
+<span class="nc" id="L74">                account = (Account) request.getSession(false).getAttribute(&quot;account&quot;);</span>
+<span class="nc" id="L75">                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);</span>
+<span class="nc" id="L76">                ArrayList&lt;Prodotto&gt; prodotti = listaDesideri.getProdotti();</span>
+<span class="nc" id="L77">                ArrayList&lt;Prodotto&gt; prodottiNelCarrello = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L78">                cart = (Cart) request.getSession(false).getAttribute(&quot;carrello&quot;);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                for (int i = 0; i &lt; prodotti.size(); i++) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                    if (cart.isPresent(prodotti.get(i))) {</span>
+<span class="nc" id="L81">                        prodottiNelCarrello.add(prodotti.get(i));</span>
+                    }
+<span class="nc" id="L83">                    reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotti.get(i));</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                    if (reviews.size() &gt; 0) {</span>
+<span class="nc" id="L85">                        double valutazioneTotale = 0;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                        for (int j = 0; j &lt; reviews.size(); j++) {</span>
+<span class="nc" id="L87">                            valutazioneTotale += reviews.get(j).getValutazione();</span>
+                        }
+<span class="nc" id="L89">                        double valutazioneMedia = valutazioneTotale / reviews.size();</span>
+<span class="nc" id="L90">                        prodotti.get(i).setValutazioneMedia(valutazioneMedia);</span>
+<span class="nc" id="L91">                        gestioneProdottoServiceImp.modificaValutazioneMediaProdotto(prodotti.get(i));</span>
+                    }
+                }
+
+<span class="nc" id="L95">                cart.isPresent(prodotto);</span>
+<span class="nc" id="L96">                listaDesideri.setProducts(prodotti);</span>
+<span class="nc" id="L97">                request.setAttribute(&quot;prodottiNelCarrello&quot;, prodottiNelCarrello);</span>
+<span class="nc" id="L98">                request.setAttribute(&quot;lista&quot;, listaDesideri);</span>
+<span class="nc" id="L99">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/user/listaDesideri.jsp&quot;);</span>
+<span class="nc" id="L100">                dispatcher.forward(request, response);</span>
+<span class="nc" id="L101">                break;</span>
+
+            case &quot;/rimuoviListaDesideri&quot;:
+<span class="nc" id="L104">                account = (Account) request.getSession(false).getAttribute(&quot;account&quot;);</span>
+<span class="nc" id="L105">                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter(&quot;id&quot;)));</span>
+
+<span class="nc bnc" id="L107" title="All 2 branches missed.">                if (listaDesideriServiceImp.eliminaProdottoListaDesideri(prodotto, account))</span>
+<span class="nc" id="L108">                    successo = true;</span>
+
+<span class="nc" id="L110">                request.setAttribute(&quot;successo&quot;, successo);</span>
+<span class="nc" id="L111">                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);</span>
+<span class="nc" id="L112">                request.setAttribute(&quot;lista&quot;, listaDesideri);</span>
+<span class="nc" id="L113">                dispatcher = request.getRequestDispatcher(&quot;/ListaDesideriController/visualizzaListaDesideri&quot;);</span>
+<span class="nc" id="L114">                dispatcher.forward(request, response);</span>
+                break;
+
+        }
+<span class="nc" id="L118">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

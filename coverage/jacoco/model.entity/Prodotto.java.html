@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Prodotto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">model.entity</a> &gt; <span class="el_source">Prodotto.java</span></div><h1>Prodotto.java</h1><pre class="source lang-java linenums">package model.entity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
+
+public class Prodotto {
+
+    private String productName,description,cover,dataString,platformName,categoryName;
+
+    private double price;
+    private LocalDate date;
+    private int id;
+<span class="fc" id="L15">    private ArrayList&lt;Order&gt; orders=new ArrayList&lt;&gt;();</span>
+
+    private double valutazioneMedia;
+
+
+    public double getValutazioneMedia() {
+<span class="nc" id="L21">        return valutazioneMedia;</span>
+    }
+
+    public void setValutazioneMedia(double valutazioneMedia) {
+<span class="fc" id="L25">        this.valutazioneMedia = valutazioneMedia;</span>
+<span class="fc" id="L26">    }</span>
+
+    public Prodotto() {
+<span class="fc" id="L29">        super();</span>
+<span class="fc" id="L30">    }</span>
+
+    public String getDataString() {
+<span class="nc" id="L33">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;).withLocale(Locale.ITALY);</span>
+<span class="nc" id="L34">        return date.format(formatter);</span>
+    }
+
+    public void setDataString(String dataString) {
+<span class="nc" id="L38">        this.dataString = dataString;</span>
+<span class="nc" id="L39">    }</span>
+
+
+    public String getPlatformName() {
+<span class="nc" id="L43">        return platformName;</span>
+    }
+
+    public void setPlatformName(String platformName) {
+<span class="fc" id="L47">        this.platformName = platformName;</span>
+<span class="fc" id="L48">    }</span>
+
+    public String getCategoryName() {
+<span class="nc" id="L51">        return categoryName;</span>
+    }
+
+    public void setCategoryName(String categoryName) {
+<span class="fc" id="L55">        this.categoryName = categoryName;</span>
+<span class="fc" id="L56">    }</span>
+
+    public String getProductName() {
+<span class="nc" id="L59">        return productName;</span>
+    }
+
+    public void setProductName(String productName) {
+<span class="fc" id="L63">        this.productName = productName;</span>
+<span class="fc" id="L64">    }</span>
+
+    public String getDescription() {
+<span class="nc" id="L67">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L71">        this.description = description;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getCover() {
+<span class="nc" id="L75">        return cover;</span>
+    }
+
+    public void setCover(String cover) {
+<span class="fc" id="L79">        this.cover = cover;</span>
+<span class="fc" id="L80">    }</span>
+
+    public double getPrice() {
+<span class="nc" id="L83">        return price;</span>
+    }
+
+    public void setPrice(double price) {
+<span class="fc" id="L87">        this.price = price;</span>
+<span class="fc" id="L88">    }</span>
+
+    public LocalDate getDate() {
+<span class="nc" id="L91">        return date;</span>
+    }
+
+    public void setDate(LocalDate date) {
+<span class="fc" id="L95">        this.date = date;</span>
+<span class="fc" id="L96">    }</span>
+
+    public int getId() {
+<span class="nc" id="L99">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L103">        this.id = id;</span>
+<span class="nc" id="L104">    }</span>
+
+    public ArrayList&lt;Order&gt; getOrders() {
+<span class="nc" id="L107">        return orders;</span>
+    }
+
+    public void setOrders(ArrayList&lt;Order&gt; orders) {
+<span class="nc" id="L111">        this.orders = orders;</span>
+<span class="nc" id="L112">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L117" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L118">        Prodotto prodotto = (Prodotto) o;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        return getId() == prodotto.getId();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
