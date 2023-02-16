@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SqlProductDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">model.dao.product</a> &gt; <span class="el_source">SqlProductDao.java</span></div><h1>SqlProductDao.java</h1><pre class="source lang-java linenums">package model.dao.product;
+
+
+import model.entity.Prodotto;
+import model.dao.storage.SqlDao;
+import java.sql.*;
+import java.util.ArrayList;
+
+public class SqlProductDao implements  ProductDao&lt;SQLException&gt;{
+
+    public SqlProductDao() {
+<span class="fc" id="L12">        super();</span>
+<span class="fc" id="L13">    }</span>
+    @Override
+
+    public  ArrayList&lt;Prodotto&gt; searchProductsvetrina(String piattaforma) throws SQLException{
+
+<span class="nc" id="L18">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L19">            String query = &quot;SELECT *  FROM product AS pro WHERE pro.piattaforma=? LIMIT 15;&quot;;</span>
+
+<span class="nc" id="L21">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L22">                ps.setString(1,piattaforma);</span>
+<span class="nc" id="L23">                ResultSet rs = ps.executeQuery();</span>
+<span class="nc" id="L24">                Prodotto prodotto = null;</span>
+<span class="nc" id="L25">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc" id="L26">                ArrayList&lt;Prodotto&gt; prodottos = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L28">                    prodotto = productExtractor.extract(rs);</span>
+<span class="nc" id="L29">                    prodottos.add(prodotto);</span>
+                }
+<span class="nc" id="L31">                return prodottos;</span>
+            }
+        }
+
+    }
+
+  public  ArrayList&lt;Prodotto&gt; searchProductsByCategoryAndPlatform(String category, String platform) throws SQLException{
+
+<span class="nc" id="L39">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L40">            String query = &quot;SELECT *  FROM product AS pro WHERE  pro.categoria=? AND pro.piattaforma=? ;&quot;;</span>
+<span class="nc" id="L41">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L42">                ps.setString(1, category);</span>
+<span class="nc" id="L43">                ps.setString(2,platform);</span>
+
+<span class="nc" id="L45">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L47">                Prodotto prodotto = null;</span>
+<span class="nc" id="L48">                ProductExtractor extractor = new ProductExtractor();</span>
+<span class="nc" id="L49">                ArrayList&lt;Prodotto&gt; prodottos = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L51">                    prodotto = extractor.extract(rs);</span>
+<span class="nc" id="L52">                    prodottos.add(prodotto);</span>
+                }
+<span class="nc" id="L54">                return prodottos;</span>
+            }
+        }
+    }
+
+
+    @Override
+    public Prodotto searchProduct(int id) throws SQLException {
+
+<span class="nc" id="L63">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L64">            String query = &quot;SELECT *  FROM product AS pro WHERE id_prodotto=?;&quot;;</span>
+<span class="nc" id="L65">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L66">                ps.setInt(1, id);</span>
+<span class="nc" id="L67">                ResultSet rs = ps.executeQuery();</span>
+
+<span class="nc" id="L69">                Prodotto prodotto = null;</span>
+<span class="nc" id="L70">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                if (rs.next()) {</span>
+<span class="nc" id="L72">                    prodotto = productExtractor.extract(rs);</span>
+                }
+<span class="nc" id="L74">                return prodotto;</span>
+            }
+        }
+
+    }
+
+    @Override
+    public ArrayList&lt;Prodotto&gt; searchAllProducts() throws SQLException {
+
+<span class="nc" id="L83">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L84">            String query = &quot;SELECT *  FROM product AS pro ;&quot;;</span>
+
+<span class="nc" id="L86">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L87">                ResultSet rs = ps.executeQuery();</span>
+<span class="nc" id="L88">                Prodotto prodotto = null;</span>
+<span class="nc" id="L89">                ProductExtractor productExtractor = new ProductExtractor();</span>
+<span class="nc" id="L90">                ArrayList&lt;Prodotto&gt; prodottos = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L92">                    prodotto = productExtractor.extract(rs);</span>
+<span class="nc" id="L93">                    prodottos.add(prodotto);</span>
+                }
+<span class="nc" id="L95">                return prodottos;</span>
+            }
+        }
+    }
+
+    @Override
+    public boolean createProduct(Prodotto prodotto) throws SQLException {
+
+<span class="nc" id="L103">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L104">            String query1 = &quot;INSERT INTO product(categoria, nome, descrizione, path_img, prezzo, data_uscita,piattaforma) &quot; +</span>
+                    &quot;VALUES (?,?,?,?,?,?,?);&quot;;
+
+<span class="nc" id="L107">            try (PreparedStatement ps1 = connection.prepareStatement(query1,Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L108">                ps1.setString(1, prodotto.getCategoryName());</span>
+<span class="nc" id="L109">                ps1.setString(2, prodotto.getProductName());</span>
+<span class="nc" id="L110">                ps1.setString(3, prodotto.getDescription());</span>
+<span class="nc" id="L111">                ps1.setString(4, prodotto.getCover());</span>
+<span class="nc" id="L112">                ps1.setDouble(5, prodotto.getPrice());</span>
+<span class="nc" id="L113">                ps1.setDate(6, Date.valueOf(prodotto.getDate()));</span>
+<span class="nc" id="L114">                ps1.setString(7, prodotto.getPlatformName());</span>
+<span class="nc" id="L115">                int rows = ps1.executeUpdate();</span>
+
+<span class="nc" id="L117">                ResultSet rs = ps1.getGeneratedKeys();</span>
+<span class="nc" id="L118">                rs.next();</span>
+<span class="nc" id="L119">                int id = rs.getInt(1);</span>
+<span class="nc" id="L120">                prodotto.setId(id);</span>
+
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+
+    @Override
+    public boolean updateProduct(Prodotto prodotto) throws SQLException {
+
+<span class="nc" id="L130">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L131">            String query = &quot;UPDATE product SET descrizione=?,prezzo=?,nome=? WHERE id_prodotto=?;&quot;;</span>
+
+<span class="nc" id="L133">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L134">                ps.setString(1, prodotto.getDescription());</span>
+<span class="nc" id="L135">                ps.setDouble(2, prodotto.getPrice());</span>
+<span class="nc" id="L136">                ps.setString(3, prodotto.getProductName());</span>
+<span class="nc" id="L137">                ps.setInt(4, prodotto.getId());</span>
+
+<span class="nc" id="L139">                int rows = ps.executeUpdate();</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+
+    }
+
+    @Override
+    public boolean deleteProduct(int id) throws SQLException {
+
+<span class="nc" id="L149">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L150">            String query = &quot;DELETE FROM product WHERE (id_prodotto=?);&quot;;</span>
+
+<span class="nc" id="L152">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L153">                ps.setInt(1,id);</span>
+
+<span class="nc" id="L155">                int rows = ps.executeUpdate();</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+
+    }
+
+    @Override
+    public boolean updateProductValuation(Prodotto prodotto) throws SQLException {
+<span class="nc" id="L164">        try(Connection connection=SqlDao.getConnection()) {</span>
+<span class="nc" id="L165">            String query = &quot;UPDATE product SET valutazione_media=? WHERE id_prodotto=?;&quot;;</span>
+
+<span class="nc" id="L167">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L168">                ps.setDouble(1, prodotto.getValutazioneMedia());</span>
+<span class="nc" id="L169">                ps.setDouble(2, prodotto.getId());</span>
+<span class="nc" id="L170">                int rows = ps.executeUpdate();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomePageController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">HomePageController.java</span></div><h1>HomePageController.java</h1><pre class="source lang-java linenums">import gestioneAcquisti.service.GestioneAcquistiServiceImp;
+import gestioneProdotto.service.GestioneProdottoServiceImp;
+import gestioneUtenti.service.GestioneUtenteServiceImp;
+import model.dao.product.SqlProductDao;
+import model.entity.Account;
+import model.entity.Order;
+import model.entity.Prodotto;
+import model.entity.cart.Cart;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+/**
+ * classe principale che si occupa di recuperare tutti i prodotti dal DB di una determinata piattaforma
+ * e caricarli  nella vetrina del sito web in modo tale da visualizzarli sulla HomePage
+ * Implementa il controller per l'HomePage
+ *
+ * @author Andrea Serpico,Andrea Santulli,Gerardo Esposito
+ */
+@WebServlet(name = &quot;HomePageController&quot;, value = &quot;/HomePageController/*&quot;)
+<span class="nc" id="L28">public class HomePageController extends HttpServlet {</span>
+    private RequestDispatcher dispatcher;
+<span class="nc" id="L30">    private Cart cart = new Cart();</span>
+<span class="nc" id="L31">    private Account account = new Account();</span>
+
+<span class="nc" id="L33">    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();</span>
+
+<span class="nc" id="L35">    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();</span>
+<span class="nc" id="L36">    private GestioneUtenteServiceImp gestioneUtenteServiceImp = new GestioneUtenteServiceImp();</span>
+
+    public void init() throws ServletException {
+<span class="nc" id="L39">        super.init();</span>
+        try {
+            ArrayList&lt;Prodotto&gt; products;
+<span class="nc" id="L42">            SqlProductDao sqlProductDao= new SqlProductDao();</span>
+<span class="nc" id="L43">            products=sqlProductDao.searchProductsvetrina(&quot;PS4&quot;);</span>
+<span class="nc" id="L44">            getServletContext().setAttribute(&quot;vetrina&quot;,products);</span>
+<span class="nc" id="L45">        } catch (SQLException throwables) {</span>
+<span class="nc" id="L46">            throwables.printStackTrace();</span>
+<span class="nc" id="L47">        }</span>
+<span class="nc" id="L48">    }</span>
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        String path = (request.getPathInfo() != null) ? request.getPathInfo() : &quot;/&quot;;</span>
+
+<span class="nc bnc" id="L54" title="All 5 branches missed.">        switch (path) {</span>
+            case &quot;/&quot;:
+<span class="nc" id="L56">                break;</span>
+            case &quot;/homePageUtent&quot;:
+<span class="nc" id="L58">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/user/utente.jsp&quot;);</span>
+<span class="nc" id="L59">                dispatcher.forward(request, response);</span>
+<span class="nc" id="L60">                break;</span>
+            case &quot;/homePage&quot;:
+<span class="nc" id="L62">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/guest/home.jsp&quot;);</span>
+<span class="nc" id="L63">                dispatcher.forward(request, response);</span>
+<span class="nc" id="L64">                break;</span>
+            case &quot;/homePageAdmin&quot;:
+<span class="nc" id="L66">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/admin/admin.jsp&quot;);</span>
+<span class="nc" id="L67">                dispatcher.forward(request, response);</span>
+                break;
+
+        }
+<span class="nc" id="L71">    }</span>
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        String path = (request.getPathInfo() != null) ? request.getPathInfo() : &quot;/&quot;;</span>
+
+<span class="nc bnc" id="L77" title="All 4 branches missed.">        switch (path) {</span>
+            case &quot;/&quot;:
+<span class="nc" id="L79">                break;</span>
+            case &quot;/homePageAdmin&quot;:
+<span class="nc" id="L81">                ArrayList&lt;Prodotto&gt; prodottos = gestioneProdottoServiceImp.getAllProdotti();</span>
+<span class="nc" id="L82">                request.getSession(false).setAttribute(&quot;n_products&quot;, prodottos.size());</span>
+<span class="nc" id="L83">                ArrayList&lt;Account&gt; accounts = gestioneUtenteServiceImp.getAllAccount();</span>
+<span class="nc" id="L84">                request.getSession(false).setAttribute(&quot;n_client&quot;, accounts.size());</span>
+<span class="nc" id="L85">                ArrayList&lt;Order&gt; orders = gestioneAcquistiServiceImp.getAllOrdiniConProdotti();</span>
+<span class="nc" id="L86">                ArrayList&lt;Order&gt; newOrdini = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L87">                LocalDate now = LocalDate.now();</span>
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">                for (int i = 0; i &lt; orders.size(); i++) {</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                    if (orders.get(i).getDate().getMonth().equals(now.getMonth())) {</span>
+<span class="nc" id="L91">                        newOrdini.add(orders.get(i));</span>
+                    }
+                }
+<span class="nc" id="L94">                double totale = 0;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                for (int j = 0; j &lt; newOrdini.size(); j++) {</span>
+<span class="nc" id="L96">                    totale += newOrdini.get(j).getTotal();</span>
+                }
+
+<span class="nc" id="L99">                request.getSession(false).setAttribute(&quot;totale_incasso&quot;, Math.round(totale * 100.0) / 100.0);</span>
+<span class="nc" id="L100">                request.getSession(false).setAttribute(&quot;n_ordini&quot;, newOrdini.size());</span>
+<span class="nc" id="L101">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/admin/admin.jsp&quot;);</span>
+<span class="nc" id="L102">                dispatcher.forward(request, response);</span>
+<span class="nc" id="L103">                break;</span>
+
+            case &quot;/homePageUtent&quot;:
+<span class="nc" id="L106">                account = (Account) request.getSession(false).getAttribute(&quot;account&quot;);</span>
+<span class="nc" id="L107">                cart = gestioneAcquistiServiceImp.getCart(account);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                if (cart != null) {</span>
+<span class="nc" id="L109">                    request.getSession(false).setAttribute(&quot;carrello&quot;, cart);</span>
+<span class="nc" id="L110">                    request.getSession(false).setAttribute(&quot;totale&quot;, Math.round(cart.totalPrice() * 100.0) / 100.0);</span>
+<span class="nc" id="L111">                    request.getSession(false).setAttribute(&quot;quantity&quot;, cart.getCartItems().size());</span>
+                }
+<span class="nc" id="L113">                dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/views/user/utente.jsp&quot;);</span>
+<span class="nc" id="L114">                dispatcher.forward(request, response);</span>
+                break;
+        }
+
+<span class="nc" id="L118">    }</span>
+}
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

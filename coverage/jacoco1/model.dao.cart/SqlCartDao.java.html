@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SqlCartDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GameOverNew</a> &gt; <a href="index.source.html" class="el_package">model.dao.cart</a> &gt; <span class="el_source">SqlCartDao.java</span></div><h1>SqlCartDao.java</h1><pre class="source lang-java linenums">package model.dao.cart;
+
+import model.dao.product.ProductExtractor;
+import model.dao.storage.SqlDao;
+import model.entity.Account;
+import model.entity.Prodotto;
+import model.entity.cart.Cart;
+import model.entity.cart.CartItem;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+<span class="fc" id="L15">public class SqlCartDao implements CartDao {</span>
+    @Override
+    public boolean removeProductFromCart(int idCliente, int id_product) throws Exception {
+<span class="nc" id="L18">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L19">            String query = &quot;DELETE FROM cart WHERE (id_prodotto=? AND id_cliente=?);&quot;;</span>
+
+<span class="nc" id="L21">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L22">                ps.setInt(1, id_product);</span>
+<span class="nc" id="L23">                ps.setInt(2, idCliente);</span>
+
+<span class="nc" id="L25">                int rows = ps.executeUpdate();</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+
+    @Override
+    public boolean addProductCart(int id_cliente, int id_product) throws Exception {
+<span class="nc" id="L33">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L34">            String query = &quot;INSERT INTO cart (id_cliente,id_prodotto) VALUES(?,?);&quot;;</span>
+
+<span class="nc" id="L36">            try (PreparedStatement ps1 = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L37">                ps1.setInt(1, id_cliente);</span>
+<span class="nc" id="L38">                ps1.setInt(2, id_product);</span>
+
+<span class="nc" id="L40">                int rows = ps1.executeUpdate();</span>
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+
+    @Override
+    public Cart searchCartWithAccount(Account account) throws Exception {
+<span class="nc" id="L49">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L50">            String query = &quot;SELECT * FROM  product AS pro,cart where id_cliente=?  and pro.id_prodotto=cart.id_prodotto;&quot;;</span>
+
+<span class="nc" id="L52">            try (PreparedStatement ps1 = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L53">                ps1.setInt(1, account.getId());</span>
+
+<span class="nc" id="L55">                ResultSet rs = ps1.executeQuery();</span>
+                Prodotto prodotto;
+<span class="nc" id="L57">                ProductExtractor productExtractor = new ProductExtractor();</span>
+
+<span class="nc" id="L59">                ArrayList&lt;CartItem&gt; products = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L61">                    prodotto = productExtractor.extract(rs);</span>
+<span class="nc" id="L62">                    CartItem cartItem=new CartItem(prodotto);</span>
+<span class="nc" id="L63">                    products.add(cartItem);</span>
+<span class="nc" id="L64">                }</span>
+<span class="nc" id="L65">                Cart cart=new Cart();</span>
+<span class="nc" id="L66">                cart.setCartItems(products);</span>
+<span class="nc" id="L67">                return cart;</span>
+            }
+        }
+
+    }
+
+    @Override
+    public boolean removeAllProductFromCart(int idCliente) throws Exception {
+<span class="nc" id="L75">        try (Connection connection = SqlDao.getConnection()) {</span>
+<span class="nc" id="L76">            String query = &quot;DELETE  FROM cart WHERE  id_cliente=?;&quot;;</span>
+
+<span class="nc" id="L78">            try (PreparedStatement ps = connection.prepareStatement(query)) {</span>
+<span class="nc" id="L79">                ps.setInt(1, idCliente);</span>
+
+<span class="nc" id="L81">                int rows = ps.executeUpdate();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                return rows == 1;</span>
+            }
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
