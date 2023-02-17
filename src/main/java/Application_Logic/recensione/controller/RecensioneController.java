@@ -43,11 +43,12 @@ public class RecensioneController extends HttpServlet {
     private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
     private ValidateForm validateForm = new ValidateForm();
 
-    public RecensioneController(){
+    public RecensioneController() {
 
     }
+
     public RecensioneController(RecensioneServiceImp recensioneService) {
-        this.recensioneServiceImp=recensioneService;
+        this.recensioneServiceImp = recensioneService;
     }
 
 
@@ -64,8 +65,7 @@ public class RecensioneController extends HttpServlet {
             review.setTitolo(titolo);
             successo = recensioneServiceImp.aggiungiRecensione(review);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -150,6 +150,8 @@ public class RecensioneController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
 
     }
@@ -188,6 +190,8 @@ public class RecensioneController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateRecensione.jsp");
                 dispatcher.forward(request, response);
                 break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

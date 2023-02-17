@@ -73,6 +73,7 @@ public class AutenticazioneController extends HttpServlet {
 
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -101,6 +102,7 @@ public class AutenticazioneController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/home.jsp");
                 dispatcher.forward(request, response);
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

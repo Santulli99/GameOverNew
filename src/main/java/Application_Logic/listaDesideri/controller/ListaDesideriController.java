@@ -46,6 +46,7 @@ public class ListaDesideriController extends HttpServlet {
         switch (path) {
             case "/":
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
         }
     }
@@ -112,6 +113,7 @@ public class ListaDesideriController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/ListaDesideriController/visualizzaListaDesideri");
                 dispatcher.forward(request, response);
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
         }
     }

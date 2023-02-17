@@ -216,6 +216,8 @@ public class GestioneAcquistiController extends HttpServlet {
                 }
                 break;
 
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
+
         }
 
 
@@ -269,7 +271,7 @@ public class GestioneAcquistiController extends HttpServlet {
                 dispatcher.forward(request, response);
 
                 break;
-
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

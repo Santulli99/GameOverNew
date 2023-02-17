@@ -177,6 +177,7 @@ public class GestioneUtenteController extends HttpServlet {
                     }
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 

@@ -51,6 +51,7 @@ public class RegistrazioneController extends HttpServlet {
                     response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda ad un account già esistente.");
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -77,6 +78,7 @@ public class RegistrazioneController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 

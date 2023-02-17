@@ -68,6 +68,7 @@ public class HomePageController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                 dispatcher.forward(request, response);
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
         }
     }
@@ -115,6 +116,7 @@ public class HomePageController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/utente.jsp");
                 dispatcher.forward(request, response);
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
 
     }

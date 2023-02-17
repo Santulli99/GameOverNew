@@ -27,7 +27,6 @@
 
 <body>
 
-
 <div> <img src="${pageContext.request.contextPath}/images/404.jpg" ></div>
 
 

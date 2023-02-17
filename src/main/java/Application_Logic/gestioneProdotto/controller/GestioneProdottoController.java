@@ -292,6 +292,7 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
         }
     }
@@ -360,6 +361,7 @@ public class GestioneProdottoController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 break;
+            default:  response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }
