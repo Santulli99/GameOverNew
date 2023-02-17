@@ -1,13 +1,13 @@
 
-import model.entity.Account;
-import model.entity.Prodotto;
+import Application_Logic.entity.Account;
+import Application_Logic.entity.Prodotto;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import recensione.controller.RecensioneController;
+import Application_Logic.recensione.controller.RecensioneController;
 
-import recensione.service.RecensioneServiceImp;
-import validate.ValidateForm;
+import Application_Logic.recensione.service.RecensioneServiceImp;
+import Application_Logic.ValidateForm;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

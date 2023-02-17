@@ -1,10 +1,10 @@
 
-import gestioneProdotto.controller.GestioneProdottoController;
-import gestioneProdotto.service.GestioneProdottoServiceImp;
+import Application_Logic.gestioneProdotto.controller.GestioneProdottoController;
+import Application_Logic.gestioneProdotto.service.GestioneProdottoServiceImp;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import validate.ValidateForm;
+import Application_Logic.ValidateForm;
 
 import java.time.LocalDate;
 import java.time.Month;

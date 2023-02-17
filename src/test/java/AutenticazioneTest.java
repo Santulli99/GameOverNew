@@ -1,6 +1,6 @@
-import autenticazione.service.AutenticazioneServiceImp;
-import model.dao.account.SqlAccountDao;
-import model.entity.Account;
+import Application_Logic.autenticazione.service.AutenticazioneServiceImp;
+import Storage.account.SqlAccountDao;
+import Application_Logic.entity.Account;
 
 import org.junit.Test;
 

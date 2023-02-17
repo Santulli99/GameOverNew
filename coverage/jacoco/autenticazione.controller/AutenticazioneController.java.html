@@ -65,10 +65,10 @@ import java.sql.SQLException;
 <span class="nc" id="L65">                session.setAttribute(&quot;account&quot;, account);</span>
 
 <span class="nc bnc" id="L67" title="All 2 branches missed.">                if (autenticazioneService.verificaVenditore(account)) {</span>
-<span class="nc" id="L68">                    dispatcher = request.getRequestDispatcher(&quot;/HomePageController/homePageAdmin&quot;);</span>
+<span class="nc" id="L68">                    dispatcher = request.getRequestDispatcher(&quot;/Application_Logic.HomePageController/homePageAdmin&quot;);</span>
 <span class="nc" id="L69">                    dispatcher.forward(request, response);</span>
                 } else {
-<span class="nc" id="L71">                    dispatcher = request.getRequestDispatcher(&quot;/HomePageController/homePageUtent&quot;);</span>
+<span class="nc" id="L71">                    dispatcher = request.getRequestDispatcher(&quot;/Application_Logic.HomePageController/homePageUtent&quot;);</span>
 <span class="nc" id="L72">                    dispatcher.forward(request, response);</span>
 
                 }
