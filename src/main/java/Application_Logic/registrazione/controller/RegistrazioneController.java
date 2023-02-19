@@ -39,7 +39,7 @@ public class RegistrazioneController extends HttpServlet {
         switch (path) {
             case "/":
                 break;
-            case "/Application_Logic/registrazione":
+            case "/registrazione":
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/client/registrazione1.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -63,7 +63,7 @@ public class RegistrazioneController extends HttpServlet {
         switch (path) {
             case "/":
                 break;
-            case "/Application_Logic/registrazione":
+            case "/registrazione":
                 boolean registrazione;
                 Account account = registrazioneServiceImp.registrazioneAccount(request);
                 if (account != null) {
