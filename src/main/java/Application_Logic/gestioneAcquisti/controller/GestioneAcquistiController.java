@@ -4,7 +4,10 @@ import Application_Logic.gestioneAcquisti.OrdinareCliente;
 import Application_Logic.gestioneAcquisti.OrdinareDataCrescente;
 import Application_Logic.gestioneAcquisti.OrdinareDataDecrescente;
 import Application_Logic.gestioneAcquisti.RandomString;
+import Application_Logic.gestioneAcquisti.service.GestioneAcquistiService;
 import Application_Logic.gestioneAcquisti.service.GestioneAcquistiServiceImp;
+import Application_Logic.gestioneProdotto.service.GestioneProdottoService;
+import Application_Logic.listaDesideri.service.ListaDesideriService;
 import com.google.gson.Gson;
 import Application_Logic.gestioneProdotto.service.GestioneProdottoServiceImp;
 import Application_Logic.listaDesideri.service.ListaDesideriServiceImp;
@@ -36,11 +39,11 @@ import java.util.Collections;
 @WebServlet(name = "GestioneAcquistiController", value = "/GestioneAcquistiController/*")
 public class GestioneAcquistiController extends HttpServlet {
 
-    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
-    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
+    private GestioneProdottoService gestioneProdottoService = new GestioneProdottoServiceImp();
+    private GestioneAcquistiService gestioneAcquistiService = new GestioneAcquistiServiceImp();
 
     private ListaDesideri listaDesideri = new ListaDesideri();
-    private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
+    private ListaDesideriService listaDesideriService = new ListaDesideriServiceImp();
     private Prodotto prodotto;
     private Account account;
     private Cart cart;
@@ -62,8 +65,8 @@ public class GestioneAcquistiController extends HttpServlet {
             case "/removeCart":
                 account = (Account) request.getSession(false).getAttribute("account");
                 idProdotto = Integer.parseInt(request.getParameter("id"));
-                gestioneAcquistiServiceImp.rimuoviProdottoDalCarrello(account.getId(), idProdotto);
-                cart = gestioneAcquistiServiceImp.getCart(account);
+                gestioneAcquistiService.rimuoviProdottoDalCarrello(account.getId(), idProdotto);
+                cart = gestioneAcquistiService.getCart(account);
 
                 request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
                 request.getSession(false).setAttribute("carrello", cart);
@@ -84,7 +87,7 @@ public class GestioneAcquistiController extends HttpServlet {
             case "/addCart":
                 account = (Account) request.getSession(false).getAttribute("account");
                 int idProdotto = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(idProdotto);
+                prodotto = gestioneProdottoService.getProdotto(idProdotto);
                 if (prodotto != null) {
 
                     if (request.getSession(false).getAttribute("carrello") == null) {
@@ -96,8 +99,8 @@ public class GestioneAcquistiController extends HttpServlet {
 
                     if (!cart.isPresent(prodotto)) {
 
-                        gestioneAcquistiServiceImp.aggiungiProdottoAlCarrello(account.getId(), idProdotto);
-                        cart = gestioneAcquistiServiceImp.getCart(account);
+                        gestioneAcquistiService.aggiungiProdottoAlCarrello(account.getId(), idProdotto);
+                        cart = gestioneAcquistiService.getCart(account);
                         request.getSession(false).setAttribute("carrello", cart);
                         request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
                         request.getSession(false).setAttribute("quantity", cart.getCartItems().size());
@@ -132,7 +135,7 @@ public class GestioneAcquistiController extends HttpServlet {
 
             /**si visualizzano tutti gli ordini(ADMIN)**/
             case "/showOrders":
-                orders = gestioneAcquistiServiceImp.getAllOrdiniConAccount();
+                orders = gestioneAcquistiService.getAllOrdiniConAccount();
                 request.setAttribute("orders", orders);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/allOrdersAdmin.jsp");
                 dispatcher.forward(request, response);
@@ -141,7 +144,7 @@ public class GestioneAcquistiController extends HttpServlet {
             /**si visualizzano tutti gli ordini(UTENTE)**/
             case "/showOrdersUtent":
                 account = (Account) request.getSession(false).getAttribute("account");
-                orders = gestioneAcquistiServiceImp.getAllOrdiniDiUnAccount(account.getId());
+                orders = gestioneAcquistiService.getAllOrdiniDiUnAccount(account.getId());
                 if (orders.size() == 0) {
                     boolean ordini = false;
                     request.setAttribute("ordini", ordini);
@@ -157,7 +160,7 @@ public class GestioneAcquistiController extends HttpServlet {
             /**si visualizza il singolo ordine(UTENTE,ADMIN)**/
             case "/showOrder":
                 account = (Account) request.getSession(false).getAttribute("account");
-                order = gestioneAcquistiServiceImp.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
+                order = gestioneAcquistiService.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
                 double totale = 0;
                 for (int i = 0; i < order.getProducts().size(); i++) {
                     totale += order.getProducts().get(i).getPrice();
@@ -174,7 +177,7 @@ public class GestioneAcquistiController extends HttpServlet {
 
             /**si visualizza il singolo ordine(ADMIN)**/
             case "/showOrderAdmin":
-                order = gestioneAcquistiServiceImp.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
+                order = gestioneAcquistiService.getOrdineConProdotti(Integer.parseInt(request.getParameter("id")));
                 double total = 0;
                 for (int i = 0; i < order.getProducts().size(); i++) {
                     total += order.getProducts().get(i).getPrice();
@@ -189,7 +192,7 @@ public class GestioneAcquistiController extends HttpServlet {
             case "/showOrdersWithAjax":
 
                 String valore = request.getParameter("valore");
-                orders = gestioneAcquistiServiceImp.getAllOrdiniConAccount();
+                orders = gestioneAcquistiService.getAllOrdiniConAccount();
 
                 switch (valore) {
 
@@ -243,13 +246,13 @@ public class GestioneAcquistiController extends HttpServlet {
                 order.setAccount(account);
                 order.setCart(cart);
 
-                boolean successo = gestioneAcquistiServiceImp.creaOrdine(order);
-                listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                boolean successo = gestioneAcquistiService.creaOrdine(order);
+                listaDesideri = listaDesideriService.getListaDesideri(account);
                 ArrayList<CartItem> prodottoArrayList = cart.getCartItems();
                 for (int i = 0; i < prodottoArrayList.size(); i++) {
                     for (int j = 0; j < listaDesideri.getProdotti().size(); j++) {
                         if (listaDesideri.getProdotti().get(j).getId() == (prodottoArrayList.get(i).getItem().getId())) {
-                            listaDesideriServiceImp.eliminaProdottoListaDesideri(listaDesideri.getProdotti().get(j), account);
+                            listaDesideriService.eliminaProdottoListaDesideri(listaDesideri.getProdotti().get(j), account);
                         }
                     }
                 }
@@ -260,8 +263,8 @@ public class GestioneAcquistiController extends HttpServlet {
                     codiciSeriali.add(randomString.nextString());
                 }
 
-                gestioneAcquistiServiceImp.rimuoviAllProdottiDalCarrello(account.getId());
-                cart = gestioneAcquistiServiceImp.getCart(account);
+                gestioneAcquistiService.rimuoviAllProdottiDalCarrello(account.getId());
+                cart = gestioneAcquistiService.getCart(account);
                 request.getSession(false).setAttribute("carrello", cart);
                 request.getSession(false).setAttribute("totale", Math.round(cart.totalPrice() * 100.0) / 100.0);
                 request.getSession(false).setAttribute("quantity", cart.getCartItems().size());

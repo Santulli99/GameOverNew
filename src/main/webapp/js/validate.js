@@ -265,7 +265,7 @@ function checkNumeroCarta() {
         document.getElementById("pr2").style.display = "block";
         return false;
     } else if (!numCartaRegex.test(numCarta)) {
-        document.getElementById("pr2").innerHTML = "Numero Carta di Credito non valido.<br>Il numero della Carta di Credio deve essere di 16 cifre.";
+        document.getElementById("pr2").innerHTML = "Numero Carta di Credito non valido.<br>Il numero della Carta di Credito deve essere di 16 cifre.";
         document.getElementById("NumCarta").style.border = "2px solid #ee3124";
         document.getElementById("NumCarta").style.boxShadow = "0 0 8px 0 rgb(238, 49, 36,0.8)";
         document.getElementById("NumCarta").style.outline = "1px solid";
@@ -372,7 +372,6 @@ function checkCvC() {
 
 
 function validateAcquisto() {
-    console.log("sono dentro");
     if (checkIntestatario() && checkNumeroCarta() && meseCheck() && annoCheck() && checkCvC()) {
         return true;
     }

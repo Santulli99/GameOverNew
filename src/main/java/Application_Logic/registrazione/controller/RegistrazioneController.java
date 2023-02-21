@@ -1,6 +1,8 @@
 package Application_Logic.registrazione.controller;
 
+import Application_Logic.gestioneUtenti.service.GestioneUtenteService;
 import Application_Logic.gestioneUtenti.service.GestioneUtenteServiceImp;
+import Application_Logic.registrazione.service.RegistrazioneService;
 import Application_Logic.registrazione.service.RegistrazioneServiceImp;
 import Storage.account.SqlAccountDao;
 import Application_Logic.entity.Account;
@@ -27,9 +29,9 @@ public class RegistrazioneController extends HttpServlet {
     private RequestDispatcher dispatcher;
     private SqlAccountDao accountDao = new SqlAccountDao();
 
-    private RegistrazioneServiceImp registrazioneServiceImp = new RegistrazioneServiceImp();
+    private RegistrazioneService registrazioneService = new RegistrazioneServiceImp();
 
-    private GestioneUtenteServiceImp gestioneUtenteServiceImp = new GestioneUtenteServiceImp();
+    private GestioneUtenteService gestioneUtenteService = new GestioneUtenteServiceImp();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -45,7 +47,7 @@ public class RegistrazioneController extends HttpServlet {
                 break;
             case "/checkEmailSign":
                 String email = request.getParameter("email");
-                account = gestioneUtenteServiceImp.getAccountEmail(email);
+                account = gestioneUtenteService.getAccountEmail(email);
                 if (account != null) {
                     response.setContentType("text/plain;charset=UTF-8");
                     response.getWriter().println("Hey, sembra che l’indirizzo email corrisponda ad un account già esistente.");
@@ -65,7 +67,7 @@ public class RegistrazioneController extends HttpServlet {
                 break;
             case "/Application_Logic/registrazione":
                 boolean registrazione;
-                Account account = registrazioneServiceImp.registrazioneAccount(request);
+                Account account = registrazioneService.registrazioneAccount(request);
                 if (account != null) {
                     registrazione = true;
                     request.setAttribute("registrazione", registrazione);

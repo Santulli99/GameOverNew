@@ -1,7 +1,11 @@
 package Application_Logic.gestioneProdotto.controller;
 
 import Application_Logic.entity.*;
+import Application_Logic.gestioneAcquisti.service.GestioneAcquistiService;
+import Application_Logic.gestioneProdotto.service.GestioneProdottoService;
 import Application_Logic.gestioneProdotto.service.GestioneProdottoServiceImp;
+import Application_Logic.listaDesideri.service.ListaDesideriService;
+import Application_Logic.recensione.service.RecensioneService;
 import com.google.gson.Gson;
 import Application_Logic.gestioneAcquisti.service.GestioneAcquistiServiceImp;
 import Application_Logic.listaDesideri.service.ListaDesideriServiceImp;
@@ -55,16 +59,16 @@ public class GestioneProdottoController extends HttpServlet {
     private ArrayList<Review> reviews = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
 
-    private GestioneAcquistiServiceImp gestioneAcquistiServiceImp = new GestioneAcquistiServiceImp();
-    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
-    private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
-    private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
+    private GestioneAcquistiService gestioneAcquistiService = new GestioneAcquistiServiceImp();
+    private GestioneProdottoService gestioneProdottoService = new GestioneProdottoServiceImp();
+    private ListaDesideriService listaDesideriService = new ListaDesideriServiceImp();
+    private RecensioneService recensioneService = new RecensioneServiceImp();
 
     public GestioneProdottoController(){
 
     }
     public GestioneProdottoController(GestioneProdottoServiceImp mockGestioneProdotto) {
-        this.gestioneProdottoServiceImp=mockGestioneProdotto;
+        this.gestioneProdottoService=mockGestioneProdotto;
     }
 
 
@@ -88,7 +92,7 @@ public class GestioneProdottoController extends HttpServlet {
             prodotto.setValutazioneMedia(0);
             prodotto.setCover(cover);
 
-            gestioneProdottoServiceImp.aggiungiProdotto(prodotto);
+            gestioneProdottoService.aggiungiProdotto(prodotto);
             return true;
         } else {
             return false;
@@ -103,7 +107,7 @@ public class GestioneProdottoController extends HttpServlet {
             /**si visualizza la pagina per modificare il prodotto**/
             case "/updateProduct":
                 id = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
+                prodotto = gestioneProdottoService.getProdotto(id);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/updateProduct.jsp");
                 dispatcher.forward(request, response);
@@ -112,7 +116,7 @@ public class GestioneProdottoController extends HttpServlet {
             /**si visualizzano tutti i prodotti**/
             case "/showAllProduct":
                 //prodotti = gestioneProdottoServiceImp.getAllProdottiConCategoriaEPiattaforma();
-                prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                prodotti = gestioneProdottoService.getAllProdotti();
                 request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/showAllProduct.jsp");
                 dispatcher.forward(request, response);
@@ -123,7 +127,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                prodotti = gestioneProdottoService.getAllProdotti();
 
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
@@ -146,7 +150,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                prodotti = gestioneProdottoService.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
@@ -167,7 +171,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                prodotti = gestioneProdottoService.getAllProdotti();
 
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
@@ -183,8 +187,8 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showProduct":
                 id = Integer.parseInt(request.getParameter("id"));
                 // prodotto = gestioneProdottoServiceImp.getProdottoConCategoria(id);
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
-                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                prodotto = gestioneProdottoService.getProdotto(id);
+                reviews = recensioneService.cercaRecensioniPerProdotto(prodotto);
 
                 request.setAttribute("recensioni1", reviews);
                 request.setAttribute("prodotto", prodotto);
@@ -197,9 +201,9 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showProductUtente":
                 account = (Account) request.getSession(false).getAttribute("account");
                 id = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
-                ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
-                orders = gestioneAcquistiServiceImp.searchAllOrderWithProductsbyAccount(account);
+                prodotto = gestioneProdottoService.getProdotto(id);
+                ListaDesideri listaDesideri = listaDesideriService.getListaDesideri(account);
+                orders = gestioneAcquistiService.searchAllOrderWithProductsbyAccount(account);
                 boolean presente = false;
                 for (int j = 0; j < orders.size(); j++) {
                     ArrayList<Prodotto> prodottiArrayList = orders.get(j).getProducts();
@@ -215,7 +219,7 @@ public class GestioneProdottoController extends HttpServlet {
                     aggiunto = true;
                 }
 
-                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                reviews = recensioneService.cercaRecensioniPerProdotto(prodotto);
                 boolean controllo = false;
                 for (int i = 0; i < reviews.size(); i++) {
                     if (account.getId() == reviews.get(i).getAccount().getId())
@@ -235,7 +239,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showProductsWithCatAndPla":
                 categoria = request.getParameter("category");
                 piattaforma = request.getParameter("pla");
-                prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria, piattaforma);
+                prodotti = gestioneProdottoService.getAllProdottiPerCategoriaEPiattaforma(categoria, piattaforma);
                 request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/prodottiCategory.jsp");
                 dispatcher.forward(request, response);
@@ -245,7 +249,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/showProductsWithCatAndPlaUtent":
                 categoria = request.getParameter("category");
                 piattaforma = request.getParameter("pla");
-                prodotti = gestioneProdottoServiceImp.getAllProdottiPerCategoriaEPiattaforma(categoria, piattaforma);
+                prodotti = gestioneProdottoService.getAllProdottiPerCategoriaEPiattaforma(categoria, piattaforma);
                 request.setAttribute("prodotti", prodotti);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottiCategoryUtent.jsp");
                 dispatcher.forward(request, response);
@@ -262,8 +266,8 @@ public class GestioneProdottoController extends HttpServlet {
 
             case "/deleteProduct":
                 id = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
-                eliminato = gestioneProdottoServiceImp.rimuoviProdotto(id);
+                prodotto = gestioneProdottoService.getProdotto(id);
+                eliminato = gestioneProdottoService.rimuoviProdotto(id);
                 if (eliminato) {
                     File file = new File("C:\\Users\\PC\\IdeaProjects\\GameOverNew\\src\\main\\webapp\\cover\\" + prodotto.getCover());
                     file.delete();
@@ -277,7 +281,7 @@ public class GestioneProdottoController extends HttpServlet {
                 prodottoSearch = new ArrayList<>();
                 stringa = request.getParameter("stringa");
                 pattern = Pattern.compile(stringa, Pattern.CASE_INSENSITIVE);
-                prodotti = gestioneProdottoServiceImp.getAllProdotti();
+                prodotti = gestioneProdottoService.getAllProdotti();
                 for (int i = 0; i < prodotti.size(); i++) {
                     Matcher matcher = pattern.matcher(prodotti.get(i).getProductName());
                     if (matcher.find())
@@ -339,7 +343,7 @@ public class GestioneProdottoController extends HttpServlet {
             case "/updateProduct":
                 ValidateForm validateForm1 = new ValidateForm();
                 id = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
+                prodotto = gestioneProdottoService.getProdotto(id);
 
                 boolean nomeUpdate = validateForm1.validateNomeProdotto(request.getParameter("nome"));
                 boolean prezzoUpdate = validateForm1.validatePrezzoProdotto(request.getParameter("prezzo"));
@@ -349,7 +353,7 @@ public class GestioneProdottoController extends HttpServlet {
                     prodotto.setProductName(request.getParameter("nome"));
                     prodotto.setDescription(request.getParameter("description"));
                     prodotto.setPrice(Double.parseDouble(request.getParameter("prezzo")));
-                    update = gestioneProdottoServiceImp.modificaProdotto(prodotto);
+                    update = gestioneProdottoService.modificaProdotto(prodotto);
                     request.setAttribute("update", update);
                     dispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp");
                     dispatcher.forward(request, response);

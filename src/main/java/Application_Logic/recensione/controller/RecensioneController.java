@@ -1,7 +1,10 @@
 package Application_Logic.recensione.controller;
 
+import Application_Logic.gestioneProdotto.service.GestioneProdottoService;
 import Application_Logic.gestioneProdotto.service.GestioneProdottoServiceImp;
+import Application_Logic.listaDesideri.service.ListaDesideriService;
 import Application_Logic.listaDesideri.service.ListaDesideriServiceImp;
+import Application_Logic.recensione.service.RecensioneService;
 import Application_Logic.recensione.service.RecensioneServiceImp;
 import Storage.product.SqlProductDao;
 import Application_Logic.entity.Account;
@@ -37,10 +40,9 @@ public class RecensioneController extends HttpServlet {
     private Review review;
     private ArrayList<Review> reviews = new ArrayList<>();
     boolean successo = false;
-    private SqlProductDao productDao = new SqlProductDao();
-    private GestioneProdottoServiceImp gestioneProdottoServiceImp = new GestioneProdottoServiceImp();
-    private ListaDesideriServiceImp listaDesideriServiceImp = new ListaDesideriServiceImp();
-    private RecensioneServiceImp recensioneServiceImp = new RecensioneServiceImp();
+    private GestioneProdottoService gestioneProdottoService = new GestioneProdottoServiceImp();
+    private ListaDesideriService listaDesideriService = new ListaDesideriServiceImp();
+    private RecensioneService recensioneService = new RecensioneServiceImp();
     private ValidateForm validateForm = new ValidateForm();
 
     public RecensioneController() {
@@ -48,7 +50,7 @@ public class RecensioneController extends HttpServlet {
     }
 
     public RecensioneController(RecensioneServiceImp recensioneService) {
-        this.recensioneServiceImp = recensioneService;
+        this.recensioneService = recensioneService;
     }
 
 
@@ -63,7 +65,7 @@ public class RecensioneController extends HttpServlet {
             review.setDescrizione(descrizione);
             review.setValutazione(valutazione);
             review.setTitolo(titolo);
-            successo = recensioneServiceImp.aggiungiRecensione(review);
+            successo = recensioneService.aggiungiRecensione(review);
             return true;
         } else {
             return false;
@@ -78,20 +80,20 @@ public class RecensioneController extends HttpServlet {
                 break;
             case "/creaRecensione":
                 account = (Account) request.getSession(false).getAttribute("account");
-                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
+                prodotto = gestioneProdottoService.getProdotto(Integer.parseInt(request.getParameter("id")));
                 String titolo = request.getParameter("titoloRecensione");
                 String descrizione = request.getParameter("descrizione");
                 double valutazione = Double.parseDouble(request.getParameter("valutazione"));
 
                 successo = aggiungiRecensione(titolo, descrizione, valutazione, account, prodotto);
-                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                reviews = recensioneService.cercaRecensioniPerProdotto(prodotto);
                 boolean controllo = false;
                 for (int i = 0; i < reviews.size(); i++) {
                     if (account.getId() == reviews.get(i).getAccount().getId())
                         controllo = true;
                 }
                 boolean aggiunto = false;
-                ListaDesideri listaDesideri = listaDesideriServiceImp.getListaDesideri(account);
+                ListaDesideri listaDesideri = listaDesideriService.getListaDesideri(account);
                 if (listaDesideri.containsListaDesideri(prodotto)) {
                     aggiunto = true;
                 }
@@ -113,7 +115,7 @@ public class RecensioneController extends HttpServlet {
 
             case "/modificaRecensione":
                 account = (Account) request.getSession(false).getAttribute("account");
-                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
+                prodotto = gestioneProdottoService.getProdotto(Integer.parseInt(request.getParameter("id")));
                 String titolo1 = request.getParameter("titoloRecensione");
                 String desc = request.getParameter("descrizione");
                 double val = Double.parseDouble(request.getParameter("valutazione"));
@@ -124,15 +126,15 @@ public class RecensioneController extends HttpServlet {
                 review.setValutazione(val);
                 review.setAccount(account);
                 review.setProdotto(prodotto);
-                boolean modifica = recensioneServiceImp.modificaRecensione(review);
-                reviews = recensioneServiceImp.cercaRecensioniPerProdotto(prodotto);
+                boolean modifica = recensioneService.modificaRecensione(review);
+                reviews = recensioneService.cercaRecensioniPerProdotto(prodotto);
                 boolean controllo1 = false;
                 for (int i = 0; i < reviews.size(); i++) {
                     if (account.getId() == reviews.get(i).getAccount().getId())
                         controllo1 = true;
                 }
                 boolean aggiunto1 = false;
-                ListaDesideri listaDesideri1 = listaDesideriServiceImp.getListaDesideri(account);
+                ListaDesideri listaDesideri1 = listaDesideriService.getListaDesideri(account);
                 if (listaDesideri1.containsListaDesideri(prodotto)) {
                     aggiunto1 = true;
                 }
@@ -165,8 +167,8 @@ public class RecensioneController extends HttpServlet {
                 break;
             case "/eliminaRecensione":
                 account = (Account) request.getSession(false).getAttribute("account");
-                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
-                successo = recensioneServiceImp.rimuoviRecensione(account, prodotto);
+                prodotto = gestioneProdottoService.getProdotto(Integer.parseInt(request.getParameter("id")));
+                successo = recensioneService.rimuoviRecensione(account, prodotto);
                 request.setAttribute("successo", successo);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/prodottoUtente.jsp");
@@ -174,7 +176,7 @@ public class RecensioneController extends HttpServlet {
 
                 break;
             case "/scriviRecensione":
-                prodotto = gestioneProdottoServiceImp.getProdotto(Integer.parseInt(request.getParameter("id")));
+                prodotto = gestioneProdottoService.getProdotto(Integer.parseInt(request.getParameter("id")));
                 request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/recensione.jsp");
                 dispatcher.forward(request, response);
@@ -182,9 +184,9 @@ public class RecensioneController extends HttpServlet {
             case "/modificaRecensione":
                 account = (Account) request.getSession(false).getAttribute("account");
                 int id = Integer.parseInt(request.getParameter("id"));
-                prodotto = gestioneProdottoServiceImp.getProdotto(id);
+                prodotto = gestioneProdottoService.getProdotto(id);
                 review = new Review();
-                review = recensioneServiceImp.cercaRecensionePerProdotto(prodotto, account);
+                review = recensioneService.cercaRecensionePerProdotto(prodotto, account);
                 request.setAttribute("recensione", review);
                 request.setAttribute("prodotto", prodotto);
                 dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/updateRecensione.jsp");
