@@ -52,30 +52,5 @@ public class AutenticazioneTest {
         assertEquals(email,autenticazioneServiceImp.login(email,pass).getEmail());
         assertEquals(pass,autenticazioneServiceImp.login(email,pass).getPassword());
     }
-/*
-    @Test
-    public void testLogin() throws SQLException {
-        // crea un oggetto mock per la classe SqlAccountDao
-        SqlAccountDao mockDao = mock(SqlAccountDao.class);
 
-        // crea un account di esempio
-        Account expectedAccount = new Account();
-        expectedAccount.setEmail("test@example.com");
-        expectedAccount.setPassword("password");
-
-        // configura il comportamento del mock per la ricerca dell'account
-        when(mockDao.searchAccountLogin("password", "test@example.com")).thenReturn(expectedAccount);
-
-        // crea un oggetto LoginService con il mock della dao
-        AutenticazioneServiceImp loginService = new AutenticazioneServiceImp(mockDao);
-
-        // chiamata al metodo login
-        Account actualAccount = loginService.login("test@example.com", "password");
-
-        // verifica che l'account restituito corrisponde all'account atteso
-        assertEquals(expectedAccount.getEmail(), actualAccount.getEmail());
-        assertEquals(expectedAccount.getPassword(), actualAccount.getPassword());
-
-    }
-*/
 }
